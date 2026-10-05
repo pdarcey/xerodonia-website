@@ -311,6 +311,8 @@ Stage 2 replaces the current HTML, so Clarity issues **#453, #455, #457 and #459
 5. **Design:** #1 **Liquid Glass** (2026-10-05). Its tick marks were redrawn as a single SVG so they're centred.
 6. **URLs:** tools share the `/apps/<slug>/` scheme (e.g. `/apps/obfuscate/`) instead of having a separate `/tools/` section. That's one listing and one template, and `kind: tool` still styles them differently.
 
+7. **Repo name:** `pdarcey/xerodonia-website` (public), so the repo is never confused with the website itself.
+
 ## Open questions for Paul
 
 5. **Clarity:** showcase only, or also a free/beta DMG download?
