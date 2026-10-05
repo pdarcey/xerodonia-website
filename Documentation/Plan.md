@@ -1,6 +1,6 @@
 # xerodonia.com — Rebuild Plan
 
-*Drafted 2026-10-05. Status (end of session, 2026-10-05): **Stages 1–5c live; 5d part-done.** Blueprint and Clarity have Mac screenshots (light and dark) live. Next: the remaining screenshots (see "Next session" below).*
+*Drafted 2026-10-05. Status (end of session, 2026-10-06): **Stages 1–5c live; 5d part-done.** Blueprint, Clarity and Upcoming Birthdays have Mac screenshots (light and dark); the latter is committed but not yet pushed. Next: iPhone/iPad screenshots (see "Next session" below).*
 
 ## Goals
 
@@ -429,17 +429,17 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 7. **Repo name:** `pdarcey/xerodonia-website` (public), so the repo is never confused with the website itself.
 8. **Stage 5 decisions:** screenshots via a DEBUG-only "screenshot mode" in Blueprint and Clarity; robots.txt allows all AI crawlers; agent engagement includes a live MCP server on Cloudflare Workers (free tier); JSON-LD `<script type="application/ld+json">` is allowed, but executable JS is not.
 
-## Next session (written 2026-10-05)
+## Next session (written 2026-10-06)
 
-1. **Remaining screenshots (5d).**
-   - **Mac, native, no Simulator:** Upcoming Birthdays and Borderstamp. Both need fake data: Birthdays from sample contacts (it has `Preview Content/Sample Data.swift`); Borderstamp from sample stamps. Each probably needs a small screenshot mode like Blueprint's and Clarity's: plan it in that repo first.
-   - **iPhone/iPad:** Blueprint, Birthdays, Borderstamp and Scoreboard. **Unblocked (Clarity #472):** the "flat out forever" was interrupted first boots. Use the two warmed-up devices, **iPhone 18 Pro Max** (`A67A08D2-…`, 6.9") and **iPad Pro 13-inch (M5)** (`3A8CBAD4-…`). Never create new ones. Capture headless with `xcrun simctl io <udid> screenshot`. Xcode 27 replaced Simulator.app with DeviceHub. **Still ask Paul before booting.**
-   - Then write `scripts/capture-screenshots.sh`, so re-captures (and App Store Connect sizes) are one command.
-2. **Clarity #467:** sample-data polish (project descriptions, green tests, obfuscate "Not shipped"), then re-take Clarity's Dashboard and Project dashboard shots.
-3. **Stage 6:** SEO and compliance audit (Lighthouse, W3C validator and link checker in CI).
-4. **Stage 7:** release automation, including obfuscate's signed and notarised DMG.
+1. **Stage 3 of Upcoming Birthdays' screenshots: iPhone, iPad and widgets.** Screenshot mode is in place (`-ScreenshotMode`, commit `65b1acf` in Upcoming Birthdays), and in the Simulator it also fills the widgets with the fictional people. Use the warmed-up **iPhone 18 Pro Max** (`A67A08D2-…`, 6.9") and **iPad Pro 13-inch (M5)** (`3A8CBAD4-…`). Never create new devices. Capture headless with `xcrun simctl io <udid> screenshot`. **Ask Paul before booting.** The widgets are the app's main interface, so give them the most attention.
+2. **Write `scripts/capture-screenshots.sh`** (build, install, launch with `-ScreenshotMode`, capture light and dark at App Store sizes), so re-captures are one command.
+3. **Borderstamp:** screenshot mode with sample stamps (plan it in that repo first), then Mac and iPhone/iPad shots.
+4. **Blueprint and Scoreboard:** iPhone/iPad shots (Blueprint already has screenshot mode).
+5. **Clarity #467:** sample-data polish, then re-take Clarity's Dashboard and Project dashboard shots.
+6. **Stage 6:** SEO and compliance audit (Lighthouse, W3C validator and link checker in CI).
+7. **Stage 7:** release automation, including obfuscate's signed and notarised DMG.
 
-**Not pushed, on purpose (Paul, 2026-10-05: don't push them):** Blueprint `461a799`, Clarity `74086dc`. **Uncommitted, Paul's own:** Blueprint `project.pbxproj`; Clarity `CLAUDE.md` line 42, `Journal.md` (27 Sep entry), `Readme.md`, `Info.plist` (build-number bump); the website's `Images/` folder (two Blueprint-only Kanban shots, unused).
+**Not pushed, on purpose:** Blueprint `461a799`, Clarity `74086dc` (Paul: don't push). The website commits since `2d47e69` and Upcoming Birthdays `65b1acf` are also local; pushing the website deploys it. **Uncommitted, Paul's own:** Blueprint `project.pbxproj`; Clarity `CLAUDE.md`, `Journal.md`, `Readme.md`, `Info.plist`; Upcoming Birthdays `Readme.md`, untracked `CLAUDE.md` and `Journal.md`, `xcschememanagement.plist`; the website's `Images/` folder (portrait and screenshot originals).
 
 ## Open questions for Paul
 
@@ -450,3 +450,4 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 9. ~~**Upcoming Birthdays and Borderstamp privacy:** what do they collect?~~ **Answered 2026-10-05:**
    - **Upcoming Birthdays:** asks for Contacts (all, or specific people). Contact details are used only to show birthdays in the app and, mostly, the widgets. Nothing is stored by the app or sent off the device. The website policy already says this. Manifest: Clarity #462.
    - **Borderstamp:** the website policy is detailed and accurate; generate the manifest from it. Manifest: Clarity #460.
+10. **Upcoming Birthdays on Mac (Clarity #474):** the Mac app has no way to choose people yet, so it shows every contact with a birthday. The site lists Mac and says "just the people you choose". Build a Mac picker before v1.0, or drop Mac from the v1.0 listing?

@@ -158,6 +158,18 @@ What we learnt:
 - **The proof:** we erased the half-booted iPhone 18 Pro Max and left its first boot alone without a window. It ran the CPU flat out for about 6 minutes while it downloaded 1.5 GB, then settled at 8 minutes. The second boot was ready in 7 seconds and calm within 2. The "forever" was never forever; it was a job that kept being interrupted and starting again. **Leave a first boot alone, then reuse that device.**
 - Housekeeping: `xcrun simctl delete unavailable` removed 33 devices left over from iOS 26.x runtimes that were no longer installed, freeing 6 GB.
 
+### 2026-10-06: Twelve people who don't exist
+Upcoming Birthdays' whole job is to show the birthdays of people you love, and that's the last thing you want in a public screenshot. So it gained a screenshot mode like Blueprint's and Clarity's. In it, the app shows twelve fictional Australians: Mia Nguyen turning 34 today, "Nan" turning 80 next week, and baby Ruby turning 3. Paul made their portraits in Image Playground, so the faces belong to no one.
+
+War stories and lessons:
+- **Faking the data isn't enough; you also have to block the writes.** The app saves which people you've chosen, writes widget data to a shared App Group, and reschedules notifications on every change. A naive screenshot mode would have replaced Paul's real chosen people with Mia and friends. Worse, the notification code starts by *removing every pending notification*. So screenshot mode guards all three, and writes widget data only inside the Simulator, whose App Group is separate from the Mac's. **When you fake the input, check every output too.**
+- **Dates relative to today.** Each person's birthday is "N days from now", so a screenshot taken in March looks as good as one taken in October. The app's older tests show why: they hard-coded "3 April 2026" and went stale once that date passed.
+- **Ask before generating twelve portraits.** Halfway through the plan, we found the app shows photos only on the detail screen, not in the list or the widgets. (Paul had already generated them all, so they all went in.)
+- **The Mac app hadn't built in a while.** The fix turned up five separate problems, found one at a time in a scratch copy of the project so Paul's working copy stayed untouched: two files called `SettingsView.swift`, notification files missing from the target, `import NotificationCenter` (the old Today-widget framework) where `UserNotifications` was meant, a UIKit-only contact picker, and the local ExtensionKit package never linked. Removing the stub then revealed a crash: the Mac's Settings window had no store manager in its environment. **A target that isn't built regularly decays silently; give every target a shared scheme.**
+- **Xcode's synchronized folders can include files by explicit list.** A new file in `iOS/Upcoming Birthdays/` joins the iOS target automatically, but the Mac target needs it ticked by hand. The Xcode MCP can't change target membership, so Paul ticks the boxes.
+- **Development assets keep the photos out of the App Store build.** `DEVELOPMENT_ASSET_PATHS` lists the portrait catalogue, so Debug builds have the 960 KB of faces and archives don't.
+- **A loose end for v1.0:** the Mac app has no way to choose people yet (Clarity #474), so it shows everyone. The website promises "just the people you choose" on Mac, so either the picker ships or Mac comes off the listing.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.
