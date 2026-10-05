@@ -1,6 +1,6 @@
 # xerodonia.com — Rebuild Plan
 
-*Drafted 2026-10-05. Status: **Stage 3 in progress.** Repo created and Stage 2 deployed to GitHub Pages; launch pages written locally and awaiting Paul's review; DNS switch pending.*
+*Drafted 2026-10-05. Status: **Stage 3 done, awaiting Paul's review. https://xerodonia.com is live** (GitHub Pages, HTTPS enforced). The App Store Connect privacy and support URLs exist for Blueprint, Borderstamp and Upcoming Birthdays.*
 
 ## Goals
 
@@ -290,7 +290,7 @@ Keep a `CHANGELOG.md` in each app repo. Paste each entry into ASC's "What's New"
 | **0** | Paul answers the open questions below | Decisions recorded here |
 | **1** ✅ | Build the five design mockups (home + Blueprint page) | Liquid Glass chosen; mockups removed |
 | **2** ✅ | Set up Eleventy, layouts, design tokens for the chosen design, data model, CI build. Delete the old flat HTML. | `npm run build` works. Home, /apps/ and 6 app pages are generated from data. Approved 2026-10-05. |
-| **3** | **Minimum viable launch:** home, an app page plus `/privacy/` and `/support/` for the three TestFlight apps, About, the site privacy policy. Deploy to GitHub Pages and switch DNS. | Live site with the URLs ASC and TestFlight need |
+| **3** 🔍 | **Minimum viable launch:** home, an app page plus `/privacy/` and `/support/` for the three TestFlight apps, About, the site privacy policy. Deploy to GitHub Pages and switch DNS. | Live site with the URLs ASC and TestFlight need |
 | **4** | Port the consulting pages and the blog (with the CSS-only nav) | `/consulting/`, `/blog/`, feed |
 | **5** | Remaining pages: Scoreboard (coming soon), Clarity (showcase), obfuscate. Assets: icons, screenshots, OG images. | Content complete |
 | **6** | SEO and compliance pass, structured data, Lighthouse/validator/link-check in CI | Audit report |

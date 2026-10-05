@@ -91,7 +91,7 @@ const eleventyComputed = {
       <p>Everything {{ app.name }} stores is kept {{ policy.storedIn or "on your device" }}. Deleting the app deletes it.{% if policy.sharing.length %} Anonymous usage signals can't be linked to you, so there's nothing about you for us to find or delete. If you've sent us feedback or an email and would like it deleted, ask us and we will.{% endif %}</p>
 
       <h2>Children</h2>
-      <p>{{ app.name }} isn't directed at children under 13, and we don't knowingly collect personal information from children.</p>
+      <p>{{ app.name }} isn't directed at children under 13. It doesn't collect personal information from anyone, including children.{% if policy.sharing.length %} The only exception is feedback: if someone sends it, we see only what they choose to write.{% endif %}</p>
 
       <h2>Changes to this policy</h2>
       <p>If {{ app.name }} changes how it handles information, we'll update this page and the date at the top before the new version is released, and mention the change in the release notes.</p>
