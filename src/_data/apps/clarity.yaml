@@ -16,6 +16,28 @@ price: Not for sale
 appCategory: Developer Tools
 languages: [English]
 
+screenshots:             # sample data from Clarity's screenshot mode (Clarity #466), 2026-10-05
+  - device: mac
+    src: images/apps/clarity/dashboard.png
+    darkSrc: images/apps/clarity/dashboard-dark.png
+    caption: Every project at a glance
+    alt: "Clarity's projects dashboard: a commit-activity timeline with release markers above cards for six Xerodonia projects, each with its icon, build and outstanding issues"
+  - device: mac
+    src: images/apps/clarity/kanban.png
+    darkSrc: images/apps/clarity/kanban-dark.png
+    caption: A Kanban board across every project
+    alt: "Clarity's Kanban board showing Backlog, Current and Completed columns of issues from several projects"
+  - device: mac
+    src: images/apps/clarity/issues.png
+    darkSrc: images/apps/clarity/issues-dark.png
+    caption: Issues, filtered by kind and status
+    alt: "Clarity's issues list for Blueprint, with kind and status filters, and an urgent issue open alongside its description and activity"
+  - device: mac
+    src: images/apps/clarity/project-dashboard.png
+    darkSrc: images/apps/clarity/project-dashboard-dark.png
+    caption: One project's tests, timeline and milestones
+    alt: "Clarity's dashboard for the Blueprint project: test results, a commit timeline with milestones, open issues, current tasks and a milestone list"
+
 featuresHeading: One tracker, three ways in
 featuresIntro: A native Mac app for people, plus a command-line tool and an MCP server for scripts and AI agents. All three share one database.
 features:

@@ -67,7 +67,7 @@ const srcset = (images) => images.map((image) => `${image.url} ${image.width}w`)
  * @param {string} className Class for the `<img>`.
  * @param {number[]} widths Widths to generate.
  */
-async function themedImageShortcode(src, darkSrc, alt, sizes, className = "", widths = [480, 800, 1200]) {
+async function themedImageShortcode(src, darkSrc, alt, sizes, className = "", widths = [480, 800, 1200, 1800]) {
   if (alt === undefined) throw new Error(`Missing alt text for image: ${src}`);
   const options = { widths, formats: ["avif", "webp"], outputDir: "_site/img/", urlPath: "/img/" };
   const light = await Image(path.join("src", src), options);
@@ -86,7 +86,11 @@ async function themedImageShortcode(src, darkSrc, alt, sizes, className = "", wi
   }
   sources.push(`<source type="image/avif" srcset="${srcset(light.avif)}" sizes="${attr(sizes)}" ${size(light.avif)}>`);
   const fallback = light.webp[0];
-  const classAttr = className ? ` class="${attr(className)}"` : "";
+  // Landscape shots (e.g. a wide Mac window) are sized by width in CSS, portrait ones by height.
+  const largest = light.webp.at(-1);
+  const orientation = largest.width > largest.height ? "landscape" : "portrait";
+  const classes = [className, className && `${className}--${orientation}`].filter(Boolean).join(" ");
+  const classAttr = classes ? ` class="${attr(classes)}"` : "";
   return `<picture>${sources.join("")}<img src="${fallback.url}" srcset="${srcset(light.webp)}" sizes="${attr(sizes)}" alt="${attr(alt)}"${classAttr} ${size(light.webp)} loading="lazy" decoding="async"></picture>`;
 }
 

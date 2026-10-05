@@ -332,7 +332,8 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.025em; }
 /* Real screenshots, once they replace the placeholders */
 /* Real screenshots. Mac shots arrive as transparent PNGs with the window's
    own rounded corners and shadow, so no extra frame or radius here. */
-.shot-image { height: clamp(22rem, 60vw, 34rem); width: auto; }
+.shot-image--portrait { height: clamp(22rem, 60vw, 34rem); width: auto; }
+.shot-image--landscape { width: min(46rem, 85vw); height: auto; }
 
 /* ==========================================================================
    Document pages: privacy policies, support, about
