@@ -22,8 +22,9 @@ const IMAGE_WIDTHS = [128, 256, 384];
  * @param {string} sizes The `sizes` attribute.
  * @param {string} className Optional class for the `<img>`.
  * @param {string} loading "lazy" (default) or "eager" for above-the-fold images.
+ * @param {number[]} widths Widths to generate; defaults to icon sizes. Screenshots pass larger ones.
  */
-async function imageShortcode(src, alt, sizes = "100vw", className = "", loading = "lazy") {
+async function imageShortcode(src, alt, sizes = "100vw", className = "", loading = "lazy", widths = IMAGE_WIDTHS) {
   if (alt === undefined) {
     throw new Error(`Missing alt text for image: ${src}`);
   }
@@ -36,7 +37,7 @@ async function imageShortcode(src, alt, sizes = "100vw", className = "", loading
   }
 
   const metadata = await Image(path.join("src", src), {
-    widths: IMAGE_WIDTHS,
+    widths,
     formats: ["avif", "webp"],
     outputDir: "_site/img/",
     urlPath: "/img/",

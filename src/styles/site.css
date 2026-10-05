@@ -330,7 +330,9 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.025em; }
 /* Page titles on listing pages (h1 that sits where a section h2 would) */
 .page-title { font-size: clamp(2.2rem, 5vw, 3.2rem); letter-spacing: -.03em; }
 /* Real screenshots, once they replace the placeholders */
-.shot-image { height: clamp(18rem, 48vw, 28rem); width: auto; border-radius: 1.2rem; }
+/* Real screenshots. Mac shots arrive as transparent PNGs with the window's
+   own rounded corners and shadow, so no extra frame or radius here. */
+.shot-image { height: clamp(22rem, 60vw, 34rem); width: auto; }
 
 /* ==========================================================================
    Document pages: privacy policies, support, about

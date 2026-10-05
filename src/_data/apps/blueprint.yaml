@@ -24,11 +24,16 @@ price: To be announced
 appCategory: Productivity
 languages: [English]
 
-screenshots:             # placeholders until real screenshots exist (device: phone | tablet | mac)
-  - { device: phone, caption: "Today, at a glance" }
-  - { device: phone, caption: "The week ahead" }
-  - { device: tablet, caption: "Everything on iPad" }
-  - { device: mac, caption: "At home on the Mac" }
+screenshots:             # device: phone | tablet | mac. Omit src for a "coming soon" placeholder.
+  # Mac shots taken in screenshot mode (fake data), 2026-10-05. iPhone/iPad to follow (Clarity #465).
+  - device: mac
+    src: images/apps/blueprint/mac-today.png
+    caption: Today, at a glance
+    alt: "Blueprint on a Mac showing today: a birthday, personal and work agendas, a new TV episode, Sydney weather, health goals met and three news stories"
+  - device: mac
+    src: images/apps/blueprint/mac-upcoming.png
+    caption: The week ahead, with a long weekend coming
+    alt: "Blueprint on a Mac showing the week ahead: birthdays, appointments, TV episodes, two football games and a Labour Day long weekend"
 
 featuresHeading: Everything that matters today
 featuresIntro: One screen, no surprises.
