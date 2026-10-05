@@ -13,6 +13,7 @@ const pagination = {
 };
 const permalink = (data) => `/apps/${data.app.slug}/support/`;
 const bodyClass = "doc-page";
+const pageType = "app-support";
 const eleventyComputed = {
     title: (data) => `${data.app.name} support`,
     description: (data) => `Get help with ${data.app.name}: answers to common questions, and how to contact Xerodonia.`,

@@ -45,6 +45,15 @@ src/
   consulting/               /consulting/ overview, services, faq, and audience.njk (one page per audience)
   blog/<slug>.md            Blog posts (defaults in blog/blog.11tydata.js); blog.njk is the /blog/ index
   feed.njk                  /feed.xml (Atom). Hand-written; no plugin needed.
+  llms.11ty.js, llms-full.11ty.js   /llms.txt and /llms-full.txt for AI agents (built by lib/llms.js)
+  consulting/services.11ty.js       /consulting/services.json: machine-readable catalogue (schemaVersion 1; the MCP server reads it)
+  robots.njk                Allows everyone, and lists the AI crawlers explicitly
+lib/
+  structured-data.js        schema.org JSON-LD per page, chosen by each template's `pageType`
+  llms.js                   llms.txt generators
+  consulting.js             priceValue() and the enquiry fields, shared by JSON-LD, services.json and llms.txt
+  build-check.js            Post-build guard: fails if any executable script, on…= handler, javascript: URL or invalid JSON-LD appears
+scripts/make-images.mjs     `npm run images`: favicons and link-preview cards
   404.njk, sitemap.njk, robots.njk, CNAME
   styles/site.css           Part 1: structure and accessibility. Part 2: Liquid Glass theme.
   images/apps/<slug>.png    1024 px source icons (Eleventy makes the web sizes)
@@ -70,6 +79,12 @@ Create `src/blog/<slug>.md` with front matter `title`, `description`, `date` (YY
 
 ### Changing consulting prices or services
 Edit `src/_data/consulting.yaml`. Each audience page lists the service `id`s it shows. An unknown id fails the build on purpose, via the `pickServices` filter.
+
+### AI agents and structured data
+- **Every template should set `pageType`** (app, app-privacy, app-support, consulting, consulting-services, consulting-audience, consulting-faq, or post) so `lib/structured-data.js` adds the right schema.org nodes. Pages without one get Organization and WebSite only.
+- **JSON-LD is the only `<script>` allowed.** The build fails on anything else (decision 8).
+- **`services.json` is a contract.** The MCP server depends on it, so add fields freely, but bump `schemaVersion` before renaming or removing any.
+- **Once the MCP server is deployed,** set `site.mcpUrl`, and llms.txt and services.json will advertise it.
 
 ## Conventions and gotchas
 - **Use `{% asyncEach %}`, not `{% for %}`, for any loop containing `{% image %}`.** The image shortcode is async, and in a plain `for` loop Nunjucks silently renders nothing.

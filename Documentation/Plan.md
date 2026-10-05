@@ -1,6 +1,6 @@
 # xerodonia.com — Rebuild Plan
 
-*Drafted 2026-10-05. Status: **Stages 1–5a live. Working on 5b (AI-agent layer).***
+*Drafted 2026-10-05. Status: **Stages 1–5b live. Working on 5c (consulting MCP server).***
 
 ## Goals
 
@@ -293,7 +293,7 @@ Keep a `CHANGELOG.md` in each app repo. Paste each entry into ASC's "What's New"
 | **3** ✅ | **Minimum viable launch:** home, an app page plus `/privacy/` and `/support/` for the three TestFlight apps, About, the site privacy policy. Deploy to GitHub Pages and switch DNS. | Live site with the URLs ASC and TestFlight need |
 | **4** ✅ | Port the consulting pages and the blog (with the CSS-only nav) | `/consulting/`, `/blog/`, feed |
 | **5a** ✅ | Remaining app pages (Scoreboard, Clarity, obfuscate); favicon set; Open Graph images | Content complete except screenshots |
-| **5b** | AI-agent layer, static: robots.txt, llms.txt, JSON-LD everywhere, machine-readable services file, build check for scripts | Agents can find, understand and book |
+| **5b** ✅ | AI-agent layer, static: robots.txt, llms.txt, JSON-LD everywhere, machine-readable services file, build check for scripts | Agents can find, understand and book |
 | **5c** | Consulting MCP server on Cloudflare Workers (new repo) | Agents can query services and send enquiries |
 | **5d** | Screenshot mode in Blueprint and Clarity; capture script for all apps | Real screenshots on every app page |
 | **6** | SEO and compliance pass (JSON-LD now in 5b), Lighthouse/validator/link-check in CI | Audit report |

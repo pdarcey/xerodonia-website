@@ -2,7 +2,16 @@
 permalink: /robots.txt
 eleventyExcludeFromCollections: true
 ---
+# xerodonia.com welcomes search engines and AI agents alike (decision 8 in
+# the site's Plan.md). AI agents: start with {{ site.url }}/llms.txt
+
 User-agent: *
+Allow: /
+
+# AI crawlers and assistants, listed explicitly so the intent is unambiguous.
+{%- for agent in ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "Claude-SearchBot", "anthropic-ai", "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot", "Applebot-Extended", "CCBot", "Meta-ExternalAgent", "Amazonbot", "DuckAssistBot", "MistralAI-User"] %}
+User-agent: {{ agent }}
+{%- endfor %}
 Allow: /
 
 Sitemap: {{ site.url }}/sitemap.xml

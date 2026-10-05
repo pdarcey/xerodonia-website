@@ -14,6 +14,7 @@ const pagination = {
 };
 const permalink = (data) => `/apps/${data.app.slug}/privacy/`;
 const bodyClass = "doc-page";
+const pageType = "app-privacy";
 const eleventyComputed = {
     title: (data) => `${data.app.name} privacy policy`,
     description: (data) => `How ${data.app.name} handles your information: what it can access, what leaves your device and why, and how to contact us.`,

@@ -29,6 +29,11 @@
   <meta name="apple-itunes-app" content="app-id={{ app.appStoreId }}">
   {%- endif %}
 
+  <script type="application/ld+json">{{ { pageType: pageType, page: page, title: title, description: description, app: app, site: site, consulting: consulting } | jsonLd | safe }}</script>
+  <link rel="alternate" type="text/markdown" title="{{ site.name }} for AI agents (llms.txt)" href="/llms.txt">
+  {%- if pageType and pageType.startsWith("consulting") %}
+  <link rel="alternate" type="application/json" title="Consulting services and prices" href="/consulting/services.json">
+  {%- endif %}
   <link rel="alternate" type="application/atom+xml" title="{{ site.name }} blog" href="/feed.xml">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/images/xerodonia-mark.svg" type="image/svg+xml">

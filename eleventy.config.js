@@ -6,6 +6,8 @@
 import path from "node:path";
 import yaml from "js-yaml";
 import Image from "@11ty/eleventy-img";
+import { structuredData, toJsonLd } from "./lib/structured-data.js";
+import { checkBuildOutput } from "./lib/build-check.js";
 
 /** Responsive widths generated for raster images (icons render at 72–176 CSS px). */
 const IMAGE_WIDTHS = [128, 256, 384];
@@ -57,6 +59,13 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addAsyncShortcode("image", imageShortcode);
 
+  /** schema.org JSON-LD for a page (see lib/structured-data.js). Output with | safe. */
+  eleventyConfig.addFilter("jsonLd", (data) => toJsonLd(structuredData(data)));
+
+  // Fail the build if any executable <script> sneaks into the output, or any
+  // JSON-LD block is invalid JSON. Visitors must never receive JavaScript.
+  eleventyConfig.on("eleventy.after", async ({ dir }) => checkBuildOutput(dir.output));
+
   /** All apps and tools as an array, in display order. */
   eleventyConfig.addFilter("sortProducts", (apps) =>
     Object.values(apps).sort((a, b) => a.order - b.order)
@@ -106,7 +115,7 @@ export default function (eleventyConfig) {
       includes: "_includes",
       data: "_data",
     },
-    templateFormats: ["njk", "md", "html"],
+    templateFormats: ["njk", "md", "html", "11ty.js"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
   };
