@@ -67,6 +67,11 @@ export default function (eleventyConfig) {
     items.length < 2 ? items.join("") : `${items.slice(0, -1).join(", ")} and ${items.at(-1)}`
   );
 
+  /** Long Australian date, e.g. "5 October 2026". YAML dates are UTC midnight, so format in UTC. */
+  eleventyConfig.addFilter("longDate", (date) =>
+    new Date(date).toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
+  );
+
   /** ISO date (YYYY-MM-DD) for sitemaps and <time datetime>. */
   eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString().split("T")[0]);
 

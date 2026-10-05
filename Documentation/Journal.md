@@ -75,6 +75,15 @@ War stories from the first build:
 - **Amber is not a text colour.** Borderstamp's amber looks great as an icon and failed WCAG contrast badly as tagline text on the near-white glass. Rather than special-casing each app, accent-coloured text is now `color-mix(in oklab, var(--accent) 60%, var(--text))`. Because `--text` is dark in light mode and light in dark mode, the same rule darkens the accent on light backgrounds and lightens it on dark ones, for any colour a future app brings.
 - **The grey hole in the Details table.** The "1px gap plus coloured background" trick for drawing grid lines fills any unused cells in the last row with solid line colour. Drawing each cell's right and bottom border instead, and clipping the outer edge, fixes it however many cells there are.
 
+### 2026-10-05: Privacy policies are written from code, not memory
+Stage 3 needed real privacy policies for three apps, and the mockup copy we'd drafted turned out to be wrong in two places. It said Blueprint keeps "your location" on the device. But Blueprint sends a location to Apple's WeatherKit for forecasts, and contacts several public services (TVmaze, TheSportsDB, Squiggle, ESPN, Nager.Date and news feeds) for listings and scores. Lesson: **write a privacy policy from the code.** The `NS…UsageDescription` strings in each project file are the definitive list of permissions; `PrivacyInfo.xcprivacy`, the package list and a grep for hard-coded URLs show what leaves the device.
+
+Two Borderstamp findings were reassuring once checked. A `LocationUpdateLogEntry` with raw latitude and longitude looked alarming, but it's wrapped in `#if DEBUG` and never ships. And the merchandise store that would send place names off the device isn't in v1.0. A policy describes the app as it ships, so the store's wording is parked in a Clarity note, to update the policy, manifest and App Store label in the same release as the feature.
+
+The policies themselves are data-driven like everything else: each app's YAML lists its permissions, everything it shares (recipient, what, why, a link to their policy) and any extra sections, and one template turns that into a consistent policy. A new app gets a policy as good as Blueprint's by filling in the same fields.
+
+Gotchas: Eleventy 3's `---js` front matter wants top-level `const` declarations, not the v2 object literal. And YAML values containing `: ` need quoting.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no dependencies to update, no security patches and no build to break.

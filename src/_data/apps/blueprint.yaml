@@ -46,17 +46,64 @@ features:
   - title: Widgets and Siri
     text: Widgets for every section, and Siri summaries of your day or week, hands-free.
 
-privacy:
+privacy:                 # the "Private by design" panel on the app page
   quote: The most secure data is data you never stored in the first place.
   summary: Blueprint reads your contacts, calendars and health data live from the system. It never copies them into a database of its own, and it never uploads them.
   onDevice:
     - Contacts and birthdays
     - Calendars and reminders
     - Health and fitness data
-    - Your location
   offDevice:
+    - Your weather location, to Apple Weather
+    - The shows, teams and feeds you follow, to the services that supply them
     - Anonymous usage counts (TelemetryDeck)
     - Feedback, only when you choose to send it
+
+privacyPolicy:           # the full policy at /apps/blueprint/privacy/ (App Store Connect "Privacy Policy URL")
+  updated: 2026-10-05
+  permissions:           # must match the app's NS…UsageDescription keys
+    - name: Contacts
+      use: To show birthdays and other important dates for the people in the lists you choose.
+    - name: Calendars
+      use: To show today's and this week's events.
+    - name: Reminders
+      use: To show reminders that are due or outstanding.
+    - name: Health
+      use: To show your sleep, workouts and activity. Blueprint only reads health data; it never writes to Health, and it doesn't use clinical health records.
+    - name: Location (optional)
+      use: Only if you turn on "Use Current Location" in Weather settings, to show the weather where you are.
+  sharing:               # everything that leaves the device
+    - recipient: Apple Weather (WeatherKit)
+      data: The location you choose for weather. This is your current location if you've turned on "Use Current Location"; otherwise it's the place you set.
+      purpose: To get the forecast and any severe-weather warnings.
+      policy: https://www.apple.com/legal/privacy/
+    - recipient: Public content services (TVmaze, TheSportsDB, Squiggle, ESPN, Nager.Date and the news feeds you add)
+      data: The names of the shows, teams and leagues you follow, the feeds you subscribe to, and your country for public holidays. Like any website, these services also see your device's IP address.
+      purpose: To fetch TV listings, scores and ladders, headlines and holiday dates. Blueprint sends them nothing about you personally.
+    - recipient: TelemetryDeck
+      data: Anonymous usage signals, such as which sections are used, plus the app and system version. TelemetryDeck doesn't store IP addresses, and the signals can't be linked to you.
+      purpose: To understand which features are used and to spot problems.
+      policy: https://telemetrydeck.com/privacy/
+    - recipient: Xerodonia, via our private issue tracker (hosted on GitHub)
+      data: "Only when you send feedback from Settings: the title and description you write, plus the app version, system version and device model."
+      purpose: To read and act on your feedback. Only we can see it.
+      policy: https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement
+  sections:
+    - heading: Health data
+      text: Blueprint reads health data on your device to show your summary. It is never sent off your device, never stored by Blueprint (in iCloud or anywhere else), never shared with anyone, and never used for advertising, marketing or data mining.
+    - heading: Contacts, calendars and reminders
+      text: Blueprint asks the system for this information each time it needs it, and doesn't keep its own copy. None of it leaves your device.
+
+support:
+  faq:
+    - q: Why does Blueprint ask for so many permissions?
+      a: Each section of the dashboard uses one kind of information, such as Calendars for your events and Health for your workouts. You can decline any of them and still use the rest of Blueprint. You can change your mind at any time in the Settings app under Privacy & Security.
+    - q: The weather isn't showing. What should I check?
+      a: In Blueprint's Weather settings, either set a location or turn on "Use Current Location". If you use your current location, make sure Blueprint is allowed to use Location in the Settings app.
+    - q: How do I add a Blueprint widget?
+      a: "On iPhone or iPad, touch and hold an empty area of the Home Screen, tap Edit, then Add Widget, and search for Blueprint. On a Mac, Control-click the desktop and choose Edit Widgets."
+    - q: How do I report a bug or suggest an idea?
+      a: Use Feedback in Blueprint's Settings, or email us. Either way, a real person reads every message.
 
 cta:
   title: Be one of the first to try Blueprint.

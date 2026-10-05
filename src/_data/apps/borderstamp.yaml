@@ -1,4 +1,4 @@
-# Borderstamp. Card-level data only; the full page content arrives in Stage 3.
+# Borderstamp. Privacy and support are complete (Stage 3); features and screenshots arrive in Stage 5.
 name: Borderstamp
 slug: borderstamp
 order: 2
@@ -17,3 +17,43 @@ testFlightUrl:
 price: To be announced
 appCategory: Travel
 languages: [English]
+
+privacy:
+  quote: Your location is turned into place names on your phone, and goes no further.
+  summary: Borderstamp watches for border crossings using map data built into the app. It works out which country, state or county you're in on the device, and never sends your location anywhere.
+  onDevice:
+    - Your location, at all times
+    - The places you've been, and when
+    - Your photos and their locations
+  offDevice:
+    - Nothing. Your stamps sync only through your own private iCloud, if you use it.
+
+privacyPolicy:
+  updated: 2026-10-05
+  storedIn: on your device and, if you use it, in your private iCloud   # optional; defaults to "on your device"
+  permissions:
+    - name: Location (optional, "Always" or "While Using")
+      use: To notice when you cross a border and award a stamp. With "Always", this happens automatically in the background; with "While Using", it happens when you open the app.
+    - name: Photos (optional)
+      use: To scan the location data in your existing photos and award stamps for places you visited before you installed Borderstamp. Your photos are read on your device and are never uploaded or shared.
+    - name: Notifications (optional)
+      use: To tell you when you've earned a new stamp.
+  sharing: []            # v1.0 sends nothing off the device. Update this, the app page and App Store Connect when the merchandise store ships.
+  sections:
+    - heading: How Borderstamp handles your location
+      text: Borderstamp compares each location reading with map data stored inside the app, to work out which country, state, province or county you're in. That happens entirely on your device. Borderstamp keeps the places you've earned stamps for and when you earned them. It doesn't keep a trail of where you've been, and your location is never sent to us or to anyone else.
+    - heading: In-app purchases
+      text: If you buy extra stamp sets, the purchase is handled entirely by Apple through the App Store. We never see your payment details, and Borderstamp only records which sets you've unlocked.
+    - heading: iCloud sync
+      text: If you're signed in to iCloud, your stamps sync between your devices through your private iCloud database. That data is stored by Apple under your Apple Account, and Xerodonia can't see it. To stop syncing, turn off iCloud for Borderstamp in the Settings app.
+
+support:
+  faq:
+    - q: How does Borderstamp know I've crossed a border?
+      a: It checks your location against map data built into the app, entirely on your device. Nothing is looked up online.
+    - q: Why would I give Borderstamp "Always" location access?
+      a: With "Always", stamps arrive automatically as you travel, even when the app is closed. If you'd rather not, choose "While Using" and open Borderstamp when you arrive somewhere new.
+    - q: Can I get stamps for trips I took before installing Borderstamp?
+      a: Yes. Let Borderstamp scan your photos, and it will award stamps for places your photos were taken. Only the photos' location data is used, and nothing leaves your device.
+    - q: Do my stamps sync between my devices?
+      a: Yes, if you're signed in to iCloud on each device. Sync uses your private iCloud database, which only you can access.

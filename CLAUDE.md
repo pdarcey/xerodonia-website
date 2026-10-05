@@ -36,6 +36,9 @@ src/
   index.njk                 Home page
   apps/index.njk            /apps/: every app and tool
   apps/app.njk              /apps/<slug>/: one page per data file (pagination)
+  apps/privacy.njk          /apps/<slug>/privacy/: generated when the YAML has `privacyPolicy`
+  apps/support.njk          /apps/<slug>/support/: generated when the YAML has `support`
+  about.njk, privacy.njk    /about/ and /privacy/ (the website's own policy, which lists every app policy)
   404.njk, sitemap.njk, robots.njk, CNAME
   styles/site.css           Part 1: structure and accessibility. Part 2: Liquid Glass theme.
   images/apps/<slug>.png    1024 px source icons (Eleventy makes the web sizes)
@@ -48,6 +51,9 @@ src/
 2. Copy `src/_data/apps/blueprint.yaml` to `src/_data/apps/<slug>.yaml` and edit it. `blueprint.yaml` documents every field.
    - **Required:** `name`, `slug`, `order`, `kind`, `accent`, `icon`, `category`, `tagline`, `headline`, `summary`, `platforms`, `requires`, `status`.
    - **Optional sections**, which only render when present: `screenshots`, `features`, `privacy`, `cta`, `terminal`, `appStoreId`, `testFlightUrl`, `downloadUrl`, `githubUrl`.
+   - **`privacyPolicy`** generates `/apps/<slug>/privacy/`, the App Store Connect "Privacy Policy URL". It also needs the `privacy` block, because the policy's "short version" reuses it.
+   - **`support`** (an FAQ list) generates `/apps/<slug>/support/`, the App Store Connect "Support URL".
+   - Every app on the App Store **must** have both. Their facts must match the app's `NS…UsageDescription` strings, its `PrivacyInfo.xcprivacy`, and its App Privacy answers in App Store Connect. Check the app's code; don't guess.
 3. Set `status` to a key from `src/_data/statuses.js`. That decides the badge and the buttons.
 4. Run `npm run dev` and check the home page, `/apps/` and `/apps/<slug>/`. The footer, sitemap and app lists update automatically.
 
@@ -59,6 +65,8 @@ src/
 - **Grid and flex children that contain `<pre>`** need `min-width: 0` so they scroll instead of overflowing.
 - **Things that need JS elsewhere are done without it here:** the nav wraps instead of using a hamburger, whole cards are clickable with a stretched `::after` link, screenshots use a scroll-snap strip, and contact is `mailto:`.
 - **"Coming soon" states are `.button--static` spans, never fake links.**
+- **JS front matter (`---js`) in Eleventy 3 uses top-level `const` declarations**, not an object literal. See `src/apps/privacy.njk`.
+- **Quote YAML values that contain `: `**, or the file won't parse.
 - **Every `{% image %}` needs alt text.** Use `""` for decorative images; the shortcode throws if it's missing.
 - **Testing narrow widths with headless Chrome:** it won't lay out below 500 px, so load the page in a 390 px `<iframe>`. To force light or dark mode, use `--blink-settings=preferredColorScheme=1` (light) or `0` (dark).
 - Issues are tracked in Clarity under the **xerodonia.com** project.

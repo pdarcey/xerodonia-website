@@ -1,0 +1,105 @@
+---js
+// /apps/<slug>/privacy/: the URL to give App Store Connect as "Privacy Policy URL".
+// Generated for every app whose YAML has a `privacyPolicy` block. The structure
+// (what it can access → what leaves the device → your choices → contact) is
+// the same for every app; only the facts come from the data file.
+const layout = "layouts/base.njk";
+const pagination = {
+    data: "apps",
+    size: 1,
+    alias: "app",
+    resolve: "values",
+    addAllPagesToCollections: true,
+    before: (apps) => apps.filter((app) => app.privacyPolicy),
+};
+const permalink = (data) => `/apps/${data.app.slug}/privacy/`;
+const bodyClass = "doc-page";
+const eleventyComputed = {
+    title: (data) => `${data.app.name} privacy policy`,
+    description: (data) => `How ${data.app.name} handles your information: what it can access, what leaves your device and why, and how to contact us.`,
+    accent: (data) => data.app.accent,
+};
+---
+{%- set policy = app.privacyPolicy -%}
+<nav class="breadcrumbs wrap" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="{{ app | productUrl }}">{{ app.name }}</a></li>
+    <li><a href="{{ page.url }}" aria-current="page">Privacy policy</a></li>
+  </ol>
+</nav>
+
+<article class="section doc">
+  <div class="wrap doc-wrap">
+    <header class="doc-header">
+      <p class="eyebrow">{{ app.name }}</p>
+      <h1 class="page-title">Privacy policy</h1>
+      <p class="doc-meta">Last updated <time datetime="{{ policy.updated | isoDate }}">{{ policy.updated | longDate }}</time></p>
+    </header>
+
+    <section class="doc-summary" aria-labelledby="summary-title">
+      <h2 id="summary-title">The short version</h2>
+      <p>{{ app.privacy.summary }}</p>
+      <div class="data-lists">
+        <h3>Stays on your device</h3>
+        <ul class="checklist">{% for item in app.privacy.onDevice %}<li>{{ item }}</li>{% endfor %}</ul>
+        <h3>Leaves your device</h3>
+        <ul class="checklist checklist--muted">{% for item in app.privacy.offDevice %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+    </section>
+
+    <div class="prose">
+      <h2>What {{ app.name }} can access</h2>
+      <p>{{ app.name }} only asks for access when it needs it, and works without any permission you decline. You can change these at any time in the Settings app under Privacy &amp; Security (on a Mac, System Settings › Privacy &amp; Security).</p>
+      <dl class="permission-list">
+        {%- for permission in policy.permissions %}
+        <div><dt>{{ permission.name }}</dt><dd>{{ permission.use }}</dd></div>
+        {%- endfor %}
+      </dl>
+
+      <h2>What leaves your device</h2>
+      {%- if policy.sharing.length %}
+      <p>This is everything {{ app.name }} sends off your device, who receives it, and why.</p>
+      <ul class="sharing-list">
+        {%- for item in policy.sharing %}
+        <li>
+          <h3>{{ item.recipient }}</h3>
+          <p><strong>What:</strong> {{ item.data }}</p>
+          <p><strong>Why:</strong> {{ item.purpose }}</p>
+          {%- if item.policy %}<p><a href="{{ item.policy }}">Their privacy policy</a></p>{% endif %}
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- else %}
+      <p><strong>Nothing.</strong> {{ app.name }} doesn't collect, transmit or sell any information. Xerodonia never receives any data about you or about how you use the app.</p>
+      {%- endif %}
+
+      {%- for section in policy.sections %}
+      <h2>{{ section.heading }}</h2>
+      <p>{{ section.text }}</p>
+      {%- endfor %}
+
+      <h2>What we never do</h2>
+      <ul>
+        <li>Show ads, or share information with advertisers or data brokers.</li>
+        <li>Track you across other companies' apps or websites.</li>
+        <li>Sell your information.</li>
+        <li>Ask you to create an account.</li>
+      </ul>
+
+      <h2>Your choices and your data</h2>
+      <p>Everything {{ app.name }} stores is kept {{ policy.storedIn or "on your device" }}. Deleting the app deletes it.{% if policy.sharing.length %} Anonymous usage signals can't be linked to you, so there's nothing about you for us to find or delete. If you've sent us feedback or an email and would like it deleted, ask us and we will.{% endif %}</p>
+
+      <h2>Children</h2>
+      <p>{{ app.name }} isn't directed at children under 13, and we don't knowingly collect personal information from children.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>If {{ app.name }} changes how it handles information, we'll update this page and the date at the top before the new version is released, and mention the change in the release notes.</p>
+
+      <h2>Contact us</h2>
+      <p>Questions or requests about privacy go to <a href="mailto:{{ site.email }}?subject={{ (app.name + ' privacy') | urlencode }}">{{ site.email }}</a>. {{ site.legalName }} (ABN {{ site.abn }}), {{ site.location }}. We follow the Australian Privacy Principles.</p>
+    </div>
+
+    <p class="link-row"><a class="text-link" href="{{ app | productUrl }}support/">{{ app.name }} support <span aria-hidden="true">→</span></a> <a class="text-link" href="{{ app | productUrl }}">About {{ app.name }} <span aria-hidden="true">→</span></a></p>
+  </div>
+</article>

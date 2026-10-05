@@ -1,6 +1,6 @@
 # xerodonia.com — Rebuild Plan
 
-*Drafted 2026-10-05. Status: **Stages 1–2 done (Liquid Glass design, Eleventy foundation). Next: Stage 3, minimum viable launch.***
+*Drafted 2026-10-05. Status: **Stage 3 in progress.** Repo created and Stage 2 deployed to GitHub Pages; launch pages written locally and awaiting Paul's review; DNS switch pending.*
 
 ## Goals
 

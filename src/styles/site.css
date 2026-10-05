@@ -331,3 +331,53 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.025em; }
 .page-title { font-size: clamp(2.2rem, 5vw, 3.2rem); letter-spacing: -.03em; }
 /* Real screenshots, once they replace the placeholders */
 .shot-image { height: clamp(18rem, 48vw, 28rem); width: auto; border-radius: 1.2rem; }
+
+/* ==========================================================================
+   Document pages: privacy policies, support, about
+   ========================================================================== */
+.doc-wrap { max-width: 50rem; }
+.doc { padding-top: clamp(1.5rem, 4vw, 2.5rem); }
+.doc-header { margin-bottom: 2rem; }
+.doc-header .eyebrow { margin-bottom: .75rem; }
+.doc-meta, .doc-lead { margin-top: .75rem; color: var(--muted); }
+.doc-lead { font-size: clamp(1.1rem, 2vw, 1.3rem); max-width: 42rem; }
+.doc-summary {
+  padding: clamp(1.25rem, 4vw, 2.25rem); border-radius: var(--radius); margin-bottom: 2.5rem;
+  background: var(--glass); border: 1px solid var(--glass-edge); box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
+}
+.doc-summary h2 { font-size: 1.4rem; margin-bottom: .75rem; }
+.doc-summary > p { color: var(--muted); margin-bottom: 1.25rem; }
+.doc-summary .data-lists h3 { margin-top: 1.25rem; }
+
+.prose { max-width: 44rem; }
+.prose h2 { font-size: clamp(1.35rem, 3vw, 1.7rem); margin: 2.5rem 0 .75rem; }
+.prose h2:first-child { margin-top: 0; }
+.prose p, .prose ul { margin-bottom: 1rem; }
+.prose ul:not([class]) { padding-left: 1.25rem; display: grid; gap: .4rem; }
+.prose + .prose { margin-top: 2.5rem; }
+.prose a { text-underline-offset: .15em; }
+
+.permission-list { display: grid; gap: 0; border-top: 1px solid var(--line); margin-bottom: 1rem; }
+.permission-list > div { display: grid; gap: .2rem 1.5rem; padding: .9rem 0; border-bottom: 1px solid var(--line); }
+@media (min-width: 40rem) { .permission-list > div { grid-template-columns: 12rem 1fr; } }
+.permission-list dt { font-weight: 600; }
+.permission-list dd { margin: 0; color: var(--muted); }
+
+.sharing-list { display: grid; gap: 1rem; margin-bottom: 1rem; }
+.sharing-list li { padding: 1.1rem 1.25rem; border-radius: 18px; background: var(--glass-strong); border: 1px solid var(--glass-edge); }
+.sharing-list h3 { font-size: 1.05rem; margin-bottom: .5rem; }
+.sharing-list p { margin-bottom: .35rem; color: var(--muted); }
+.sharing-list strong { color: var(--text); }
+
+.faq { display: grid; gap: .75rem; }
+.faq details { border-radius: 18px; background: var(--glass-strong); border: 1px solid var(--glass-edge); }
+.faq summary { cursor: pointer; padding: 1rem 1.25rem; font-weight: 600; list-style-position: inside; }
+.faq details[open] summary { padding-bottom: .4rem; }
+.faq details p { padding: 0 1.25rem 1.1rem; margin: 0; color: var(--muted); }
+
+.policy-list { display: grid; gap: .6rem; padding: 0; list-style: none; }
+.policy-list li { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; }
+.policy-list strong { min-width: 10rem; }
+
+.fine-print a { color: inherit; }

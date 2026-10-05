@@ -1,4 +1,4 @@
-# Upcoming Birthdays. Card-level data only; the full page content arrives in Stage 3.
+# Upcoming Birthdays. Privacy and support are complete (Stage 3); features and screenshots arrive in Stage 5.
 name: Upcoming Birthdays
 slug: upcoming-birthdays
 order: 3
@@ -17,3 +17,33 @@ testFlightUrl:
 price: To be announced
 appCategory: Lifestyle
 languages: [English]
+
+privacy:
+  quote: Nothing leaves your device. Ever.
+  summary: Upcoming Birthdays reads birthdays from your contacts on your device, for just the people you choose. It has no analytics and no servers, and it doesn't make network requests.
+  onDevice:
+    - Your contacts and their birthdays
+    - The people you've chosen to follow
+  offDevice:
+    - Nothing at all
+
+privacyPolicy:
+  updated: 2026-10-05
+  permissions:
+    - name: Contacts
+      use: To read the birthdays of the people you choose. On iPhone and iPad you can give access to just those people instead of all your contacts.
+    - name: Notifications (optional)
+      use: To remind you on the day of someone's birthday.
+  sharing: []
+  sections:
+    - heading: Your contacts
+      text: Upcoming Birthdays reads names and birthdays from your contacts on your device, and remembers which people you've chosen to follow. It never changes your contacts and never copies them anywhere, and nothing is sent to us or to anyone else.
+
+support:
+  faq:
+    - q: Why isn't someone's birthday showing?
+      a: Check two things. First, their contact card needs a birthday. Second, they need to be one of the people you've chosen in Upcoming Birthdays. If you gave limited contact access, also make sure they're included in the contacts you shared with the app (Settings › Privacy & Security › Contacts).
+    - q: How do I add the widgets?
+      a: "On iPhone or iPad, touch and hold an empty area of the Home Screen, tap Edit, then Add Widget, and search for Upcoming Birthdays. On a Mac, Control-click the desktop and choose Edit Widgets."
+    - q: I'm not getting birthday reminders.
+      a: Make sure notifications are allowed for Upcoming Birthdays in the Settings app under Notifications.

@@ -1,0 +1,69 @@
+---js
+// /apps/<slug>/support/: the URL to give App Store Connect as "Support URL".
+// Generated for every app whose YAML has a `support` block. App Review needs
+// an easy way to contact us (guideline 1.5), so the contact panel comes first.
+const layout = "layouts/base.njk";
+const pagination = {
+    data: "apps",
+    size: 1,
+    alias: "app",
+    resolve: "values",
+    addAllPagesToCollections: true,
+    before: (apps) => apps.filter((app) => app.support),
+};
+const permalink = (data) => `/apps/${data.app.slug}/support/`;
+const bodyClass = "doc-page";
+const eleventyComputed = {
+    title: (data) => `${data.app.name} support`,
+    description: (data) => `Get help with ${data.app.name}: answers to common questions, and how to contact Xerodonia.`,
+    accent: (data) => data.app.accent,
+};
+---
+<nav class="breadcrumbs wrap" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="{{ app | productUrl }}">{{ app.name }}</a></li>
+    <li><a href="{{ page.url }}" aria-current="page">Support</a></li>
+  </ol>
+</nav>
+
+<article class="section doc">
+  <div class="wrap doc-wrap">
+    <header class="doc-header">
+      <p class="eyebrow">{{ app.name }}</p>
+      <h1 class="page-title">Support</h1>
+    </header>
+
+    <section class="doc-summary contact-panel" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact us</h2>
+      <p>Email us and a real person will read your message and reply as soon as we can. It helps if you tell us your device, its system version and the app version (shown in {{ app.name }}'s Settings).</p>
+      <div class="actions">
+        <a class="button button--primary" href="mailto:{{ site.email }}?subject={{ (app.name + ' support') | urlencode }}">Email {{ site.email }}</a>
+      </div>
+    </section>
+
+    {%- if app.support.faq %}
+    <section class="prose" aria-labelledby="faq-title">
+      <h2 id="faq-title">Common questions</h2>
+      <div class="faq">
+        {%- for item in app.support.faq %}
+        <details>
+          <summary>{{ item.q }}</summary>
+          <p>{{ item.a }}</p>
+        </details>
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endif %}
+
+    <section class="prose" aria-labelledby="req-title">
+      <h2 id="req-title">Requirements</h2>
+      <p>{{ app.name }} runs on {{ app.platforms | listToProse }}, and requires {{ app.requires }}.</p>
+    </section>
+
+    <p class="link-row">
+      {%- if app.privacyPolicy %}<a class="text-link" href="{{ app | productUrl }}privacy/">{{ app.name }} privacy policy <span aria-hidden="true">→</span></a>{% endif %}
+      <a class="text-link" href="{{ app | productUrl }}">About {{ app.name }} <span aria-hidden="true">→</span></a>
+    </p>
+  </div>
+</article>

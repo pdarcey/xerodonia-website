@@ -33,7 +33,9 @@ eleventyComputed:
       <p class="app-summary">{{ app.summary }}</p>
       <ul class="chips" aria-label="Platforms">{% for platform in app.platforms %}<li>{{ platform }}</li>{% endfor %}</ul>
       {% include "partials/get-actions.njk" %}
-      <p class="fine-print">Requires {{ app.requires }}.</p>
+      <p class="fine-print">Requires {{ app.requires }}.
+        {%- if app.privacyPolicy %} · <a href="{{ app | productUrl }}privacy/">Privacy policy</a>{% endif %}
+        {%- if app.support %} · <a href="{{ app | productUrl }}support/">Support</a>{% endif %}</p>
     </div>
   </div>
 </section>
@@ -86,8 +88,8 @@ eleventyComputed:
       {%- endif %}
       <p>{{ app.privacy.summary }}</p>
       <p class="link-row">
-        <a class="text-link" href="{{ app | productUrl }}privacy/">Privacy policy <span aria-hidden="true">→</span></a>
-        <a class="text-link" href="{{ app | productUrl }}support/">Support <span aria-hidden="true">→</span></a>
+        {%- if app.privacyPolicy %}<a class="text-link" href="{{ app | productUrl }}privacy/">Privacy policy <span aria-hidden="true">→</span></a>{% endif %}
+        {%- if app.support %}<a class="text-link" href="{{ app | productUrl }}support/">Support <span aria-hidden="true">→</span></a>{% endif %}
       </p>
     </div>
     <div class="data-lists">

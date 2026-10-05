@@ -1,0 +1,42 @@
+---
+layout: layouts/base.njk
+title: About
+description: Xerodonia Pty Ltd is a small software company in Sydney, Australia, making private, native apps for iPhone, iPad and Mac, and helping businesses put AI coding agents to work.
+permalink: /about/
+bodyClass: doc-page
+---
+<article class="section doc">
+  <div class="wrap doc-wrap">
+    <header class="doc-header">
+      <p class="eyebrow">About</p>
+      <h1 class="page-title">Small apps, made carefully.</h1>
+      <p class="doc-lead">{{ site.legalName }} is a small software company in {{ site.location }}. We make apps for iPhone, iPad and Mac, and we help businesses put AI coding agents to work.</p>
+    </header>
+
+    <section class="doc-summary" aria-labelledby="principles-title">
+      <h2 id="principles-title">How we build apps</h2>
+      <ul class="checklist">
+        <li><strong>Private by default.</strong> If an app doesn't need your data, it doesn't take it. Most of ours never send anything off your device.</li>
+        <li><strong>Native to every Apple device.</strong> Built with Apple's own frameworks, so each app feels at home on iPhone, iPad and Mac.</li>
+        <li><strong>One job, done well.</strong> Small, focused apps you can understand at a glance.</li>
+        <li><strong>No ads, no tracking.</strong> Not in our apps, and not on this website.</li>
+      </ul>
+    </section>
+
+    <div class="prose">
+      <h2>What we make</h2>
+      <p>Our apps cover the everyday: what's coming up today, the birthdays that matter, the places you've been, the scores for your teams. We also share some of the tools we build for our own work, like <a href="/apps/obfuscate/">obfuscate</a> and <a href="/apps/clarity/">Clarity</a>. <a href="/apps/">See all apps and tools</a>.</p>
+
+      <h2>Consulting</h2>
+      <p>We use AI coding agents every day to build our own software, and we help other businesses do the same: analysing how your team works, setting agents up properly, and training your people to get real value from them. We work on-site in Sydney and remotely anywhere. <a href="/consulting/">Learn about consulting</a>.</p>
+
+      <h2>Company details</h2>
+      <dl class="permission-list">
+        <div><dt>Company</dt><dd>{{ site.legalName }}</dd></div>
+        <div><dt>ABN</dt><dd>{{ site.abn }}</dd></div>
+        <div><dt>Location</dt><dd>{{ site.location }}</dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:{{ site.email }}">{{ site.email }}</a></dd></div>
+      </dl>
+    </div>
+  </div>
+</article>
