@@ -1,1 +1,36 @@
+# Environment
+.env
+.env.*
+.env.local
+!.env.example
+
+### macOS ###
+# General
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Build outputs
+node_modules/
+dist/
+.build/
+build/
+*.pyc
+__pycache__/
+
+# Placeholder image generator output
+output_images/
+
+# Claude local files
+.claude/settings.local.json
+CLAUDE.local.md
