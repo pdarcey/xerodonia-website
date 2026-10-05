@@ -23,6 +23,7 @@ The rebuild plan, decisions and staging are in `Documentation/Plan.md`. The stor
 - `npm run dev`: dev server with live reload at http://localhost:8080
 - `npm run build`: build to `_site/`
 - `npm run clean`: delete `_site/`
+- `npm run images`: regenerate `favicon.ico`, `apple-touch-icon.png` and the link-preview cards in `src/images/og/`. Run this on a Mac after adding an app or changing an app's name, tagline or icon, and commit the output. It isn't part of the build, because its text rendering depends on the Mac's fonts.
 
 ## Architecture
 ```
@@ -55,12 +56,14 @@ src/
    `"/Applications/Xcode.app/Contents/Applications/Icon Composer.app/Contents/Executables/ictool" AppIcon.icon --export-image --output-file <slug>.png --platform iOS --rendition Default --width 1024 --height 1024 --scale 1`
 2. Copy `src/_data/apps/blueprint.yaml` to `src/_data/apps/<slug>.yaml` and edit it. `blueprint.yaml` documents every field.
    - **Required:** `name`, `slug`, `order`, `kind`, `accent`, `icon`, `category`, `tagline`, `headline`, `summary`, `platforms`, `requires`, `status`.
-   - **Optional sections**, which only render when present: `screenshots`, `features`, `privacy`, `cta`, `terminal`, `appStoreId`, `testFlightUrl`, `downloadUrl`, `githubUrl`.
+   - **Optional sections**, which only render when present: `screenshots`, `features`, `sections` (free-form: `heading`, `text`, `list`, `code`, `after`), `privacy`, `cta`, `terminal`, `appStoreId`, `testFlightUrl`, `downloadUrl`, `githubUrl`.
+   - **Only link public URLs.** For example, leave `githubUrl` empty while a repo is private, or visitors get a 404.
    - **`privacyPolicy`** generates `/apps/<slug>/privacy/`, the App Store Connect "Privacy Policy URL". It also needs the `privacy` block, because the policy's "short version" reuses it.
    - **`support`** (an FAQ list) generates `/apps/<slug>/support/`, the App Store Connect "Support URL".
    - Every app on the App Store **must** have both. Their facts must match the app's `NS…UsageDescription` strings, its `PrivacyInfo.xcprivacy`, and its App Privacy answers in App Store Connect. Check the app's code; don't guess.
 3. Set `status` to a key from `src/_data/statuses.js`. That decides the badge and the buttons.
-4. Run `npm run dev` and check the home page, `/apps/` and `/apps/<slug>/`. The footer, sitemap and app lists update automatically.
+4. Run `npm run images` to make the app's link-preview card.
+5. Run `npm run dev` and check the home page, `/apps/` and `/apps/<slug>/`. The footer, sitemap and app lists update automatically.
 
 ### Writing a blog post
 Create `src/blog/<slug>.md` with front matter `title`, `description`, `date` (YYYY-MM-DD) and an optional `category`, then write the post in Markdown. The layout, URL (`/blog/<slug>/`), blog index, home-page teaser, sitemap and Atom feed all update automatically. Keep any page that isn't a post *out* of `src/blog/`, or it inherits the `posts` tag and shows up in the feed.

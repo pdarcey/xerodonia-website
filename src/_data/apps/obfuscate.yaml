@@ -1,4 +1,4 @@
-# obfuscate. Card-level data only; the full page content arrives in Stage 5.
+# obfuscate. Free, MIT-licensed command-line tool.
 name: obfuscate
 slug: obfuscate
 order: 6
@@ -13,10 +13,44 @@ platforms: [macOS, CLI]
 requires: macOS 26
 status: free-download
 downloadUrl:             # notarised DMG on GitHub Releases (Stage 7)
-githubUrl: https://github.com/pdarcey/obfuscate
+githubUrl: https://github.com/pdarcey/obfuscate   # public since 2026-10-05
 price: Free
 appCategory: Developer Tools
 languages: [English]
 terminal:
   command: obfuscate -k openAI=sk-… -f Secrets
   comment: "Secrets.swift: no plain-text keys"
+
+featuresHeading: Secrets out of source control
+features:
+  - title: Nothing in plain text
+    text: The generated file never contains a secret in plain text, not even in a comment.
+  - title: A key for every secret
+    text: Each secret is encrypted with ChaCha20-Poly1305 (via CryptoKit) using its own random key, and every run produces different output.
+  - title: Simple to use
+    text: "Read a secret with one line: let apiKey = try Secrets.openAI"
+  - title: Checks its own work
+    text: "With --check, obfuscate decodes every secret before writing anything, so a bad file never reaches your project."
+
+sections:
+  - heading: How it works
+    text: "Give obfuscate your secrets and a file name:"
+    code: |
+      $ obfuscate --key openAI=sk-example-1234 -f Secrets
+    after: "That writes Secrets.swift, containing a Secrets enum, which you can safely commit. Your app reads each secret with let apiKey = try Secrets.openAI. The technique is based on NSHipster's article on secrets."
+  - heading: Install
+    text: "Until the signed download is ready, build obfuscate from source with Xcode:"
+    code: |
+      $ git clone https://github.com/pdarcey/obfuscate.git
+      $ open obfuscate/obfuscate.xcodeproj
+    after: "Then choose Product › Build (⌘B). Each build installs obfuscate to /usr/local/bin and its man page alongside, so obfuscate and man obfuscate work straight away."
+  - heading: Options
+    list:
+      - "<secret> …: secrets to obfuscate. They become Secrets.apiKey1, Secrets.apiKey2 and so on."
+      - "-k, --key <name=secret>: a secret plus the property name that returns it. Repeat for more secrets."
+      - "-f, --file-name <file>: write to this file instead of standard output (.swift is added if needed)."
+      - "-c, --check: check that every secret decodes correctly before writing any output."
+  - heading: Important
+    text: "This is obfuscation, not high-security encryption: the key for each secret is in the same file. Anyone determined can recover the secrets. obfuscate just means they have to do some work, instead of finding your keys in plain sight."
+  - heading: Requirements and licence
+    text: obfuscate runs on macOS 26 or later. It's free and open source under the MIT licence.

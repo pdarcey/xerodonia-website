@@ -78,6 +78,25 @@ eleventyComputed:
 </section>
 {%- endif %}
 
+{#- Free-form extra sections (optional): heading, text (a string or list of paragraphs), code, list -#}
+{%- for extra in app.sections %}
+<section class="section app-extra" aria-labelledby="extra-{{ loop.index }}">
+  <div class="wrap">
+    <div class="prose">
+      <h2 id="extra-{{ loop.index }}">{{ extra.heading }}</h2>
+      {%- for paragraph in ([extra.text] if extra.text is string else (extra.text or [])) %}
+      <p>{{ paragraph }}</p>
+      {%- endfor %}
+      {%- if extra.list %}<ul>{% for item in extra.list %}<li>{{ item }}</li>{% endfor %}</ul>{% endif %}
+      {%- if extra.code %}
+      <pre class="terminal"><code>{{ extra.code | trim }}</code></pre>
+      {%- endif %}
+      {%- if extra.after %}<p>{{ extra.after }}</p>{% endif %}
+    </div>
+  </div>
+</section>
+{%- endfor %}
+
 {%- if app.privacy %}
 <section class="section privacy-callout" aria-labelledby="privacy-title">
   <div class="wrap split">

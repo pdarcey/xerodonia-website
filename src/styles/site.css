@@ -465,3 +465,5 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.025em; }
 .post-body ol { list-style: decimal; }
 /* Four services read best as a 2×2 grid rather than 3 + 1 */
 @media (min-width: 48rem) { .pricing-grid--four { grid-template-columns: repeat(2, 1fr); } }
+.app-extra .terminal { margin: 1rem 0; font-size: .85rem; padding: 1rem 1.2rem; border-radius: 14px; white-space: pre; }
+.app-extra + .app-extra { padding-top: 0; }

@@ -51,6 +51,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/images/*.svg");
   eleventyConfig.addPassthroughCopy("src/images/apps/*.svg");
   eleventyConfig.addPassthroughCopy("src/CNAME");
+  eleventyConfig.addPassthroughCopy("src/favicon.ico");
+  eleventyConfig.addPassthroughCopy("src/apple-touch-icon.png");
+  eleventyConfig.addPassthroughCopy("src/images/og/*.jpg");
 
   eleventyConfig.addAsyncShortcode("image", imageShortcode);
 

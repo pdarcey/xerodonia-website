@@ -1,4 +1,4 @@
-# Scoreboard. Card-level data only; the full page content arrives in Stage 5.
+# Scoreboard. In development; privacy and support pages get added before its App Store submission.
 name: Scoreboard
 slug: scoreboard
 order: 4
@@ -17,3 +17,23 @@ testFlightUrl:
 price: To be announced
 appCategory: Sports
 languages: [English]
+
+featuresHeading: Your teams, your scores
+featuresIntro: Built for Australian sport, because no other app put it all in one place.
+features:
+  - title: All your sports together
+    text: AFL, NRL, NBL, cricket, football, rugby and more, in one app, including internationals where Australian teams play.
+  - title: Only the teams you follow
+    text: Choose your sports and teams. Scoreboard shows their games and nothing else.
+  - title: Live-ish scores
+    text: Scores update during the game, a little behind real time. Fast enough to keep up, without pretending to be a broadcast.
+  - title: Widgets
+    text: Put the latest scores or your next games on your Home Screen, updating automatically.
+  - title: Notifications, your way
+    text: Choose which alerts you want, from game start to final score, or none at all.
+  - title: Ask Siri
+    text: When does my team play next? What's the score? What was the result last week? Just ask.
+
+cta:
+  title: Want to know when Scoreboard is ready?
+  text: Send us an email and we'll let you know as soon as it's available.

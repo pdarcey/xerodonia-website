@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "eleventy --serve",
     "build": "eleventy",
-    "clean": "rm -rf _site"
+    "clean": "rm -rf _site",
+    "images": "node scripts/make-images.mjs"
   },
   "engines": {
     "node": ">=22"
@@ -15,6 +16,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.0",
     "@11ty/eleventy-img": "^7.0.0",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "sharp": "^0.35.5"
   }
 }

@@ -2,6 +2,8 @@
     Front matter it reads: title, description, accent, bodyClass, app (on app pages). -#}
 {%- set pageTitle = title + " · " + site.name if title and title != site.name else site.name + ": thoughtful apps for iPhone, iPad and Mac" -%}
 {%- set pageDescription = description or site.description -%}
+{#- Link-preview image: a page's ogImage, else its app's card, else the site default (made by `npm run images`). -#}
+{%- set pageImage = ogImage or ("/images/og/" + app.slug + ".jpg" if app else "/images/og/default.jpg") -%}
 <!doctype html>
 <html lang="en-AU">
 <head>
@@ -18,13 +20,19 @@
   <meta property="og:title" content="{{ pageTitle }}">
   <meta property="og:description" content="{{ pageDescription }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="{{ site.url }}{{ pageImage }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ pageTitle }}">
+  <meta name="twitter:card" content="summary_large_image">
   {%- if app and app.appStoreId %}
   <meta name="apple-itunes-app" content="app-id={{ app.appStoreId }}">
   {%- endif %}
 
   <link rel="alternate" type="application/atom+xml" title="{{ site.name }} blog" href="/feed.xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/images/xerodonia-mark.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="/styles/site.css">
 </head>
 <body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}{% if accent %} style="--accent: {{ accent }}"{% endif %}>

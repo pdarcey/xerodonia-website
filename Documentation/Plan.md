@@ -1,6 +1,6 @@
 # xerodonia.com — Rebuild Plan
 
-*Drafted 2026-10-05. Status: **Stages 1–4 done; https://xerodonia.com is live with apps, consulting and blog.** Next: Stage 5 (remaining app content and assets).*
+*Drafted 2026-10-05. Status: **Stages 1–5a live. Working on 5b (AI-agent layer).***
 
 ## Goals
 
@@ -292,14 +292,70 @@ Keep a `CHANGELOG.md` in each app repo. Paste each entry into ASC's "What's New"
 | **2** ✅ | Set up Eleventy, layouts, design tokens for the chosen design, data model, CI build. Delete the old flat HTML. | `npm run build` works. Home, /apps/ and 6 app pages are generated from data. Approved 2026-10-05. |
 | **3** ✅ | **Minimum viable launch:** home, an app page plus `/privacy/` and `/support/` for the three TestFlight apps, About, the site privacy policy. Deploy to GitHub Pages and switch DNS. | Live site with the URLs ASC and TestFlight need |
 | **4** ✅ | Port the consulting pages and the blog (with the CSS-only nav) | `/consulting/`, `/blog/`, feed |
-| **5** | Remaining pages: Scoreboard (coming soon), Clarity (showcase), obfuscate. Assets: icons, screenshots, OG images. | Content complete |
-| **6** | SEO and compliance pass, structured data, Lighthouse/validator/link-check in CI | Audit report |
+| **5a** ✅ | Remaining app pages (Scoreboard, Clarity, obfuscate); favicon set; Open Graph images | Content complete except screenshots |
+| **5b** | AI-agent layer, static: robots.txt, llms.txt, JSON-LD everywhere, machine-readable services file, build check for scripts | Agents can find, understand and book |
+| **5c** | Consulting MCP server on Cloudflare Workers (new repo) | Agents can query services and send enquiries |
+| **5d** | Screenshot mode in Blueprint and Clarity; capture script for all apps | Real screenshots on every app page |
+| **6** | SEO and compliance pass (JSON-LD now in 5b), Lighthouse/validator/link-check in CI | Audit report |
 | **7** | Release automation (Lookup API cron, GitHub Releases dispatch, obfuscate DMG workflow) | Hands-off release notes |
 | **8** | Update docs (`CLAUDE.md`, Journal), tidy up Clarity issues | Done |
 
 Stage 2 replaces the current HTML, so Clarity issues **#453, #455, #457 and #459** will become obsolete. #452, #454, #456 and #458 will be handled by the new build. I'll suggest closing them then, but only with Paul's agreement.
 
 ---
+
+## 9. Stage 5 in detail (approved 2026-10-05)
+
+Each sub-stage ends with a pause for review. 5a and 5b only touch this repo; 5c is a new repo; 5d changes the Blueprint and Clarity repos.
+
+### 5a: Remaining content and assets
+- **Full pages for Scoreboard, Clarity and obfuscate.** Written from each repo's README and docs, like the others. Scoreboard says "Coming soon" with an "Email me" button; Clarity is shown as built in-house; obfuscate gets an install guide, usage and the terminal example.
+- **Favicons:** SVG favicon (already there), a 32 px `favicon.ico` fallback, and a 180 px `apple-touch-icon.png`.
+- **Open Graph images (1200×630)** so shared links show a proper card: one site-wide, one per app (icon, name and tagline on the Liquid Glass background), plus one for consulting. They're made by a small script using `sharp` (already installed with eleventy-img) and committed as PNGs, so the output doesn't depend on fonts on GitHub's build machines. The base layout then adds `og:image` and switches to `twitter:card = summary_large_image`.
+
+### 5b: AI-agent layer (static, no server)
+- **robots.txt:** allow everything (decision: "Allow all"). It explicitly lists the main AI user agents (GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-User, Claude-SearchBot, PerplexityBot, Perplexity-User, Google-Extended, Applebot-Extended, CCBot) and points to the sitemap and llms.txt.
+- **`/llms.txt`** ([llmstxt.org](https://llmstxt.org) format): a Markdown summary of Xerodonia with links to every app, policy, consulting page and post, plus a "For AI agents" section explaining how to book, how to send an enquiry, and the MCP endpoint (once 5c exists). It's generated from the same data files, so it never drifts.
+- **`/llms-full.txt`:** the same, with the full consulting details, app details and blog posts inlined, so an agent can read everything in one request.
+- **JSON-LD on every page** (decision: data-only `<script type="application/ld+json">` is allowed):
+  - `Organization` and `WebSite` site-wide
+  - `MobileApplication` / `SoftwareApplication` per app
+  - `ProfessionalService` with an `OfferCatalog` (each service as an `Offer` with AUD price, excluding GST) and a `ReserveAction` pointing to Calendly
+  - `FAQPage` for the consulting FAQ and app support pages
+  - `BlogPosting` and `BreadcrumbList`
+- **`/consulting/services.json`:** a machine-readable catalogue of services, prices, fee tiers, agents, IDEs, the booking URL and the enquiry contract. It's generated from `consulting.yaml`, so it's the same data that powers the pages and (in 5c) the MCP server.
+- **Build guard:** a post-build check that fails the deploy if any `<script>` other than `application/ld+json` appears, enforcing the no-JS rule.
+
+### 5c: Consulting MCP server (Cloudflare Workers, free tier)
+- **New private repo `xerodonia-mcp`,** following `clarity-feedback-relay`'s conventions: TypeScript Worker, `wrangler.jsonc`, KV rate limiting, secrets only via `wrangler secret put`, and vitest with `@cloudflare/vitest-pool-workers`.
+- **Remote MCP over Streamable HTTP,** at `https://xerodonia-mcp.<account>.workers.dev/mcp`. A `mcp.xerodonia.com` address would need the DNS zone on Cloudflare, which we decided against (it would move email DNS).
+- **Tools:**
+  - `list_services`, `get_service`, `get_fees`: read-only, straight from `services.json`. The Worker fetches it from the live site and caches it, so prices are only ever edited in `consulting.yaml`.
+  - `estimate_engagement`: given a team's situation (existing agent setup or not, number of agents, wants follow-up support), returns the matching packages and an indicative total, AUD excluding GST. Deterministic arithmetic, no AI.
+  - `get_booking_link`: the Calendly link, for a human to choose a time.
+  - `send_enquiry`: name, email, company, message and optional preferred times, plus a required `contact_consent: true` confirming the human agreed to share their details. Creates a consulting enquiry for Paul (destination: see questions). The tool **never commits Xerodonia to anything**; it only starts a conversation.
+- **Safeguards:**
+  - rate limits per IP and per email
+  - input length limits
+  - no free-text HTML passed through
+  - enquiries labelled as agent-submitted
+  - a kill switch (an environment variable) that disables `send_enquiry` without redeploying
+- **Privacy:** the website privacy policy gains a "Consulting enquiries" section covering what's collected, where it's stored, how long it's kept, and deletion on request.
+- **Deploy:** Paul runs `npx wrangler login` once (or uses the existing login); everything else is scripted.
+
+### 5d: Screenshots
+- **Blueprint and Clarity:** a `-ScreenshotMode` launch argument, compiled into DEBUG builds only, that swaps in an in-memory store and stub providers filled with fake data. In Blueprint that covers contacts, events, reminders, health, weather, news, sport and TV. In Clarity it covers projects and issues. Each change is planned and reviewed in its own repo, following that repo's `CLAUDE.md`, with Clarity issues filed in those projects.
+- **Upcoming Birthdays:** fake contacts loaded into a dedicated Simulator from a `.vcf` file.
+- **Borderstamp:** a simulated GPS route across real borders (`simctl location`), plus a few geotagged sample photos for the photo-scan feature.
+- **Scoreboard:** live public data.
+- **`scripts/capture-screenshots.sh`** in this repo: boots dedicated simulators (iPhone 18 Pro Max, iPad Pro 13-inch), sets a clean status bar (`simctl status_bar override`: 9:41, full battery), launches each app with its demo data, and captures App Store-sized PNGs. Mac apps are captured with `screencapture -l` on the app window. The PNGs land in `src/images/apps/<slug>/` and the YAML references them, and the same files can be uploaded to App Store Connect.
+
+### Decided for 5c (2026-10-05)
+1. **Enquiries go to both destinations:**
+   - as a GitHub issue in a private `consulting-enquiries` repo, via `clarity-feedback-relay` with its own ingest token, so Clarity imports it
+   - **and** as an email to hello@
+   - To check when building: GitHub already emails watchers about new issues, which may be enough on its own. If not, use Fastmail JMAP with a scoped API token as a Worker secret.
+2. **Repo name:** `xerodonia-mcp` (private).
 
 ## Decisions (2026-10-05)
 
@@ -312,11 +368,12 @@ Stage 2 replaces the current HTML, so Clarity issues **#453, #455, #457 and #459
 6. **URLs:** tools share the `/apps/<slug>/` scheme (e.g. `/apps/obfuscate/`) instead of having a separate `/tools/` section. That's one listing and one template, and `kind: tool` still styles them differently.
 
 7. **Repo name:** `pdarcey/xerodonia-website` (public), so the repo is never confused with the website itself.
+8. **Stage 5 decisions:** screenshots via a DEBUG-only "screenshot mode" in Blueprint and Clarity; robots.txt allows all AI crawlers; agent engagement includes a live MCP server on Cloudflare Workers (free tier); JSON-LD `<script type="application/ld+json">` is allowed, but executable JS is not.
 
 ## Open questions for Paul
 
-5. **Clarity:** showcase only, or also a free/beta DMG download?
-6. **obfuscate:** is `pdarcey/obfuscate` (or will it be) a **public** GitHub repo? Do you have a Developer ID Application certificate for notarisation? Clarity's script suggests you do.
+5. ~~**Clarity:** showcase only?~~ **Answered 2026-10-05:** showcase only, not for sale and no download. The DMG pipeline was an experiment.
+6. ~~**obfuscate:** public repo?~~ **Answered 2026-10-05:** `pdarcey/obfuscate` is now public (history scanned first: only test-fixture keys). The DMG and notarisation come in Stage 7.
 7. **TestFlight:** public TestFlight links for Blueprint, Borderstamp and Birthdays, or invite-only?
 8. **Release PRs:** should automated release-note updates open a PR for you to approve (recommended), or publish automatically?
 9. **Upcoming Birthdays and Borderstamp privacy:** I couldn't find an analytics SDK or a `PrivacyInfo.xcprivacy` in either repo. Can you confirm what they actually collect? Both apps also need privacy manifests before App Store submission. That's work in those repos, so I'd log it as Clarity issues there.

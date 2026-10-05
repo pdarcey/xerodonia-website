@@ -1,4 +1,4 @@
-# Clarity. Card-level data only; the full page content arrives in Stage 5.
+# Clarity. Built in-house and not for sale; shown as an example of how we work.
 name: Clarity
 slug: clarity
 order: 5
@@ -15,3 +15,25 @@ status: in-house
 price: Not for sale
 appCategory: Developer Tools
 languages: [English]
+
+featuresHeading: One tracker, three ways in
+featuresIntro: A native Mac app for people, plus a command-line tool and an MCP server for scripts and AI agents. All three share one database.
+features:
+  - title: Dashboard
+    text: Every project on one screen, with version, test and timeline summaries, and a drill-down dashboard for each project.
+  - title: Kanban board
+    text: Backlog, Current and Completed columns, with drag to reorder and multi-select.
+  - title: Issues with context
+    text: Filter by status, kind and urgency, and drag images, PDFs, Markdown and other files straight onto an issue.
+  - title: Imports from your repos
+    text: Drop a repo folder in to create a project, with its app icon. Link a GitHub repo and its open issues are imported automatically.
+  - title: A full command-line tool
+    text: "Projects, issues, reminders, milestones and attachments from the terminal, with JSON output for scripts and shell completions."
+  - title: An MCP server for AI agents
+    text: "27 tools let agents like Claude Code read and update issues as they work, so the tracker stays current without anyone typing it up."
+
+sections:
+  - heading: Why we built it
+    text:
+      - "We build our apps with AI coding agents. We wanted an issue tracker the agents could use as easily as we do: one that lives on the Mac, works offline, and has no per-seat SaaS pricing."
+      - Clarity is the result. Every project on this site is tracked in it, including this website. It isn't for sale, but it shows the kind of tooling we build, for ourselves and for our consulting clients.
