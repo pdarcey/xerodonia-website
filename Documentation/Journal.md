@@ -118,6 +118,17 @@ The consulting MCP server is live (its own story is in `xerodonia-mcp/Journal.md
 
 Writing the privacy section meant checking what the server actually stores, rather than what it's meant to store. IP addresses really are kept for an hour and email hashes for a day, because those are the KV TTLs in `rate-limit.ts`. A privacy policy should be checked against the code, the same way the app policies were.
 
+### 2026-10-05 (evening): Screenshots without showing anyone's life
+Every app page needed real screenshots, but Blueprint shows contacts, calendars and health data, and Clarity shows every private project note. Both apps gained a **screenshot mode**: a Debug-only `-ScreenshotMode` launch argument that swaps in fake data, isolated from the real stores. In Blueprint that meant the mocks its tests already used; in Clarity, an in-memory database. (Each repo's own Journal tells its half of the story.)
+
+What the website side learnt:
+- **Ask before booting a Simulator.** A never-used iPhone 18 Pro Max ran the CPU flat out for half an hour without finishing its first boot, and Paul had to kill it. The Mac builds did the job in seconds. "Native first" is now a rule (and a memory).
+- **Mac screenshots arrive as transparent PNGs with the window's own shadow.** Keep them that way. The page background shows through, so no frame is needed, and they look right in light and dark.
+- **Light and dark, no JavaScript.** `{% themedImage %}` builds one `<picture>` with the dark sources first, behind `(prefers-color-scheme: dark)`, and each source carries its own dimensions. Dark-mode visitors automatically see dark screenshots. A 1 MB PNG becomes a 37–57 KB AVIF.
+- **Portrait and landscape need different rules.** Blueprint's tall window is sized by height and Clarity's wide windows by width, and the shortcode adds a `--portrait` or `--landscape` class from the image's own dimensions.
+- **Headless Chrome screenshots images that haven't loaded yet.** The dark Clarity screenshots looked missing until `--virtual-time-budget` gave lazy images time to load. Check that a test is measuring the page, not the capture.
+- **Paul's review beats any test.** "The icons don't show" and "there's no commit activity" were both cases of sample data that passed every test but didn't look like the real app. Sample data should do whatever the real importer does.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no dependencies to update, no security patches and no build to break.

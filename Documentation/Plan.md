@@ -1,6 +1,6 @@
 # xerodonia.com — Rebuild Plan
 
-*Drafted 2026-10-05. Status: **Stages 1–5c live** (site, AI-agent layer, consulting MCP server with email notifications). Next: 5d (screenshots).*
+*Drafted 2026-10-05. Status (end of session, 2026-10-05): **Stages 1–5c live; 5d part-done.** Blueprint and Clarity have Mac screenshots (light and dark) live. Next: the remaining screenshots (see "Next session" below).*
 
 ## Goals
 
@@ -295,7 +295,7 @@ Keep a `CHANGELOG.md` in each app repo. Paste each entry into ASC's "What's New"
 | **5a** ✅ | Remaining app pages (Scoreboard, Clarity, obfuscate); favicon set; Open Graph images | Content complete except screenshots |
 | **5b** ✅ | AI-agent layer, static: robots.txt, llms.txt, JSON-LD everywhere, machine-readable services file, build check for scripts | Agents can find, understand and book |
 | **5c** ✅ | Consulting MCP server on Cloudflare Workers (new repo) | Agents can query services and send enquiries |
-| **5d** | Screenshot mode in Blueprint and Clarity; capture script for all apps | Real screenshots on every app page |
+| **5d** 🔶 | Screenshot mode in Blueprint and Clarity; capture script for all apps | **Done:** screenshot modes in Blueprint (461a799, #465) and Clarity (74086dc, #466); Mac screenshots, light and dark, live for both. **To do:** iPhone/iPad for Blueprint; Mac + iPhone/iPad for Birthdays and Borderstamp; iPhone/iPad for Scoreboard; capture script |
 | **6** | SEO and compliance pass (JSON-LD now in 5b), Lighthouse/validator/link-check in CI | Audit report |
 | **7** | Release automation (Lookup API cron, GitHub Releases dispatch, obfuscate DMG workflow) | Hands-off release notes |
 | **8** | Update docs (`CLAUDE.md`, Journal), tidy up Clarity issues | Done |
@@ -428,6 +428,18 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 
 7. **Repo name:** `pdarcey/xerodonia-website` (public), so the repo is never confused with the website itself.
 8. **Stage 5 decisions:** screenshots via a DEBUG-only "screenshot mode" in Blueprint and Clarity; robots.txt allows all AI crawlers; agent engagement includes a live MCP server on Cloudflare Workers (free tier); JSON-LD `<script type="application/ld+json">` is allowed, but executable JS is not.
+
+## Next session (written 2026-10-05)
+
+1. **Remaining screenshots (5d).**
+   - **Mac, native, no Simulator:** Upcoming Birthdays and Borderstamp. Both need fake data: Birthdays from sample contacts (it has `Preview Content/Sample Data.swift`); Borderstamp from sample stamps. Each probably needs a small screenshot mode like Blueprint's and Clarity's: plan it in that repo first.
+   - **iPhone/iPad:** Blueprint, Birthdays, Borderstamp and Scoreboard. **Ask Paul before booting any Simulator.** A fresh iPhone 18 Pro Max's first boot ran the CPU flat out for about 30 minutes. Prefer a simulator Paul already uses, or have Paul boot one ahead of time.
+   - Then write `scripts/capture-screenshots.sh`, so re-captures (and App Store Connect sizes) are one command.
+2. **Clarity #467:** sample-data polish (project descriptions, green tests, obfuscate "Not shipped"), then re-take Clarity's Dashboard and Project dashboard shots.
+3. **Stage 6:** SEO and compliance audit (Lighthouse, W3C validator and link checker in CI).
+4. **Stage 7:** release automation, including obfuscate's signed and notarised DMG.
+
+**Not pushed (local commits Paul may want to push):** Blueprint `461a799`, Clarity `74086dc`. **Uncommitted, Paul's own:** Blueprint `project.pbxproj`; Clarity `CLAUDE.md` line 42, `Journal.md` (27 Sep entry), `Readme.md`, `Info.plist` (build-number bump); the website's `Images/` folder (two Blueprint-only Kanban shots, unused).
 
 ## Open questions for Paul
 
