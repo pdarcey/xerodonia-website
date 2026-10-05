@@ -1,0 +1,24 @@
+{#- The "how to get it" buttons for an app, chosen by its status.
+    Expects `app` in scope. Used in the app hero and the closing call to action.
+    Static (non-link) states use .button--static so they never look clickable. -#}
+<div class="actions">
+  {%- if app.status == "app-store" and app.appStoreId %}
+  <a class="button button--primary" href="https://apps.apple.com/app/id{{ app.appStoreId }}">Download on the App Store</a>
+  {%- elif app.status == "testflight" and app.testFlightUrl %}
+  <a class="button button--primary" href="{{ app.testFlightUrl }}">Join the TestFlight beta</a>
+  <span class="button button--secondary button--static">Coming soon to the App Store</span>
+  {%- elif app.status == "free-download" %}
+    {%- if app.downloadUrl %}
+  <a class="button button--primary" href="{{ app.downloadUrl }}">Download for Mac</a>
+    {%- endif %}
+    {%- if app.githubUrl %}
+  <a class="button {% if app.downloadUrl %}button--secondary{% else %}button--primary{% endif %}" href="{{ app.githubUrl }}">View on GitHub</a>
+    {%- endif %}
+  {%- elif app.status == "in-house" %}
+  <span class="button button--secondary button--static">Built for our own work, not for sale</span>
+  {%- else %}
+  {#- in-development, testflight-soon, or a status whose link isn't set yet -#}
+  <a class="button button--primary" href="mailto:{{ site.email }}?subject={{ ('Let me know when ' + app.name + ' is ready') | urlencode }}">Email me when it's ready</a>
+  <span class="button button--secondary button--static">{{ "TestFlight beta coming soon" if app.status == "testflight-soon" else "Coming soon" }}</span>
+  {%- endif %}
+</div>

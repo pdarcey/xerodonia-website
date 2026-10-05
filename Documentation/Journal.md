@@ -53,6 +53,28 @@ The site was working but undocumented. A first audit found:
 
 All of these are now tracked in Clarity.
 
+### 2026-10-05: Five designs, one set of HTML
+To choose a look for the rebuild, we built five mockups (`Design Mockups/`): Liquid Glass, Editorial, Blueprint, Bento and Swiss Minimal. The trick is that **all five share exactly the same HTML**. `build.py` takes two source pages plus header and footer partials and writes one copy per design, changing only the stylesheet link. It's the CSS Zen Garden idea: if the markup is semantic enough, the stylesheet alone can make it look like a magazine, an engineering drawing or a keynote slide. That also means the HTML is effectively finished before the design is chosen.
+
+Things we learnt along the way:
+- **Exporting Icon Composer icons from the command line:** Xcode ships *two* `ictool` binaries. The one in `Xcode.app/Contents/Developer/usr/bin` is the old asset-catalogue tool and rejects `--export-image`. The one inside `Icon Composer.app/Contents/Executables/` works: `ictool AppIcon.icon --export-image --output-file icon.png --platform iOS --rendition Default --width 512 --height 512 --scale 1`. Converted to WebP with `cwebp`, each icon went from about 550 KB to under 10 KB.
+- **Headless Chrome won't go below 500 px wide.** `--window-size=390,…` silently lays the page out at 500 px and then crops the screenshot to 390, which makes a perfectly good layout look broken. The fix is to load the page in a 390 px `<iframe>` inside a harness page. Check `innerWidth` before trusting a narrow screenshot.
+- **`--force-dark-mode` doesn't set `prefers-color-scheme`.** Use `--blink-settings=preferredColorScheme=0` (dark) or `=1` (light). Otherwise you get whatever appearance the Mac happens to be in.
+- **Specificity strikes again:** a reset rule like `ul[class] { padding: 0 }` (specificity 0,1,1) beats a later `.checklist { padding: … }` (0,1,0). Keep resets low-specificity, or wrap them in `:where()`.
+- **Grid children don't shrink by default.** A wide `<pre>` inside a grid column pushes the column wider instead of scrolling. `min-width: 0` on the grid items fixes it.
+- **No JS needed for a mobile menu here.** With only four nav links, a nav that simply wraps onto a second line works fine on phones. Leaving out the hamburger also removes a whole category of accessibility bugs.
+
+### 2026-10-05: Liquid Glass wins, and the site becomes a machine
+Paul picked design #1, with one note: the ticks in the checklists looked off-centre. They were built from two pieces, a blue circle (`::before`) and a white "L" rotated 45° (`::after`), each positioned separately in rem units. Rotating a box spins it around its own centre, not the centre of the tick it draws, so the two pieces never quite lined up, and they drifted further as the text size changed. The fix was to make it a single element: a disc whose background is an SVG tick with its bounding box centred in the viewBox, sized in `em` so it follows the text. **If two separately positioned pieces have to line up, make them one piece.**
+
+Then Stage 2 replaced the hand-written pages with Eleventy. Each app is now a YAML file, and the home page, `/apps/`, every app page, the footer and the sitemap are all generated from those files. Adding Xerodonia's next app is one file and one icon.
+
+War stories from the first build:
+- **The disappearing apps.** The first build ran without errors, and the home page had a heading, a description… and no apps at all. The cause: the product card uses `{% image %}`, an *async* shortcode, and Nunjucks's ordinary `{% for %}` loop doesn't wait for async work, so it quietly renders nothing. `{% asyncEach %}` does wait. No error, no warning, just an empty list. That's why this is now the first gotcha in `CLAUDE.md`.
+- **The sitemap that forgot five apps.** Eleventy's pagination makes six app pages from one template, but by default only the *first* is added to `collections.all`. The sitemap listed Blueprint and nothing else until `addAllPagesToCollections: true` was set.
+- **Amber is not a text colour.** Borderstamp's amber looks great as an icon and failed WCAG contrast badly as tagline text on the near-white glass. Rather than special-casing each app, accent-coloured text is now `color-mix(in oklab, var(--accent) 60%, var(--text))`. Because `--text` is dark in light mode and light in dark mode, the same rule darkens the accent on light backgrounds and lightens it on dark ones, for any colour a future app brings.
+- **The grey hole in the Details table.** The "1px gap plus coloured background" trick for drawing grid lines fills any unused cells in the last row with solid line colour. Drawing each cell's right and bottom border instead, and clipping the outer edge, fixes it however many cells there are.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no dependencies to update, no security patches and no build to break.

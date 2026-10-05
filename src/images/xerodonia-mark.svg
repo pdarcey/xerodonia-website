@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Xerodonia">
+  <rect width="64" height="64" rx="15" fill="#2f6cf6"/>
+  <path d="M20 19 44 45M44 19 20 45" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="47" cy="47" r="5" fill="#f8b93d"/>
+</svg>

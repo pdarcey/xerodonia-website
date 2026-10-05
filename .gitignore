@@ -28,8 +28,9 @@ build/
 *.pyc
 __pycache__/
 
-# Placeholder image generator output
-output_images/
+# Eleventy output and the image-processing cache
+_site/
+.cache/
 
 # Claude local files
 .claude/settings.local.json

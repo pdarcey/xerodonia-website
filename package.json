@@ -1,0 +1,20 @@
+{
+  "name": "xerodonia-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "xerodonia.com: Xerodonia's apps, tools, consulting and blog. A static site that ships no JavaScript to visitors.",
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "clean": "rm -rf _site"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.0",
+    "@11ty/eleventy-img": "^7.0.0",
+    "js-yaml": "^4.1.0"
+  }
+}

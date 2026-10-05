@@ -1,0 +1,22 @@
+{#- Site header. With only a few links the nav simply wraps on phones, so no JS menu is needed. -#}
+{%- set navItems = [
+  { title: "Apps", url: "/apps/" },
+  { title: "Consulting", url: "/consulting/" },
+  { title: "Blog", url: "/blog/" },
+  { title: "About", url: "/about/" }
+] -%}
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/images/xerodonia-mark.svg" alt="" width="32" height="32">
+      <span class="brand-name">{{ site.name }}</span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        {%- for item in navItems %}
+        <li><a href="{{ item.url }}"{% if page.url.startsWith(item.url) %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>

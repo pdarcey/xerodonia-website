@@ -1,54 +1,67 @@
 # Xerodonia Website
 
 ## Overview
-The public marketing site for Xerodonia Pty Ltd's apps (iOS, iPadOS and macOS). It has a home page with one featured app and a grid of other apps, one page per app (description, features, App Store link, screenshot gallery, per-app privacy policy), plus About and Privacy pages.
+xerodonia.com is the public home for Xerodonia Pty Ltd's apps and tools (iPhone, iPad, Mac and CLI), its AI consulting service and its blog. It also hosts the **Privacy Policy and Support URLs** that App Store Connect requires for every app.
+
+Hard rules:
+- **Visitors get no JavaScript, no trackers and no cookies.** Node runs only at build time.
+- **The site must expect more apps later.** Adding an app means adding a data file and an icon, with no template changes.
+- Australian English in all copy.
+
+The rebuild plan, decisions and staging are in `Documentation/Plan.md`. The story and lessons learnt are in `Documentation/Journal.md`.
 
 ## Tech Stack
-- Language: Plain HTML5 + CSS3. No JavaScript.
-- Framework: None. No build step, package manager or dependencies.
-- Database: None.
-- Tooling: `generate_template_images.py` (Python 3 + Pillow) makes placeholder app images.
+- Static site generator: **Eleventy 3** (ESM config, Nunjucks templates)
+- Images: **@11ty/eleventy-img** (build-time AVIF and WebP, responsive, with width and height)
+- Data: YAML (via **js-yaml**) and JS data files
+- Styling: one hand-written stylesheet, `src/styles/site.css` (the "Liquid Glass" design)
+- Hosting: **GitHub Pages**, deployed by GitHub Actions (`.github/workflows/deploy.yml`)
+- DNS: **Fastmail**, which also hosts email. Never touch the MX, DKIM, SPF or DMARC records.
 
 ## Commands
-- Preview locally: `python3 -m http.server 8000`, then open http://localhost:8000
-- Generate placeholder images: `python3 generate_template_images.py` (writes to `output_images/`, which is git-ignored)
-- No build, test or lint commands.
+- `npm install`: install dependencies (Node 22 or later)
+- `npm run dev`: dev server with live reload at http://localhost:8080
+- `npm run build`: build to `_site/`
+- `npm run clean`: delete `_site/`
 
 ## Architecture
 ```
-index.html               Home: featured app + app grid
-about.html, privacy.html Site-wide pages
-<appname>.html           One page per app, copied from appPageTemplate.html
-appPageTemplate.html     Starting point for new app pages
-css/style.css            Single stylesheet for the whole site
-images/                  Per-app images (see naming below)
-Documentation/           Journal.md (learning journal)
+eleventy.config.js          Plugins, filters (sortProducts, productUrl, listToProse, isoDate), image shortcode
+src/
+  _data/site.js             Site-wide settings (name, URL, email, ABN, Calendly…)
+  _data/statuses.js         Allowed app statuses and their labels
+  _data/apps/<slug>.yaml    One file per app or tool: the single source of truth
+  _includes/layouts/base.njk        Page shell: <head> and SEO meta, header, footer
+  _includes/partials/               header, footer, product-card, get-actions (status-driven buttons)
+  index.njk                 Home page
+  apps/index.njk            /apps/: every app and tool
+  apps/app.njk              /apps/<slug>/: one page per data file (pagination)
+  404.njk, sitemap.njk, robots.njk, CNAME
+  styles/site.css           Part 1: structure and accessibility. Part 2: Liquid Glass theme.
+  images/apps/<slug>.png    1024 px source icons (Eleventy makes the web sizes)
+.github/workflows/deploy.yml   Build and deploy to GitHub Pages on push to main
 ```
 
-### Conventions
-- **Page filenames:** the app name in lowercase with no spaces (`upcomingbirthdays.html`).
-- **Image names** per app, keyed on that same lowercase name:
-  - `<app>.png`: the icon/hero image used on the home grid and at the top of the app page
-  - `<app>-thumb1..3.png`: screenshot thumbnails
-  - `<app>-full1..3.png`: full-size screenshots shown in the lightbox
-- **Screenshot lightbox:** CSS only. Thumbnails link to `#img1`–`#img3`, and `.overlay:target` shows the matching full-size image. Close links point to `#!`.
-- **Per-app privacy policy:** a `<details>` element inside `.privacy-popup` at the bottom of each app page.
-- **Shared markup:** the header, nav and footer are copied into every page. A change to any of them must be made on **every** HTML file.
-- **Banners:** `.banner.top-left` or `.banner.top-right` inside a `.card-image` or `.featured-image` (e.g. "New", "Updated").
-- **Colours:** dark theme. Background `#0e1420`, header/footer `#115bf6`, accent borders `#6e96ef`, highlight `#fed35a`.
-
 ### Adding a new app
-1. Copy `appPageTemplate.html` to `<app>.html` and replace every "App Name 1" and `app1` reference.
-2. Add the images to `images/` using the naming convention above.
-3. Add a card to the `.app-grid` in `index.html`, with proper `alt` text.
-4. Add an entry to `privacy.html`.
-5. Replace the `idXXXXXXXX` App Store placeholder with the real app ID.
+1. Export a 1024 px icon to `src/images/apps/<slug>.png`. For Icon Composer `.icon` files, use the `ictool` inside **Icon Composer.app**, not the one in `Developer/usr/bin`:
+   `"/Applications/Xcode.app/Contents/Applications/Icon Composer.app/Contents/Executables/ictool" AppIcon.icon --export-image --output-file <slug>.png --platform iOS --rendition Default --width 1024 --height 1024 --scale 1`
+2. Copy `src/_data/apps/blueprint.yaml` to `src/_data/apps/<slug>.yaml` and edit it. `blueprint.yaml` documents every field.
+   - **Required:** `name`, `slug`, `order`, `kind`, `accent`, `icon`, `category`, `tagline`, `headline`, `summary`, `platforms`, `requires`, `status`.
+   - **Optional sections**, which only render when present: `screenshots`, `features`, `privacy`, `cta`, `terminal`, `appStoreId`, `testFlightUrl`, `downloadUrl`, `githubUrl`.
+3. Set `status` to a key from `src/_data/statuses.js`. That decides the badge and the buttons.
+4. Run `npm run dev` and check the home page, `/apps/` and `/apps/<slug>/`. The footer, sitemap and app lists update automatically.
 
-## Gotchas
-- Every page needs `<meta name="viewport" content="width=device-width, initial-scale=1.0">`.
-- Privacy wording must match what each app actually does (App Review checks it).
-- Use Australian English in site copy.
-- Issues are tracked in Clarity under the "xerodonia.com" project.
+## Conventions and gotchas
+- **Use `{% asyncEach %}`, not `{% for %}`, for any loop containing `{% image %}`.** The image shortcode is async, and in a plain `for` loop Nunjucks silently renders nothing.
+- **Paginated templates need `addAllPagesToCollections: true`**, or only the first generated page reaches `collections.all` (and the sitemap).
+- **Colour accent text with `color-mix(in oklab, var(--accent) N%, var(--text))`**, never raw `var(--accent)`. Raw amber or green on the light background fails WCAG contrast.
+- **Avoid high-specificity resets.** Lists are reset with `ul[class], ol, nav ul`. A plain class selector loses to `ul[class]`.
+- **Grid and flex children that contain `<pre>`** need `min-width: 0` so they scroll instead of overflowing.
+- **Things that need JS elsewhere are done without it here:** the nav wraps instead of using a hamburger, whole cards are clickable with a stretched `::after` link, screenshots use a scroll-snap strip, and contact is `mailto:`.
+- **"Coming soon" states are `.button--static` spans, never fake links.**
+- **Every `{% image %}` needs alt text.** Use `""` for decorative images; the shortcode throws if it's missing.
+- **Testing narrow widths with headless Chrome:** it won't lay out below 500 px, so load the page in a 390 px `<iframe>`. To force light or dark mode, use `--blink-settings=preferredColorScheme=1` (light) or `0` (dark).
+- Issues are tracked in Clarity under the **xerodonia.com** project.
 
 ## Environment Variables
-None.
+None at present. Stage 7 (release automation) may add GitHub Actions secrets. They must never be committed.

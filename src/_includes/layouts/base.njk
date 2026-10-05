@@ -1,0 +1,37 @@
+{#- The outer shell of every page.
+    Front matter it reads: title, description, accent, bodyClass, app (on app pages). -#}
+{%- set pageTitle = title + " · " + site.name if title and title != site.name else site.name + ": thoughtful apps for iPhone, iPad and Mac" -%}
+{%- set pageDescription = description or site.description -%}
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>{{ pageTitle }}</title>
+  <meta name="description" content="{{ pageDescription }}">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:locale" content="{{ site.locale }}">
+  <meta property="og:title" content="{{ pageTitle }}">
+  <meta property="og:description" content="{{ pageDescription }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta name="twitter:card" content="summary">
+  {%- if app and app.appStoreId %}
+  <meta name="apple-itunes-app" content="app-id={{ app.appStoreId }}">
+  {%- endif %}
+
+  <link rel="icon" href="/images/xerodonia-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles/site.css">
+</head>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}{% if accent %} style="--accent: {{ accent }}"{% endif %}>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% include "partials/header.njk" %}
+  <main id="main">
+    {{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+</body>
+</html>

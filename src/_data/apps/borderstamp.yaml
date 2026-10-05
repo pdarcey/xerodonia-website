@@ -1,0 +1,19 @@
+# Borderstamp. Card-level data only; the full page content arrives in Stage 3.
+name: Borderstamp
+slug: borderstamp
+order: 2
+kind: app
+accent: "#e9a91c"
+icon: images/apps/borderstamp.png
+category: Travel
+tagline: A digital passport for the real world. Collect a stamp every time you cross a border.
+headline: Passport stamps for the places you actually go.
+summary: "Carry your phone across a border (between countries, states, provinces or counties) and Borderstamp gives you a stamp. Everything stays on your device, with no servers and no tracking."
+platforms: [iPhone, iPad, Mac]
+requires: iOS 26, iPadOS 26 or macOS 26
+status: testflight-soon
+appStoreId:
+testFlightUrl:
+price: To be announced
+appCategory: Travel
+languages: [English]

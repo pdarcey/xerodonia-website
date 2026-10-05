@@ -1,0 +1,17 @@
+# Clarity. Card-level data only; the full page content arrives in Stage 5.
+name: Clarity
+slug: clarity
+order: 5
+kind: app
+accent: "#d9a520"
+icon: images/apps/clarity.png
+category: Developer tools
+tagline: The issue tracker we built for ourselves, with a Mac app, a CLI and an MCP server for AI agents.
+headline: Project and issue tracking for indie Mac developers.
+summary: "Clarity tracks projects, issues and releases in a native Mac app. It also works from the command line, and as an MCP server so AI coding agents can read and update issues as they work."
+platforms: [Mac, CLI, MCP]
+requires: macOS 26
+status: in-house
+price: Not for sale
+appCategory: Developer Tools
+languages: [English]

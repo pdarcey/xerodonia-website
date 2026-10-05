@@ -1,0 +1,19 @@
+# Scoreboard. Card-level data only; the full page content arrives in Stage 5.
+name: Scoreboard
+slug: scoreboard
+order: 4
+kind: app
+accent: "#3c8d2f"
+icon: images/apps/scoreboard.png
+category: Sport
+tagline: "Live-ish scores for the Australian teams you follow: AFL, NRL, NBL, cricket and more."
+headline: Australian sport, all in one place.
+summary: "Scores and upcoming games for the Australian teams you follow, across AFL, NRL, NBL, cricket, football and more, with widgets, notifications and Siri."
+platforms: [iPhone, iPad]
+requires: iOS 26 or iPadOS 26
+status: in-development
+appStoreId:
+testFlightUrl:
+price: To be announced
+appCategory: Sports
+languages: [English]

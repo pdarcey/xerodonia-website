@@ -1,0 +1,22 @@
+# obfuscate. Card-level data only; the full page content arrives in Stage 5.
+name: obfuscate
+slug: obfuscate
+order: 6
+kind: tool
+accent: "#475569"
+icon: images/apps/obfuscate.svg
+category: Command-line tool
+tagline: A command-line tool that keeps API keys out of your Swift source code.
+headline: Keep API keys out of your Swift source.
+summary: "obfuscate generates a Secrets.swift file in which each secret is encrypted with its own random key, so you can commit it without your API keys appearing in source control."
+platforms: [macOS, CLI]
+requires: macOS 26
+status: free-download
+downloadUrl:             # notarised DMG on GitHub Releases (Stage 7)
+githubUrl: https://github.com/pdarcey/obfuscate
+price: Free
+appCategory: Developer Tools
+languages: [English]
+terminal:
+  command: obfuscate -k openAI=sk-… -f Secrets
+  comment: "Secrets.swift: no plain-text keys"

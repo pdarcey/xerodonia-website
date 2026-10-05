@@ -1,0 +1,320 @@
+# xerodonia.com — Rebuild Plan
+
+*Drafted 2026-10-05. Status: **Stages 1–2 done (Liquid Glass design, Eleventy foundation). Next: Stage 3, minimum viable launch.***
+
+## Goals
+
+- The marketing home for Xerodonia's apps, tools and consulting services, plus a blog.
+- It also provides the **Privacy Policy and Support URLs** that App Store Connect requires.
+- Visitors get only HTML and CSS: **no JavaScript, no trackers, no cookies.**
+- Modern and clean, quick to load, and good modern SEO.
+- Free hosting at `xerodonia.com`.
+- A simple update process, with release notes published automatically where possible.
+
+## What we're starting from
+
+| Item | Source repo | Status | Platforms (from pbxproj) | Notes |
+|---|---|---|---|---|
+| **Blueprint** | `Apps/Blueprint` | About to enter TestFlight | iPhone, iPad, Mac | Was called "Cockpit". Uses TelemetryDeck and ClarityFeedbackKit, and its privacy manifest declares *Customer Support* and *Other Diagnostic Data*. Reads Contacts, Calendar, Reminders, HealthKit and WeatherKit. An Xcode privacy report PDF already exists. |
+| **Borderstamp** | `Apps/Border Apps/Borderstamp` | About to enter TestFlight | iPhone, iPad, Mac | "A digital passport for the real world". Uses location, keeps everything on-device, no servers. Bundle ID is `com.borderstamp.2026.*`. **No privacy manifest found.** |
+| **Clarity** | `Apps/Clarity` | Not for sale (showcase) | Mac (GUI + CLI + MCP server) | Has a notarised DMG pipeline (`scripts/build-dmg.sh`) and a `VersionHistory.md`. |
+| **Scoreboard** | `Apps/Scoreboard/Scoreboard` | In development, so "Coming soon" | iPhone, iPad | Australian sports scores, widgets and Siri. Uses TelemetryDeck and has a privacy manifest. |
+| **Upcoming Birthdays** | `Apps/Upcoming Birthdays` | About to enter TestFlight | iPhone, iPad, Mac | Reads Contacts. **No analytics SDK found in the code**, yet the current site's privacy text says it uses one, so this needs checking. No privacy manifest found. |
+| **obfuscate** | `CLI/obfuscate` | v1.0.0, free | macOS 26 CLI | So far it's only distributed by building from source. A DMG will need Developer ID signing and notarisation; Clarity's script can be reused. |
+| **AI Consulting** | `Websites/AI Consulting` | Built, never deployed | — | An Eleventy 3 site with 11 pages and 1 blog post. It uses `nav.js` (which would have to go) and is configured for `xerodonia.com.au`, **which doesn't currently resolve**. It isn't a git repository. |
+
+The apps on the current site that aren't in this list (Travel Bingo, Distance Mapper, Slideshow, Swimming Timer, RomanX, Disk Catalogue, Safari Extensions) are **dropped** (confirmed 2026-10-05). Others may be added later, so the site is built to expect more apps.
+
+### Domain and DNS (checked 2026-10-05)
+- `xerodonia.com` is registered with Tucows until **2028-02-24**.
+- Its nameservers are **Fastmail** (`ns1/ns2.messagingengine.com`).
+- **Email is live on Fastmail.** The MX records point to `us1/us2-smtp.messagingengine.com`, and there will also be DKIM and SPF records. **None of these may be touched.**
+- The apex and `www` A records currently point to Fastmail's own web hosting (`103.168.172.37/.52`).
+
+---
+
+## 1. Deployment plan
+
+### Recommendation: Eleventy and GitHub Pages, with DNS left at Fastmail
+
+**Static site generator: Eleventy 3**, the same tool the AI Consulting site already uses.
+- Node runs only on Paul's Mac and on GitHub's build servers. Visitors get plain HTML and CSS with **zero client-side JavaScript**.
+- It lets us share the header, footer and layouts, write blog posts in Markdown, keep app details in data files, and generate the sitemap, RSS feed and per-app pages. That removes the copy-paste problem the current site has.
+- It also means the consulting site can be ported almost unchanged.
+
+**Hosting: GitHub Pages**, built and deployed by GitHub Actions.
+- It's free, HTTPS comes free (Let's Encrypt), and it's served from a CDN. That's plenty for low traffic: a 1 GB site and roughly 100 GB of bandwidth a month (a soft limit).
+- ⚠️ The free plan **requires the site repo to be public.** The content is public anyway, but this needs Paul's OK.
+- **DNS stays at Fastmail.** In Fastmail → Settings → Domains → xerodonia.com → DNS:
+  1. Turn off Fastmail's own website hosting for the domain, which removes the `103.168.172.x` A records.
+  2. Add apex A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153` and `185.199.111.153`, plus AAAA records `2606:50c0:8000::153` to `8003::153`.
+  3. Add `www` as a CNAME to `pdarcey.github.io`.
+  4. Add the TXT record GitHub provides to verify the domain, which stops anyone else claiming it.
+  5. **Leave the MX, DKIM, SPF and DMARC records alone.**
+- In the repo's Pages settings, set the custom domain to `xerodonia.com` and turn on **Enforce HTTPS**.
+
+**Alternative: Cloudflare Pages.** This keeps the repo private, with unlimited bandwidth and preview URLs for each branch. However, an apex domain on Cloudflare means moving the nameservers to Cloudflare and recreating every Fastmail email record. That's more work and more risk to email, so this is the fallback only if the repo must stay private.
+
+### The update process (day to day)
+
+```
+edit Markdown or data file  →  npm run serve (preview at localhost:8080)
+                            →  git commit && git push
+                            →  GitHub Action builds and deploys (~1 minute)
+```
+- **New blog post:** add `src/content/blog/<slug>.md` with front matter.
+- **App change:** edit `src/_data/apps/<slug>.yaml`.
+- **Release notes:** automatic (see §6).
+
+---
+
+## 2. Five designs
+
+All five designs share **the same HTML**. Each one is a different set of CSS design tokens plus its own component styles. That makes it cheap to switch later, and means the designs can be compared side by side on real content.
+
+Rules all five follow:
+- **System fonts only**: `-apple-system` / `ui-serif` (New York) / `ui-monospace` (SF Mono). No font downloads.
+- Light and dark modes from `prefers-color-scheme`.
+- Respects `prefers-reduced-motion`.
+- WCAG 2.2 AA contrast.
+- Built on the corporate colours **#2f6cf6** (blue) and **#f8b93d** (amber).
+
+| # | Name | Feel | Signature elements | Best for |
+|---|---|---|---|---|
+| 1 | **Liquid Glass** | Matches Apple's iOS 26 look | Frosted translucent cards (`backdrop-filter`), soft blue-to-violet mesh gradients, large app icons with depth, pill-shaped buttons | Consumer apps (Birthdays, Blueprint, Borderstamp) |
+| 2 | **Editorial** | An independent studio's magazine | `ui-serif` headlines, generous white space, each app presented as a long-form feature, the blog given equal weight with apps, pull quotes | Blog and consulting credibility |
+| 3 | **Blueprint** | Engineering drawing | Faint grid-paper background, SF Mono labels and "dimension lines", outlined line art, amber annotations on blue | Dev tools (Clarity, obfuscate) and the "slightly techie" consulting brief |
+| 4 | **Bento** | Keynote-slide tiles | A CSS-grid mosaic of tiles in different sizes, each app tile in its own icon colour, dark by default, small stat chips ("Mac · iPhone · iPad") | Showing many products at once |
+| 5 | **Swiss Minimal** | Fast and calm | Black and white with a single amber accent, very large type, strict grid, hairline rules, the smallest CSS of the five | Fastest pages, ages best |
+
+**How we'd choose:** build each design as a static **mockup of the home page and one app page** using real Blueprint content, in `Design Mockups/1-liquid-glass/` and so on. Paul compares them in Safari, picks one (or mixes elements), and we throw the rest away.
+
+### No-JavaScript patterns (any design)
+| Need | Solution without JS |
+|---|---|
+| Mobile menu | `<details><summary>Menu</summary><nav>…</nav></details>` |
+| Screenshot lightbox | `:target` overlays (the current site already does this) or a horizontal `scroll-snap` gallery |
+| FAQ / privacy expanders | `<details>` |
+| Booking a consult | A plain link to Calendly (no embedded widget) |
+| Contact | A `mailto:` link. No form, so no third-party form processor is needed. |
+| Site search | A GET form to `duckduckgo.com/?q=site:xerodonia.com+…` (optional) |
+| Smart App Banner | `<meta name="apple-itunes-app" content="app-id=…">`. Safari renders it natively. |
+
+---
+
+## 3. Site structure and content
+
+```
+/                                  Home: hero, apps, tools, consulting teaser, latest posts
+/apps/                             All apps
+/apps/<slug>/                      App page: hero, features, screenshots, platforms, get-it
+/apps/<slug>/privacy/              ← App Store Connect "Privacy Policy URL"
+/apps/<slug>/support/              ← App Store Connect "Support URL" (FAQ + contact)
+/apps/<slug>/releases/             Version history (automated, §7)
+                                   Tools (e.g. obfuscate) live under /apps/ too, with kind: tool
+/consulting/ (+ /for-skeptics/, /for-operators/, /for-innovators/, /services/, /faq/)
+/blog/, /blog/<slug>/, /feed.xml   Blog with an Atom feed
+/about/, /contact/, /privacy/      Company pages; /privacy/ = the website's own privacy policy
+/press/                            Optional press kit (icons, screenshots, boilerplate)
+/sitemap.xml, /robots.txt, /404.html, /.well-known/security.txt
+```
+
+Each app is described by one data file (`src/_data/apps/blueprint.yaml`), and every page about that app is generated from it:
+```yaml
+name: Blueprint
+slug: blueprint
+tagline: What's coming up today?
+status: testflight        # coming-soon | testflight | app-store | showcase | free-download
+platforms: [iPhone, iPad, Mac]
+minimumOS: { iOS: "26", macOS: "26" }
+appStoreId: null          # filled in once ASC creates the record
+testFlightUrl: null       # public TestFlight link, if any
+price: Free
+category: Productivity
+features: [...]
+privacy:
+  collects: [Diagnostics (anonymous, TelemetryDeck), Support messages you send]
+  onDeviceOnly: [Contacts, Calendar, Reminders, Health, Location]
+  thirdParties: [TelemetryDeck]
+screenshots: [...]
+```
+
+---
+
+## 4. Content and assets: what we need, and what the repos can provide
+
+✅ = can be derived from the repo · ✍️ = Claude drafts it, Paul approves · 📸 = needs creating · ❓ = Paul to supply
+
+| Asset | Blueprint | Borderstamp | Clarity | Scoreboard | Birthdays | obfuscate |
+|---|---|---|---|---|---|---|
+| Name, tagline, description | ✍️ README + Design Document | ✍️ README + Project Definition | ✍️ Readme (very detailed) | ✍️ Readme | ✍️ Readme | ✍️ Readme |
+| Feature list | ✅ Design Document | ✍️ Project Definition | ✅ Readme | ✅ Readme | ✅ Readme | ✅ Readme (options table) |
+| Platforms and minimum OS | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| App icon (1024 px plus web sizes) | ✅ export `AppIcon.icon` | ✅ export `Borderstamp.icon` | ✅ `Clarity.png` / `.icon` | ✅ asset catalogue | ✅ export `AppIcon.icon` | 📸 none; needs a glyph |
+| Screenshots | 📸 | 📸 | 📸 (some mockup JPGs exist) | 📸 | 📸 | ✅ terminal sample in the Readme (render as styled HTML text, not an image) |
+| Privacy facts | ✅ `PrivacyInfo.xcprivacy` + privacy report PDF | ⚠️ no manifest | ✅ code review | ✅ manifest | ⚠️ no manifest; analytics claim unverified | ✅ (none collected) |
+| Release history | ✅ git tags | ✅ git tags | ✅ `VersionHistory.md` | ✅ git tags | ✅ git tags | ✅ v1.0.0 tag |
+| Download | — | — | ✅ notarised DMG (`build-dmg.sh`) if offered | — | — | 📸 a notarised DMG still needs making |
+
+The icon export can be scripted with Icon Composer's `ictool`, which ships inside Xcode.
+
+**Screenshots:** none exist in any repo. Capture them **once, at App Store sizes** so they serve both App Store Connect and the website:
+- iPhone 6.9"
+- iPad 13"
+- Mac 2880×1800
+
+This can be scripted with `xcrun simctl io booted screenshot` (or UI-test snapshots) against demo data. Eleventy Image then converts them at build time to responsive AVIF/WebP with width and height attributes. That keeps pages light and avoids layout shift.
+
+**Site-wide content:**
+
+| Item | Source |
+|---|---|
+| Consulting pages | ✅ ported from `AI Consulting/src`. Change `.com.au` to `.com` and replace `nav.js` with `<details>`. |
+| Consulting blog post | ✅ ported as-is |
+| Company details | ✅ ABN 48 606 760 089, Sydney, corporate colours |
+| Contact email | ❓ is `hello@xerodonia.com` set up on Fastmail? |
+| Calendly link | ❓ still marked "needs confirmation" in the consulting site's status file |
+| Logo / wordmark | ✍️ start from the consulting site's `favicon.svg`. A proper SVG wordmark is ❓/📸. |
+| Favicon set | 📸 SVG favicon, `apple-touch-icon.png`, and `favicon.ico` fallback |
+| Open Graph images (1200×630) | 📸 one site-wide image and one per app. Generated at build time from a template, or made once by hand. |
+| About page | ✍️ needs Paul's input: bio, optional photo |
+| Website privacy policy | ✍️ |
+| Terms / licence for obfuscate | ✅ `LICENSE` file |
+
+---
+
+## 5. What we need from App Store Connect
+
+**From ASC to the website** (per app, once each app record exists):
+- **Apple ID (numeric app ID).** This drives the App Store link (`apps.apple.com/app/id<N>`), the badge, the Smart App Banner meta tag and structured data.
+- **A public TestFlight link** (`testflight.apple.com/join/…`), if Paul wants public betas for Blueprint, Borderstamp and Birthdays before launch. This is optional; without it the page says "Coming soon".
+- Price, category, age rating and availability (for structured data and page copy).
+- "What's New" text for each version. This is automated (§6).
+- **Official badge artwork** from Apple's Marketing Resources site (SVG, black and white versions). It must be used unmodified.
+- *Optional, for richer automation:* an **App Store Connect API key** (Issuer ID, Key ID and a `.p8` file). It would be stored **only** as a GitHub Actions secret and never committed.
+
+**From the website to ASC** (fields that need these URLs):
+| ASC field | Requirement | Our URL |
+|---|---|---|
+| Privacy Policy URL | **Required** for every app | `/apps/<slug>/privacy/` |
+| Support URL | **Required** | `/apps/<slug>/support/` |
+| Marketing URL | Optional | `/apps/<slug>/` |
+| Privacy Policy URL for **TestFlight** external testing | Required before external testers | the same privacy URL |
+
+So the **privacy and support pages should go live before external TestFlight**. That's a good reason to deploy a minimal version of the site early (see the staging plan).
+
+Clarity and obfuscate are distributed **outside** the App Store and don't need ASC. They do need a **Developer ID certificate and notarisation**, or Gatekeeper will block the DMG.
+
+---
+
+## 6. Compliance and best practice
+
+### App Store Review Guidelines
+- **5.1.1(i) Privacy policy**: one per app, publicly reachable, and it must say:
+  - what data is collected and how
+  - what it's used for
+  - which third parties receive it and whether they give the same protection (e.g. TelemetryDeck)
+  - how long it's kept and how to have it deleted
+  - how to contact us
+
+  It must **match the App Privacy "nutrition label"** in ASC and each app's `PrivacyInfo.xcprivacy`. That's three sources that must agree, so the per-app YAML (§3) should be the single source of truth.
+- **5.1.3 Health (Blueprint):** the privacy policy must state that HealthKit data is not used for advertising or data mining, isn't shared with third parties, and is never stored in iCloud by Blueprint.
+- **Contacts (Birthdays, Blueprint):** state plainly that contacts never leave the device and are never uploaded.
+- **Location (Borderstamp):** state that location is processed on the device and that border crossings are stored locally.
+- **1.5 Developer Information:** the Support URL must give an easy way to contact us, such as an email address and an FAQ.
+- **Accuracy:** pages must not promise features the shipping build lacks.
+- **Pre-release apps:** say "Coming soon" or offer a TestFlight link. Don't show the "Download on the App Store" badge until the app is live, unless Apple's pre-order badge applies.
+
+### Apple marketing and trademark guidelines
+- Use only the official badges, unmodified, with clear space around them.
+- Add a footer notice: *"Apple, the Apple logo, iPhone, iPad and Mac are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc."*
+- Device frames, if used, must come from **Apple Design Resources**.
+- WeatherKit (Blueprint): the in-app attribution is what's required, but screenshots that show weather should still include it.
+
+### Australian and general
+- The **Privacy Act 1988 / APPs**: Xerodonia is probably exempt as a small business (under $3M turnover), but following the APPs is best practice and costs nothing.
+- **No cookies and no tracking means no cookie banner** (GDPR/ePrivacy). The site privacy policy should still disclose that **GitHub Pages logs visitor IP addresses** for security.
+- **Consulting prices:** state whether they include GST. This matters under the Australian Consumer Law's single-price rule if any customers are consumers.
+- Show the ABN in the footer. It isn't legally required on a website, but it builds trust.
+- Accessibility: **WCAG 2.2 AA**, including semantic landmarks, a skip link, alt text on every image, a visible focus state and correct heading order.
+
+### Modern SEO (no trackers)
+- Every page gets a unique `<title>`, a meta description, a canonical URL, Open Graph and Twitter card tags, and `lang="en-AU"`.
+- **JSON-LD structured data:**
+  - `Organization` and `WebSite` site-wide
+  - `SoftwareApplication` / `MobileApplication` per app (operatingSystem, applicationCategory, offers)
+  - `BlogPosting` per post
+  - `ProfessionalService` for consulting
+  - `BreadcrumbList`
+- `sitemap.xml`, `robots.txt` and an Atom feed (`feed.xml`), plus per-app release feeds.
+- The Smart App Banner meta tag on each live app's pages.
+- Core Web Vitals are fast by design: no JS, system fonts, responsive AVIF/WebP images with dimensions, critical CSS inlined, and HTML minified.
+- Verify **Google Search Console** and **Bing Webmaster Tools** with **DNS TXT records**. That gives search insights without any tracking code on the site.
+- Check every deploy with Lighthouse (targets: Performance ≥ 95; Accessibility, Best Practices and SEO all 100), the W3C validator and a link checker in CI.
+
+---
+
+## 7. Automating release updates
+
+The goal is to publish release notes on the site automatically when a new version ships, with Paul approving each update before it goes live.
+
+### App Store apps: scheduled check of the public iTunes Lookup API (recommended)
+`https://itunes.apple.com/lookup?id=<appId>&country=au` returns the live `version`, `releaseNotes`, `currentVersionReleaseDate`, price and screenshot URLs. **No API key and no secrets are needed.**
+
+```
+GitHub Action (daily cron + manual trigger)
+  → for each app with an appStoreId: call the Lookup API
+  → if the version is newer than src/_data/releases/<slug>.json:
+      append {version, date, notes} to the file
+  → open a PR "Blueprint 1.1 released"  (Paul merges → auto-deploy)
+     (or auto-merge, if Paul prefers it fully hands-off)
+```
+- The Lookup API only returns the *latest* version. That's fine because the history builds up in the repo from the first run onwards. Historical notes can be back-filled by hand once.
+- With the optional ASC API key, the same job could also show TestFlight build status and fetch every version's "What's New" text. That's a later improvement.
+
+### Outside the App Store (obfuscate, Clarity): GitHub Releases
+- In each tool's repo, a release workflow runs on a `v*` tag. It builds, signs and notarises the DMG, attaches it to a **GitHub Release** whose notes come from a `CHANGELOG.md` section, then sends a `repository_dispatch` event to the site repo.
+- The site's workflow fetches the release and records the version, notes and DMG URL.
+- The download button on `/tools/obfuscate/` points at the GitHub Release asset. That avoids storing binaries in the site repo and satisfies "download from this site and GitHub" with one file.
+- This needs a fine-grained token (stored as a secret in the tool's repo) that can only send dispatch events to the site repo.
+
+### Recommended single source of truth for release notes
+Keep a `CHANGELOG.md` in each app repo. Paste each entry into ASC's "What's New" when submitting, and let the website pick up whatever actually shipped through the Lookup API. That way the notes are written once, and the site always matches the App Store.
+
+---
+
+## 8. Staging plan (each stage ends with a pause for Paul to review)
+
+| Stage | Work | Output |
+|---|---|---|
+| **0** | Paul answers the open questions below | Decisions recorded here |
+| **1** ✅ | Build the five design mockups (home + Blueprint page) | Liquid Glass chosen; mockups removed |
+| **2** ✅ | Set up Eleventy, layouts, design tokens for the chosen design, data model, CI build. Delete the old flat HTML. | `npm run build` works. Home, /apps/ and 6 app pages are generated from data. Approved 2026-10-05. |
+| **3** | **Minimum viable launch:** home, an app page plus `/privacy/` and `/support/` for the three TestFlight apps, About, the site privacy policy. Deploy to GitHub Pages and switch DNS. | Live site with the URLs ASC and TestFlight need |
+| **4** | Port the consulting pages and the blog (with the CSS-only nav) | `/consulting/`, `/blog/`, feed |
+| **5** | Remaining pages: Scoreboard (coming soon), Clarity (showcase), obfuscate. Assets: icons, screenshots, OG images. | Content complete |
+| **6** | SEO and compliance pass, structured data, Lighthouse/validator/link-check in CI | Audit report |
+| **7** | Release automation (Lookup API cron, GitHub Releases dispatch, obfuscate DMG workflow) | Hands-off release notes |
+| **8** | Update docs (`CLAUDE.md`, Journal), tidy up Clarity issues | Done |
+
+Stage 2 replaces the current HTML, so Clarity issues **#453, #455, #457 and #459** will become obsolete. #452, #454, #456 and #458 will be handled by the new build. I'll suggest closing them then, but only with Paul's agreement.
+
+---
+
+## Decisions (2026-10-05)
+
+1. **Hosting:** the site repo will be **public**. We're going with GitHub Pages, and DNS stays at Fastmail.
+2. **Consulting** lives at `xerodonia.com/consulting/`. The `xerodonia.com.au` references in the consulting site were a typo; everything uses `xerodonia.com`.
+3. **The public contact address** is `hello@xerodonia.com`.
+4. **Old apps are dropped.** The site must be **built to expect more apps** in future. Adding an app should mean adding one data file plus its assets (icon, screenshots), with no template or layout changes. App lists, the sitemap, structured data and the release automation all come from the data files. The "Adding a new app" checklist in `CLAUDE.md` will be rewritten for the new process in Stage 8.
+
+5. **Design:** #1 **Liquid Glass** (2026-10-05). Its tick marks were redrawn as a single SVG so they're centred.
+6. **URLs:** tools share the `/apps/<slug>/` scheme (e.g. `/apps/obfuscate/`) instead of having a separate `/tools/` section. That's one listing and one template, and `kind: tool` still styles them differently.
+
+## Open questions for Paul
+
+5. **Clarity:** showcase only, or also a free/beta DMG download?
+6. **obfuscate:** is `pdarcey/obfuscate` (or will it be) a **public** GitHub repo? Do you have a Developer ID Application certificate for notarisation? Clarity's script suggests you do.
+7. **TestFlight:** public TestFlight links for Blueprint, Borderstamp and Birthdays, or invite-only?
+8. **Release PRs:** should automated release-note updates open a PR for you to approve (recommended), or publish automatically?
+9. **Upcoming Birthdays and Borderstamp privacy:** I couldn't find an analytics SDK or a `PrivacyInfo.xcprivacy` in either repo. Can you confirm what they actually collect? Both apps also need privacy manifests before App Store submission. That's work in those repos, so I'd log it as Clarity issues there.

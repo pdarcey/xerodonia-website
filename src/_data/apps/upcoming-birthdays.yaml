@@ -1,0 +1,19 @@
+# Upcoming Birthdays. Card-level data only; the full page content arrives in Stage 3.
+name: Upcoming Birthdays
+slug: upcoming-birthdays
+order: 3
+kind: app
+accent: "#f08a24"
+icon: images/apps/upcoming-birthdays.png
+category: Widgets and reminders
+tagline: Birthdays for just the people you care about, in widgets and gentle reminders.
+headline: Never miss the birthdays that matter.
+summary: "Your calendar shows every contact's birthday. Upcoming Birthdays shows just the people you choose, with widgets for the next few birthdays and a reminder on the day."
+platforms: [iPhone, iPad, Mac]
+requires: iOS 26, iPadOS 26 or macOS 26
+status: testflight-soon
+appStoreId:
+testFlightUrl:
+price: To be announced
+appCategory: Lifestyle
+languages: [English]

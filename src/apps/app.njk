@@ -1,0 +1,127 @@
+---
+# One page per file in src/_data/apps/. Optional sections only render when
+# their data exists, so a new app can start with just the card-level fields.
+layout: layouts/base.njk
+pagination:
+  data: apps
+  size: 1
+  alias: app
+  resolve: values
+  addAllPagesToCollections: true
+permalink: "{{ app | productUrl }}"
+bodyClass: app-page
+eleventyComputed:
+  title: "{{ app.name }}: {{ app.headline }}"
+  description: "{{ app.summary }}"
+  accent: "{{ app.accent }}"
+---
+<nav class="breadcrumbs wrap" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="/apps/">Apps</a></li>
+    <li><a href="{{ page.url }}" aria-current="page">{{ app.name }}</a></li>
+  </ol>
+</nav>
+
+<section class="app-hero">
+  <div class="wrap app-hero-inner">
+    {% image app.icon, app.name + " icon", "(min-width: 48rem) 176px, 112px", "app-icon", "eager" %}
+    <div class="app-hero-text">
+      <p class="eyebrow">{{ app.category }}</p>
+      <h1 class="app-name">{{ app.name }}</h1>
+      <p class="app-tagline">{{ app.headline }}</p>
+      <p class="app-summary">{{ app.summary }}</p>
+      <ul class="chips" aria-label="Platforms">{% for platform in app.platforms %}<li>{{ platform }}</li>{% endfor %}</ul>
+      {% include "partials/get-actions.njk" %}
+      <p class="fine-print">Requires {{ app.requires }}.</p>
+    </div>
+  </div>
+</section>
+
+{%- if app.screenshots %}
+<section class="section screenshots" aria-labelledby="shots-title">
+  <div class="wrap">
+    <h2 id="shots-title">Screenshots</h2>
+    <ul class="shot-strip">
+      {%- asyncEach shot in app.screenshots %}{# async: uses the image shortcode #}
+      <li>
+        <figure class="shot shot--{{ shot.device }}">
+          {%- if shot.src %}
+          {% image shot.src, shot.alt or shot.caption, "28rem", "shot-image" %}
+          {%- else %}
+          <div class="shot-frame">Screenshot coming soon</div>
+          {%- endif %}
+          <figcaption>{{ shot.caption }}</figcaption>
+        </figure>
+      </li>
+      {%- endeach %}
+    </ul>
+  </div>
+</section>
+{%- endif %}
+
+{%- if app.features %}
+<section class="section features" aria-labelledby="features-title">
+  <div class="wrap">
+    <header class="section-header">
+      <h2 id="features-title">{{ app.featuresHeading or "Features" }}</h2>
+      {%- if app.featuresIntro %}<p>{{ app.featuresIntro }}</p>{% endif %}
+    </header>
+    <ul class="feature-grid">
+      {%- for feature in app.features %}
+      <li class="feature"><h3>{{ feature.title }}</h3><p>{{ feature.text }}</p></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+{%- endif %}
+
+{%- if app.privacy %}
+<section class="section privacy-callout" aria-labelledby="privacy-title">
+  <div class="wrap split">
+    <div>
+      <h2 id="privacy-title">Private by design</h2>
+      {%- if app.privacy.quote %}
+      <blockquote><p>{{ app.privacy.quote }}</p></blockquote>
+      {%- endif %}
+      <p>{{ app.privacy.summary }}</p>
+      <p class="link-row">
+        <a class="text-link" href="{{ app | productUrl }}privacy/">Privacy policy <span aria-hidden="true">→</span></a>
+        <a class="text-link" href="{{ app | productUrl }}support/">Support <span aria-hidden="true">→</span></a>
+      </p>
+    </div>
+    <div class="data-lists">
+      <h3>Stays on your device</h3>
+      <ul class="checklist">{% for item in app.privacy.onDevice %}<li>{{ item }}</li>{% endfor %}</ul>
+      {%- if app.privacy.offDevice %}
+      <h3>Leaves your device</h3>
+      <ul class="checklist checklist--muted">{% for item in app.privacy.offDevice %}<li>{{ item }}</li>{% endfor %}</ul>
+      {%- endif %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section specs" aria-labelledby="specs-title">
+  <div class="wrap">
+    <h2 id="specs-title">Details</h2>
+    <dl class="spec-list">
+      <div><dt>Platforms</dt><dd>{{ app.platforms | listToProse }}</dd></div>
+      <div><dt>Requires</dt><dd>{{ app.requires }}</dd></div>
+      {%- if app.appCategory %}<div><dt>Category</dt><dd>{{ app.appCategory }}</dd></div>{% endif %}
+      {%- if app.price %}<div><dt>Price</dt><dd>{{ app.price }}</dd></div>{% endif %}
+      {%- if app.languages %}<div><dt>Languages</dt><dd>{{ app.languages | listToProse }}</dd></div>{% endif %}
+      <div><dt>Developer</dt><dd>{{ site.legalName }}</dd></div>
+    </dl>
+  </div>
+</section>
+
+{%- if app.cta %}
+<section class="section cta-band" aria-labelledby="cta-title">
+  <div class="wrap">
+    <h2 id="cta-title">{{ app.cta.title }}</h2>
+    <p>{{ app.cta.text }}</p>
+    {% include "partials/get-actions.njk" %}
+  </div>
+</section>
+{%- endif %}

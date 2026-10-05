@@ -1,0 +1,51 @@
+---
+layout: layouts/base.njk
+---
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Independent Apple developer · {{ site.location }}</p>
+    <h1 class="hero-title">Thoughtful apps for <em>iPhone, iPad and Mac.</em></h1>
+    <p class="hero-lead">Xerodonia makes small, private, carefully built apps that do one job well. Your data stays yours. We also help businesses put AI coding agents to work.</p>
+    <div class="actions">
+      <a class="button button--primary" href="#apps">See the apps</a>
+      <a class="button button--secondary" href="/consulting/">AI consulting</a>
+    </div>
+  </div>
+</section>
+
+<section class="section products" id="apps" aria-labelledby="apps-title">
+  <div class="wrap">
+    <header class="section-header">
+      <h2 id="apps-title">Apps and tools</h2>
+      <p>Made with care in Sydney. No ads, no tracking, and nothing more than they need.</p>
+    </header>
+    <ul class="product-grid">
+      {#- asyncEach, not for: the card uses the async image shortcode -#}
+      {%- asyncEach app in apps | sortProducts %}
+      {% include "partials/product-card.njk" %}
+      {%- endeach %}
+    </ul>
+  </div>
+</section>
+
+<section class="section consulting" id="consulting" aria-labelledby="consulting-title">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Consulting</p>
+      <h2 id="consulting-title">AI coding agents, set up properly.</h2>
+      <p>We help small and medium businesses put Claude Code, Codex, Copilot and Gemini to work. We start with a workflow analysis and finish with a working, documented setup your team knows how to use.</p>
+      <div class="actions">
+        <a class="button button--primary" href="/consulting/">Explore consulting</a>
+        <a class="button button--secondary" href="{{ site.calendlyUrl }}">Book a free 15-minute call</a>
+      </div>
+    </div>
+    <ul class="checklist">
+      <li>Analysis of your team's real workflow</li>
+      <li>Agent setup to current best practice</li>
+      <li>Training, materials and documentation</li>
+      <li>On-site in Sydney, remote anywhere</li>
+    </ul>
+  </div>
+</section>
+
+{# "From the blog" teaser: added in Stage 4, together with the posts collection. #}

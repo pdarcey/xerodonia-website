@@ -1,0 +1,63 @@
+# Blueprint: one file holds everything the site says about this app.
+# See CLAUDE.md › "Adding a new app" for every field.
+
+name: Blueprint
+slug: blueprint
+order: 1                 # position in app lists (lowest first)
+featured: true           # shown as the large card on the home page
+kind: app                # app | tool
+accent: "#2f6cf6"        # tints cards, ticks and highlights; take it from the icon
+icon: images/apps/blueprint.png
+category: Daily dashboard
+
+tagline: "Your day and week at a glance: birthdays, calendar, health, weather, news and sport in one morning briefing."
+headline: What's coming up today?
+summary: "Blueprint brings your birthdays, calendar, reminders, health, weather, news, sport, TV shows and holidays together in one glanceable morning briefing. It looks at home on whichever Apple device you're holding."
+
+platforms: [iPhone, iPad, Mac]
+requires: iOS 26, iPadOS 26 or macOS 26
+
+status: testflight-soon  # see src/_data/statuses.js
+appStoreId:              # numeric Apple ID from App Store Connect, once it exists
+testFlightUrl:           # public TestFlight link (https://testflight.apple.com/join/…), if any
+price: To be announced
+appCategory: Productivity
+languages: [English]
+
+screenshots:             # placeholders until real screenshots exist (device: phone | tablet | mac)
+  - { device: phone, caption: "Today, at a glance" }
+  - { device: phone, caption: "The week ahead" }
+  - { device: tablet, caption: "Everything on iPad" }
+  - { device: mac, caption: "At home on the Mac" }
+
+featuresHeading: Everything that matters today
+featuresIntro: One screen, no surprises.
+features:
+  - title: Today
+    text: Birthdays, appointments, reminders and new episodes of your favourite shows, all in one list.
+  - title: The week ahead
+    text: See what's coming before it arrives, including public and school holidays.
+  - title: Health
+    text: Sleep, workouts this week, and badges for strength, core, cardio, flexibility and walks.
+  - title: Weather
+    text: Today's high and conditions, a short outlook, and a clear warning when something dangerous is on the way.
+  - title: News and sport
+    text: A few headlines with short summaries, plus scores and ladder positions for your teams. Just the facts.
+  - title: Widgets and Siri
+    text: Widgets for every section, and Siri summaries of your day or week, hands-free.
+
+privacy:
+  quote: The most secure data is data you never stored in the first place.
+  summary: Blueprint reads your contacts, calendars and health data live from the system. It never copies them into a database of its own, and it never uploads them.
+  onDevice:
+    - Contacts and birthdays
+    - Calendars and reminders
+    - Health and fitness data
+    - Your location
+  offDevice:
+    - Anonymous usage counts (TelemetryDeck)
+    - Feedback, only when you choose to send it
+
+cta:
+  title: Be one of the first to try Blueprint.
+  text: Join the beta on TestFlight and help shape version 1.0.
