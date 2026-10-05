@@ -1,0 +1,48 @@
+---
+layout: layouts/base.njk
+title: Contact
+description: Contact Xerodonia about our apps, or book a free AI Opportunity Audit for consulting. Sydney-based, working worldwide.
+permalink: /contact/
+bodyClass: doc-page
+---
+<article class="section doc">
+  <div class="wrap doc-wrap">
+    <header class="doc-header">
+      <p class="eyebrow">Contact</p>
+      <h1 class="page-title">Get in touch</h1>
+      <p class="doc-lead">Questions about an app, an idea for one, or a project you'd like help with: we'd love to hear from you.</p>
+    </header>
+
+    <ul class="card-grid card-grid--two">
+      <li class="info-card">
+        <h2>Email</h2>
+        <p>For anything at all. A real person reads every message.</p>
+        <div class="actions"><a class="button button--primary" href="mailto:{{ site.email }}">{{ site.email }}</a></div>
+      </li>
+      <li class="info-card">
+        <h2>Book a free {{ consulting.audit.name }}</h2>
+        <p>{{ consulting.audit.summary }}</p>
+        <div class="actions"><a class="button button--primary" href="{{ site.calendlyUrl }}">Choose a time</a></div>
+      </li>
+    </ul>
+
+    <div class="prose">
+      <h2>App support</h2>
+      <p>Each app has its own support page with answers to common questions. You'll find them under <a href="/privacy/#apps">App privacy and support</a>.</p>
+
+      <h2>What happens when you book a consult</h2>
+      <ol>
+        <li><strong>You get a calendar invite</strong> for a time that suits you, through Calendly.</li>
+        <li><strong>We learn about your business:</strong> your team and how you work today. We're not selling at this stage; we're trying to understand your situation.</li>
+        <li><strong>You get clear recommendations:</strong> 2–3 areas where AI coding agents could create real value, and an honest view of where to start. There's no obligation to go ahead.</li>
+      </ol>
+
+      <h2>Company details</h2>
+      <dl class="permission-list">
+        <div><dt>Company</dt><dd>{{ site.legalName }}</dd></div>
+        <div><dt>ABN</dt><dd>{{ site.abn }}</dd></div>
+        <div><dt>Location</dt><dd>Sydney, New South Wales, Australia. Working worldwide.</dd></div>
+      </dl>
+    </div>
+  </div>
+</article>

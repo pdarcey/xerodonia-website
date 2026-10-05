@@ -1,0 +1,11 @@
+{#- Closing call to action on consulting pages. Optional: ctaTitle, ctaText. -#}
+<section class="section cta-band" aria-labelledby="audit-cta-title">
+  <div class="wrap">
+    <h2 id="audit-cta-title">{{ ctaTitle or "Start with a free conversation." }}</h2>
+    <p>{{ ctaText or ("Book a free " + (consulting.audit.length + " " if consulting.audit.length else "") + consulting.audit.name + ". " + consulting.audit.summary) }}</p>
+    <div class="actions">
+      <a class="button button--primary" href="{{ site.calendlyUrl }}">Book a free {{ consulting.audit.name }}</a>
+      <a class="button button--secondary" href="/contact/">Contact us</a>
+    </div>
+  </div>
+</section>

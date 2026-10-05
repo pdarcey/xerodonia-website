@@ -1,0 +1,6 @@
+{#- A blog post summary. Expects `post` (a collection item) in scope. -#}
+<article class="post-card">
+  <p class="post-meta"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time>{% if post.data.category %} · {{ post.data.category }}{% endif %}</p>
+  <h3 class="post-title"><a class="stretched-link" href="{{ post.url }}">{{ post.data.title }}</a></h3>
+  <p class="post-excerpt">{{ post.data.description }}</p>
+</article>

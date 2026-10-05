@@ -1,0 +1,8 @@
+{#- One consulting service. Expects `service` in scope. -#}
+<li class="pricing-card">
+  <h3>{{ service.name }}</h3>
+  {%- if service.description %}<p class="pricing-description">{{ service.description }}</p>{% endif %}
+  <p class="pricing-price"><span class="price">{{ service.price }}</span> <span class="price-unit">{{ service.unit }}</span></p>
+  <ul class="checklist">{% for feature in service.features %}<li>{{ feature }}</li>{% endfor %}</ul>
+  {%- if service.condition %}<p class="pricing-condition">{{ service.condition }}</p>{% endif %}
+</li>

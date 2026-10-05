@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: Blog
+description: Notes from Xerodonia on building apps for Apple platforms and putting AI coding agents to work.
+permalink: /blog/
+---
+<section class="section" aria-labelledby="blog-title">
+  <div class="wrap doc-wrap">
+    <header class="doc-header">
+      <p class="eyebrow">Blog</p>
+      <h1 id="blog-title" class="page-title">Notes from Xerodonia</h1>
+      <p class="doc-lead">On building apps for Apple platforms, and putting AI coding agents to work. <a href="/feed.xml">Subscribe with RSS</a>.</p>
+    </header>
+    <ul class="post-list">
+      {%- for post in collections.posts | reverse %}
+      <li>{% include "partials/post-card.njk" %}</li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>

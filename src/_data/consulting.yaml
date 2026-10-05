@@ -1,0 +1,255 @@
+# AI consulting: one file holds the facts every consulting page uses.
+# Ported from the "AI Consulting" Eleventy site (2026-10-05).
+# Prices are AUD, excluding GST. Change a price here and every page updates.
+
+audit:
+  name: AI Opportunity Audit
+  length: 15-minute      # confirmed by Paul 2026-10-05 (the old copy's "45-minute" was wrong)
+  summary: "We'll identify 2–3 areas where AI could immediately improve your operations, with no obligation and no jargon."
+
+services:
+  - id: initial-setup
+    name: Initial Setup
+    price: "$20,000"
+    unit: AUD excl. GST
+    description: Get your first AI coding agent working properly.
+    features:
+      - Analysis of your business requirements
+      - Implement 1 coding agent into your business
+      - Hands-on training and training materials
+      - Comprehensive documentation
+      - A fully working, best-practice implementation
+      - 1 month of standard consultancy (80 hours indicative)
+
+  - id: rehabilitate
+    name: Rehabilitate Existing Setup
+    price: "$30,000"
+    unit: AUD excl. GST
+    description: For teams with an existing AI agent that isn't delivering results.
+    features:
+      - Analysis of your business requirements and current setup
+      - Re-implement 1 coding agent to best practice
+      - Hands-on training and training materials
+      - Comprehensive documentation
+      - A fully working, best-practice implementation
+      - 1 month of intensive consultancy (120 hours indicative)
+
+  - id: follow-up
+    name: Follow-Up Support
+    price: "$10,000"
+    unit: AUD excl. GST
+    condition: Only available with Initial Setup or Rehabilitation.
+    features:
+      - Answers to questions about your setup
+      - Fixes for any issues that arise
+      - Additional training as required
+      - 1 month of routine consultancy (40 hours indicative)
+
+  - id: additional-agent
+    name: Additional Coding Agents
+    price: "$5,000"
+    unit: per agent, AUD excl. GST
+    condition: Only available with Initial Setup or Rehabilitation.
+    features:
+      - Implement 1 additional coding agent
+      - Integrated with your existing setup
+      - Configured to your team's workflows
+
+fees:
+  - { tier: Routine, rate: "$10,000 / month", hours: "40 hours" }
+  - { tier: Standard, rate: "$20,000 / month", hours: "80 hours" }
+  - { tier: Intensive, rate: "$30,000 / month", hours: "120 hours" }
+  - { tier: Ad hoc, rate: "$2,000 / day", hours: "8 hours" }
+
+agents:
+  - { name: Claude Code, maker: Anthropic }
+  - { name: Codex, maker: OpenAI }
+  - { name: Gemini, maker: Google }
+  - { name: Copilot, maker: Microsoft }
+
+ides:
+  - { name: VS Code, agents: "Copilot, Claude Code, Codex" }
+  - { name: IntelliJ IDEA, agents: "Copilot, Claude Code, Codex" }
+  - { name: PyCharm, agents: "Copilot, Claude Code, Codex" }
+  - { name: WebStorm, agents: "Copilot, Claude Code, Codex" }
+  - { name: Xcode, agents: "Claude Code, Codex" }
+
+whatWeDo:
+  - title: Discovery and strategy
+    text: We map your operations to find where AI creates the most value. No guesswork, just a clear, prioritised roadmap based on your actual workflows and goals.
+  - title: Agent implementation
+    text: We set up coding agents (Claude Code, Copilot, Codex, Gemini) inside your IDE and existing development processes. Best practice, production-ready and fully documented.
+  - title: Training and handover
+    text: Your team gets hands-on training and comprehensive materials, so they get the most from the agents. No black boxes, no vendor lock-in.
+  - title: Ongoing support
+    text: AI moves fast. Our consultancy packages keep your setup current, fix issues quickly, and keep your agents delivering as your business grows.
+  - title: IDE integration
+    text: VS Code, IntelliJ IDEA, PyCharm, WebStorm or Xcode. Whichever tools your developers already use, adoption is seamless from day one.
+  - title: On-site or remote
+    text: Based in Sydney, we can work on-site with local businesses, or deliver everything remotely for teams anywhere in the world.
+
+whyUs:
+  - title: Sydney-based, globally capable
+    text: Proudly Australian, with a worldwide remote practice. We understand how Australian businesses work, and we can serve clients anywhere.
+  - title: Fixed price, defined outcomes
+    text: No open-ended retainers with vague deliverables. Every engagement has a clear scope and a fixed price, so you always know what you're getting and what it costs.
+  - title: Best practice, production-ready
+    text: Every implementation follows industry best practice, with full documentation and training. No science projects and no technical debt.
+  - title: Vendor-agnostic advice
+    text: We work with Claude Code, Copilot, Codex and Gemini, and recommend the right tool for your situation. Your success is our only agenda.
+  - title: We use what we recommend
+    text: Xerodonia builds its own apps with AI coding agents every day. Our advice comes from shipping real software, not from slide decks.
+
+# One page per audience, at /consulting/<slug>/
+audiences:
+  - slug: business-owners
+    navLabel: Business owners
+    card:
+      label: I'm a business owner
+      text: "Sceptical about AI hype? We'll show you what's actually working for businesses like yours, with no jargon and no wasted budget."
+    eyebrow: For business owners
+    title: Practical AI. Real results. No hype.
+    lead: "AI is already reshaping how businesses operate. The problem? Most small and mid-sized businesses don't have the time, expertise or internal team to work out what's real, what's useful and what's a distraction."
+    cta: Book a free AI Opportunity Audit
+    concernsHeading: You've heard the AI promises. You're not buying it.
+    concernsIntro: These are the concerns we hear from business owners. They're completely valid, and we have straight answers for all of them.
+    concerns:
+      - "I've been told AI will transform my business, but I don't know where to start."
+      - "I tried an AI tool and it didn't work. I don't want to waste more money."
+      - "My team isn't technical. I can't afford to distract them with experiments."
+      - "I don't know what's hype and what's actually useful for a business like mine."
+    helpHeading: We find where AI can actually help, then we build it.
+    help:
+      - title: We start with your business, not AI
+        text: We analyse your operations first, then identify 2–3 specific areas where an AI agent can save time, reduce costs or increase revenue, with honest estimates of the impact.
+      - title: We build it properly, once
+        text: A working, best-practice AI agent that fits your existing workflows. Not a prototype or a demo, but something your team can use from day one.
+      - title: We train your team
+        text: Every engagement includes training and documentation pitched at your team's technical level.
+    outcomesHeading: Clear outcomes. Fixed price. No surprises.
+    outcomes:
+      - An honest assessment of where AI can help your business right now
+      - A working AI agent in your existing workflows
+      - Training materials your team will actually use
+      - Clear documentation, so nothing is a black box
+      - A fixed price with no hidden extras
+      - Ongoing support, if you want it
+    services: [initial-setup, follow-up]
+
+  - slug: scaling-teams
+    navLabel: Scaling teams
+    card:
+      label: I'm scaling a team
+      text: Your competitors are automating faster. We help growing businesses put AI agents into core workflows, so output grows without overhead.
+    eyebrow: For growing businesses
+    title: Turn AI into your competitive advantage.
+    lead: "Your competitors are responding quicker and scaling without adding headcount. AI agents can take on a surprising amount of development work, but only if they're set up strategically."
+    cta: Book a strategy session
+    concernsHeading: Growth without control is just chaos.
+    concernsIntro: Scaling teams face a common set of pressure points. AI can help with most of them, if it's implemented properly.
+    concerns:
+      - Adding headcount is expensive, slow and risky at scale.
+      - Manual processes that worked at 10 people are breaking at 50.
+      - Your team is drowning in repetitive tasks instead of high-value work.
+      - You know AI can help, but you don't have time to experiment. You need results.
+    helpHeading: Smarter systems. Leaner teams. Faster growth.
+    help:
+      - title: A custom AI roadmap
+        text: We map your operations, find your highest-leverage opportunities, and produce a prioritised roadmap with ROI estimates for each.
+      - title: Production-ready from day one
+        text: No prototypes. Coding agents set up properly in the tools your developers already use.
+      - title: Measurable outcomes
+        text: We define success before we start, so you can judge the return on every dollar you invest in AI.
+      - title: Team enablement
+        text: We train your developers to work effectively alongside AI agents, and document everything so your team owns the system.
+    outcomesHeading: Your team works on what matters. AI handles the rest.
+    outcomes:
+      - Faster development cycles without adding developers
+      - Consistent code quality across your team
+      - Less time on repetitive coding tasks
+      - Faster onboarding for new team members
+      - A custom AI integration roadmap for your business
+    services: [initial-setup, rehabilitate]
+
+  - slug: tech-companies
+    navLabel: Tech companies
+    card:
+      label: I lead a tech company
+      text: Ready to roll agents out across your organisation? We design and deploy production-ready AI systems with measurable returns.
+    eyebrow: For tech-forward companies
+    title: Designing the autonomous business.
+    lead: "AI agents are more than automation tools; they're digital teammates. We design and deploy agents that fit your stack, work with your team, and keep improving how you build software."
+    cta: Build your AI agent strategy
+    concernsHeading: The gap between AI potential and production reality is real.
+    concernsIntro: Tech-forward companies know what AI can do. Turning that into production-grade, organisation-wide practice is a different challenge.
+    concerns:
+      - Proofs of concept that never make it to production.
+      - AI tools adopted ad hoc across teams, with no consistent strategy or governance.
+      - No clear way to measure the return on AI investment.
+      - AI capabilities that change so fast they need constant evaluation.
+    helpHeading: From strategy to deployment, end to end.
+    help:
+      - title: Agent architecture
+        text: Agent setups designed around your stack, security requirements and team workflows. No one-size-fits-all templates.
+      - title: Multi-agent rollout
+        text: Claude Code, Copilot, Codex or Gemini, each configured for your development environment, across every team that needs them.
+      - title: Continuous evaluation
+        text: The landscape changes weekly. We evaluate new capabilities and bring them into your setup when they're genuinely useful.
+      - title: An ROI measurement framework
+        text: Clear metrics for every initiative before we start, such as cycle time, review time, defect rates and deployment frequency.
+    outcomesHeading: Agents your whole organisation can rely on.
+    outcomes:
+      - A consistent AI strategy across every team
+      - Agents configured to best practice in every IDE you use
+      - Metrics that show what your AI investment delivers
+      - Documentation and training that scale with you
+    services: [initial-setup, rehabilitate, additional-agent]
+
+faq:
+  - group: About AI
+    items:
+      - q: Is AI really ready for use in a real business, or is it still hype?
+        a:
+          - For specific, well-defined tasks, yes. AI coding agents in particular are mature enough to meaningfully speed up software development when they're implemented properly.
+          - The key word is "properly". Most disappointing AI experiences come from tools adopted ad hoc, without proper configuration, training or integration into existing workflows. That's the problem we solve.
+      - q: We tried an AI tool before and it didn't work. Why would this be different?
+        a:
+          - "Most AI tool failures come down to three things: the wrong tool for the job, poor configuration, or a lack of team training."
+          - We start by understanding what you tried and why it didn't work. If the approach was fundamentally sound, we'll rehabilitate it. If a different agent would suit you better, we'll recommend that instead.
+      - q: What are AI coding agents, exactly?
+        a:
+          - AI coding agents work alongside your developers, inside the tools they already use (such as VS Code, IntelliJ or Xcode), to help write code faster, catch errors earlier, write documentation and handle repetitive tasks.
+          - The most capable today include Claude Code (Anthropic), GitHub Copilot (Microsoft), Codex (OpenAI) and Gemini (Google). Each has different strengths, and the right choice depends on your team's workflow and tech stack.
+  - group: Working with us
+    items:
+      - q: How long does a typical engagement take?
+        a:
+          - The core implementation in an Initial Setup or Rehabilitation typically takes 2–4 weeks. The month of consultancy included in each service then gives your team time to settle in, ask questions and get extra support.
+          - If you have a deadline, tell us during the free audit and we'll design the engagement around it.
+      - q: What if we don't have a technical team?
+        a:
+          - For less technical teams we provide more comprehensive training, simpler tooling choices, and documentation written for non-developers.
+          - That said, AI coding agents are primarily tools for developers. If your business doesn't have developers, the free audit is the right place to start. We'll be honest about whether a coding agent makes sense for you, and what else might serve you better.
+      - q: Are there ongoing costs after the engagement?
+        a:
+          - Our services are fixed-price engagements, not subscriptions. Once the engagement is complete, you own everything we've built and configured.
+          - You'll pay the AI provider (such as Anthropic, Microsoft, OpenAI or Google) for ongoing use of the agent, which varies by provider and usage. We'll give you a realistic estimate as part of our recommendation. If you'd like more support afterwards, Follow-Up Support is available.
+      - q: What happens if the implementation doesn't work as expected?
+        a:
+          - Every engagement starts with a clear definition of success. The consultancy time included in each service is there to fix issues, answer questions and adjust the setup as your team settles in. We don't disappear once the setup is done.
+      - q: Do you work on-site or remotely?
+        a:
+          - Both. For Sydney businesses we can work on-site for key sessions, such as discovery, training and go-live, and do everything else remotely. For businesses outside Sydney, we deliver everything remotely.
+  - group: Pricing
+    items:
+      - q: Why does this cost $20,000–$30,000? Isn't AI supposed to be cheap?
+        a:
+          - The AI tool itself is cheap. What costs money is implementing it properly, so it delivers value in your workflows instead of sitting unused after a few weeks.
+          - "Our pricing reflects the time it takes to analyse your requirements, configure and test the agent in your environment, train your team in a way that sticks, document everything, and support you for a month while your team gets up to speed."
+      - q: What's included in the free AI Opportunity Audit?
+        a:
+          - "On a video call, we learn about your business, team and current development workflows; identify 2–3 areas where AI coding agents could create genuine value; tell you honestly which agent would suit you best; and recommend a starting point."
+          - There's no obligation to go ahead. If we don't think an AI agent will help your business right now, we'll tell you.
+      - q: Are your prices in Australian dollars? Do they include GST?
+        a:
+          - All prices are in Australian dollars (AUD) and exclude GST. GST is added to invoices for Australian clients where applicable.

@@ -167,7 +167,7 @@ p { text-wrap: pretty; }
 
 /* Dividers come from each cell's right/bottom edge (clipped at the container's
    edges), so a partly filled last row stays clean instead of showing a grey gap. */
-.spec-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr)); overflow: hidden; border: 1px solid var(--line); }
+.spec-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); overflow: hidden; border: 1px solid var(--line); }
 .spec-list > div { padding: 1rem 1.2rem; margin: 0 -1px -1px 0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .spec-list dt { font-size: .8rem; color: var(--muted); }
 .spec-list dd { margin: .2rem 0 0; font-weight: 600; }
@@ -381,3 +381,87 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.025em; }
 .policy-list strong { min-width: 10rem; }
 
 .fine-print a { color: inherit; }
+
+/* ==========================================================================
+   Consulting and blog
+   ========================================================================== */
+/* Consulting section nav: wrapping glass pills, no JS */
+.subnav { padding-top: 1.5rem; }
+.subnav ul { display: flex; flex-wrap: wrap; gap: .5rem; }
+.subnav a {
+  display: inline-block; padding: .4rem .9rem; border-radius: 999px; font-size: .88rem; font-weight: 500;
+  color: var(--text); text-decoration: none; background: var(--glass-strong); border: 1px solid var(--glass-edge);
+}
+.subnav a:hover { color: var(--link); }
+.subnav a[aria-current="page"] { background: var(--brand-blue); border-color: transparent; color: #fff; }
+
+.hero--left { text-align: left; padding-block: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 4vw, 2.5rem); }
+.hero--left .hero-lead { margin-inline: 0; }
+.hero--left .actions { justify-content: flex-start; }
+.hero--left .hero-title { font-size: clamp(2.3rem, 6vw, 4.2rem); max-width: 20ch; }
+.hero .fine-print { margin-top: 1rem; }
+
+.section-more { margin-top: 1.5rem; }
+.split-intro { margin-top: .75rem; color: var(--muted); }
+
+/* Audience and contact cards */
+.card-grid { display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); }
+.card-grid--two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); margin-bottom: 2.5rem; }
+.info-card {
+  position: relative; display: flex; flex-direction: column; gap: .6rem; padding: 1.5rem; border-radius: var(--radius);
+  background: var(--glass); border: 1px solid var(--glass-edge); box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
+  transition: transform .25s;
+}
+.info-card:has(.stretched-link):hover { transform: translateY(-3px); }
+.info-card h2, .info-card h3 { font-size: 1.25rem; }
+.info-card p { color: var(--muted); }
+.info-card .actions { margin-top: auto; padding-top: .5rem; }
+.info-card-more { margin-top: auto; font-weight: 600; color: var(--link) !important; }
+
+/* Concern quotes */
+.quote-list { display: grid; gap: .75rem; }
+.quote-list li {
+  padding: 1rem 1.25rem; border-radius: 18px; font-size: 1.05rem; font-style: italic;
+  background: var(--glass-strong); border: 1px solid var(--glass-edge); border-left: 4px solid var(--brand-blue);
+}
+
+/* Pricing */
+.pricing-grid { display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+.pricing-card {
+  display: flex; flex-direction: column; gap: .8rem; padding: 1.6rem; border-radius: var(--radius);
+  background: var(--glass); border: 1px solid var(--glass-edge); box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
+}
+.pricing-card h3 { font-size: 1.3rem; }
+.pricing-description, .pricing-condition { color: var(--muted); font-size: .92rem; }
+.pricing-condition { margin-top: auto; padding-top: .5rem; border-top: 1px solid var(--line); }
+.pricing-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .6rem; }
+.price { font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -.03em; }
+.price-unit { font-size: .85rem; color: var(--muted); }
+.pricing-card .checklist { gap: .55rem; font-size: .95rem; }
+
+/* Tables */
+.table-intro { margin: -.75rem 0 1.25rem; color: var(--muted); max-width: 46rem; }
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--glass-edge); background: var(--glass); box-shadow: var(--shadow); }
+.data-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.data-table th, .data-table td { padding: .85rem 1.2rem; text-align: left; border-bottom: 1px solid var(--line); }
+.data-table thead th { font-size: .8rem; font-weight: 600; color: var(--muted); }
+.data-table tbody tr:last-child > * { border-bottom: 0; }
+.data-table tbody th { font-weight: 600; }
+.specs .fine-print { margin-top: 1rem; }
+
+/* Blog */
+.post-list { display: grid; gap: var(--gap); }
+.post-list .post-card, .blog .post-card {
+  padding: 1.6rem; border-radius: var(--radius); background: var(--glass); border: 1px solid var(--glass-edge);
+  box-shadow: var(--shadow); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+}
+.post-body { font-size: 1.07rem; }
+.post-body ul, .post-body ol { padding-left: 1.4rem; display: grid; gap: .45rem; margin-bottom: 1.1rem; }
+.post-body hr { border: 0; border-top: 1px solid var(--line); margin: 2.5rem 0; }
+.post-body strong { color: var(--text); }
+.prose ol:not([class]) { list-style: decimal; padding-left: 1.4rem; display: grid; gap: .6rem; margin-bottom: 1rem; }
+.post-body ol { list-style: decimal; }
+/* Four services read best as a 2×2 grid rather than 3 + 1 */
+@media (min-width: 48rem) { .pricing-grid--four { grid-template-columns: repeat(2, 1fr); } }

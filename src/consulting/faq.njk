@@ -1,0 +1,36 @@
+---
+layout: layouts/base.njk
+title: Consulting FAQ
+description: Honest answers to common questions about AI coding agents, how our consulting works, timelines, ongoing costs and pricing.
+permalink: /consulting/faq/
+---
+{% include "partials/consulting-nav.njk" %}
+
+<article class="section doc">
+  <div class="wrap doc-wrap">
+    <header class="doc-header">
+      <p class="eyebrow">Consulting FAQ</p>
+      <h1 class="page-title">Honest answers to common questions</h1>
+      <p class="doc-lead">The questions we hear most often, with straight answers rather than marketing copy.</p>
+    </header>
+
+    {%- for group in consulting.faq %}
+    <section class="prose" aria-labelledby="faq-{{ loop.index }}">
+      <h2 id="faq-{{ loop.index }}">{{ group.group }}</h2>
+      <div class="faq">
+        {%- for item in group.items %}
+        <details>
+          <summary>{{ item.q }}</summary>
+          {%- for paragraph in item.a %}<p>{{ paragraph }}</p>{% endfor %}
+        </details>
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endfor %}
+
+    <p class="fine-print">{{ site.legalName }} · ABN {{ site.abn }}</p>
+  </div>
+</article>
+
+{% set ctaTitle = "Still have questions? Let's talk." %}
+{% include "partials/audit-cta.njk" %}

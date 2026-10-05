@@ -13,4 +13,5 @@ export default {
   // TODO: confirm. Marked "needs confirmation" in the old consulting site.
   calendlyUrl: "https://calendly.com/calendly-xerodonia/10-15_minute_call",
   currentYear: new Date().getFullYear(),
+  buildTime: new Date(),
 };

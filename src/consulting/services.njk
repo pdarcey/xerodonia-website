@@ -1,0 +1,91 @@
+---
+layout: layouts/base.njk
+title: Consulting services and pricing
+description: Fixed-price AI coding agent consulting. Initial Setup from $20,000 AUD excl. GST. Full service details, consultancy fees, supported agents and IDE integrations.
+permalink: /consulting/services/
+---
+{% include "partials/consulting-nav.njk" %}
+
+<section class="hero hero--left">
+  <div class="wrap">
+    <p class="eyebrow">Services and pricing</p>
+    <h1 class="hero-title">Transparent, fixed-price AI consulting.</h1>
+    <p class="hero-lead">Every engagement has a clear scope, a fixed price and defined deliverables. No surprise invoices and no open-ended retainers.</p>
+    <p class="fine-print">All prices are in Australian dollars (AUD) and exclude GST.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="services-title">
+  <div class="wrap">
+    <header class="section-header">
+      <h2 id="services-title">What's included in each engagement</h2>
+      <p>Each service is a complete, end-to-end engagement, not a loose collection of hours.</p>
+    </header>
+    <ul class="pricing-grid pricing-grid--four">
+      {%- for service in consulting.services %}
+      {% include "partials/pricing-card.njk" %}
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section specs" aria-labelledby="fees-title">
+  <div class="wrap">
+    <h2 id="fees-title">How consultancy time is structured</h2>
+    <p class="table-intro">Each service includes a consultancy tier. These are the monthly rates and indicative hours behind them.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th scope="col">Consultancy tier</th><th scope="col">Rate</th><th scope="col">Indicative hours</th></tr></thead>
+        <tbody>
+          {%- for fee in consulting.fees %}
+          <tr><th scope="row">{{ fee.tier }}</th><td>{{ fee.rate }}</td><td>{{ fee.hours }}</td></tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="fine-print">All rates are AUD, excluding GST. Indicative hours are a guide only and may vary with the engagement's complexity.</p>
+  </div>
+</section>
+
+<section class="section specs" aria-labelledby="agents-title">
+  <div class="wrap">
+    <h2 id="agents-title">The agents we work with</h2>
+    <p class="table-intro">We're vendor-agnostic: we recommend the agent that suits your team, your stack and your goals.</p>
+    <dl class="spec-list">
+      {%- for agent in consulting.agents %}
+      <div><dt>{{ agent.maker }}</dt><dd>{{ agent.name }}</dd></div>
+      {%- endfor %}
+    </dl>
+  </div>
+</section>
+
+<section class="section specs" aria-labelledby="ides-title">
+  <div class="wrap">
+    <h2 id="ides-title">In the tools your team already uses</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th scope="col">IDE</th><th scope="col">Supported agents</th></tr></thead>
+        <tbody>
+          {%- for ide in consulting.ides %}
+          <tr><th scope="row">{{ ide.name }}</th><td>{{ ide.agents }}</td></tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section features" aria-labelledby="delivery-title">
+  <div class="wrap">
+    <header class="section-header">
+      <h2 id="delivery-title">On-site or remote: your choice</h2>
+    </header>
+    <ul class="feature-grid">
+      <li class="feature"><h3>On-site in Sydney</h3><p>For Sydney businesses, we can work on-site with your team. That's ideal for setup, workshops and training, where face-to-face time adds the most value.</p></li>
+      <li class="feature"><h3>Remote, worldwide</h3><p>Every service can be delivered remotely, for clients across Australia and overseas. We manage time-zone differences so collaboration stays smooth.</p></li>
+    </ul>
+  </div>
+</section>
+
+{% set ctaTitle = "Not sure which service is right for you?" %}
+{% include "partials/audit-cta.njk" %}

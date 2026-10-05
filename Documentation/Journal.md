@@ -84,6 +84,15 @@ The policies themselves are data-driven like everything else: each app's YAML li
 
 Gotchas: Eleventy 3's `---js` front matter wants top-level `const` declarations, not the v2 object literal. And YAML values containing `: ` need quoting.
 
+### 2026-10-05: Consulting moves in, and the blog arrives
+The consulting site had been built as a separate Eleventy project for a domain that turned out to be a typo (`xerodonia.com.au`). Moving it in meant porting the *content*, not the code: its CSS, components and hamburger-menu `nav.js` were all replaced by the Liquid Glass design and a pill-shaped sub-nav that simply wraps on phones.
+
+The old site repeated the same pricing cards on four pages, each copy slightly different ("Analysis of current setup" on one, "Audit of current implementation" on another). Now every consulting fact lives in `consulting.yaml`, and each audience page just lists the service ids it wants. A typo in an id fails the build, rather than quietly dropping a price card.
+
+Porting also turned up contradictions that are easy to miss when copy is duplicated: a "free 45-minute audit" whose booking link is a 10–15 minute Calendly event, and a "Most Popular" badge on a service no one had bought yet. The first is now a single setting waiting for Paul's answer; the second was removed, since an unearned claim like that is the sort of thing the ACL takes a dim view of.
+
+Blog gotcha: tags set in a directory data file apply to *everything* in that directory, including the index page. The first feed had two entries for one post until the index moved out of `src/blog/`.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no dependencies to update, no security patches and no build to break.

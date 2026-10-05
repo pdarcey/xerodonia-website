@@ -72,6 +72,27 @@ export default function (eleventyConfig) {
     new Date(date).toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
   );
 
+  /** Full ISO 8601 timestamp, for the Atom feed. */
+  eleventyConfig.addFilter("isoDateTime", (date) => new Date(date).toISOString());
+
+  /**
+   * Picks consulting services by id, in the order given. Throws on an unknown
+   * id so a typo in consulting.yaml fails the build instead of silently
+   * dropping a pricing card.
+   */
+  eleventyConfig.addFilter("pickServices", (services, ids = []) =>
+    ids.map((id) => {
+      const service = services.find((candidate) => candidate.id === id);
+      if (!service) throw new Error(`Unknown consulting service id: ${id}`);
+      return service;
+    })
+  );
+
+  /** Makes root-relative links absolute, for content syndicated in the feed. */
+  eleventyConfig.addFilter("absoluteUrls", (html = "", base) =>
+    html.replace(/(href|src)="\/(?!\/)/g, `$1="${base}/`)
+  );
+
   /** ISO date (YYYY-MM-DD) for sitemaps and <time datetime>. */
   eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString().split("T")[0]);
 

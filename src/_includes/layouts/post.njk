@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+bodyClass: doc-page
+---
+{#- A blog post. Front matter: title, description, date, optional category. -#}
+<nav class="breadcrumbs wrap" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="/blog/">Blog</a></li>
+    <li><a href="{{ page.url }}" aria-current="page">{{ title }}</a></li>
+  </ol>
+</nav>
+
+<article class="section doc">
+  <div class="wrap doc-wrap">
+    <header class="doc-header">
+      <p class="post-meta"><time datetime="{{ page.date | isoDate }}">{{ page.date | longDate }}</time>{% if category %} · {{ category }}{% endif %}</p>
+      <h1 class="page-title">{{ title }}</h1>
+      <p class="doc-lead">{{ description }}</p>
+    </header>
+    <div class="prose post-body">
+      {{ content | safe }}
+    </div>
+    <p class="link-row"><a class="text-link" href="/blog/"><span aria-hidden="true">←</span> All posts</a> <a class="text-link" href="/feed.xml">Subscribe with RSS</a></p>
+  </div>
+</article>

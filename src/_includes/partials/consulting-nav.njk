@@ -1,0 +1,12 @@
+{#- Secondary nav shown on every consulting page. Wraps on phones; no JS. -#}
+<nav class="subnav wrap" aria-label="Consulting">
+  <ul>
+    <li><a href="/consulting/"{% if page.url == "/consulting/" %} aria-current="page"{% endif %}>Overview</a></li>
+    {%- for audience in consulting.audiences %}
+    {%- set url = "/consulting/" + audience.slug + "/" %}
+    <li><a href="{{ url }}"{% if page.url == url %} aria-current="page"{% endif %}>{{ audience.navLabel }}</a></li>
+    {%- endfor %}
+    <li><a href="/consulting/services/"{% if page.url == "/consulting/services/" %} aria-current="page"{% endif %}>Services and pricing</a></li>
+    <li><a href="/consulting/faq/"{% if page.url == "/consulting/faq/" %} aria-current="page"{% endif %}>FAQ</a></li>
+  </ul>
+</nav>

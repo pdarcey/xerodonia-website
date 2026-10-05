@@ -39,6 +39,11 @@ src/
   apps/privacy.njk          /apps/<slug>/privacy/: generated when the YAML has `privacyPolicy`
   apps/support.njk          /apps/<slug>/support/: generated when the YAML has `support`
   about.njk, privacy.njk    /about/ and /privacy/ (the website's own policy, which lists every app policy)
+  contact.njk               /contact/
+  _data/consulting.yaml     Every consulting fact: audit, services and prices, fees, agents, IDEs, FAQ, audiences
+  consulting/               /consulting/ overview, services, faq, and audience.njk (one page per audience)
+  blog/<slug>.md            Blog posts (defaults in blog/blog.11tydata.js); blog.njk is the /blog/ index
+  feed.njk                  /feed.xml (Atom). Hand-written; no plugin needed.
   404.njk, sitemap.njk, robots.njk, CNAME
   styles/site.css           Part 1: structure and accessibility. Part 2: Liquid Glass theme.
   images/apps/<slug>.png    1024 px source icons (Eleventy makes the web sizes)
@@ -57,10 +62,17 @@ src/
 3. Set `status` to a key from `src/_data/statuses.js`. That decides the badge and the buttons.
 4. Run `npm run dev` and check the home page, `/apps/` and `/apps/<slug>/`. The footer, sitemap and app lists update automatically.
 
+### Writing a blog post
+Create `src/blog/<slug>.md` with front matter `title`, `description`, `date` (YYYY-MM-DD) and an optional `category`, then write the post in Markdown. The layout, URL (`/blog/<slug>/`), blog index, home-page teaser, sitemap and Atom feed all update automatically. Keep any page that isn't a post *out* of `src/blog/`, or it inherits the `posts` tag and shows up in the feed.
+
+### Changing consulting prices or services
+Edit `src/_data/consulting.yaml`. Each audience page lists the service `id`s it shows. An unknown id fails the build on purpose, via the `pickServices` filter.
+
 ## Conventions and gotchas
 - **Use `{% asyncEach %}`, not `{% for %}`, for any loop containing `{% image %}`.** The image shortcode is async, and in a plain `for` loop Nunjucks silently renders nothing.
 - **Paginated templates need `addAllPagesToCollections: true`**, or only the first generated page reaches `collections.all` (and the sitemap).
 - **Colour accent text with `color-mix(in oklab, var(--accent) N%, var(--text))`**, never raw `var(--accent)`. Raw amber or green on the light background fails WCAG contrast.
+- **Ordered lists:** the reset strips numbering from every `<ol>` (breadcrumbs need that), so prose lists restore it with `.prose ol:not([class]) { list-style: decimal }`.
 - **Avoid high-specificity resets.** Lists are reset with `ul[class], ol, nav ul`. A plain class selector loses to `ul[class]`.
 - **Grid and flex children that contain `<pre>`** need `min-width: 0` so they scroll instead of overflowing.
 - **Things that need JS elsewhere are done without it here:** the nav wraps instead of using a hamburger, whole cards are clickable with a stretched `::after` link, screenshots use a scroll-snap strip, and contact is `mailto:`.
