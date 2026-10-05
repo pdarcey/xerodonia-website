@@ -26,11 +26,16 @@
 | `pdarcey/clarity_feedback_relay` | Its `INGEST_TOKENS` secret gained a consulting-enquiries token (no code change) | n/a |
 | `pdarcey/consulting-enquiries` | New private repo for enquiries (label `consulting-enquiry`) | ✅ |
 | `pdarcey/obfuscate` | Made public | ✅ |
-| Blueprint | Screenshot mode (#465), `461a799` | ❌ local only |
-| Clarity | Screenshot mode (#466), `74086dc` | ❌ local only |
+| Blueprint | Screenshot mode (#465), `461a799` | ❌ local only, on purpose (Paul: don't push) |
+| Clarity | Screenshot mode (#466), `74086dc` | ❌ local only, on purpose (Paul: don't push) |
 
 ## Open Clarity issues for this site
 - **xerodonia.com #452–459:** the original audit. All are now fixed or superseded by the rebuild; they're waiting for Paul to verify before they're closed.
 - **Blueprint #465, Clarity #466:** screenshot modes, awaiting verification (Blueprint also awaits its iPhone/iPad shots).
 - **Clarity #467:** sample-data polish.
-- **Borderstamp #460, #461; Upcoming Birthdays #462:** privacy manifests, and the merchandise-store policy note.
+- **Borderstamp #460, #461; Upcoming Birthdays #462:** privacy manifests, and the merchandise-store policy note. Paul has confirmed what each app collects (comments on #460 and #462).
+
+## Decisions made in the 2026-10-05 follow-up session
+- TestFlight is **invite-only**: no public TestFlight links on the site.
+- Automated release-note updates open a **PR for Paul to approve**. They're never auto-merged.
+- **iPhone/iPad screenshots unblocked (Clarity #472):** the Simulator CPU problem was interrupted first boots. The iPhone 18 Pro Max and iPad Pro 13-inch (M5) are warmed up for screenshots.

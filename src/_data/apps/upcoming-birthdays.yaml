@@ -1,4 +1,4 @@
-# Upcoming Birthdays. Privacy and support are complete (Stage 3); features and screenshots arrive in Stage 5.
+# Upcoming Birthdays. Privacy and support are complete (Stage 3). Mac screenshots added 2026-10-06; iPhone/iPad and widgets to follow.
 name: Upcoming Birthdays
 slug: upcoming-birthdays
 order: 3
@@ -17,6 +17,18 @@ testFlightUrl:
 price: To be announced
 appCategory: Lifestyle
 languages: [English]
+
+screenshots:             # fictional people from the app's screenshot mode (Image Playground portraits), 2026-10-06
+  - device: mac
+    src: images/apps/upcoming-birthdays/list.png
+    darkSrc: images/apps/upcoming-birthdays/list-dark.png
+    caption: Today's birthdays first, then everyone else in order
+    alt: "Upcoming Birthdays on a Mac: a Today's Birthdays banner for Mia Nguyen, turning 34, above a list of the next birthdays, each with its date, how far away it is, the person's name and the age they'll turn"
+  - device: mac
+    src: images/apps/upcoming-birthdays/detail.png
+    darkSrc: images/apps/upcoming-birthdays/detail-dark.png
+    caption: A closer look at each person
+    alt: "The details for Nan: her photo, and that she will turn 80 on 15 October"
 
 privacy:
   quote: Nothing leaves your device. Ever.

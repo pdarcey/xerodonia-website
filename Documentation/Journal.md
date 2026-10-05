@@ -2,42 +2,59 @@
 
 ## The Big Picture
 
-Think of this site as the shop window for Xerodonia's apps. Someone hears about Scoreboard or Upcoming Birthdays, searches for it and lands here. They see what the app does, look at a few screenshots, read a privacy policy that tells them nothing creepy is going on, then click through to the App Store.
+Think of xerodonia.com as Xerodonia's shopfront, with a few rooms out the back. The front window shows the apps and tools: Blueprint, Borderstamp, Upcoming Birthdays, Scoreboard, Clarity and obfuscate. Someone hears about one, searches for it and lands here. They see what it does, look at a few screenshots, read a privacy policy that tells them nothing creepy is going on, and (once the app is live) click through to the App Store.
 
-It also does a less glamorous job: Apple wants a support URL and a privacy policy URL for every app on the App Store. These pages are those URLs.
+Out the back there's a consulting office (AI coding-agent consulting, with prices, an FAQ and a page for each kind of client), a blog with an Atom feed, and a counter for robots. AI agents get structured data, `llms.txt` and a machine-readable price list, and there's a live MCP server they can use to make an enquiry.
+
+It also does a less glamorous job that matters a lot: Apple wants a **Privacy Policy URL and a Support URL for every app** on the App Store. Those pages live here, at `/apps/<slug>/privacy/` and `/apps/<slug>/support/`.
+
+The ground rule for visitors is strict: **no JavaScript, no trackers, no cookies.** You get HTML, one stylesheet and images, and that's it.
 
 ## Architecture Deep Dive
 
-The site is **deliberately simple**: plain HTML files, one stylesheet and a folder of images. There's no framework, no build step and no JavaScript.
+The site is a **static site built by Eleventy**. Picture a print shop. The YAML data files are the copy, the Nunjucks templates are the printing plates, and Eleventy is the press. You run the press (`npm run build`) and out come finished HTML pages in `_site/`. Node only ever runs in the print shop, on Paul's Mac or on GitHub's build server. Visitors get the printed pages, never the machinery.
 
-If a React or Next.js site is a commercial kitchen with a dozen stations, this one is a toastie press. You put something in and you get a predictable result. Any web server can host it, including GitHub Pages, a cheap shared host or `python3 -m http.server`. It'll still render correctly in twenty years.
+A few ideas hold it together:
 
-There are two pieces worth understanding:
+- **One data file per app is the single source of truth.** `src/_data/apps/blueprint.yaml` drives Blueprint's card on the home page, its listing on `/apps/`, its app page, its privacy policy, its support page, its JSON-LD, its line in `llms.txt` and its sitemap entry. Change a tagline once and it changes everywhere. Adding the next app means one YAML file and one icon, with no template changes.
+- **Status drives the buttons.** Each app has a `status` (`in-development`, `testflight-soon`, `testflight`, `app-store`, `free-download`, `in-house`). The `get-actions` partial reads it and chooses the right buttons, so an app never shows a "Download" button it can't honour. Things that can't be clicked are `<span>`s styled as static buttons, never fake links.
+- **Consulting works the same way.** Every price, service and FAQ lives in `consulting.yaml`. Each audience page just lists the service ids it wants, and an unknown id fails the build instead of quietly dropping a price card.
+- **The machine-readable layer is generated, not written.** JSON-LD, `llms.txt`, `llms-full.txt` and `/consulting/services.json` are all built from the same data as the pages, so the robots can never be told something different from the humans.
+- **A bouncer at the door.** After every build, `lib/build-check.js` scans the output and fails the deploy if it finds any executable `<script>`, any `onclick=`-style handler, any `javascript:` URL or any JSON-LD that doesn't parse. JSON-LD is the only `<script>` allowed, because browsers never run it.
+- **Deployment is a conveyor belt.** Push to `main`, and a GitHub Action builds the site and publishes it to GitHub Pages in about a minute. DNS stays at Fastmail, which also handles email, so the mail records are never touched.
 
-- **The CSS-only lightbox.** Clicking a screenshot thumbnail changes the URL fragment to `#img2`. The rule `.overlay:target` matches whichever overlay has that `id`, and shows it full-screen. The close button links to `#!`, which matches nothing, so the overlay goes away. It works like a light that turns on whenever someone says its name.
-- **The `<details>` privacy policy.** The browser handles the expand/collapse behaviour for free. It's accessible by default and needs no script.
-
-The trade-off is that **nothing is shared between pages**. The header, nav and footer are copied into every file, like a photocopied letterhead. That's fine at a dozen pages, but if the nav changes you have to change every file. If the site grows much more, a tiny static-site generator (or even a shell script) is the obvious next step.
+The things that usually need JavaScript are done with plain HTML and CSS. The nav wraps instead of hiding behind a hamburger, whole cards are clickable with a stretched `::after` link, screenshots sit in a scroll-snap strip, dark-mode screenshots come from `<picture>` and `prefers-color-scheme`, and the contact form is a `mailto:` link.
 
 ## The Codebase Map
 
 ```
-index.html             ← front door: featured app + grid of the rest
-<app>.html             ← one page per app (made from appPageTemplate.html)
-about.html             ← who's behind it
-privacy.html           ← site-wide privacy summary
-css/style.css          ← the one and only stylesheet
-images/                ← <app>.png, <app>-thumbN.png, <app>-fullN.png
-generate_template_images.py ← makes coloured placeholder tiles while real art isn't ready
+eleventy.config.js        the press settings: plugins, filters, image shortcodes
+src/_data/                the copy
+  apps/<slug>.yaml          one per app or tool (blueprint.yaml documents every field)
+  consulting.yaml           every consulting fact
+  site.js, statuses.js      site-wide settings; the allowed app statuses
+src/_includes/            the plates: base layout, header, footer, cards, buttons
+src/apps/                 /apps/, one page per app, plus privacy and support pages
+src/consulting/           overview, services, FAQ, one page per audience, services.json
+src/blog/                 posts in Markdown (blog.njk, the index, sits outside on purpose)
+src/styles/site.css       the one stylesheet: structure first, then the Liquid Glass theme
+src/images/               1024 px app icons, screenshots, link-preview cards
+lib/                      JSON-LD, llms.txt, shared consulting helpers, the build check
+scripts/make-images.mjs   favicons and link-preview cards (run on a Mac, output committed)
+Documentation/            Plan.md (roadmap), Status.md (snapshot), this journal
 ```
 
-The naming convention is the glue that holds it together. Every app has one lowercase, no-spaces key (`distancemapper`), and that key is used for the HTML filename and every image. If you know an app's key, you know where all its files are.
+If you know an app's slug, you know where everything about it lives: `src/_data/apps/<slug>.yaml`, `src/images/apps/<slug>.png`, and the URLs `/apps/<slug>/`, `/apps/<slug>/privacy/` and `/apps/<slug>/support/`.
 
 ## Tech Stack & Why
 
-- **Plain HTML/CSS**: there's nothing dynamic to render, so a framework would add maintenance with no benefit.
-- **System font stack (`-apple-system`)**: the apps are Apple-platform apps, so the site uses the same typeface. It looks native on Apple devices and costs nothing to load.
-- **Python + Pillow for placeholders**: the script hashes each app name into a colour, so every app always gets the same placeholder tile. Rerunning it won't produce a new random colour scheme.
+- **Eleventy 3**: it's a static-site generator that adds nothing to the page. It shares layouts, turns data into pages and writes the sitemap and feed, then gets out of the way. The old consulting site already used it, so porting was easy.
+- **Nunjucks templates and YAML data**: YAML is easy for a person to edit and diff, and Nunjucks is plenty for templates that mostly loop over data. (Watch out for its one big trap: async shortcodes need `asyncEach`, not `for`.)
+- **@11ty/eleventy-img**: turns 1 MB PNGs into 40 KB AVIF and WebP at build time, with width and height set so nothing jumps while the page loads.
+- **One hand-written stylesheet**: the Liquid Glass design is a few hundred lines of modern CSS (`color-mix`, `backdrop-filter`, container-friendly grids). A CSS framework would weigh more than the whole site.
+- **System fonts**: the apps are Apple-platform apps, so the site uses SF and New York. They look native on Apple devices and cost nothing to download.
+- **GitHub Pages and GitHub Actions**: free hosting with HTTPS, served from a CDN, and deployment is just a push. The catch is that the repo has to be public, which is fine because the content is public anyway.
+- **sharp (through `npm run images`)**: renders the link-preview cards and favicons. It runs on the Mac rather than in CI, because SVG text rendering depends on the fonts installed.
 
 ## The Journey
 
@@ -129,14 +146,30 @@ What the website side learnt:
 - **Headless Chrome screenshots images that haven't loaded yet.** The dark Clarity screenshots looked missing until `--virtual-time-budget` gave lazy images time to load. Check that a test is measuring the page, not the capture.
 - **Paul's review beats any test.** "The icons don't show" and "there's no commit activity" were both cases of sample data that passed every test but didn't look like the real app. Sample data should do whatever the real importer does.
 
+### 2026-10-05 (late): Chasing a Simulator that wouldn't calm down
+Before we could take any iPhone or iPad screenshots, we had to deal with a problem outside our code: starting an iOS Simulator on Paul's Mac ran the CPU flat out until every simulator was killed. Rather than guess, we measured. Each test booted a device and sampled CPU, swap and the top processes every 15 seconds for 5 minutes (Clarity #472).
+
+What we learnt:
+- **Xcode 27 has no Simulator.app.** It's been replaced by **DeviceHub.app**, inside `Xcode.app/Contents/Applications/`. Our first "with a window" test ran `open -a Simulator`, which failed quietly in a background log, so we spent five minutes measuring a headless boot by mistake. Paul spotted it because nothing appeared on screen. **Check that each step of a test actually ran before trusting its numbers.**
+- **A device that has booted before is fine.** It was fine without a window, with the DeviceHub window, and with Xcode building and running Blueprint: 2–2½ minutes of heavy boot work, then 75–94% idle. Even on 8 GB, swap never grew.
+- **Apple has a crash loop in the iOS 27.0 simulator.** `intelligencetasksd` crashes on an XPC entitlement check (`__XPC_API_MISUSE__`) as often as every 10 seconds until launchd backs off, and each crash makes the Mac write a crash report. It's annoying, but it isn't what kept the CPU busy.
+- **First boots are the expensive part.** Each new device downloads about 2.5 GB of Siri and Apple Intelligence data and indexes it. The iPhone 18 Pro Max that ran away last time had only 367 MB of data, so its first boot never finished, and an interrupted first boot starts the heavy work all over again.
+- **Screenshots don't need a window at all.** `xcrun simctl io <device> screenshot` captures a headless simulator, which means the capture script can run without DeviceHub.
+- **The proof:** we erased the half-booted iPhone 18 Pro Max and left its first boot alone without a window. It ran the CPU flat out for about 6 minutes while it downloaded 1.5 GB, then settled at 8 minutes. The second boot was ready in 7 seconds and calm within 2. The "forever" was never forever; it was a job that kept being interrupted and starting again. **Leave a first boot alone, then reuse that device.**
+- Housekeeping: `xcrun simctl delete unavailable` removed 33 devices left over from iOS 26.x runtimes that were no longer installed, freeing 6 GB.
+
 ## Engineer's Wisdom
 
-- **Choose the boring option on purpose.** A static site has no dependencies to update, no security patches and no build to break.
-- **A naming convention is a form of architecture.** In a project with no code, consistent names do the job that types and modules normally do.
-- **Privacy copy is a contract.** It isn't decoration. Make sure it says exactly what the app does.
+- **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.
+- **One source of truth, many outputs.** Pages, privacy policies, JSON-LD, `llms.txt` and the MCP server's price list all come from the same YAML. Duplicated facts drift; generated ones can't.
+- **Privacy copy is a contract.** Write it from the code (usage strings, manifests, network calls), never from memory. The policy, the privacy manifest and App Store Connect's privacy answers must all agree.
+- **Make the rule enforce itself.** "No JavaScript" is a build failure, not a guideline. A guard you've seen fail is worth ten you hope work.
+- **Check that a stranger can open a link before you publish it.** Private repos, unreleased apps and placeholder URLs all look fine from the inside.
+- **Native first.** Mac screenshots take seconds; Simulators can cost half an hour. Use the cheapest tool that does the job.
 
 ## If I Were Starting Over...
 
-- I'd keep the header/footer in one place from the start, using a tiny build script or a static-site generator such as Eleventy or Hugo, so the nav isn't copied into a dozen files.
-- I'd keep a single list of apps (name, key, App Store ID, privacy summary) and generate the home grid and privacy page from it.
-- I'd add the viewport tag and real `alt` text to the template on day one, so every page copied from it would already have them.
+- I'd start with Eleventy and per-app data files on day one. The original site's copied headers, placeholder App Store IDs and missing pages all came from copy-and-paste templates.
+- I'd write the build check before the first page, so "no JavaScript" was enforced from the start instead of added later.
+- I'd give every app a Debug-only screenshot mode with sample data from its first build. Then good screenshots, for the site and the App Store, are one launch argument away.
+- I'd check the development machine before planning Simulator work. An 8 GB Mac struggles to run an iOS Simulator alongside Xcode.

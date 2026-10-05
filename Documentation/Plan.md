@@ -187,7 +187,7 @@ This can be scripted with `xcrun simctl io booted screenshot` (or UI-test snapsh
 
 **From ASC to the website** (per app, once each app record exists):
 - **Apple ID (numeric app ID).** This drives the App Store link (`apps.apple.com/app/id<N>`), the badge, the Smart App Banner meta tag and structured data.
-- **A public TestFlight link** (`testflight.apple.com/join/…`), if Paul wants public betas for Blueprint, Borderstamp and Birthdays before launch. This is optional; without it the page says "Coming soon".
+- ~~**A public TestFlight link**~~. **Decided 2026-10-05: TestFlight is invite-only**, so there are no public `testflight.apple.com/join/…` links and `testFlightUrl` stays empty. Pages show "Coming soon" instead.
 - Price, category, age rating and availability (for structured data and page copy).
 - "What's New" text for each version. This is automated (§6).
 - **Official badge artwork** from Apple's Marketing Resources site (SVG, black and white versions). It must be used unmodified.
@@ -267,7 +267,7 @@ GitHub Action (daily cron + manual trigger)
   → if the version is newer than src/_data/releases/<slug>.json:
       append {version, date, notes} to the file
   → open a PR "Blueprint 1.1 released"  (Paul merges → auto-deploy)
-     (or auto-merge, if Paul prefers it fully hands-off)
+     (never auto-merged: Paul approves every update, decided 2026-10-05)
 ```
 - The Lookup API only returns the *latest* version. That's fine because the history builds up in the repo from the first run onwards. Historical notes can be back-filled by hand once.
 - With the optional ASC API key, the same job could also show TestFlight build status and fetch every version's "What's New" text. That's a later improvement.
@@ -433,18 +433,20 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 
 1. **Remaining screenshots (5d).**
    - **Mac, native, no Simulator:** Upcoming Birthdays and Borderstamp. Both need fake data: Birthdays from sample contacts (it has `Preview Content/Sample Data.swift`); Borderstamp from sample stamps. Each probably needs a small screenshot mode like Blueprint's and Clarity's: plan it in that repo first.
-   - **iPhone/iPad:** Blueprint, Birthdays, Borderstamp and Scoreboard. **Ask Paul before booting any Simulator.** A fresh iPhone 18 Pro Max's first boot ran the CPU flat out for about 30 minutes. Prefer a simulator Paul already uses, or have Paul boot one ahead of time.
+   - **iPhone/iPad:** Blueprint, Birthdays, Borderstamp and Scoreboard. **Unblocked (Clarity #472):** the "flat out forever" was interrupted first boots. Use the two warmed-up devices, **iPhone 18 Pro Max** (`A67A08D2-…`, 6.9") and **iPad Pro 13-inch (M5)** (`3A8CBAD4-…`). Never create new ones. Capture headless with `xcrun simctl io <udid> screenshot`. Xcode 27 replaced Simulator.app with DeviceHub. **Still ask Paul before booting.**
    - Then write `scripts/capture-screenshots.sh`, so re-captures (and App Store Connect sizes) are one command.
 2. **Clarity #467:** sample-data polish (project descriptions, green tests, obfuscate "Not shipped"), then re-take Clarity's Dashboard and Project dashboard shots.
 3. **Stage 6:** SEO and compliance audit (Lighthouse, W3C validator and link checker in CI).
 4. **Stage 7:** release automation, including obfuscate's signed and notarised DMG.
 
-**Not pushed (local commits Paul may want to push):** Blueprint `461a799`, Clarity `74086dc`. **Uncommitted, Paul's own:** Blueprint `project.pbxproj`; Clarity `CLAUDE.md` line 42, `Journal.md` (27 Sep entry), `Readme.md`, `Info.plist` (build-number bump); the website's `Images/` folder (two Blueprint-only Kanban shots, unused).
+**Not pushed, on purpose (Paul, 2026-10-05: don't push them):** Blueprint `461a799`, Clarity `74086dc`. **Uncommitted, Paul's own:** Blueprint `project.pbxproj`; Clarity `CLAUDE.md` line 42, `Journal.md` (27 Sep entry), `Readme.md`, `Info.plist` (build-number bump); the website's `Images/` folder (two Blueprint-only Kanban shots, unused).
 
 ## Open questions for Paul
 
 5. ~~**Clarity:** showcase only?~~ **Answered 2026-10-05:** showcase only, not for sale and no download. The DMG pipeline was an experiment.
 6. ~~**obfuscate:** public repo?~~ **Answered 2026-10-05:** `pdarcey/obfuscate` is now public (history scanned first: only test-fixture keys). The DMG and notarisation come in Stage 7.
-7. **TestFlight:** public TestFlight links for Blueprint, Borderstamp and Birthdays, or invite-only?
-8. **Release PRs:** should automated release-note updates open a PR for you to approve (recommended), or publish automatically?
-9. **Upcoming Birthdays and Borderstamp privacy:** I couldn't find an analytics SDK or a `PrivacyInfo.xcprivacy` in either repo. Can you confirm what they actually collect? Both apps also need privacy manifests before App Store submission. That's work in those repos, so I'd log it as Clarity issues there.
+7. ~~**TestFlight:** public links or invite-only?~~ **Answered 2026-10-05:** invite-only. No public TestFlight links on the site.
+8. ~~**Release PRs:** PR or auto-publish?~~ **Answered 2026-10-05:** a PR that Paul approves. Never auto-merge.
+9. ~~**Upcoming Birthdays and Borderstamp privacy:** what do they collect?~~ **Answered 2026-10-05:**
+   - **Upcoming Birthdays:** asks for Contacts (all, or specific people). Contact details are used only to show birthdays in the app and, mostly, the widgets. Nothing is stored by the app or sent off the device. The website policy already says this. Manifest: Clarity #462.
+   - **Borderstamp:** the website policy is detailed and accurate; generate the manifest from it. Manifest: Clarity #460.
