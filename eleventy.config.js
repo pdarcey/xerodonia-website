@@ -45,6 +45,51 @@ async function imageShortcode(src, alt, sizes = "100vw", className = "", loading
   return Image.generateHTML(metadata, attributes);
 }
 
+/** Escapes a value for use inside an HTML attribute. */
+function attr(value) {
+  return String(value).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+}
+
+/** `srcset` text for one format's generated images. */
+const srcset = (images) => images.map((image) => `${image.url} ${image.width}w`).join(", ");
+
+/**
+ * A screenshot with light and dark versions, as one `<picture>`: the dark
+ * sources come first behind `(prefers-color-scheme: dark)`, so visitors in
+ * dark mode get the dark screenshot automatically, with no JavaScript. Each
+ * source carries its own width and height, so neither version shifts the
+ * layout even when their sizes differ slightly.
+ *
+ * @param {string} src Light version, relative to `src/`.
+ * @param {string|undefined} darkSrc Dark version; without it, this is a plain responsive image.
+ * @param {string} alt Alt text (shared: both versions show the same content).
+ * @param {string} sizes The `sizes` attribute.
+ * @param {string} className Class for the `<img>`.
+ * @param {number[]} widths Widths to generate.
+ */
+async function themedImageShortcode(src, darkSrc, alt, sizes, className = "", widths = [480, 800, 1200]) {
+  if (alt === undefined) throw new Error(`Missing alt text for image: ${src}`);
+  const options = { widths, formats: ["avif", "webp"], outputDir: "_site/img/", urlPath: "/img/" };
+  const light = await Image(path.join("src", src), options);
+  const dark = darkSrc ? await Image(path.join("src", darkSrc), options) : null;
+  const size = (images) => {
+    const largest = images.at(-1);
+    return `width="${largest.width}" height="${largest.height}"`;
+  };
+  const sources = [];
+  if (dark) {
+    for (const format of ["avif", "webp"]) {
+      sources.push(
+        `<source media="(prefers-color-scheme: dark)" type="image/${format}" srcset="${srcset(dark[format])}" sizes="${attr(sizes)}" ${size(dark[format])}>`
+      );
+    }
+  }
+  sources.push(`<source type="image/avif" srcset="${srcset(light.avif)}" sizes="${attr(sizes)}" ${size(light.avif)}>`);
+  const fallback = light.webp[0];
+  const classAttr = className ? ` class="${attr(className)}"` : "";
+  return `<picture>${sources.join("")}<img src="${fallback.url}" srcset="${srcset(light.webp)}" sizes="${attr(sizes)}" alt="${attr(alt)}"${classAttr} ${size(light.webp)} loading="lazy" decoding="async"></picture>`;
+}
+
 export default function (eleventyConfig) {
   // App data lives in src/_data/apps/<slug>.yaml
   eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
@@ -59,6 +104,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/images/og/*.jpg");
 
   eleventyConfig.addAsyncShortcode("image", imageShortcode);
+  eleventyConfig.addAsyncShortcode("themedImage", themedImageShortcode);
 
   /** schema.org JSON-LD for a page (see lib/structured-data.js). Output with | safe. */
   eleventyConfig.addFilter("jsonLd", (data) => toJsonLd(structuredData(data)));

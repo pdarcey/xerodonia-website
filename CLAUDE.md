@@ -97,6 +97,7 @@ Edit `src/_data/consulting.yaml`. Each audience page lists the service `id`s it 
 - **"Coming soon" states are `.button--static` spans, never fake links.**
 - **JS front matter (`---js`) in Eleventy 3 uses top-level `const` declarations**, not an object literal. See `src/apps/privacy.njk`.
 - **Quote YAML values that contain `: `**, or the file won't parse.
+- **Screenshots use `{% themedImage src, darkSrc, alt, sizes, class %}`**, which builds one `<picture>` with the dark versions behind `(prefers-color-scheme: dark)`, so dark-mode visitors get dark screenshots without JS. In an app's YAML, give each screenshot a `src` and, optionally, a `darkSrc`. For Mac screenshots of Blueprint, launch the Debug build with `-ScreenshotMode` (add `-AppleInterfaceStyle Dark` for dark mode, which affects only that app) and capture the window with ⇧⌘4, then Space. Keep the transparent shadow; the CSS adds no frame.
 - **Every `{% image %}` needs alt text.** Use `""` for decorative images; the shortcode throws if it's missing.
 - **Testing narrow widths with headless Chrome:** it won't lay out below 500 px, so load the page in a 390 px `<iframe>`. To force light or dark mode, use `--blink-settings=preferredColorScheme=1` (light) or `0` (dark).
 - Issues are tracked in Clarity under the **xerodonia.com** project.

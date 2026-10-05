@@ -24,14 +24,17 @@ price: To be announced
 appCategory: Productivity
 languages: [English]
 
-screenshots:             # device: phone | tablet | mac. Omit src for a "coming soon" placeholder.
+screenshots:             # device: phone | tablet | mac. Omit src for a "coming soon" placeholder;
+                         # darkSrc (optional) is shown to visitors in dark mode.
   # Mac shots taken in screenshot mode (fake data), 2026-10-05. iPhone/iPad to follow (Clarity #465).
   - device: mac
     src: images/apps/blueprint/mac-today.png
+    darkSrc: images/apps/blueprint/mac-today-dark.png
     caption: Today, at a glance
     alt: "Blueprint on a Mac showing today: a birthday, personal and work agendas, a new TV episode, Sydney weather, health goals met and three news stories"
   - device: mac
     src: images/apps/blueprint/mac-upcoming.png
+    darkSrc: images/apps/blueprint/mac-upcoming-dark.png
     caption: The week ahead, with a long weekend coming
     alt: "Blueprint on a Mac showing the week ahead: birthdays, appointments, TV episodes, two football games and a Labour Day long weekend"
 
