@@ -1,6 +1,6 @@
 # xerodonia.com — Rebuild Plan
 
-*Drafted 2026-10-05. Status: **Stages 1–5b live. Working on 5c (consulting MCP server).***
+*Drafted 2026-10-05. Status: **Stages 1–5c live** (site, AI-agent layer, consulting MCP server with email notifications). Next: 5d (screenshots).*
 
 ## Goals
 
@@ -294,7 +294,7 @@ Keep a `CHANGELOG.md` in each app repo. Paste each entry into ASC's "What's New"
 | **4** ✅ | Port the consulting pages and the blog (with the CSS-only nav) | `/consulting/`, `/blog/`, feed |
 | **5a** ✅ | Remaining app pages (Scoreboard, Clarity, obfuscate); favicon set; Open Graph images | Content complete except screenshots |
 | **5b** ✅ | AI-agent layer, static: robots.txt, llms.txt, JSON-LD everywhere, machine-readable services file, build check for scripts | Agents can find, understand and book |
-| **5c** | Consulting MCP server on Cloudflare Workers (new repo) | Agents can query services and send enquiries |
+| **5c** ✅ | Consulting MCP server on Cloudflare Workers (new repo) | Agents can query services and send enquiries |
 | **5d** | Screenshot mode in Blueprint and Clarity; capture script for all apps | Real screenshots on every app page |
 | **6** | SEO and compliance pass (JSON-LD now in 5b), Lighthouse/validator/link-check in CI | Audit report |
 | **7** | Release automation (Lookup API cron, GitHub Releases dispatch, obfuscate DMG workflow) | Hands-off release notes |
@@ -342,6 +342,65 @@ Each sub-stage ends with a pause for review. 5a and 5b only touch this repo; 5c 
   - a kill switch (an environment variable) that disables `send_enquiry` without redeploying
 - **Privacy:** the website privacy policy gains a "Consulting enquiries" section covering what's collected, where it's stored, how long it's kept, and deletion on request.
 - **Deploy:** Paul runs `npx wrangler login` once (or uses the existing login); everything else is scripted.
+
+### 5c in detail (approved and built 2026-10-05)
+
+**As built:**
+- Endpoint `https://xerodonia-mcp.autumn-glitter-b50d.workers.dev/mcp`; repo `pdarcey/xerodonia-mcp` (private), 29 tests.
+- **Changes from the plan:** no `agents` package (MCP SDK 1.32's web-standard transport is enough). The relay is reached through a **service binding**, not its URL, because Worker-to-Worker fetches over workers.dev fail with error 1042. The live end-to-end test filed issue #1 in `pdarcey/consulting-enquiries`.
+- **Email:** GitHub doesn't notify you about issues created with your own token, so the Worker emails hello@ itself via Fastmail SMTP (an SMTP-only app password; Reply-To is the enquirer). It's confirmed to arrive almost instantly. Test issues #1 and #2 are closed.
+
+
+```
+AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET──▶ xerodonia.com/consulting/services.json   (read tools)
+                                          │
+                                          └─ send_enquiry ──POST /v1/feedback──▶ clarity-feedback-relay ──▶ GitHub issue in
+                                                             (ingest token)                                   pdarcey/consulting-enquiries
+                                                                                                              (label: consulting-enquiry)
+                                                                                    ├─▶ Clarity imports it (project linked to the repo)
+                                                                                    └─▶ email to Paul (see "Email" below)
+```
+
+**Repo:** `pdarcey/xerodonia-mcp` (private), in `Projects/Services/xerodonia-mcp/`, set up like `clarity-feedback-relay`: TypeScript, `wrangler.jsonc`, KV for rate limits, secrets only via `wrangler secret put`, vitest with `@cloudflare/vitest-pool-workers`, and `CLAUDE.md`, `README.md`, `Journal.md` and `Status.md`.
+
+**Dependencies (new, need approval):**
+- `@modelcontextprotocol/sdk` (the official MCP SDK)
+- `agents` (Cloudflare's; only its stateless `createMcpHandler`, so no Durable Objects are needed)
+- `zod` (tool input schemas, which the MCP SDK requires)
+
+**Endpoint:** `https://xerodonia-mcp.<subdomain>.workers.dev/mcp`. Read tools need no authentication. `GET /` returns a short human-readable description, and `/.well-known/mcp.json` describes the server.
+
+**Tools:**
+
+| Tool | What it does |
+|---|---|
+| `list_services` | Every service with its AUD price (excluding GST), what it includes and conditions. |
+| `get_service(id)` | One service in full. |
+| `get_rates` | Consultancy rate tiers, supported agents and IDEs. |
+| `estimate_engagement(hasExistingSetup, additionalAgents, wantsFollowUp)` | Picks the packages (Initial Setup or Rehabilitate, plus extras) and returns an itemised indicative total in AUD, excluding GST, clearly labelled as "an estimate, not a quote". Plain arithmetic on services.json. |
+| `get_booking_link` | The Calendly link for the free 15-minute audit, plus a note that a human should choose the time. |
+| `send_enquiry(name, email, message, company?, preferredTimes?, onBehalfOf?, contactConsent)` | Requires `contactConsent: true`. Creates the GitHub issue through the relay, and returns a reference and "we'll reply by email". It never commits Xerodonia to anything. |
+
+**Data source:** the read tools fetch `services.json` from the live site (cached for 10 minutes), so prices are edited only in the website's `consulting.yaml`. If `schemaVersion` isn't 1, the tools fail clearly rather than guessing.
+
+**Safeguards for `send_enquiry`:**
+- validated inputs: email format, length limits, plain text only
+- rate limits in KV: 3 per IP per hour, 3 per email address per day, and 20 in total per day
+- the issue body is clearly marked "Submitted via MCP by an AI agent", and quotes the free text as a code block so nothing in it renders as Markdown or links
+- a kill switch, `ENQUIRIES_ENABLED=false`, that returns a polite "please email hello@xerodonia.com" instead
+
+**Relay changes (a live service; I'd do it carefully):**
+- add one ingest token for `pdarcey/consulting-enquiries` with the label `consulting-enquiry` to your local `ingest_tokens.json`
+- re-upload it with `wrangler secret put INGEST_TOKENS`
+- no code change: the relay already supports per-token repos and labels
+
+**New private repo:** `pdarcey/consulting-enquiries` (issues only), plus a Clarity project linked to it so enquiries are imported.
+
+**Email (your "both" decision):** GitHub emails a repo's owner about new issues by default. If you watch the repo with "All activity" and email notifications are on, each enquiry already arrives in your inbox, with no extra code and no extra secret. I'd test that first. If it isn't enough, add a direct Fastmail email via JMAP. That needs a Fastmail API token limited to sending, stored as a Worker secret, and is about 40 lines of code.
+
+**Website updates once it's live:** set `site.mcpUrl` so llms.txt and services.json advertise it; add a "Consulting enquiries" section to `/privacy/` (what's collected, where it's stored, how long it's kept, deletion on request); and add a short "For AI agents" note on `/contact/`.
+
+**Tests:** unit tests for every tool, with services.json and the relay mocked (including rate limits, the kill switch, missing consent and the wrong schema version), plus a live check with the MCP Inspector after deploying.
 
 ### 5d: Screenshots
 - **Blueprint and Clarity:** a `-ScreenshotMode` launch argument, compiled into DEBUG builds only, that swaps in an in-memory store and stub providers filled with fake data. In Blueprint that covers contacts, events, reminders, health, weather, news, sport and TV. In Clarity it covers projects and issues. Each change is planned and reviewed in its own repo, following that repo's `CLAUDE.md`, with Clarity issues filed in those projects.

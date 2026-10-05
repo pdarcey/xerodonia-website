@@ -14,7 +14,7 @@ export default {
   calendlyUrl: "https://calendly.com/calendly-xerodonia/10-15_minute_call",
   // The consulting MCP server's endpoint, once it's deployed (Stage 5c).
   // While empty, services.json and llms.txt simply don't mention it.
-  mcpUrl: "",
+  mcpUrl: "https://xerodonia-mcp.autumn-glitter-b50d.workers.dev/mcp",
   currentYear: new Date().getFullYear(),
   buildTime: new Date(),
 };

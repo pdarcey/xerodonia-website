@@ -84,7 +84,7 @@ Edit `src/_data/consulting.yaml`. Each audience page lists the service `id`s it 
 - **Every template should set `pageType`** (app, app-privacy, app-support, consulting, consulting-services, consulting-audience, consulting-faq, or post) so `lib/structured-data.js` adds the right schema.org nodes. Pages without one get Organization and WebSite only.
 - **JSON-LD is the only `<script>` allowed.** The build fails on anything else (decision 8).
 - **`services.json` is a contract.** The MCP server depends on it, so add fields freely, but bump `schemaVersion` before renaming or removing any.
-- **Once the MCP server is deployed,** set `site.mcpUrl`, and llms.txt and services.json will advertise it.
+- **The consulting MCP server** lives in `pdarcey/xerodonia-mcp` (`Projects/Services/xerodonia-mcp`). It reads `/consulting/services.json` from the live site, and `site.mcpUrl` advertises it. Its enquiries become issues in the private `pdarcey/consulting-enquiries` repo, which Clarity imports.
 
 ## Conventions and gotchas
 - **Use `{% asyncEach %}`, not `{% for %}`, for any loop containing `{% image %}`.** The image shortcode is async, and in a plain `for` loop Nunjucks silently renders nothing.

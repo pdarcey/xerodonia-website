@@ -240,6 +240,11 @@ faq:
       - q: Do you work on-site or remotely?
         a:
           - Both. For Sydney businesses we can work on-site for key sessions, such as discovery, training and go-live, and do everything else remotely. For businesses outside Sydney, we deliver everything remotely.
+  - group: AI agents
+    items:
+      - q: Can my AI assistant contact you for me?
+        a:
+          - Yes. AI assistants can read our services and prices, estimate an engagement, and send us an enquiry on your behalf through our MCP server, but only with your agreement to share your name and email. We'll reply to you by email; nothing is booked or agreed until you've spoken with us.
   - group: Pricing
     items:
       - q: Why does this cost $20,000–$30,000? Isn't AI supposed to be cheap?

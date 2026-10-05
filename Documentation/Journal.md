@@ -113,6 +113,11 @@ The interesting design choice was the no-JavaScript rule. JSON-LD lives in a `<s
 
 Small gotcha: Eleventy ignores `.11ty.js` templates unless `11ty.js` is in `templateFormats`. The first `services.json` silently didn't exist.
 
+### 2026-10-05: The shop counter opens
+The consulting MCP server is live (its own story is in `xerodonia-mcp/Journal.md`). From the website's side, the satisfying part is how little changed. The server reads `services.json`, which is generated from the same `consulting.yaml` as the pages, the JSON-LD and llms.txt. One setting (`site.mcpUrl`) made llms.txt and services.json advertise it. A price change is still one line in one file, and it reaches the pages, search engines, AI crawlers and live agents at once.
+
+Writing the privacy section meant checking what the server actually stores, rather than what it's meant to store. IP addresses really are kept for an hour and email hashes for a day, because those are the KV TTLs in `rate-limit.ts`. A privacy policy should be checked against the code, the same way the app policies were.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no dependencies to update, no security patches and no build to break.
