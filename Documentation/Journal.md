@@ -170,6 +170,16 @@ War stories and lessons:
 - **Development assets keep the photos out of the App Store build.** `DEVELOPMENT_ASSET_PATHS` lists the portrait catalogue, so Debug builds have the 960 KB of faces and archives don't.
 - **A loose end for v1.0:** the Mac app has no way to choose people yet (Clarity #474), so it shows everyone. The website promises "just the people you choose" on Mac, so either the picker ships or Mac comes off the listing.
 
+### 2026-10-06: Two old domains find a new home
+Borderstamp had two domains of its own. `borderstamp.com` still showed an old page from Fastmail's hosting, with a certificate for the wrong name. `borderstamp.app` sat on Hover's parking page. Both now send visitors to `/apps/borderstamp/` on this site.
+
+War stories and lessons:
+- **`.app` is HTTPS or nothing.** The whole `.app` top-level domain is on browsers' HSTS preload list, so a browser won't even try plain HTTP. That ruled out Hover's built-in forwarding, which is HTTP-only.
+- **One GitHub Pages site, one custom domain.** We couldn't add the Borderstamp domains to this repo. Instead, each domain got a two-file repo: an `index.html` with a meta refresh and a canonical link, and an identical `404.html`. GitHub serves the `404.html` for every path it doesn't know, so old deep links land in the right place too. It uses no JavaScript, and nothing needs maintaining.
+- **The certificate that wouldn't come.** The DNS was right and GitHub was serving the pages, but after 30 minutes neither domain had a certificate. Re-saving the same custom domain didn't help. Removing it and adding it back (two automatic commits, "Delete CNAME" and "Create CNAME") brought both certificates within minutes.
+- **Your own Mac lies about DNS.** Public DNS showed the new records while this Mac still had the old ones cached, so `borderstamp.com` showed the old page here. Testing with `curl --resolve <host>:443:185.199.108.153` asks GitHub directly and skips the cache.
+- **Keep the mail.** Both domains receive email, so only the web records changed and the MX records were left as they were.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.
@@ -177,6 +187,7 @@ War stories and lessons:
 - **Privacy copy is a contract.** Write it from the code (usage strings, manifests, network calls), never from memory. The policy, the privacy manifest and App Store Connect's privacy answers must all agree.
 - **Make the rule enforce itself.** "No JavaScript" is a build failure, not a guideline. A guard you've seen fail is worth ten you hope work.
 - **Check that a stranger can open a link before you publish it.** Private repos, unreleased apps and placeholder URLs all look fine from the inside.
+- **Change only the records you mean to.** A domain move is a web change and a mail change. Do one at a time, and check the MX records before and after.
 - **Native first.** Mac screenshots take seconds; Simulators can cost half an hour. Use the cheapest tool that does the job.
 
 ## If I Were Starting Over...

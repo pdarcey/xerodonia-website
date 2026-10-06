@@ -32,12 +32,17 @@
 | Clarity | Screenshot mode (#466), `74086dc` | ❌ local only, on purpose (Paul: don't push) |
 | Upcoming Birthdays | Screenshot mode (12 fictional Australians), Mac target builds again (#473), `65b1acf` | ❌ local only |
 
+## Domains (2026-10-06)
+- `borderstamp.com` and `borderstamp.app` redirect to https://xerodonia.com/apps/borderstamp/ over HTTPS, via the GitHub Pages repos `pdarcey/borderstamp-com` and `pdarcey/borderstamp-app` (both public and pushed). Paul tested them in a browser, and Clarity #476 is closed.
+- Fastmail's old Borderstamp site files are deleted. Mail for both domains goes to Fastmail.
+
 ## Open Clarity issues for this site
 - **xerodonia.com #452–459:** the original audit. All are now fixed or superseded by the rebuild; they're waiting for Paul to verify before they're closed.
 - **Blueprint #465, Clarity #466:** screenshot modes, awaiting verification (Blueprint also awaits its iPhone/iPad shots).
 - **Clarity #467:** sample-data polish.
 - **xerodonia.com #472:** the Simulator CPU investigation. Solved (interrupted first boots); awaiting verification.
 - **Upcoming Birthdays #473** (Mac build, fixed, awaiting verification), **#474** (Mac people picker: built 2026-10-06, awaiting verification), **#475** (stale test dates, `os(ios)` typo, `print()`).
+- **xerodonia.com #481:** replace hard-coded `borderstamp.com` links in the Borderstamp app. Do it before or during the App Store Connect setup.
 - **Borderstamp #460, #461; Upcoming Birthdays #462:** privacy manifests, and the merchandise-store policy note. Paul has confirmed what each app collects (comments on #460 and #462).
 
 ## Decisions made in the 2026-10-05/06 session

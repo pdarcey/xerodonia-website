@@ -17,6 +17,7 @@ The rebuild plan, decisions and staging are in `Documentation/Plan.md`. The stor
 - Styling: one hand-written stylesheet, `src/styles/site.css` (the "Liquid Glass" design)
 - Hosting: **GitHub Pages**, deployed by GitHub Actions (`.github/workflows/deploy.yml`)
 - DNS: **Fastmail**, which also hosts email. Never touch the MX, DKIM, SPF or DMARC records.
+- Redirect domains: `borderstamp.com` (DNS at Fastmail) and `borderstamp.app` (DNS at Hover) are served by the GitHub Pages repos `pdarcey/borderstamp-com` and `pdarcey/borderstamp-app` (local copies next to this repo). They redirect to `/apps/borderstamp/`. If a Pages certificate stalls, remove the custom domain and add it back.
 
 ## Commands
 - `npm install`: install dependencies (Node 22 or later)

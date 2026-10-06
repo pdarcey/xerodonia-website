@@ -30,6 +30,7 @@ The apps on the current site that aren't in this list (Travel Bingo, Distance Ma
 - Its nameservers are **Fastmail** (`ns1/ns2.messagingengine.com`).
 - **Email is live on Fastmail.** The MX records point to `us1/us2-smtp.messagingengine.com`, and there will also be DKIM and SPF records. **None of these may be touched.**
 - The apex and `www` A records currently point to Fastmail's own web hosting (`103.168.172.37/.52`).
+- **`borderstamp.com` (DNS at Fastmail) and `borderstamp.app` (DNS at Hover) redirect to `/apps/borderstamp/`** (done 2026-10-06, Clarity #476). Each domain has its own tiny GitHub Pages repo, `pdarcey/borderstamp-com` and `pdarcey/borderstamp-app`, because a Pages site can have only one custom domain. Their `index.html` and `404.html` use a meta refresh plus a canonical link. HTTPS is enforced. Both domains' MX records point to Fastmail; leave them alone.
 
 ---
 
@@ -438,6 +439,7 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 5. **Clarity #467:** sample-data polish, then re-take Clarity's Dashboard and Project dashboard shots.
 6. **Stage 6:** SEO and compliance audit (Lighthouse, W3C validator and link checker in CI).
 7. **Stage 7:** release automation, including obfuscate's signed and notarised DMG.
+8. **Borderstamp in App Store Connect** (Paul, around 2026-10-08): use `/apps/borderstamp/`, `/privacy/` and `/support/` as the Marketing, Privacy Policy and Support URLs. Then fill in `appStoreId` in `borderstamp.yaml` and update its `status`. Clarity #481: replace any hard-coded `borderstamp.com` links in the app.
 
 **Not pushed, on purpose:** Blueprint `461a799`, Clarity `74086dc` (Paul: don't push). The website commits since `2d47e69` and Upcoming Birthdays `65b1acf` are also local; pushing the website deploys it. **Uncommitted, Paul's own:** Blueprint `project.pbxproj`; Clarity `CLAUDE.md`, `Journal.md`, `Readme.md`, `Info.plist`; Upcoming Birthdays `Readme.md`, untracked `CLAUDE.md` and `Journal.md`, `xcschememanagement.plist`; the website's `Images/` folder (portrait and screenshot originals).
 
