@@ -180,6 +180,20 @@ War stories and lessons:
 - **Your own Mac lies about DNS.** Public DNS showed the new records while this Mac still had the old ones cached, so `borderstamp.com` showed the old page here. Testing with `curl --resolve <host>:443:185.199.108.153` asks GitHub directly and skips the cache.
 - **Keep the mail.** Both domains receive email, so only the web records changed and the MX records were left as they were.
 
+### 2026-10-06 (afternoon): The picker, and the bugs it shook loose
+The website promised Mac users "just the people you choose", and the Mac app couldn't choose anyone. So the Mac got a proper picker: a sheet listing everyone with a birthday, with a search field, checkboxes, Select All, and rows you can select like any Mac list. Building it, and then screenshotting the app on three platforms, turned up five bugs that had been hiding for months.
+
+War stories and lessons:
+- **The loop nobody saw.** With real contacts, the app crashed the moment you opened the picker. The log showed "Removing all pending notification requests" thousands of times a second until macOS quarantined the app's logging. Fetching contacts rescheduled notifications, and rescheduling notifications began by... fetching contacts. Each round ran in a new `Task`, so it never overflowed the stack; it just spun. Screenshot mode skips notifications, which is why a day of testing missed it. **Test with real data at least once; fake data can switch off the very code that's broken.**
+- **"Nobody chosen" used to mean "everyone".** With no saved choices the app fetched every contact with a birthday, and removing your last person brought everyone back. Now, with full access and nobody chosen, it shows no one, and a `hasChosenPeople` flag remembers that an empty list was a choice.
+- **Search is about people, not strings.** Paul typed "O'Brien" and found nothing: the sample name used a curly apostrophe (’) and keyboards type a straight one ('). Then "Matt" didn't find Matt Kelly, because the app shows his nickname, "Kel". Search now ignores apostrophes, case and accents, and looks at full names and nicknames.
+- **Never nest a NavigationStack.** Double-clicking a person crashed: the details view wrapped itself in its own `NavigationStack`, inside the list's. The old `NavigationLink(destination:)` tolerated it; navigating by value didn't.
+- **Widgets that read once.** On the iPhone, both widgets were empty although the data was sitting in the App Group. Each widget read it in a stored property, once, when its provider was created; the extension had started before the app wrote anything, and every reload reused that empty read. Restarting the extension processes proved it. **In a widget, read shared data inside `timeline(for:in:)`, never in a stored property.**
+- **The screenshot that told the truth.** "Birthdays in the Next 3 Days" listed people 4 and 6 days away: the cutoff was hard-coded to a week. Screenshots are a free bug hunt, because you finally look at every screen slowly.
+- **Mind what's on the Home Screen.** Paul filled the iPad with other widgets so ours didn't float in empty space, which looked great, except the News widget showed real headlines about real people. Swapped for Reminders ("Buy a present for Mia") and a battery widget.
+- **Tools that fought back.** `log` in this shell is a function, not `/usr/bin/log`, so every log search silently returned nothing until we used the full path. `-AppleInterfaceStyle Light` does nothing (only `Dark` is a value); `-NSRequiresAquaSystemAppearance YES` forces light. And the template UI tests took over the whole Mac every time tests ran, so they're out of the test plans.
+- **The repo with no remote.** Upcoming Birthdays had never been pushed anywhere. It's now a private GitHub repo, checked for secrets first.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.
@@ -189,6 +203,8 @@ War stories and lessons:
 - **Check that a stranger can open a link before you publish it.** Private repos, unreleased apps and placeholder URLs all look fine from the inside.
 - **Change only the records you mean to.** A domain move is a web change and a mail change. Do one at a time, and check the MX records before and after.
 - **Native first.** Mac screenshots take seconds; Simulators can cost half an hour. Use the cheapest tool that does the job.
+- **Find the cause before the fix.** Every crash this session had a log or a crash report that named it. Reading those first meant each fix was one small change, not a guess.
+- **Make the hidden dependency a parameter.** The notification loop existed because a function quietly fetched its own data. Passing the contacts in made the loop impossible, and made the code testable.
 
 ## If I Were Starting Over...
 
@@ -196,3 +212,4 @@ War stories and lessons:
 - I'd write the build check before the first page, so "no JavaScript" was enforced from the start instead of added later.
 - I'd give every app a Debug-only screenshot mode with sample data from its first build. Then good screenshots, for the site and the App Store, are one launch argument away.
 - I'd check the development machine before planning Simulator work. An 8 GB Mac struggles to run an iOS Simulator alongside Xcode.
+- I'd run every app with real data on every platform before marketing it. The Mac picker gap, the notification loop and both widget bugs were all visible from the first real launch.

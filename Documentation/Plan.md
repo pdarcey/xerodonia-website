@@ -1,6 +1,6 @@
 # xerodonia.com — Rebuild Plan
 
-*Drafted 2026-10-05. Status (end of session, 2026-10-06): **Stages 1–5c live; 5d part-done.** Blueprint, Clarity and Upcoming Birthdays have Mac screenshots (light and dark); the latter is committed but not yet pushed. Next: iPhone/iPad screenshots (see "Next session" below).*
+*Drafted 2026-10-05. Status (end of session, 2026-10-06 afternoon): **Stages 1–5c live; 5d well along.** Upcoming Birthdays has screenshots on all three platforms (iPhone widgets and list, iPad widgets, Mac list, Choose People sheet and details). Blueprint and Clarity have Mac shots. Next: Borderstamp (see "Next session" below).*
 
 ## Goals
 
@@ -405,7 +405,7 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 
 ### 5d: Screenshots
 - **Blueprint and Clarity:** a `-ScreenshotMode` launch argument, compiled into DEBUG builds only, that swaps in an in-memory store and stub providers filled with fake data. In Blueprint that covers contacts, events, reminders, health, weather, news, sport and TV. In Clarity it covers projects and issues. Each change is planned and reviewed in its own repo, following that repo's `CLAUDE.md`, with Clarity issues filed in those projects.
-- **Upcoming Birthdays:** fake contacts loaded into a dedicated Simulator from a `.vcf` file.
+- **Upcoming Birthdays:** ~~fake contacts loaded from a `.vcf` file~~ a `-ScreenshotMode` launch argument (twelve fictional Australians with Image Playground portraits), the same pattern as Blueprint and Clarity. Done on all platforms, 2026-10-06.
 - **Borderstamp:** a simulated GPS route across real borders (`simctl location`), plus a few geotagged sample photos for the photo-scan feature.
 - **Scoreboard:** live public data.
 - **`scripts/capture-screenshots.sh`** in this repo: boots dedicated simulators (iPhone 18 Pro Max, iPad Pro 13-inch), sets a clean status bar (`simctl status_bar override`: 9:41, full battery), launches each app with its demo data, and captures App Store-sized PNGs. Mac apps are captured with `screencapture -l` on the app window. The PNGs land in `src/images/apps/<slug>/` and the YAML references them, and the same files can be uploaded to App Store Connect.
@@ -430,18 +430,23 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 7. **Repo name:** `pdarcey/xerodonia-website` (public), so the repo is never confused with the website itself.
 8. **Stage 5 decisions:** screenshots via a DEBUG-only "screenshot mode" in Blueprint and Clarity; robots.txt allows all AI crawlers; agent engagement includes a live MCP server on Cloudflare Workers (free tier); JSON-LD `<script type="application/ld+json">` is allowed, but executable JS is not.
 
-## Next session (written 2026-10-06)
+## Next session (written 2026-10-06, afternoon)
 
-1. **Stage 3 of Upcoming Birthdays' screenshots: iPhone, iPad and widgets.** Screenshot mode is in place (`-ScreenshotMode`, commit `65b1acf` in Upcoming Birthdays), and in the Simulator it also fills the widgets with the fictional people. Use the warmed-up **iPhone 18 Pro Max** (`A67A08D2-…`, 6.9") and **iPad Pro 13-inch (M5)** (`3A8CBAD4-…`). Never create new devices. Capture headless with `xcrun simctl io <udid> screenshot`. **Ask Paul before booting.** The widgets are the app's main interface, so give them the most attention.
-2. **Write `scripts/capture-screenshots.sh`** (build, install, launch with `-ScreenshotMode`, capture light and dark at App Store sizes), so re-captures are one command.
-3. **Borderstamp:** screenshot mode with sample stamps (plan it in that repo first), then Mac and iPhone/iPad shots.
-4. **Blueprint and Scoreboard:** iPhone/iPad shots (Blueprint already has screenshot mode).
+1. **Borderstamp screenshot mode** (plan it in that repo first, following its `CLAUDE.md`): sample stamps and trips, DEBUG-only, guarding every write like Upcoming Birthdays' does. Then Mac shots (native), then iPhone and iPad.
+2. **Borderstamp in App Store Connect** (Paul, around 2026-10-08): use `/apps/borderstamp/`, `/privacy/` and `/support/` as the Marketing, Privacy Policy and Support URLs. Then fill in `appStoreId` in `borderstamp.yaml` and update its `status`. Clarity #481: replace any hard-coded `borderstamp.com` links in the app.
+3. **Blueprint and Scoreboard:** iPhone/iPad shots (Blueprint already has screenshot mode).
+4. **Write `scripts/capture-screenshots.sh`** from this session's commands (below), so re-captures are one command.
 5. **Clarity #467:** sample-data polish, then re-take Clarity's Dashboard and Project dashboard shots.
 6. **Stage 6:** SEO and compliance audit (Lighthouse, W3C validator and link checker in CI).
 7. **Stage 7:** release automation, including obfuscate's signed and notarised DMG.
-8. **Borderstamp in App Store Connect** (Paul, around 2026-10-08): use `/apps/borderstamp/`, `/privacy/` and `/support/` as the Marketing, Privacy Policy and Support URLs. Then fill in `appStoreId` in `borderstamp.yaml` and update its `status`. Clarity #481: replace any hard-coded `borderstamp.com` links in the app.
+8. **Upcoming Birthdays polish, when Paul chooses:** #479 (large widget a third empty), #480 (iPad list layout; would let the iPad list be shown), #475, and a `.gitignore` for that repo.
 
-**Not pushed, on purpose:** Blueprint `461a799`, Clarity `74086dc` (Paul: don't push). The website commits since `2d47e69` and Upcoming Birthdays `65b1acf` are also local; pushing the website deploys it. **Uncommitted, Paul's own:** Blueprint `project.pbxproj`; Clarity `CLAUDE.md`, `Journal.md`, `Readme.md`, `Info.plist`; Upcoming Birthdays `Readme.md`, untracked `CLAUDE.md` and `Journal.md`, `xcschememanagement.plist`; the website's `Images/` folder (portrait and screenshot originals).
+**How screenshots were taken this session** (for the capture script):
+- **Mac:** launch the Debug build with `-ScreenshotMode` plus `-AppleInterfaceStyle Dark`, or `-NSRequiresAquaSystemAppearance YES` for light; `open` the app again to bring it to the front; `screencapture -x -l <window id>` (keeps the shadow and any attached sheet). Paul opens sheets and pages; the terminal can't send keystrokes.
+- **iPhone/iPad:** `simctl boot` (ask Paul first; settles in 4–6 minutes), `xcodebuild … -destination id=<udid> build`, `simctl install`, `simctl status_bar <udid> override --time 9:41 --batteryState charged --batteryLevel 100 …`, `simctl ui <udid> appearance light|dark`, `simctl launch <udid> com.xerodonia.Upcoming-Birthdays -ScreenshotMode`, `simctl io <udid> screenshot`. Terminating the app returns to the Home Screen. Paul arranges Home Screen widgets in DeviceHub; keep third-party widgets (News) out. `simctl shutdown` when done.
+- **Checking the page:** headless Chrome needs `--virtual-time-budget=20000` or lazy-loaded screenshots render blank.
+
+**Not pushed, on purpose:** Blueprint `461a799`, Clarity `74086dc` (Paul: don't push). **Uncommitted, Paul's own:** Blueprint `project.pbxproj`; Clarity `CLAUDE.md`, `Journal.md`, `Readme.md`, `Info.plist`; Upcoming Birthdays `Readme.md`, `xcschememanagement.plist`, untracked `CLAUDE.md` and `Journal.md`; the website's `Images/` folder (portrait and screenshot originals).
 
 ## Open questions for Paul
 
@@ -452,4 +457,4 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 9. ~~**Upcoming Birthdays and Borderstamp privacy:** what do they collect?~~ **Answered 2026-10-05:**
    - **Upcoming Birthdays:** asks for Contacts (all, or specific people). Contact details are used only to show birthdays in the app and, mostly, the widgets. Nothing is stored by the app or sent off the device. The website policy already says this. Manifest: Clarity #462.
    - **Borderstamp:** the website policy is detailed and accurate; generate the manifest from it. Manifest: Clarity #460.
-10. ~~**Upcoming Birthdays on Mac (Clarity #474):** build a Mac picker, or drop Mac from v1.0?~~ **Answered 2026-10-06:** build it, so both versions can be marketed. Done the same day (not yet committed at the time of writing): a "Choose People" sheet (search by name or nickname, checkboxes, Select All), File › Choose People… (⇧⌘P), and Remove/Delete in the list. With full access and nobody chosen, the app now shows no one instead of everyone, on iOS too. The site's Mac listing and "just the people you choose" stay as they are.
+10. ~~**Upcoming Birthdays on Mac (Clarity #474):** build a Mac picker, or drop Mac from v1.0?~~ **Answered 2026-10-06:** build it, so both versions can be marketed. Done the same day (Upcoming Birthdays `064a981`, verified by Paul, #474 closed): a "Choose People" sheet (search by name or nickname, checkboxes, Select All), File › Choose People… (⇧⌘P), and Remove/Delete in the list. With full access and nobody chosen, the app now shows no one instead of everyone, on iOS too. The site's Mac listing and "just the people you choose" stay as they are.
