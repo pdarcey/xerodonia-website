@@ -432,7 +432,7 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 
 ## Next session (written 2026-10-06, afternoon)
 
-1. **Borderstamp screenshot mode** (plan it in that repo first, following its `CLAUDE.md`): sample stamps and trips, DEBUG-only, guarding every write like Upcoming Birthdays' does. Then iPhone and iPad shots. **No Mac:** Mac is dropped from v1.0 (2026-10-06), because the native Mac build doesn't compile (Borderstamp #482), and the site no longer lists it.
+1. ~~**Borderstamp screenshot mode**~~ **Done 2026-10-07** (Borderstamp `bacfcf9`: `-ScreenshotMode`, plus `-ScreenshotTab` and `-ScreenshotMapPack`). Four shots are on the site. **Still to do:** dark map shots after Borderstamp #488; Home Screen widget shots (Paul arranges them; widgets first, per the screenshot preferences); optionally retake the iPad shots in full-screen mode to lose the resize handle. **No Mac:** Mac is dropped from v1.0 (2026-10-06), because the native Mac build doesn't compile (Borderstamp #482), and the site no longer lists it.
 2. **Borderstamp in App Store Connect** (Paul, around 2026-10-08): use `/apps/borderstamp/`, `/privacy/` and `/support/` as the Marketing, Privacy Policy and Support URLs. Then fill in `appStoreId` in `borderstamp.yaml` and update its `status`. Clarity #481: replace any hard-coded `borderstamp.com` links in the app.
 3. **Blueprint and Scoreboard:** iPhone/iPad shots (Blueprint already has screenshot mode).
 4. **Write `scripts/capture-screenshots.sh`** from this session's commands (below), so re-captures are one command.

@@ -1,4 +1,4 @@
-# Borderstamp. Privacy and support are complete (Stage 3); features and screenshots arrive in Stage 5.
+# Borderstamp. Privacy and support are complete (Stage 3); screenshots added 2026-10-07 (Stage 5d).
 name: Borderstamp
 slug: borderstamp
 order: 2
@@ -17,6 +17,29 @@ testFlightUrl:
 price: To be announced
 appCategory: Travel
 languages: [English]
+
+screenshots:             # a sample passport from the app's screenshot mode (fake data), 2026-10-07
+  # iPhone 18 Pro Max Simulator (status bar 9:41, full battery)
+  - device: phone
+    src: images/apps/borderstamp/iphone-stamps.png
+    darkSrc: images/apps/borderstamp/iphone-stamps-dark.png
+    caption: Every border you cross becomes a stamp, newest first
+    alt: "Borderstamp on an iPhone: 31 Stamps, newest first. Australia and a round New South Wales stamp, then Japanese prefecture stamps for Osaka and Hiroshima, Japan and Tokyo, and China and Beijing, each with the date it was earned"
+  # iPad Pro 13-inch (M5) Simulator
+  - device: tablet
+    src: images/apps/borderstamp/ipad-stamps.png
+    darkSrc: images/apps/borderstamp/ipad-stamps-dark.png
+    caption: Countries, states, prefectures and counties, each with its own design
+    alt: "Borderstamp on an iPad: a grid of stamps four across, including Australia, New South Wales, Osaka, Hiroshima, Tokyo, Beijing, a shamrock stamp for Galway, Italy, Switzerland, a Schengen Area entry stamp, the European Union, France, Scotland and England"
+  # Dark versions of the maps wait for new dark-mode map colours (Borderstamp #488)
+  - device: phone
+    src: images/apps/borderstamp/iphone-map.png
+    caption: Watch your map fill in
+    alt: "The Borderstamp world map on an iPhone with the visited countries in amber: Australia, China, Japan, the United Kingdom, Ireland, France, Switzerland and Italy. Visited: 8 of 235 countries"
+  - device: tablet
+    src: images/apps/borderstamp/ipad-map-china.png
+    caption: Zoom in on a region pack, like China's provinces
+    alt: "The Borderstamp map on an iPad zoomed in on China, with Beijing, Shanghai, Shaanxi and Sichuan in amber. Chinese Provinces: visited 4 of 34, most visited Beijing"
 
 privacy:
   quote: Your location is turned into place names on your phone, and goes no further.
