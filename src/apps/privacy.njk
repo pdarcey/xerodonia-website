@@ -51,7 +51,7 @@ const eleventyComputed = {
 
     <div class="prose">
       <h2>What {{ app.name }} can access</h2>
-      <p>{{ app.name }} only asks for access when it needs it, and works without any permission you decline. You can change these at any time in the Settings app under Privacy &amp; Security (on a Mac, System Settings › Privacy &amp; Security).</p>
+      <p>{{ app.name }} only asks for access when it needs it, and works without any permission you decline. You can change these at any time in the Settings app under Privacy &amp; Security{% if "Mac" in app.platforms %} (on a Mac, System Settings › Privacy &amp; Security){% endif %}.</p>
       <dl class="permission-list">
         {%- for permission in policy.permissions %}
         <div><dt>{{ permission.name }}</dt><dd>{{ permission.use }}</dd></div>

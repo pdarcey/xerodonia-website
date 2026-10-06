@@ -16,7 +16,7 @@
 | Item | Source repo | Status | Platforms (from pbxproj) | Notes |
 |---|---|---|---|---|
 | **Blueprint** | `Apps/Blueprint` | About to enter TestFlight | iPhone, iPad, Mac | Was called "Cockpit". Uses TelemetryDeck and ClarityFeedbackKit, and its privacy manifest declares *Customer Support* and *Other Diagnostic Data*. Reads Contacts, Calendar, Reminders, HealthKit and WeatherKit. An Xcode privacy report PDF already exists. |
-| **Borderstamp** | `Apps/Border Apps/Borderstamp` | About to enter TestFlight | iPhone, iPad, Mac | "A digital passport for the real world". Uses location, keeps everything on-device, no servers. Bundle ID is `com.borderstamp.2026.*`. **No privacy manifest found.** |
+| **Borderstamp** | `Apps/Border Apps/Borderstamp` | About to enter TestFlight | iPhone, iPad (Mac dropped from v1.0, 2026-10-06) | "A digital passport for the real world". Uses location, keeps everything on-device, no servers. Bundle ID is `com.borderstamp.2026.*`. **No privacy manifest found.** |
 | **Clarity** | `Apps/Clarity` | Not for sale (showcase) | Mac (GUI + CLI + MCP server) | Has a notarised DMG pipeline (`scripts/build-dmg.sh`) and a `VersionHistory.md`. |
 | **Scoreboard** | `Apps/Scoreboard/Scoreboard` | In development, so "Coming soon" | iPhone, iPad | Australian sports scores, widgets and Siri. Uses TelemetryDeck and has a privacy manifest. |
 | **Upcoming Birthdays** | `Apps/Upcoming Birthdays` | About to enter TestFlight | iPhone, iPad, Mac | Reads Contacts. **No analytics SDK found in the code**, yet the current site's privacy text says it uses one, so this needs checking. No privacy manifest found. |
@@ -296,7 +296,7 @@ Keep a `CHANGELOG.md` in each app repo. Paste each entry into ASC's "What's New"
 | **5a** ✅ | Remaining app pages (Scoreboard, Clarity, obfuscate); favicon set; Open Graph images | Content complete except screenshots |
 | **5b** ✅ | AI-agent layer, static: robots.txt, llms.txt, JSON-LD everywhere, machine-readable services file, build check for scripts | Agents can find, understand and book |
 | **5c** ✅ | Consulting MCP server on Cloudflare Workers (new repo) | Agents can query services and send enquiries |
-| **5d** 🔶 | Screenshot mode in Blueprint and Clarity; capture script for all apps | **Done:** screenshot modes in Blueprint (461a799, #465) and Clarity (74086dc, #466); Mac screenshots, light and dark, live for both. **To do:** iPhone/iPad for Blueprint; Mac + iPhone/iPad for Birthdays and Borderstamp; iPhone/iPad for Scoreboard; capture script |
+| **5d** 🔶 | Screenshot mode in Blueprint and Clarity; capture script for all apps | **Done:** screenshot modes in Blueprint (461a799, #465) and Clarity (74086dc, #466); Mac screenshots, light and dark, live for both. **To do:** iPhone/iPad for Blueprint; Mac + iPhone/iPad for Birthdays; iPhone/iPad for Borderstamp; iPhone/iPad for Scoreboard; capture script |
 | **6** | SEO and compliance pass (JSON-LD now in 5b), Lighthouse/validator/link-check in CI | Audit report |
 | **7** | Release automation (Lookup API cron, GitHub Releases dispatch, obfuscate DMG workflow) | Hands-off release notes |
 | **8** | Update docs (`CLAUDE.md`, Journal), tidy up Clarity issues | Done |
@@ -432,7 +432,7 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 
 ## Next session (written 2026-10-06, afternoon)
 
-1. **Borderstamp screenshot mode** (plan it in that repo first, following its `CLAUDE.md`): sample stamps and trips, DEBUG-only, guarding every write like Upcoming Birthdays' does. Then Mac shots (native), then iPhone and iPad.
+1. **Borderstamp screenshot mode** (plan it in that repo first, following its `CLAUDE.md`): sample stamps and trips, DEBUG-only, guarding every write like Upcoming Birthdays' does. Then iPhone and iPad shots. **No Mac:** Mac is dropped from v1.0 (2026-10-06), because the native Mac build doesn't compile (Borderstamp #482), and the site no longer lists it.
 2. **Borderstamp in App Store Connect** (Paul, around 2026-10-08): use `/apps/borderstamp/`, `/privacy/` and `/support/` as the Marketing, Privacy Policy and Support URLs. Then fill in `appStoreId` in `borderstamp.yaml` and update its `status`. Clarity #481: replace any hard-coded `borderstamp.com` links in the app.
 3. **Blueprint and Scoreboard:** iPhone/iPad shots (Blueprint already has screenshot mode).
 4. **Write `scripts/capture-screenshots.sh`** from this session's commands (below), so re-captures are one command.

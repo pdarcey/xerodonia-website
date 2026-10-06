@@ -19,7 +19,7 @@ Everything is pushed and live.
 | AI-agent layer | ✅ JSON-LD, `llms.txt`, `llms-full.txt`, `/consulting/services.json`, AI-aware `robots.txt` |
 | Consulting MCP server | ✅ `https://xerodonia-mcp.autumn-glitter-b50d.workers.dev/mcp` (repo `pdarcey/xerodonia-mcp`); enquiries become GitHub issues and an email to hello@ |
 | Link previews, favicons | ✅ |
-| Screenshots | 🔶 **Upcoming Birthdays: done on all three platforms** (iPhone widgets and list, iPad widgets, Mac list, Choose People sheet and details; light and dark). Blueprint and Clarity: Mac only. Still to do: Borderstamp (all), Blueprint and Scoreboard iPhone/iPad. |
+| Screenshots | 🔶 **Upcoming Birthdays: done on all three platforms** (iPhone widgets and list, iPad widgets, Mac list, Choose People sheet and details; light and dark). Blueprint and Clarity: Mac only. Still to do: Borderstamp (iPhone/iPad; no Mac in v1.0), Blueprint and Scoreboard iPhone/iPad. |
 
 ## Related repos
 | Repo | Change | Pushed? |
@@ -55,6 +55,7 @@ Everything is pushed and live.
 - **Closed this session:** xerodonia.com #452–459 (old-site audit) and #472 (Simulator CPU); Upcoming Birthdays #474 (Mac picker), #477 (stale widget data), #478 (X-days range).
 
 ## Decisions made in the 2026-10-05/06 sessions
+- **Borderstamp drops Mac from v1.0** (2026-10-06, evening). The target listed native Mac, but that build never compiled (about 40 errors; Borderstamp #482). Paul removed the Mac destination. The site lists iPhone and iPad only, and the shared privacy template now mentions Mac settings only for apps listed on Mac.
 - TestFlight is **invite-only**: no public TestFlight links on the site.
 - Automated release-note updates open a **PR for Paul to approve**. They're never auto-merged.
 - **iPhone/iPad screenshots unblocked (Clarity #472):** the Simulator CPU problem was interrupted first boots. The iPhone 18 Pro Max and iPad Pro 13-inch (M5) are warmed up for screenshots.
