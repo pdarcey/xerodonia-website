@@ -19,6 +19,17 @@ appCategory: Lifestyle
 languages: [English]
 
 screenshots:             # fictional people from the app's screenshot mode (Image Playground portraits); Mac shots retaken 2026-10-06 with the people picker
+  # iPhone 18 Pro Max Simulator, 2026-10-06 (status bar 9:41, full battery)
+  - device: phone
+    src: images/apps/upcoming-birthdays/iphone-widgets.png
+    darkSrc: images/apps/upcoming-birthdays/iphone-widgets-dark.png
+    caption: Widgets for the next few days and the next few birthdays
+    alt: "An iPhone Home Screen with two Upcoming Birthdays widgets: Birthdays in the Next 3 Days, showing Mia Nguyen today (34) and Liam O'Brien on 8 October (41), and a large Upcoming Birthdays widget listing the next seven birthdays"
+  - device: phone
+    src: images/apps/upcoming-birthdays/iphone-list.png
+    darkSrc: images/apps/upcoming-birthdays/iphone-list-dark.png
+    caption: Every upcoming birthday, with today's at the top
+    alt: "Upcoming Birthdays on an iPhone: a Today's Birthdays banner for Mia Nguyen, turning 34, above the next birthdays, each with its date, how far away it is, the person's name and the age they'll turn"
   - device: mac
     src: images/apps/upcoming-birthdays/list.png
     darkSrc: images/apps/upcoming-birthdays/list-dark.png

@@ -334,6 +334,11 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.025em; }
    own rounded corners and shadow, so no extra frame or radius here. */
 .shot-image--portrait { height: clamp(22rem, 60vw, 34rem); width: auto; }
 .shot-image--landscape { width: min(46rem, 85vw); height: auto; }
+/* iPhone and iPad screenshots arrive as square-cornered screen captures: round them like
+   the device's screen (radius as a share of width / height) and outline them, so a light
+   shot doesn't melt into the light page. */
+.shot--phone .shot-image { border-radius: 13% / 6%; outline: 1px solid var(--line); outline-offset: -1px; }
+.shot--tablet .shot-image { border-radius: 4% / 3%; outline: 1px solid var(--line); outline-offset: -1px; }
 
 /* ==========================================================================
    Document pages: privacy policies, support, about
