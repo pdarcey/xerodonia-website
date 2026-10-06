@@ -19,6 +19,12 @@ appCategory: Travel
 languages: [English]
 
 screenshots:             # a sample passport from the app's screenshot mode (fake data), 2026-10-07
+  # iPad Pro 13-inch (M5) Simulator, full-screen mode, among Apple apps only (no third-party content).
+  # Light only until the map widgets get dark-mode colours (Borderstamp #488).
+  - device: tablet
+    src: images/apps/borderstamp/ipad-widgets.png
+    caption: Your latest stamp, your most-visited place and your maps, right on your Home Screen
+    alt: "An iPad Home Screen with five Borderstamp widgets: the latest stamp (Osaka, Japanese Prefectures, 3 July 2026), Most Visited (Australia), two stats widgets showing 31 stamps, 8 countries and 27 regions, a world map with 8 of 235 countries visited, and an Australian States map with 5 of 8 visited"
   # iPhone 18 Pro Max Simulator (status bar 9:41, full battery)
   - device: phone
     src: images/apps/borderstamp/iphone-stamps.png
