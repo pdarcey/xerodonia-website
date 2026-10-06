@@ -18,12 +18,17 @@ price: To be announced
 appCategory: Lifestyle
 languages: [English]
 
-screenshots:             # fictional people from the app's screenshot mode (Image Playground portraits), 2026-10-06
+screenshots:             # fictional people from the app's screenshot mode (Image Playground portraits); Mac shots retaken 2026-10-06 with the people picker
   - device: mac
     src: images/apps/upcoming-birthdays/list.png
     darkSrc: images/apps/upcoming-birthdays/list-dark.png
     caption: Today's birthdays first, then everyone else in order
     alt: "Upcoming Birthdays on a Mac: a Today's Birthdays banner for Mia Nguyen, turning 34, above a list of the next birthdays, each with its date, how far away it is, the person's name and the age they'll turn"
+  - device: mac
+    src: images/apps/upcoming-birthdays/choose.png
+    darkSrc: images/apps/upcoming-birthdays/choose-dark.png
+    caption: Choose just the people you want, by name or nickname
+    alt: "The Choose People sheet: a search field and a list of people with a checkbox, photo and birthday for each, showing nicknames beside full names, such as Kel (Matt Kelly) and Nan (Grace Wilson)"
   - device: mac
     src: images/apps/upcoming-birthdays/detail.png
     darkSrc: images/apps/upcoming-birthdays/detail-dark.png
