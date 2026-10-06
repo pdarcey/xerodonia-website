@@ -37,7 +37,7 @@
 - **Blueprint #465, Clarity #466:** screenshot modes, awaiting verification (Blueprint also awaits its iPhone/iPad shots).
 - **Clarity #467:** sample-data polish.
 - **xerodonia.com #472:** the Simulator CPU investigation. Solved (interrupted first boots); awaiting verification.
-- **Upcoming Birthdays #473** (Mac build, fixed, awaiting verification), **#474** (no Mac people picker: decide before v1.0, see Plan question 10), **#475** (stale test dates, `os(ios)` typo, `print()`).
+- **Upcoming Birthdays #473** (Mac build, fixed, awaiting verification), **#474** (Mac people picker: built 2026-10-06, awaiting verification), **#475** (stale test dates, `os(ios)` typo, `print()`).
 - **Borderstamp #460, #461; Upcoming Birthdays #462:** privacy manifests, and the merchandise-store policy note. Paul has confirmed what each app collects (comments on #460 and #462).
 
 ## Decisions made in the 2026-10-05/06 session
