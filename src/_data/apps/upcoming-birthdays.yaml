@@ -25,6 +25,12 @@ screenshots:             # fictional people from the app's screenshot mode (Imag
     darkSrc: images/apps/upcoming-birthdays/iphone-widgets-dark.png
     caption: Widgets for the next few days and the next few birthdays
     alt: "An iPhone Home Screen with two Upcoming Birthdays widgets: Birthdays in the Next 3 Days, showing Mia Nguyen today (34) and Liam O'Brien on 8 October (41), and a large Upcoming Birthdays widget listing the next seven birthdays"
+  # iPad Pro 13-inch (M5) Simulator, 2026-10-06, among system widgets (no third-party content)
+  - device: tablet
+    src: images/apps/upcoming-birthdays/ipad-widgets.png
+    darkSrc: images/apps/upcoming-birthdays/ipad-widgets-dark.png
+    caption: At home among your other widgets on iPad
+    alt: "An iPad Home Screen with three Upcoming Birthdays widgets in different sizes, alongside Calendar, Reminders (with “Buy a present for Mia”) and battery widgets"
   - device: phone
     src: images/apps/upcoming-birthdays/iphone-list.png
     darkSrc: images/apps/upcoming-birthdays/iphone-list-dark.png
