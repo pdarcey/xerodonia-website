@@ -50,7 +50,7 @@ eleventyComputed:
       <li>
         <figure class="shot shot--{{ shot.device }}">
           {%- if shot.src %}
-          {% themedImage shot.src, shot.darkSrc, shot.alt or shot.caption, "(min-width: 48rem) 46rem, 90vw", "shot-image" %}
+          {% themedImage shot.src, shot.darkSrc, shot.alt or shot.caption, "", "shot-image" %}
           {%- else %}
           <div class="shot-frame">Screenshot coming soon</div>
           {%- endif %}

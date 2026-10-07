@@ -417,6 +417,15 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
    - To check when building: GitHub already emails watchers about new issues, which may be enough on its own. If not, use Fastmail JMAP with a scoped API token as a Worker secret.
 2. **Repo name:** `xerodonia-mcp` (private).
 
+## 10. Stage 6 in detail (approved 2026-10-07)
+
+Baseline before starting: all 26 pages have `lang="en-AU"`, a canonical URL, a meta description, `og:image` and a skip link, and no two share a title. The trademark notice, ABN, GST wording and GitHub Pages IP-logging disclosure are present. 6 external links.
+
+- **6a: audit locally, then fix.** Lighthouse (local Chrome) on home, `/apps/`, Blueprint, one privacy and one support page, `/consulting/` and the blog post. W3C Nu validation of every page (online checker for the baseline; the Mac has no Java). lychee for links and anchors. Manual §6 items (Apple's required privacy wording per app, no App Store badge before release, breadcrumbs). Fix, then write `Documentation/Audit-2026-10.md`. Pause.
+- **6b: CI.** A `check` job between `build` and `deploy`, so a failure stops the deploy: vnu-jar, lychee (offline, internal links and anchors), Lighthouse CI. Performance fails below 90 and warns from 90 to 95; Accessibility, Best Practices and SEO must be 100. External links: a weekly scheduled run that opens a GitHub issue, never blocking a deploy. A `pull_request` trigger so Stage 7's release PRs are checked before approval. `npm run check` runs the same checks locally (except vnu). Pause.
+- **6c: Search Console and Bing** (Paul). Google Domain property, verified by a **new, separate** TXT record at Fastmail (never edit the SPF or other mail records; `dig` before and after). Bing imports from Search Console. Submit `sitemap.xml` to both. Pause, then close #469.
+- **New tools approved:** lychee (Homebrew and its GitHub Action), `@lhci/cli` and `vnu-jar` as devDependencies. Build-time only.
+
 ## Decisions (2026-10-05)
 
 1. **Hosting:** the site repo will be **public**. We're going with GitHub Pages, and DNS stays at Fastmail.

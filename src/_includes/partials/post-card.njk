@@ -1,6 +1,8 @@
-{#- A blog post summary. Expects `post` (a collection item) in scope. -#}
+{#- A blog post summary. Expects `post` (a collection item) in scope.
+    The title is an h3 by default; see `cardHeading` in product-card.njk. -#}
+{%- set cardTag = cardHeading or "h3" %}
 <article class="post-card">
   <p class="post-meta"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time>{% if post.data.category %} · {{ post.data.category }}{% endif %}</p>
-  <h3 class="post-title"><a class="stretched-link" href="{{ post.url }}">{{ post.data.title }}</a></h3>
+  <{{ cardTag }} class="post-title"><a class="stretched-link" href="{{ post.url }}">{{ post.data.title }}</a></{{ cardTag }}>
   <p class="post-excerpt">{{ post.data.description }}</p>
 </article>

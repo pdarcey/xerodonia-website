@@ -55,6 +55,24 @@ function attr(value) {
 const srcset = (images) => images.map((image) => `${image.url} ${image.width}w`).join(", ");
 
 /**
+ * The `sizes` attribute for a screenshot, matching how site.css lays it out:
+ *   .shot-image--landscape { width: min(46rem, 85vw) }
+ *   .shot-image--portrait  { height: clamp(22rem, 60vw, 34rem) }, so its width is that times width/height.
+ * Without this, a phone screenshot shown about 160 px wide would download the 800 px file.
+ * Keep it in step with those two rules.
+ * @param {number} width  Intrinsic width of the image.
+ * @param {number} height Intrinsic height of the image.
+ * @returns {string}
+ */
+function screenshotSizes(width, height) {
+  if (width > height) return "(min-width: 54.2rem) 46rem, 85vw";
+  const ratio = width / height;
+  const rem = (value) => `${(value * ratio).toFixed(2)}rem`;
+  // 60vw reaches 22rem at 36.7rem wide and 34rem at 56.7rem wide.
+  return `(min-width: 56.7rem) ${rem(34)}, (min-width: 36.7rem) ${(60 * ratio).toFixed(2)}vw, ${rem(22)}`;
+}
+
+/**
  * A screenshot with light and dark versions, as one `<picture>`: the dark
  * sources come first behind `(prefers-color-scheme: dark)`, so visitors in
  * dark mode get the dark screenshot automatically, with no JavaScript. Each
@@ -64,7 +82,7 @@ const srcset = (images) => images.map((image) => `${image.url} ${image.width}w`)
  * @param {string} src Light version, relative to `src/`.
  * @param {string|undefined} darkSrc Dark version; without it, this is a plain responsive image.
  * @param {string} alt Alt text (shared: both versions show the same content).
- * @param {string} sizes The `sizes` attribute.
+ * @param {string} sizes The `sizes` attribute, or "" to derive it from the image's shape (screenshots).
  * @param {string} className Class for the `<img>`.
  * @param {number[]} widths Widths to generate.
  */
@@ -73,6 +91,10 @@ async function themedImageShortcode(src, darkSrc, alt, sizes, className = "", wi
   const options = { widths, formats: ["avif", "webp"], outputDir: "_site/img/", urlPath: "/img/" };
   const light = await Image(path.join("src", src), options);
   const dark = darkSrc ? await Image(path.join("src", darkSrc), options) : null;
+  // Landscape shots (e.g. a wide Mac window) are sized by width in CSS, portrait ones by height.
+  const largest = light.webp.at(-1);
+  const orientation = largest.width > largest.height ? "landscape" : "portrait";
+  sizes ||= screenshotSizes(largest.width, largest.height);
   const size = (images) => {
     const largest = images.at(-1);
     return `width="${largest.width}" height="${largest.height}"`;
@@ -87,9 +109,6 @@ async function themedImageShortcode(src, darkSrc, alt, sizes, className = "", wi
   }
   sources.push(`<source type="image/avif" srcset="${srcset(light.avif)}" sizes="${attr(sizes)}" ${size(light.avif)}>`);
   const fallback = light.webp[0];
-  // Landscape shots (e.g. a wide Mac window) are sized by width in CSS, portrait ones by height.
-  const largest = light.webp.at(-1);
-  const orientation = largest.width > largest.height ? "landscape" : "portrait";
   const classes = [className, className && `${className}--${orientation}`].filter(Boolean).join(" ");
   const classAttr = classes ? ` class="${attr(classes)}"` : "";
   return `<picture>${sources.join("")}<img src="${fallback.url}" srcset="${srcset(light.webp)}" sizes="${attr(sizes)}" alt="${attr(alt)}"${classAttr} ${size(light.webp)} loading="lazy" decoding="async"></picture>`;

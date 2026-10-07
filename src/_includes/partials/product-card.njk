@@ -1,12 +1,15 @@
-{#- One app or tool in a product grid. Expects `app` in scope. -#}
+{#- One app or tool in a product grid. Expects `app` in scope.
+    The name is an h3 by default; a page whose cards follow its h1 directly
+    sets `cardHeading = "h2"` first, so heading levels never skip. -#}
+{%- set cardTag = cardHeading or "h3" %}
 <li class="product-card{% if app.featured %} product-card--featured{% endif %}{% if app.kind == 'tool' %} product-card--tool{% endif %}" style="--accent: {{ app.accent }}">
   {% image app.icon, "", "(min-width: 64rem) 104px, 72px", "product-icon" %}
   <div class="product-body">
-    <h3 class="product-name"><a class="stretched-link" href="{{ app | productUrl }}">{{ app.name }}</a></h3>
+    <{{ cardTag }} class="product-name"><a class="stretched-link" href="{{ app | productUrl }}">{{ app.name }}</a></{{ cardTag }}>
     <p class="product-tagline">{{ app.tagline }}</p>
   </div>
   {%- if app.terminal %}
-  <pre class="terminal" aria-label="Example command"><code><span class="t-prompt">$</span> {{ app.terminal.command }}
+  <pre class="terminal"><code><span class="t-prompt">$</span> {{ app.terminal.command }}
 <span class="t-comment"># {{ app.terminal.comment }}</span></code></pre>
   {%- endif %}
   <ul class="chips" aria-label="Platforms">{% for platform in app.platforms %}<li>{{ platform }}</li>{% endfor %}</ul>
