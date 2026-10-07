@@ -2,8 +2,8 @@
     Expects `app` in scope. Used in the app hero and the closing call to action.
     Static (non-link) states use .button--static so they never look clickable. -#}
 <div class="actions">
-  {%- if app.status == "app-store" and app.appStoreId %}
-  <a class="button button--primary" href="https://apps.apple.com/app/id{{ app.appStoreId }}">Download on the App Store</a>
+  {%- if app | appStoreUrl %}
+  <a class="button button--primary" href="{{ app | appStoreUrl }}">Download on the App Store</a>
   {%- elif app.status == "testflight" and app.testFlightUrl %}
   <a class="button button--primary" href="{{ app.testFlightUrl }}">Join the TestFlight beta</a>
   <span class="button button--secondary button--static">Coming soon to the App Store</span>

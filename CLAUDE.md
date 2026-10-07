@@ -55,6 +55,7 @@ lib/
   structured-data.js        schema.org JSON-LD per page, chosen by each template's `pageType`
   llms.js                   llms.txt generators
   consulting.js             priceValue() and the enquiry fields, shared by JSON-LD, services.json and llms.txt
+  apps.js                   appStoreUrl(): the one rule for when an app's App Store link appears
   build-check.js            Post-build guard: fails if any executable script, on…= handler, javascript: URL or invalid JSON-LD appears
 scripts/make-images.mjs     `npm run images`: favicons and link-preview cards
   404.njk, sitemap.njk, robots.njk, CNAME
@@ -74,6 +75,7 @@ scripts/make-images.mjs     `npm run images`: favicons and link-preview cards
    - **`support`** (an FAQ list) generates `/apps/<slug>/support/`, the App Store Connect "Support URL".
    - Every app on the App Store **must** have both. Their facts must match the app's `NS…UsageDescription` strings, its `PrivacyInfo.xcprivacy`, and its App Privacy answers in App Store Connect. Check the app's code; don't guess.
 3. Set `status` to a key from `src/_data/statuses.js`. That decides the badge and the buttons.
+   - Add `appStoreId` (the numeric Apple ID) as soon as the App Store Connect record exists. The site links it (the button, the Smart App Banner, JSON-LD and `llms.txt`, all via `appStoreUrl()` in `lib/apps.js`) only once `status` is `app-store`, because the store page doesn't exist until release. On approval, changing `status` is all it takes.
 4. Run `npm run images` to make the app's link-preview card.
 5. Run `npm run dev` and check the home page, `/apps/` and `/apps/<slug>/`. The footer, sitemap and app lists update automatically.
 

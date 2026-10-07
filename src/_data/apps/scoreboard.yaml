@@ -12,7 +12,7 @@ summary: "Scores and upcoming games for the Australian teams you follow, across 
 platforms: [iPhone, iPad]
 requires: iOS 26 or iPadOS 26
 status: in-development
-appStoreId:
+appStoreId: 6480300539
 testFlightUrl:
 price: To be announced
 appCategory: Sports

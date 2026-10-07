@@ -433,7 +433,7 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 ## Next session (written 2026-10-07)
 
 1. **Stage 6:** the SEO and compliance audit in CI (Clarity #469): a link checker, W3C HTML validation and a Lighthouse run in the deploy workflow; Search Console and Bing verification by DNS TXT records at Fastmail (never touch the mail records). Plan it first.
-2. **Borderstamp in App Store Connect** (Paul, around 2026-10-08): use `/apps/borderstamp/`, `/privacy/` and `/support/` as the Marketing, Privacy Policy and Support URLs (the site is now Borderstamp's canonical home; see `CLAUDE.md`). Then fill in `appStoreId` in `borderstamp.yaml` and update its `status`. Before that, Borderstamp #481: replace hard-coded `borderstamp.com` links in the app.
+2. **Borderstamp in App Store Connect** (Paul, around 2026-10-08): use `/apps/borderstamp/`, `/privacy/` and `/support/` as the Marketing, Privacy Policy and Support URLs (the site is now Borderstamp's canonical home; see `CLAUDE.md`). **Update (2026-10-07):** #481 is done (Borderstamp `9c0bbbc`), and every App Store Connect app's `appStoreId` is in its YAML. No build has been uploaded yet. When an app is approved, set its `status` to `app-store`; the store links appear only then.
 3. **Borderstamp's next work** (in that repo): StoreKit in-app purchases are now a **v1.0 launch feature**, and the site already promises them ("Free, with optional packs"). Also #488 (the map's dark-mode colours), after which: retake the dark map shots and the dark iPad widget shot, and add darkSrc to `borderstamp.yaml`.
 4. **Stage 7:** release automation, including obfuscate's signed and notarised DMG (#470).
 5. **Stage 8:** update docs, tidy Clarity.

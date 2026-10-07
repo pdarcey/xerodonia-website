@@ -12,7 +12,7 @@ summary: "Your calendar shows every contact's birthday. Upcoming Birthdays shows
 platforms: [iPhone, iPad, Mac]
 requires: iOS 26, iPadOS 26 or macOS 26
 status: testflight-soon
-appStoreId:
+appStoreId: 6819952458
 testFlightUrl:
 price: To be announced
 appCategory: Lifestyle

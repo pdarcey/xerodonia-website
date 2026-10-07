@@ -25,7 +25,7 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="{{ pageTitle }}">
   <meta name="twitter:card" content="summary_large_image">
-  {%- if app and app.appStoreId %}
+  {%- if app | appStoreUrl %}
   <meta name="apple-itunes-app" content="app-id={{ app.appStoreId }}">
   {%- endif %}
 

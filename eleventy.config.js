@@ -8,6 +8,7 @@ import yaml from "js-yaml";
 import Image from "@11ty/eleventy-img";
 import { structuredData, toJsonLd } from "./lib/structured-data.js";
 import { checkBuildOutput } from "./lib/build-check.js";
+import { appStoreUrl } from "./lib/apps.js";
 
 /** Responsive widths generated for raster images (icons render at 72–176 CSS px). */
 const IMAGE_WIDTHS = [128, 256, 384];
@@ -124,6 +125,9 @@ export default function (eleventyConfig) {
 
   /** The page URL for an app or tool. */
   eleventyConfig.addFilter("productUrl", (app) => `/apps/${app.slug}/`);
+
+  // The App Store URL, or null until the app's status is "app-store".
+  eleventyConfig.addFilter("appStoreUrl", appStoreUrl);
 
   /** Joins a list for prose: ["a", "b", "c"] → "a, b and c" (Australian style, no Oxford comma). */
   eleventyConfig.addFilter("listToProse", (items = []) =>

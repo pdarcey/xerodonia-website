@@ -12,6 +12,7 @@ summary: "Clarity tracks projects, issues and releases in a native Mac app. It a
 platforms: [Mac, CLI, MCP]
 requires: macOS 26
 status: in-house
+appStoreId: 6800520059   # reserved for a possible iOS companion app; Clarity itself stays in-house
 price: Not for sale
 appCategory: Developer Tools
 languages: [English]

@@ -12,7 +12,7 @@ summary: "Carry your phone across a border and Borderstamp gives you a stamp. Ev
 platforms: [iPhone, iPad]
 requires: iOS 26 or iPadOS 26
 status: testflight-soon
-appStoreId:
+appStoreId: 6819947495
 testFlightUrl:
 price: Free, with optional packs
 appCategory: Travel

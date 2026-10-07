@@ -18,7 +18,7 @@ platforms: [iPhone, iPad, Mac]
 requires: iOS 26, iPadOS 26 or macOS 26
 
 status: testflight-soon  # see src/_data/statuses.js
-appStoreId:              # numeric Apple ID from App Store Connect, once it exists
+appStoreId: 6819942583    # Apple ID from App Store Connect. Linked only once status is app-store
 testFlightUrl:           # public TestFlight link (https://testflight.apple.com/join/…), if any
 price: To be announced
 appCategory: Productivity
