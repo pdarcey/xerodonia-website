@@ -194,6 +194,20 @@ War stories and lessons:
 - **Tools that fought back.** `log` in this shell is a function, not `/usr/bin/log`, so every log search silently returned nothing until we used the full path. `-AppleInterfaceStyle Light` does nothing (only `Dark` is a value); `-NSRequiresAquaSystemAppearance YES` forces light. And the template UI tests took over the whole Mac every time tests ran, so they're out of the test plans.
 - **The repo with no remote.** Upcoming Birthdays had never been pushed anywhere. It's now a private GitHub repo, checked for secrets first.
 
+### 2026-10-06 (evening) and 2026-10-07: The camera is a ruthless QA tester
+
+The plan was simple: give Borderstamp and Blueprint screenshot modes, take some pretty pictures, close Stage 5d. The pictures turned out to be the best bug hunt of the week.
+
+**Borderstamp's Mac was a mirage.** The target listed Mac, the website said Mac, and the Mac build had never compiled: about 40 errors, from `UIImage` to iOS-only toolbars. Paul dropped Mac from v1.0, and the site now says iPhone and iPad. While we were in the project file, Xcode surfaced 16 copies of the project referencing *itself*, collected since March. They're gone, but Xcode adds one back on open, so that mystery is parked (Borderstamp #483) with an experiment written up.
+
+**A passport for the camera.** Borderstamp's sample data lives in an in-memory store with CloudKit off (sample stamps in iCloud would have landed on every one of Paul's devices), and seeding refuses any on-disk store. The list shows the newest stamps first and fits about ten on a screen, so the sample trip is a storyboard: it ends with Osaka, Hiroshima, Tokyo, Beijing and Galway because those designs look best. Every stamp shows its date, though, so the story still has to make sense: you get your Japan stamp when you *arrive*.
+
+**What the screenshots caught:** a year index that said "2026" nine times; a map that ignored a saved filter; "Visited: 27 of 235" with 8 countries; stamps 700 points wide on iPad, then flag stamps that grew wider than their columns; "Most visited" changing on every launch; Blueprint's widgets listing events before reminders. Each was fixed, tested and checked in a fresh screenshot.
+
+**The widget flag that kept vanishing.** Blueprint's widgets fetch live data, so the app (in the Simulator only) now publishes the sample day to the App Group and flips a switch the widgets check. It worked, then didn't. Reading the flag every ten seconds showed it alive for 30 seconds after the app quit, then gone. iOS had quietly relaunched Blueprint in the background for news refresh, and a "normal launch" cleared the flag. Now only the dashboard appearing does. A second trap: widgets chose their providers once per extension process, so a running extension never noticed the switch; they now check on every request.
+
+**Copy is code too.** Borderstamp's page now says plainly that countries are free and the packs are optional, and sells the delightful parts: stamps from West Berlin and the GDR, Yugoslavia and Westmorland; past trips found from photo *metadata only*; buy a pack later and your old stamps appear, dated. Every claim was checked against the code and the map data first (Alexanderplatz really is inside the GDR's outline).
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.
@@ -204,6 +218,9 @@ War stories and lessons:
 - **Change only the records you mean to.** A domain move is a web change and a mail change. Do one at a time, and check the MX records before and after.
 - **Native first.** Mac screenshots take seconds; Simulators can cost half an hour. Use the cheapest tool that does the job.
 - **Find the cause before the fix.** Every crash this session had a log or a crash report that named it. Reading those first meant each fix was one small change, not a guess.
+- **Screenshots are a free QA pass.** You look at every screen as a stranger would, with data tidy enough that a wrong number jumps out. Six real bugs fell out of one day of "just taking pictures".
+- **Measure, don't guess, when state goes missing.** The vanishing widget flag looked like a caching problem. Reading it every ten seconds showed exactly when it died, which pointed straight at a background launch.
+- **Check a claim against the code before it goes on the website.** "We never look at your photos" and "stamps appear when you buy the pack" were both verified in the source before they were published.
 - **Make the hidden dependency a parameter.** The notification loop existed because a function quietly fetched its own data. Passing the contacts in made the loop impossible, and made the code testable.
 
 ## If I Were Starting Over...
@@ -212,4 +229,5 @@ War stories and lessons:
 - I'd write the build check before the first page, so "no JavaScript" was enforced from the start instead of added later.
 - I'd give every app a Debug-only screenshot mode with sample data from its first build. Then good screenshots, for the site and the App Store, are one launch argument away.
 - I'd check the development machine before planning Simulator work. An 8 GB Mac struggles to run an iOS Simulator alongside Xcode.
+- I'd build every target I advertise in CI. Borderstamp's Mac build had never compiled, and nobody knew because nothing ever built it.
 - I'd run every app with real data on every platform before marketing it. The Mac picker gap, the notification loop and both widget bugs were all visible from the first real launch.

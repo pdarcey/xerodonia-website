@@ -1,6 +1,6 @@
 # xerodonia.com — Status
 
-*Snapshot at the end of the 2026-10-06 session (afternoon). See `Plan.md` for the roadmap and "Next session".*
+*Snapshot at the end of the 2026-10-07 session. See `Plan.md` for the roadmap and "Next session".*
 
 ## Live at https://xerodonia.com
 Everything is pushed and live.
@@ -12,7 +12,7 @@ Everything is pushed and live.
 | Area | State |
 |---|---|
 | Home, About, Contact, website privacy | ✅ |
-| App pages (6) | ✅ Blueprint, Borderstamp, Upcoming Birthdays, Scoreboard, Clarity, obfuscate |
+| App pages (6) | ✅ Blueprint, Borderstamp, Upcoming Birthdays, Scoreboard, Clarity, obfuscate. Borderstamp: iPhone and iPad only, "Free, with optional packs", and a "What you get" section (2026-10-07) |
 | App privacy and support pages | ✅ Blueprint, Borderstamp, Upcoming Birthdays (the App Store Connect URLs) |
 | Consulting (overview, 3 audiences, services, FAQ) | ✅ |
 | Blog and Atom feed | ✅ 1 post |
@@ -29,7 +29,8 @@ Everything is pushed and live.
 | `pdarcey/consulting-enquiries` | Private repo for enquiries (label `consulting-enquiry`) | ✅ |
 | `pdarcey/borderstamp-com`, `pdarcey/borderstamp-app` | Domain redirects | ✅ |
 | `pdarcey/obfuscate` | Made public | ✅ |
-| Blueprint | Screenshot mode (#465), `461a799` | ❌ local only, on purpose (Paul: don't push) |
+| Blueprint | Screenshot mode (#465) `461a799`; Paul's TestFlight prep `7153c07`; widget screenshot mode, `-ScreenshotScroll`, #492 `93313d7` | ❌ local only, on purpose (Paul: keep local) |
+| Borderstamp | iPhone/iPad only and project clean-up `965723d`; screenshot mode and fixes #484–#490 `bacfcf9`; widget most-visited `6c5065d`; packs at launch `b5e3fc6`; canonical site `428e2f0` | ❌ local only, on purpose. `project.pbxproj` uncommitted (#483) |
 | Clarity | Screenshot mode (#466), `74086dc` | ❌ local only, on purpose (Paul: don't push) |
 
 ### Upcoming Birthdays commits this session (all pushed)
@@ -45,16 +46,19 @@ Everything is pushed and live.
 - Fastmail's old Borderstamp site files are deleted. Mail for both domains goes to Fastmail.
 
 ## Open Clarity issues
-- **Blueprint #465, Clarity #466:** screenshot modes, awaiting verification (Blueprint also awaits its iPhone/iPad shots).
-- **Clarity #467:** sample-data polish.
-- **xerodonia.com #468:** Stage 5d, remaining screenshots and the capture script.
+- **Awaiting Paul's check:** xerodonia.com #468 (Stage 5d); Blueprint #465 (screenshot mode, now with widgets) and #492 (widget order); Clarity #466.
 - **xerodonia.com #469, #470:** Stages 6 and 7.
-- **xerodonia.com #481:** replace hard-coded `borderstamp.com` links in the Borderstamp app. Do it before or during the App Store Connect setup.
-- **Upcoming Birthdays #473** (Mac build, fixed, awaiting verification), **#475** (stale test dates, `os(ios)` typo, `print()`), **#479** (large widget a third empty), **#480** (iPad list stretches full width).
-- **Borderstamp #460, #461; Upcoming Birthdays #462:** privacy manifests, and the merchandise-store policy note. Paul has confirmed what each app collects (comments on #460 and #462).
-- **Closed this session:** xerodonia.com #452–459 (old-site audit) and #472 (Simulator CPU); Upcoming Birthdays #474 (Mac picker), #477 (stale widget data), #478 (X-days range).
+- **Borderstamp:** #481 (hard-coded `borderstamp.com` links; before App Store Connect), #488 (map dark-mode colours; blocks the dark map and widget shots), #483 (project self-reference, parked), #482 (native Mac port, after v1.0), #460 and #461 (privacy manifest, merchandise note).
+- **Clarity #467** (sample-data polish) and **#491** (MCP `issue_update` can detach an issue from its project; seen on Borderstamp #489 and #490, which Paul reattached).
+- **Upcoming Birthdays** #473 (awaiting verification), #475, #479, #480, #462.
+- **Closed 2026-10-07:** Borderstamp #484 (year index), #485 (Stamps tab icon, Paul), #486 (map filter at launch), #487 (map count), #489 (iPad grid), #490 (most visited).
 
-## Decisions made in the 2026-10-05/06 sessions
+## Decisions made in the 2026-10-05/06/07 sessions
+- **Borderstamp's region packs are a v1.0 launch feature** (2026-10-07): Countries is free, the other 27 packs are optional in-app purchases. Stamps for packs you don't own are still awarded (tracking and the photo scan) and appear, with their dates, when you buy the pack. The page says so, with no timing.
+- **xerodonia.com/apps/borderstamp/ is Borderstamp's canonical site** (2026-10-07); `borderstamp.com` and `.app` redirect there.
+- **Borderstamp counts generously** (2026-10-07): the widgets' "Regions" includes countries. It's a fun app; a bigger number makes people happy.
+- **Blueprint's widgets match the dashboard's order** (#492): timed events and reminders together in time order, then the untimed ones.
+- **Scoreboard gets no screenshots yet:** it has no screens worth advertising.
 - **Borderstamp drops Mac from v1.0** (2026-10-06, evening). The target listed native Mac, but that build never compiled (about 40 errors; Borderstamp #482). Paul removed the Mac destination. The site lists iPhone and iPad only, and the shared privacy template now mentions Mac settings only for apps listed on Mac.
 - TestFlight is **invite-only**: no public TestFlight links on the site.
 - Automated release-note updates open a **PR for Paul to approve**. They're never auto-merged.

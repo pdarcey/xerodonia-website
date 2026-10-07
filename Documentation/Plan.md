@@ -1,6 +1,6 @@
 # xerodonia.com — Rebuild Plan
 
-*Drafted 2026-10-05. Status (end of session, 2026-10-06 afternoon): **Stages 1–5c live; 5d well along.** Upcoming Birthdays has screenshots on all three platforms (iPhone widgets and list, iPad widgets, Mac list, Choose People sheet and details). Blueprint and Clarity have Mac shots. Next: Borderstamp (see "Next session" below).*
+*Drafted 2026-10-05. Status (end of session, 2026-10-07): **Stages 1–5d done and live.** Every app that's ready has screenshots on its platforms (Scoreboard deferred), and `scripts/capture-screenshots.sh` re-captures them. Next: Stage 6 (see "Next session" below).*
 
 ## Goals
 
@@ -430,23 +430,18 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 7. **Repo name:** `pdarcey/xerodonia-website` (public), so the repo is never confused with the website itself.
 8. **Stage 5 decisions:** screenshots via a DEBUG-only "screenshot mode" in Blueprint and Clarity; robots.txt allows all AI crawlers; agent engagement includes a live MCP server on Cloudflare Workers (free tier); JSON-LD `<script type="application/ld+json">` is allowed, but executable JS is not.
 
-## Next session (written 2026-10-06, afternoon)
+## Next session (written 2026-10-07)
 
-1. ~~**Borderstamp screenshot mode**~~ **Done 2026-10-07** (Borderstamp `bacfcf9`: `-ScreenshotMode`, plus `-ScreenshotTab` and `-ScreenshotMapPack`). Four shots are on the site. **Still to do:** dark map shots after Borderstamp #488; Home Screen widget shots (Paul arranges them; widgets first, per the screenshot preferences); optionally retake the iPad shots in full-screen mode to lose the resize handle. **No Mac:** Mac is dropped from v1.0 (2026-10-06), because the native Mac build doesn't compile (Borderstamp #482), and the site no longer lists it.
-2. **Borderstamp in App Store Connect** (Paul, around 2026-10-08): use `/apps/borderstamp/`, `/privacy/` and `/support/` as the Marketing, Privacy Policy and Support URLs. Then fill in `appStoreId` in `borderstamp.yaml` and update its `status`. Clarity #481: replace any hard-coded `borderstamp.com` links in the app.
-3. ~~**Blueprint and Scoreboard:** iPhone/iPad shots~~ **Blueprint done 2026-10-07** (iPad and iPhone widgets, iPhone and iPad Today). Scoreboard deferred: no screens worth advertising yet.
-4. ~~**Write `scripts/capture-screenshots.sh`**~~ **Done 2026-10-07.**
-5. **Clarity #467:** sample-data polish, then re-take Clarity's Dashboard and Project dashboard shots.
-6. **Stage 6:** SEO and compliance audit (Lighthouse, W3C validator and link checker in CI).
-7. **Stage 7:** release automation, including obfuscate's signed and notarised DMG.
-8. **Upcoming Birthdays polish, when Paul chooses:** #479 (large widget a third empty), #480 (iPad list layout; would let the iPad list be shown), #475, and a `.gitignore` for that repo.
+1. **Stage 6:** the SEO and compliance audit in CI (Clarity #469): a link checker, W3C HTML validation and a Lighthouse run in the deploy workflow; Search Console and Bing verification by DNS TXT records at Fastmail (never touch the mail records). Plan it first.
+2. **Borderstamp in App Store Connect** (Paul, around 2026-10-08): use `/apps/borderstamp/`, `/privacy/` and `/support/` as the Marketing, Privacy Policy and Support URLs (the site is now Borderstamp's canonical home; see `CLAUDE.md`). Then fill in `appStoreId` in `borderstamp.yaml` and update its `status`. Before that, Borderstamp #481: replace hard-coded `borderstamp.com` links in the app.
+3. **Borderstamp's next work** (in that repo): StoreKit in-app purchases are now a **v1.0 launch feature**, and the site already promises them ("Free, with optional packs"). Also #488 (the map's dark-mode colours), after which: retake the dark map shots and the dark iPad widget shot, and add darkSrc to `borderstamp.yaml`.
+4. **Stage 7:** release automation, including obfuscate's signed and notarised DMG (#470).
+5. **Stage 8:** update docs, tidy Clarity.
+6. **Whenever Paul chooses:** Clarity #467 (sample-data polish, then retake Clarity's dashboard shots); Upcoming Birthdays #479, #480, #475 and a `.gitignore`; Borderstamp #483 (the project file re-adds a self-reference on open; the experiment to try is written up in the issue).
 
-**How screenshots were taken this session** (for the capture script):
-- **Mac:** launch the Debug build with `-ScreenshotMode` plus `-AppleInterfaceStyle Dark`, or `-NSRequiresAquaSystemAppearance YES` for light; `open` the app again to bring it to the front; `screencapture -x -l <window id>` (keeps the shadow and any attached sheet). Paul opens sheets and pages; the terminal can't send keystrokes.
-- **iPhone/iPad:** `simctl boot` (ask Paul first; settles in 4–6 minutes), `xcodebuild … -destination id=<udid> build`, `simctl install`, `simctl status_bar <udid> override --time 9:41 --batteryState charged --batteryLevel 100 …`, `simctl ui <udid> appearance light|dark`, `simctl launch <udid> com.xerodonia.Upcoming-Birthdays -ScreenshotMode`, `simctl io <udid> screenshot`. Terminating the app returns to the Home Screen. Paul arranges Home Screen widgets in DeviceHub; keep third-party widgets (News) out. `simctl shutdown` when done.
-- **Checking the page:** headless Chrome needs `--virtual-time-budget=20000` or lazy-loaded screenshots render blank.
+**Taking screenshots:** `scripts/capture-screenshots.sh <app> <udid>` does the in-app shots (presets: borderstamp, blueprint); its header explains the manual Home Screen widget shots. Ask Paul before booting a Simulator, run tests *before* publishing widget data (a test run turns Blueprint's widget flag off), and expect the Home Screen to jump to the app's icon page whenever the app quits. Mac shots: launch the Debug build with `-ScreenshotMode` (plus `-AppleInterfaceStyle Dark`, or `-NSRequiresAquaSystemAppearance YES` for light) and `screencapture -x -l <window id>`. Checking the page: headless Chrome needs `--virtual-time-budget=20000`.
 
-**Not pushed, on purpose:** Blueprint `461a799`, Clarity `74086dc` (Paul: don't push). **Uncommitted, Paul's own:** Blueprint `project.pbxproj`; Clarity `CLAUDE.md`, `Journal.md`, `Readme.md`, `Info.plist`; Upcoming Birthdays `Readme.md`, `xcschememanagement.plist`, untracked `CLAUDE.md` and `Journal.md`; the website's `Images/` folder (portrait and screenshot originals).
+**Not pushed, on purpose (Paul: keep them local):** Blueprint (`461a799`, `7153c07`, `93313d7`); Borderstamp (`965723d`, `bacfcf9`, `6c5065d`, `b5e3fc6`, `428e2f0`); Clarity `74086dc`. **Uncommitted on purpose:** Borderstamp `project.pbxproj` (the #483 self-reference). **Paul's own, uncommitted:** Clarity `CLAUDE.md`, `Journal.md`, `Readme.md`, `Info.plist`; Upcoming Birthdays `Readme.md`, `xcschememanagement.plist`, untracked `CLAUDE.md` and `Journal.md`; the website's `Images/` folder.
 
 ## Open questions for Paul
 
