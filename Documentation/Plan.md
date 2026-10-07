@@ -296,7 +296,7 @@ Keep a `CHANGELOG.md` in each app repo. Paste each entry into ASC's "What's New"
 | **5a** ✅ | Remaining app pages (Scoreboard, Clarity, obfuscate); favicon set; Open Graph images | Content complete except screenshots |
 | **5b** ✅ | AI-agent layer, static: robots.txt, llms.txt, JSON-LD everywhere, machine-readable services file, build check for scripts | Agents can find, understand and book |
 | **5c** ✅ | Consulting MCP server on Cloudflare Workers (new repo) | Agents can query services and send enquiries |
-| **5d** 🔶 | Screenshot mode in Blueprint and Clarity; capture script for all apps | **Done:** screenshot modes in Blueprint (461a799, #465) and Clarity (74086dc, #466); Mac screenshots, light and dark, live for both. **To do:** iPhone/iPad for Blueprint; Mac + iPhone/iPad for Birthdays; iPhone/iPad for Borderstamp; iPhone/iPad for Scoreboard; capture script |
+| **5d** ✅ | Screenshot mode in Blueprint and Clarity; capture script for all apps | **Done 2026-10-07.** Screenshots on all platforms for Blueprint (Mac, iPhone, iPad, and widgets via a Simulator-only widget screenshot mode), Upcoming Birthdays and Borderstamp; Mac for Clarity. `scripts/capture-screenshots.sh` (presets: borderstamp, blueprint). Scoreboard deferred until it has screens worth showing (Paul). Still to come: Borderstamp's dark map and widget shots after Borderstamp #488. |
 | **6** | SEO and compliance pass (JSON-LD now in 5b), Lighthouse/validator/link-check in CI | Audit report |
 | **7** | Release automation (Lookup API cron, GitHub Releases dispatch, obfuscate DMG workflow) | Hands-off release notes |
 | **8** | Update docs (`CLAUDE.md`, Journal), tidy up Clarity issues | Done |
@@ -434,8 +434,8 @@ AI agent ──MCP (Streamable HTTP)──▶ xerodonia-mcp Worker ──GET─�
 
 1. ~~**Borderstamp screenshot mode**~~ **Done 2026-10-07** (Borderstamp `bacfcf9`: `-ScreenshotMode`, plus `-ScreenshotTab` and `-ScreenshotMapPack`). Four shots are on the site. **Still to do:** dark map shots after Borderstamp #488; Home Screen widget shots (Paul arranges them; widgets first, per the screenshot preferences); optionally retake the iPad shots in full-screen mode to lose the resize handle. **No Mac:** Mac is dropped from v1.0 (2026-10-06), because the native Mac build doesn't compile (Borderstamp #482), and the site no longer lists it.
 2. **Borderstamp in App Store Connect** (Paul, around 2026-10-08): use `/apps/borderstamp/`, `/privacy/` and `/support/` as the Marketing, Privacy Policy and Support URLs. Then fill in `appStoreId` in `borderstamp.yaml` and update its `status`. Clarity #481: replace any hard-coded `borderstamp.com` links in the app.
-3. **Blueprint and Scoreboard:** iPhone/iPad shots (Blueprint already has screenshot mode).
-4. **Write `scripts/capture-screenshots.sh`** from this session's commands (below), so re-captures are one command.
+3. ~~**Blueprint and Scoreboard:** iPhone/iPad shots~~ **Blueprint done 2026-10-07** (iPad and iPhone widgets, iPhone and iPad Today). Scoreboard deferred: no screens worth advertising yet.
+4. ~~**Write `scripts/capture-screenshots.sh`**~~ **Done 2026-10-07.**
 5. **Clarity #467:** sample-data polish, then re-take Clarity's Dashboard and Project dashboard shots.
 6. **Stage 6:** SEO and compliance audit (Lighthouse, W3C validator and link checker in CI).
 7. **Stage 7:** release automation, including obfuscate's signed and notarised DMG.

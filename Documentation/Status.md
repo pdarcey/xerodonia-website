@@ -19,7 +19,7 @@ Everything is pushed and live.
 | AI-agent layer | ✅ JSON-LD, `llms.txt`, `llms-full.txt`, `/consulting/services.json`, AI-aware `robots.txt` |
 | Consulting MCP server | ✅ `https://xerodonia-mcp.autumn-glitter-b50d.workers.dev/mcp` (repo `pdarcey/xerodonia-mcp`); enquiries become GitHub issues and an email to hello@ |
 | Link previews, favicons | ✅ |
-| Screenshots | 🔶 **Upcoming Birthdays: done on all three platforms** (iPhone widgets and list, iPad widgets, Mac list, Choose People sheet and details; light and dark). Blueprint and Clarity: Mac only. **Borderstamp: done 2026-10-07** (iPhone and iPad stamps list, light and dark; iPhone world map and iPad China map, light only until Borderstamp #488 fixes the map's dark colours). Still to do: Blueprint and Scoreboard iPhone/iPad. |
+| Screenshots | ✅ **Stage 5d done (2026-10-07).** Blueprint: Mac, iPhone and iPad, plus iPad and iPhone widgets. Upcoming Birthdays: all three platforms. Borderstamp: iPhone and iPad (stamps, maps, iPad widgets; dark maps and widgets wait for Borderstamp #488). Clarity: Mac. Scoreboard deferred. `scripts/capture-screenshots.sh` captures each app's shots. |
 
 ## Related repos
 | Repo | Change | Pushed? |

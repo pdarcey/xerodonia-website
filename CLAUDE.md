@@ -17,6 +17,7 @@ The rebuild plan, decisions and staging are in `Documentation/Plan.md`. The stor
 - Styling: one hand-written stylesheet, `src/styles/site.css` (the "Liquid Glass" design)
 - Hosting: **GitHub Pages**, deployed by GitHub Actions (`.github/workflows/deploy.yml`)
 - DNS: **Fastmail**, which also hosts email. Never touch the MX, DKIM, SPF or DMARC records.
+- **https://xerodonia.com/apps/borderstamp/ is the canonical site for all things Borderstamp.** Link there (and to its `/privacy/` and `/support/` pages), never to the old domains.
 - Redirect domains: `borderstamp.com` (DNS at Fastmail) and `borderstamp.app` (DNS at Hover) are served by the GitHub Pages repos `pdarcey/borderstamp-com` and `pdarcey/borderstamp-app` (local copies next to this repo). They redirect to `/apps/borderstamp/`. If a Pages certificate stalls, remove the custom domain and add it back.
 
 ## Commands
@@ -24,6 +25,7 @@ The rebuild plan, decisions and staging are in `Documentation/Plan.md`. The stor
 - `npm run dev`: dev server with live reload at http://localhost:8080
 - `npm run build`: build to `_site/`
 - `npm run clean`: delete `_site/`
+- `scripts/capture-screenshots.sh <app> <simulator UDID> [output dir]`: builds the app, installs it on an **already booted** Simulator, and captures its screenshot-mode shots in light and dark (presets: `borderstamp`, `blueprint`). Home Screen widget shots are manual; see the script's header.
 - `npm run images`: regenerate `favicon.ico`, `apple-touch-icon.png` and the link-preview cards in `src/images/og/`. Run this on a Mac after adding an app or changing an app's name, tagline or icon, and commit the output. It isn't part of the build, because its text rendering depends on the Mac's fonts.
 
 ## Architecture

@@ -26,7 +26,29 @@ languages: [English]
 
 screenshots:             # device: phone | tablet | mac. Omit src for a "coming soon" placeholder;
                          # darkSrc (optional) is shown to visitors in dark mode.
-  # Mac shots taken in screenshot mode (fake data), 2026-10-05. iPhone/iPad to follow (Clarity #465).
+  # All shots from screenshot mode (fake data, Clarity #465). iPhone 18 Pro Max and iPad Pro 13-inch (M5)
+  # Simulators, 2026-10-07; the widgets show the same sample day, among Apple apps only.
+  - device: tablet
+    src: images/apps/blueprint/ipad-widgets.png
+    darkSrc: images/apps/blueprint/ipad-widgets-dark.png
+    caption: Your whole day on your Home Screen, with a widget for every section
+    alt: "An iPad Home Screen with nine Blueprint widgets: Sydney's weather (21°C, sunny), health goals met, today's and upcoming birthdays, today's agenda in time order, a new TV episode, the week ahead with a Labour Day long weekend, AFL and NRL fixtures, and three news stories"
+  - device: phone
+    src: images/apps/blueprint/iphone-widgets.png
+    darkSrc: images/apps/blueprint/iphone-widgets-dark.png
+    caption: Health, weather and today, at a glance on iPhone
+    alt: "An iPhone Home Screen with Blueprint widgets: workouts, fitness and sleep goals met, Sydney at 21°C and sunny, and today's birthday, agenda and a new TV episode"
+  - device: phone
+    src: images/apps/blueprint/iphone-today.png
+    darkSrc: images/apps/blueprint/iphone-today-dark.png
+    caption: Today, in one scroll
+    alt: "Blueprint on an iPhone showing today: Olivia's 36th birthday, personal and work agendas, a new TV episode, Sydney weather, health goals met, and a news story"
+  - device: tablet
+    src: images/apps/blueprint/ipad-today.png
+    darkSrc: images/apps/blueprint/ipad-today-dark.png
+    caption: Today and the days ahead on iPad
+    alt: "Blueprint on an iPad showing today (a birthday, agendas, a new episode, weather, health goals and three news stories) above the start of the week ahead"
+  # Mac shots, 2026-10-05.
   - device: mac
     src: images/apps/blueprint/mac-today.png
     darkSrc: images/apps/blueprint/mac-today-dark.png
