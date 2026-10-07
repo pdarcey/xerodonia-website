@@ -40,6 +40,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # eleventy-img skips images it has already made, so restoring _site/img
+      # cuts the build from about 5 minutes to seconds. The key covers everything
+      # that changes the output; any change regenerates them all, so stale files
+      # never build up.
+      - name: Restore generated images
+        uses: actions/cache@v4
+        with:
+          path: _site/img
+          key: images-${{ hashFiles('src/images/**', 'eleventy.config.js', 'package-lock.json') }}
+
       - name: Build
         run: npm run build
 
@@ -128,6 +138,16 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      # eleventy-img skips images it has already made, so restoring _site/img
+      # cuts the build from about 5 minutes to seconds. The key covers everything
+      # that changes the output; any change regenerates them all, so stale files
+      # never build up.
+      - name: Restore generated images
+        uses: actions/cache@v4
+        with:
+          path: _site/img
+          key: images-${{ hashFiles('src/images/**', 'eleventy.config.js', 'package-lock.json') }}
 
       - name: Build
         run: npm run build
