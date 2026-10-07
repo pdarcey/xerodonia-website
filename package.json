@@ -8,7 +8,12 @@
     "dev": "eleventy --serve",
     "build": "eleventy",
     "clean": "rm -rf _site",
-    "images": "node scripts/make-images.mjs"
+    "images": "node scripts/make-images.mjs",
+    "check": "npm run build && npm run check:links && npm run check:lighthouse",
+    "check:links": "lychee --no-progress --offline --include-fragments --index-files index.html --root-dir \"$PWD/_site\" '_site/**/*.html' '_site/*.xml' '_site/*.txt'",
+    "check:external": "lychee --no-progress --root-dir \"$PWD/_site\" --scheme https --scheme http '_site/**/*.html' '_site/*.xml' '_site/*.txt'",
+    "check:html": "java -jar node_modules/vnu-jar/build/dist/vnu.jar --errors-only --skip-non-html _site",
+    "check:lighthouse": "rm -rf .lighthouseci && lhci collect && node scripts/check-lighthouse.mjs"
   },
   "engines": {
     "node": ">=22"
@@ -18,6 +23,7 @@
     "@11ty/eleventy-img": "^7.0.0",
     "@lhci/cli": "^0.15.1",
     "js-yaml": "^4.1.0",
-    "sharp": "^0.35.5"
+    "sharp": "^0.35.5",
+    "vnu-jar": "^26.10.7"
   }
 }

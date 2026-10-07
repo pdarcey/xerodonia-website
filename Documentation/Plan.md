@@ -297,7 +297,7 @@ Keep a `CHANGELOG.md` in each app repo. Paste each entry into ASC's "What's New"
 | **5b** ✅ | AI-agent layer, static: robots.txt, llms.txt, JSON-LD everywhere, machine-readable services file, build check for scripts | Agents can find, understand and book |
 | **5c** ✅ | Consulting MCP server on Cloudflare Workers (new repo) | Agents can query services and send enquiries |
 | **5d** ✅ | Screenshot mode in Blueprint and Clarity; capture script for all apps | **Done 2026-10-07.** Screenshots on all platforms for Blueprint (Mac, iPhone, iPad, and widgets via a Simulator-only widget screenshot mode), Upcoming Birthdays and Borderstamp; Mac for Clarity. `scripts/capture-screenshots.sh` (presets: borderstamp, blueprint). Scoreboard deferred until it has screens worth showing (Paul). Still to come: Borderstamp's dark map and widget shots after Borderstamp #488. |
-| **6** | SEO and compliance pass (JSON-LD now in 5b), Lighthouse/validator/link-check in CI | Audit report |
+| **6** | SEO and compliance pass (JSON-LD now in 5b), Lighthouse/validator/link-check in CI | **6a done 2026-10-07** (`Documentation/Audit-2026-10.md`). 6b (CI) built, awaiting Paul. 6c to come. See §10. |
 | **7** | Release automation (Lookup API cron, GitHub Releases dispatch, obfuscate DMG workflow) | Hands-off release notes |
 | **8** | Update docs (`CLAUDE.md`, Journal), tidy up Clarity issues | Done |
 

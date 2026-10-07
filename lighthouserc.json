@@ -1,0 +1,18 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "_site",
+      "numberOfRuns": 3,
+      "url": [
+        "http://localhost/index.html",
+        "http://localhost/apps/index.html",
+        "http://localhost/apps/blueprint/index.html",
+        "http://localhost/apps/borderstamp/privacy/index.html",
+        "http://localhost/apps/borderstamp/support/index.html",
+        "http://localhost/consulting/index.html",
+        "http://localhost/blog/how-to-get-started-with-ai-coding-agents/index.html",
+        "http://localhost/404.html"
+      ]
+    }
+  }
+}
