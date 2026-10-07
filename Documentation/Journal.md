@@ -208,6 +208,26 @@ The plan was simple: give Borderstamp and Blueprint screenshot modes, take some 
 
 **Copy is code too.** Borderstamp's page now says plainly that countries are free and the packs are optional, and sells the delightful parts: stamps from West Berlin and the GDR, Yugoslavia and Westmorland; past trips found from photo *metadata only*; buy a pack later and your old stamps appear, dated. Every claim was checked against the code and the map data first (Alexanderplatz really is inside the GDR's outline).
 
+### 2026-10-07 (evening) and 2026-10-08: The ticket said "links", the bug was a privacy policy
+
+**#481 looked like a find-and-replace.** "Replace hard-coded `borderstamp.com` links in the app." A search of every Swift file, plist, string catalog and doc found... no web links at all, just two email addresses. The real problem was sitting next to them. Settings › Privacy Policy still held the *2020* policy: a print shop, payment and shipping details, 60-day purchase retention, crash reports with device identifiers, "© 2020 Borderstamp". None of it is true any more, and it flatly contradicted the website. App Review reads both. The screen now shows a short summary, taken from the same YAML as the website's policy, with a link to the full policy. A new `BorderstampLinks` type holds the URLs that App Store Connect also uses. Paul kept the `@borderstamp.com` addresses, because that mail still reaches Fastmail. Lesson: when a ticket is small, read the code *around* the match.
+
+**An ID is not a release.** Paul created App Store Connect records for every app, and the obvious move was to paste the Apple IDs into the YAML. But the site used `appStoreId` in four places (the button, the Smart App Banner, JSON-LD and `llms.txt`), and only the button checked whether the app was actually out. Every unreleased app would have published a link to an App Store page that 404s. Now `appStoreUrl()` in `lib/apps.js` holds the single rule: no link until `status: app-store`. The IDs are in; approval is a one-word change.
+
+**A misread column.** Paul's table had a "Bundle ID" column, and three of its values didn't match the Xcode projects. That looked like a release-blocking mismatch, so I asked before touching any app. It was the ASC **SKU**. Asking cost one message; "fixing" three bundle IDs would have broken widgets, App Groups and iCloud containers.
+
+**Stage 6: auditing a site that was already good.** The baseline was strong: every page had `lang`, a canonical URL and a description, and Lighthouse gave 100 across the board on day one. The W3C validator still found four errors:
+- Card headings jumped from `<h1>` to `<h3>` on `/apps/` and `/blog/`. The partials now take a `cardHeading` level.
+- An `aria-label` sat on a `<pre>`, where it isn't allowed.
+
+Lighthouse's quieter "opportunities" found the real waste: every screenshot said `sizes="90vw"`, so phones downloaded an 800 px image to show it 160 px wide. Portrait shots are sized by *height* in CSS, and `sizes` describes *width*. `screenshotSizes()` now does the arithmetic from each image's shape, which saves about 160 KiB on Blueprint's page.
+
+**Tools that cry wolf.** lychee reported 27 broken `/privacy/#apps` anchors. The anchor existed. lychee checks the fragment against the *directory* unless you pass `--index-files index.html`. The MCP endpoint "failed" with a 406, which is simply how an MCP server answers a plain GET. So CI excludes it from the link check and sends it a real `tools/list` request instead, which tests something meaningful: is the server alive?
+
+**CI that guards the door.** Every push now runs build → check (W3C, links, Lighthouse with the median of 3 runs) → deploy, and a failure stops the deploy. Performance only fails below 90 and warns from 90 to 95, because shared runners wobble by a few points. Accessibility, Best Practices and SEO must be 100. PRs are checked but never deployed, ready for Stage 7's release notes. A weekly job checks external links and the MCP server and opens a GitHub issue, which Clarity imports automatically. The first CI run took 10 minutes, mostly regenerating 16 MB of images from scratch. Caching `_site/img`, keyed on a hash of the sources, cut the build from 300 s to 19 s.
+
+**DNS, carefully.** Google Search Console wanted a TXT record on the apex domain, the same name as the SPF record that keeps mail working. Before Paul touched it, we took a snapshot of every mail and web record. Afterwards we compared it against Fastmail's own name server. My local resolver still had the old answers cached, which would have "proved" nothing had changed. One new TXT record, everything else identical.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.
@@ -221,6 +241,10 @@ The plan was simple: give Borderstamp and Blueprint screenshot modes, take some 
 - **Screenshots are a free QA pass.** You look at every screen as a stranger would, with data tidy enough that a wrong number jumps out. Six real bugs fell out of one day of "just taking pictures".
 - **Measure, don't guess, when state goes missing.** The vanishing widget flag looked like a caching problem. Reading it every ten seconds showed exactly when it died, which pointed straight at a background launch.
 - **Check a claim against the code before it goes on the website.** "We never look at your photos" and "stamps appear when you buy the pack" were both verified in the source before they were published.
+- **Gate the output, not the data.** Record facts (an App Store ID) as soon as you know them. Decide *when they're shown* in one function, so release day is a one-word change.
+- **A check must fail before you trust it.** The Lighthouse script was run against doctored results to prove it fails and warns. The DNS check went against the authoritative server, not a cache.
+- **Make the gate cheap, or people route around it.** Ten-minute deploys invite "just push it". Caching the images made the checks almost free.
+- **Ask when an answer would be expensive to get wrong.** One question ("are these bundle IDs?") saved a cascade of entitlement changes.
 - **Make the hidden dependency a parameter.** The notification loop existed because a function quietly fetched its own data. Passing the contacts in made the loop impossible, and made the code testable.
 
 ## If I Were Starting Over...
@@ -230,4 +254,6 @@ The plan was simple: give Borderstamp and Blueprint screenshot modes, take some 
 - I'd give every app a Debug-only screenshot mode with sample data from its first build. Then good screenshots, for the site and the App Store, are one launch argument away.
 - I'd check the development machine before planning Simulator work. An 8 GB Mac struggles to run an iOS Simulator alongside Xcode.
 - I'd build every target I advertise in CI. Borderstamp's Mac build had never compiled, and nobody knew because nothing ever built it.
+- I'd put the validator, link checker and Lighthouse in CI with the very first page. Fixing four errors was easy; letting 26 pages pile up unchecked was luck.
+- I'd keep every in-app legal text as a summary plus a link to one hosted policy from the start. Borderstamp's in-app copy sat unchanged for six years.
 - I'd run every app with real data on every platform before marketing it. The Mac picker gap, the notification loop and both widget bugs were all visible from the first real launch.

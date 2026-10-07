@@ -1,6 +1,6 @@
 # xerodonia.com — Status
 
-*Snapshot at the end of the 2026-10-07 session. See `Plan.md` for the roadmap and "Next session".*
+*Snapshot at the end of the 2026-10-07 session, with Stage 6 and the App Store IDs added on 2026-10-08. See `Plan.md` for the roadmap and "Next session".*
 
 ## Live at https://xerodonia.com
 Everything is pushed and live.
@@ -19,6 +19,8 @@ Everything is pushed and live.
 | AI-agent layer | ✅ JSON-LD, `llms.txt`, `llms-full.txt`, `/consulting/services.json`, AI-aware `robots.txt` |
 | Consulting MCP server | ✅ `https://xerodonia-mcp.autumn-glitter-b50d.workers.dev/mcp` (repo `pdarcey/xerodonia-mcp`); enquiries become GitHub issues and an email to hello@ |
 | Link previews, favicons | ✅ |
+| SEO and compliance (Stage 6) | ✅ **Done 2026-10-08.** W3C-valid, Lighthouse 100 across the board, no broken links (`Documentation/Audit-2026-10.md`). Every push runs build → check → deploy; PRs check without deploying; a weekly job checks external links and the MCP server and opens a GitHub issue (which syncs to Clarity). Search Console and Bing verified. |
+| App Store IDs | ✅ In each app's YAML (2026-10-07). Store links appear only when `status` is `app-store`; no build is uploaded yet |
 | Screenshots | ✅ **Stage 5d done (2026-10-07).** Blueprint: Mac, iPhone and iPad, plus iPad and iPhone widgets. Upcoming Birthdays: all three platforms. Borderstamp: iPhone and iPad (stamps, maps, iPad widgets; dark maps and widgets wait for Borderstamp #488). Clarity: Mac. Scoreboard deferred. `scripts/capture-screenshots.sh` captures each app's shots. |
 
 ## Related repos
@@ -30,7 +32,7 @@ Everything is pushed and live.
 | `pdarcey/borderstamp-com`, `pdarcey/borderstamp-app` | Domain redirects | ✅ |
 | `pdarcey/obfuscate` | Made public | ✅ |
 | Blueprint | Screenshot mode (#465) `461a799`; Paul's TestFlight prep `7153c07`; widget screenshot mode, `-ScreenshotScroll`, #492 `93313d7` | ❌ local only, on purpose (Paul: keep local) |
-| Borderstamp | iPhone/iPad only and project clean-up `965723d`; screenshot mode and fixes #484–#490 `bacfcf9`; widget most-visited `6c5065d`; packs at launch `b5e3fc6`; canonical site `428e2f0` | ❌ local only, on purpose. `project.pbxproj` uncommitted (#483) |
+| Borderstamp | iPhone/iPad only and project clean-up `965723d`; screenshot mode and fixes #484–#490 `bacfcf9`; widget most-visited `6c5065d`; packs at launch `b5e3fc6`; canonical site `428e2f0`; xerodonia.com links and a current in-app privacy summary (#481) `9c0bbbc` | ❌ local only, on purpose. `project.pbxproj` uncommitted (#483) |
 | Clarity | Screenshot mode (#466), `74086dc` | ❌ local only, on purpose (Paul: don't push) |
 
 ### Upcoming Birthdays commits this session (all pushed)
@@ -47,11 +49,11 @@ Everything is pushed and live.
 
 ## Open Clarity issues
 - **Awaiting Paul's check:** xerodonia.com #468 (Stage 5d); Blueprint #465 (screenshot mode, now with widgets) and #492 (widget order); Clarity #466.
-- **xerodonia.com #469, #470:** Stages 6 and 7.
-- **Borderstamp:** #481 (hard-coded `borderstamp.com` links; before App Store Connect), #488 (map dark-mode colours; blocks the dark map and widget shots), #483 (project self-reference, parked), #482 (native Mac port, after v1.0), #460 and #461 (privacy manifest, merchandise note).
+- **xerodonia.com #470:** Stage 7.
+- **Borderstamp:** #488 (map dark-mode colours; blocks the dark map and widget shots), #483 (project self-reference, parked), #482 (native Mac port, after v1.0), #460 and #461 (privacy manifest, merchandise note).
 - **Clarity #467** (sample-data polish) and **#491** (MCP `issue_update` can detach an issue from its project; seen on Borderstamp #489 and #490, which Paul reattached).
 - **Upcoming Birthdays** #473 (awaiting verification), #475, #479, #480, #462.
-- **Closed 2026-10-07:** Borderstamp #484 (year index), #485 (Stamps tab icon, Paul), #486 (map filter at launch), #487 (map count), #489 (iPad grid), #490 (most visited).
+- **Closed 2026-10-07/08:** #481 (Borderstamp's links; Paul checked it on his device), #469 (Stage 6), Borderstamp #484 (year index), #485 (Stamps tab icon, Paul), #486 (map filter at launch), #487 (map count), #489 (iPad grid), #490 (most visited).
 
 ## Decisions made in the 2026-10-05/06/07 sessions
 - **Borderstamp's region packs are a v1.0 launch feature** (2026-10-07): Countries is free, the other 27 packs are optional in-app purchases. Stamps for packs you don't own are still awarded (tracking and the photo scan) and appear, with their dates, when you buy the pack. The page says so, with no timing.

@@ -297,7 +297,7 @@ Keep a `CHANGELOG.md` in each app repo. Paste each entry into ASC's "What's New"
 | **5b** ✅ | AI-agent layer, static: robots.txt, llms.txt, JSON-LD everywhere, machine-readable services file, build check for scripts | Agents can find, understand and book |
 | **5c** ✅ | Consulting MCP server on Cloudflare Workers (new repo) | Agents can query services and send enquiries |
 | **5d** ✅ | Screenshot mode in Blueprint and Clarity; capture script for all apps | **Done 2026-10-07.** Screenshots on all platforms for Blueprint (Mac, iPhone, iPad, and widgets via a Simulator-only widget screenshot mode), Upcoming Birthdays and Borderstamp; Mac for Clarity. `scripts/capture-screenshots.sh` (presets: borderstamp, blueprint). Scoreboard deferred until it has screens worth showing (Paul). Still to come: Borderstamp's dark map and widget shots after Borderstamp #488. |
-| **6** | SEO and compliance pass (JSON-LD now in 5b), Lighthouse/validator/link-check in CI | **6a done 2026-10-07** (`Documentation/Audit-2026-10.md`). 6b (CI) built, awaiting Paul. 6c to come. See §10. |
+| **6** ✅ | SEO and compliance pass (JSON-LD now in 5b), Lighthouse/validator/link-check in CI | **Done 2026-10-08.** 6a audit and fixes (`73570b7`, report in `Documentation/Audit-2026-10.md`); 6b CI checks gate every deploy (`dfe2fde`), with an image cache (`acffcad`, build 300 s → 19 s); 6c Google Search Console and Bing verified (one new Google TXT record at Fastmail; mail records checked unchanged). See §10. |
 | **7** | Release automation (Lookup API cron, GitHub Releases dispatch, obfuscate DMG workflow) | Hands-off release notes |
 | **8** | Update docs (`CLAUDE.md`, Journal), tidy up Clarity issues | Done |
 
@@ -439,18 +439,19 @@ Baseline before starting: all 26 pages have `lang="en-AU"`, a canonical URL, a m
 7. **Repo name:** `pdarcey/xerodonia-website` (public), so the repo is never confused with the website itself.
 8. **Stage 5 decisions:** screenshots via a DEBUG-only "screenshot mode" in Blueprint and Clarity; robots.txt allows all AI crawlers; agent engagement includes a live MCP server on Cloudflare Workers (free tier); JSON-LD `<script type="application/ld+json">` is allowed, but executable JS is not.
 
-## Next session (written 2026-10-07)
+## Next session (written 2026-10-08)
 
-1. **Stage 6:** the SEO and compliance audit in CI (Clarity #469): a link checker, W3C HTML validation and a Lighthouse run in the deploy workflow; Search Console and Bing verification by DNS TXT records at Fastmail (never touch the mail records). Plan it first.
-2. **Borderstamp in App Store Connect** (Paul, around 2026-10-08): use `/apps/borderstamp/`, `/privacy/` and `/support/` as the Marketing, Privacy Policy and Support URLs (the site is now Borderstamp's canonical home; see `CLAUDE.md`). **Update (2026-10-07):** #481 is done (Borderstamp `9c0bbbc`), and every App Store Connect app's `appStoreId` is in its YAML. No build has been uploaded yet. When an app is approved, set its `status` to `app-store`; the store links appear only then.
+1. **App Store Connect:** every app's record exists and its `appStoreId` is in its YAML (Clarity's is reserved for a possible iOS companion app). No build is uploaded yet. Use `/apps/<slug>/`, `/privacy/` and `/support/` for the Marketing, Privacy Policy and Support URLs. **When an app is approved, set its `status` to `app-store` and push**; the button, Smart App Banner, JSON-LD and `llms.txt` link appear only then.
+2. **Stage 7:** release automation, including obfuscate's signed and notarised DMG (#470). Plan it first. Release-note PRs now get the full Stage 6 checks automatically.
 3. **Borderstamp's next work** (in that repo): StoreKit in-app purchases are now a **v1.0 launch feature**, and the site already promises them ("Free, with optional packs"). Also #488 (the map's dark-mode colours), after which: retake the dark map shots and the dark iPad widget shot, and add darkSrc to `borderstamp.yaml`.
-4. **Stage 7:** release automation, including obfuscate's signed and notarised DMG (#470).
-5. **Stage 8:** update docs, tidy Clarity.
-6. **Whenever Paul chooses:** Clarity #467 (sample-data polish, then retake Clarity's dashboard shots); Upcoming Birthdays #479, #480, #475 and a `.gitignore`; Borderstamp #483 (the project file re-adds a self-reference on open; the experiment to try is written up in the issue).
+4. **Stage 8:** update docs, tidy Clarity.
+5. **Whenever Paul chooses:** Search Console and Bing take a few days to show data; check them for crawl errors once they have some. Clarity #467 (sample-data polish, then retake Clarity's dashboard shots); Upcoming Birthdays #479, #480, #475 and a `.gitignore`; Borderstamp #483 (the project file re-adds a self-reference on open; the experiment to try is written up in the issue).
 
 **Taking screenshots:** `scripts/capture-screenshots.sh <app> <udid>` does the in-app shots (presets: borderstamp, blueprint); its header explains the manual Home Screen widget shots. Ask Paul before booting a Simulator, run tests *before* publishing widget data (a test run turns Blueprint's widget flag off), and expect the Home Screen to jump to the app's icon page whenever the app quits. Mac shots: launch the Debug build with `-ScreenshotMode` (plus `-AppleInterfaceStyle Dark`, or `-NSRequiresAquaSystemAppearance YES` for light) and `screencapture -x -l <window id>`. Checking the page: headless Chrome needs `--virtual-time-budget=20000`.
 
-**Not pushed, on purpose (Paul: keep them local):** Blueprint (`461a799`, `7153c07`, `93313d7`); Borderstamp (`965723d`, `bacfcf9`, `6c5065d`, `b5e3fc6`, `428e2f0`); Clarity `74086dc`. **Uncommitted on purpose:** Borderstamp `project.pbxproj` (the #483 self-reference). **Paul's own, uncommitted:** Clarity `CLAUDE.md`, `Journal.md`, `Readme.md`, `Info.plist`; Upcoming Birthdays `Readme.md`, `xcschememanagement.plist`, untracked `CLAUDE.md` and `Journal.md`; the website's `Images/` folder.
+**Checks:** `npm run check` before pushing (needs `brew install lychee`). CI runs build → check → deploy, and the check job takes about 5 minutes (24 Lighthouse runs).
+
+**Not pushed, on purpose (Paul: keep them local):** Blueprint (`461a799`, `7153c07`, `93313d7`); Borderstamp (`965723d`, `bacfcf9`, `6c5065d`, `b5e3fc6`, `428e2f0`, `9c0bbbc`); Clarity `74086dc`. **Uncommitted on purpose:** Borderstamp `project.pbxproj` (the #483 self-reference). **Paul's own, uncommitted:** Clarity `CLAUDE.md`, `Journal.md`, `Readme.md`, `Info.plist`; Upcoming Birthdays `Readme.md`, `xcschememanagement.plist`, untracked `CLAUDE.md` and `Journal.md`; the website's `Images/` folder.
 
 ## Open questions for Paul
 
