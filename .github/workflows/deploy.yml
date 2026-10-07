@@ -1,5 +1,13 @@
-# Builds the site with Eleventy and publishes it to GitHub Pages
+# Builds the site with Eleventy, checks it, and publishes it to GitHub Pages
 # on every push to main (or when run by hand from the Actions tab).
+#
+#   build → check → deploy     A failing check stops the deploy (Stage 6).
+#   Pull requests              build and check only, so release-note PRs
+#                              (Stage 7) are checked before they're approved.
+#   Weekly (Monday morning)    external links and the MCP server. Problems
+#                              open a GitHub issue; they never block a deploy.
+#
+# The same checks run locally with `npm run check` (see package.json).
 #
 # One-time setup (Stage 3): repo Settings › Pages › Source: "GitHub Actions",
 # then set the custom domain to xerodonia.com and tick "Enforce HTTPS".
@@ -9,20 +17,17 @@ name: Deploy site
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: "0 22 * * 0"   # Sunday 22:00 UTC: Monday 8 or 9 am in Sydney
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-# Never cancel a deploy halfway; queue the next one instead.
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
   build:
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -38,16 +43,137 @@ jobs:
       - name: Build
         run: npm run build
 
-      - uses: actions/upload-pages-artifact@v5
+      - name: Keep the built site for the checks
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+          retention-days: 7
+
+      - name: Package the site for GitHub Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
-  deploy:
+  check:
     needs: build
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site
+
+      # The W3C Nu validator, offline (the runner has Java).
+      - name: Validate HTML
+        run: npm run check:html
+
+      # Internal links and #fragments, offline. Keep in step with check:links in package.json.
+      - name: Check internal links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --offline --include-fragments --index-files index.html
+            --root-dir ${{ github.workspace }}/_site
+            '_site/**/*.html' '_site/*.xml' '_site/*.txt'
+          fail: true
+          jobSummary: true
+
+      # Performance fails below 90 and warns below 95; the rest must be 100.
+      - name: Lighthouse
+        run: npm run check:lighthouse
+
+  deploy:
+    needs: [build, check]
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    # Never cancel a deploy halfway; queue the next one instead.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+
+  external:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # Exclusions are in lychee.toml. Keep in step with check:external in package.json.
+      - name: Check external links
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --root-dir ${{ github.workspace }}/_site --scheme https --scheme http
+            '_site/**/*.html' '_site/*.xml' '_site/*.txt'
+          output: link-report.md
+          fail: false
+          jobSummary: true
+
+      # A plain GET gets 406 from an MCP server, so ask it for its tools instead.
+      - name: Check the MCP server
+        id: mcp
+        run: |
+          url=$(node -e 'import("./src/_data/site.js").then((m) => console.log(m.default.mcpUrl))')
+          status=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 -X POST \
+            -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' "$url")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          if [ "$status" != 200 ]; then echo "::warning::The MCP server at $url answered $status"; fi
+
+      - name: Open or update an issue
+        if: steps.lychee.outputs.exit_code != '0' || steps.mcp.outputs.status != '200'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MCP_URL: ${{ steps.mcp.outputs.url }}
+          MCP_STATUS: ${{ steps.mcp.outputs.status }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Weekly link check found problems"
+          {
+            echo "The weekly check on $(date -u +%Y-%m-%d) found problems ([run]($RUN_URL))."
+            echo
+            if [ "$MCP_STATUS" != 200 ]; then echo "**MCP server:** $MCP_URL answered HTTP $MCP_STATUS to tools/list."; echo; fi
+            if [ -f link-report.md ]; then cat link-report.md; fi
+          } > issue.md
+          existing=$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file issue.md
+          else
+            gh issue create --title "$title" --body-file issue.md
+          fi

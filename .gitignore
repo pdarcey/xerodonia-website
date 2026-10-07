@@ -32,6 +32,9 @@ __pycache__/
 _site/
 .cache/
 
+# Lighthouse CI results (npm run check:lighthouse)
+.lighthouseci/
+
 # Claude local files
 .claude/settings.local.json
 CLAUDE.local.md

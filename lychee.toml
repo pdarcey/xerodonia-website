@@ -1,0 +1,14 @@
+# lychee link checker settings, shared by `npm run check:links`,
+# `npm run check:external` and CI (.github/workflows/deploy.yml).
+# lychee reads this file from the working directory automatically.
+
+exclude = [
+  # The site itself: checked offline against _site/ instead.
+  '^https?://(www\.)?xerodonia\.com',
+  # The sitemap's XML namespace is a name, not a page to visit.
+  '^http://www\.sitemaps\.org/',
+  # Clone URLs shown in code blocks.
+  '\.git$',
+  # The MCP endpoint answers a plain GET with 406. CI checks it with a real MCP request instead.
+  'workers\.dev/mcp$',
+]

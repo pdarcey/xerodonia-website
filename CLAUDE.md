@@ -25,6 +25,10 @@ The rebuild plan, decisions and staging are in `Documentation/Plan.md`. The stor
 - `npm run dev`: dev server with live reload at http://localhost:8080
 - `npm run build`: build to `_site/`
 - `npm run clean`: delete `_site/`
+- `npm run check`: build, then check internal links and anchors (lychee) and Lighthouse (8 pages, median of 3 runs). CI runs the same checks plus W3C validation, and a failure stops the deploy. Needs `brew install lychee`.
+  - `npm run check:external`: external links (CI runs this weekly and opens a GitHub issue on failure).
+  - `npm run check:html`: the W3C Nu validator (`vnu-jar`). Needs Java, which this Mac doesn't have, so it runs in CI only.
+  - Lighthouse targets: Performance fails below 90 and warns below 95; Accessibility, Best Practices and SEO must be 100 (`scripts/check-lighthouse.mjs`). The pages are listed in `lighthouserc.json`.
 - `scripts/capture-screenshots.sh <app> <simulator UDID> [output dir]`: builds the app, installs it on an **already booted** Simulator, and captures its screenshot-mode shots in light and dark (presets: `borderstamp`, `blueprint`). Home Screen widget shots are manual; see the script's header.
 - `npm run images`: regenerate `favicon.ico`, `apple-touch-icon.png` and the link-preview cards in `src/images/og/`. Run this on a Mac after adding an app or changing an app's name, tagline or icon, and commit the output. It isn't part of the build, because its text rendering depends on the Mac's fonts.
 
@@ -58,10 +62,13 @@ lib/
   apps.js                   appStoreUrl(): the one rule for when an app's App Store link appears
   build-check.js            Post-build guard: fails if any executable script, on…= handler, javascript: URL or invalid JSON-LD appears
 scripts/make-images.mjs     `npm run images`: favicons and link-preview cards
+scripts/check-lighthouse.mjs  Applies the Lighthouse targets to .lighthouseci/ results
   404.njk, sitemap.njk, robots.njk, CNAME
   styles/site.css           Part 1: structure and accessibility. Part 2: Liquid Glass theme.
   images/apps/<slug>.png    1024 px source icons (Eleventy makes the web sizes)
-.github/workflows/deploy.yml   Build and deploy to GitHub Pages on push to main
+.github/workflows/deploy.yml   build → check → deploy on push to main; build and check on PRs; weekly external-link and MCP check
+lychee.toml                 Link-checker exclusions, shared by npm scripts and CI
+lighthouserc.json           The pages Lighthouse checks
 ```
 
 ### Adding a new app
@@ -103,6 +110,8 @@ Edit `src/_data/consulting.yaml`. Each audience page lists the service `id`s it 
 - **JS front matter (`---js`) in Eleventy 3 uses top-level `const` declarations**, not an object literal. See `src/apps/privacy.njk`.
 - **Quote YAML values that contain `: `**, or the file won't parse.
 - **Screenshots use `{% themedImage src, darkSrc, alt, sizes, class %}`**, which builds one `<picture>` with the dark versions behind `(prefers-color-scheme: dark)`, so dark-mode visitors get dark screenshots without JS. In an app's YAML, give each screenshot a `src` and, optionally, a `darkSrc`. For Mac screenshots (Blueprint, Clarity, Upcoming Birthdays), launch the Debug build with `-ScreenshotMode`. Add `-AppleInterfaceStyle Dark` for dark mode, or `-NSRequiresAquaSystemAppearance YES` for light mode on a Mac set to dark (`-AppleInterfaceStyle Light` does nothing); both affect only that app. Capture with ⇧⌘4 then Space, or from the terminal with `screencapture -x -l <window id>` (find the id with `CGWindowListCopyWindowInfo`), which keeps the shadow and includes any attached sheet. Run `open` on the app first so it's frontmost; otherwise the traffic lights and default button are greyed out. If the app launches with no window, `open` it again (a "reopen" brings the window back). Keep the transparent shadow; the CSS adds no frame.
+- **Screenshots get their `sizes` from `screenshotSizes()` in `eleventy.config.js`**, which mirrors the `.shot-image--portrait` and `--landscape` rules in `site.css`. Change one, change the other.
+- **Card partials take `cardHeading`** (default `h3`). A page whose cards follow its `<h1>` directly sets it to `h2`, or W3C validation fails on a skipped heading level.
 - **Every `{% image %}` needs alt text.** Use `""` for decorative images; the shortcode throws if it's missing.
 - **Testing narrow widths with headless Chrome:** it won't lay out below 500 px, so load the page in a 390 px `<iframe>`. To force light or dark mode, use `--blink-settings=preferredColorScheme=1` (light) or `0` (dark). Add `--virtual-time-budget=20000`, or the lazy-loaded screenshots render blank.
 - **Home Screen screenshots:** never include third-party content (for example, the News widget shows real headlines and photos). Use system widgets such as Calendar, Reminders and Batteries.
