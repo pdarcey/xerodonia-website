@@ -69,7 +69,8 @@ privacy:
     - Nothing. Your stamps sync only through your own private iCloud, if you use it.
 
 privacyPolicy:
-  updated: 2026-10-05
+  updated: 2026-10-09
+  contactEmail: privacy@borderstamp.com   # matches the app's Settings › Privacy Policy; defaults to site.email
   storedIn: on your device and, if you use it, in your private iCloud   # optional; defaults to "on your device"
   permissions:
     - name: Location (optional, "Always" or "While Using")
@@ -85,7 +86,7 @@ privacyPolicy:
     - heading: In-app purchases
       text: If you buy extra stamp sets, the purchase is handled entirely by Apple through the App Store. We never see your payment details, and Borderstamp only records which sets you've unlocked.
     - heading: iCloud sync
-      text: If you're signed in to iCloud, your stamps sync between your devices through your private iCloud database. That data is stored by Apple under your Apple Account, and Xerodonia can't see it. To stop syncing, turn off iCloud for Borderstamp in the Settings app.
+      text: If you're signed in to iCloud, your stamps sync between your devices through your private iCloud database. That data is stored by Apple under your Apple Account, and Xerodonia can't see it. If you're not signed in to iCloud, your stamps stay on your device only. To stop syncing, turn off iCloud for Borderstamp in the Settings app.
 
 support:
   faq:
@@ -96,4 +97,6 @@ support:
     - q: Can I get stamps for trips I took before installing Borderstamp?
       a: Yes. Let Borderstamp scan your photos, and it will award stamps for places your photos were taken. Only the photos' location data is used, and nothing leaves your device.
     - q: Do my stamps sync between my devices?
-      a: Yes, if you're signed in to iCloud on each device. Sync uses your private iCloud database, which only you can access.
+      a: Yes, if you're signed in to iCloud on each device. Sync uses your private iCloud database, which only you can access. If you're not signed in, or your iCloud storage is full, your stamps are kept on your device, and Settings › iCloud Sync in Borderstamp shows what's happening.
+    - q: What happens if I sign out of iCloud, or turn it off for Borderstamp?
+      a: Your synced stamps are removed from that device, but stay safe in your iCloud and come back when you turn it on again. Stamps from the last few minutes may not have finished syncing, so open Borderstamp while you're online before you sign out.

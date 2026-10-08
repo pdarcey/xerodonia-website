@@ -91,6 +91,7 @@ privacy:                 # the "Private by design" panel on the app page
 
 privacyPolicy:           # the full policy at /apps/blueprint/privacy/ (App Store Connect "Privacy Policy URL")
   updated: 2026-10-05
+  # contactEmail: privacy@example.com   # optional; the policy's privacy contact. Defaults to site.email
   permissions:           # must match the app's NS…UsageDescription keys
     - name: Contacts
       use: To show birthdays and other important dates for the people in the lists you choose.
