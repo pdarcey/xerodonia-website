@@ -8,7 +8,7 @@ icon: images/apps/borderstamp.png
 category: Travel
 tagline: A digital passport for the real world. Collect a stamp every time you cross a border.
 headline: Passport stamps for the places you actually go.
-summary: "Carry your phone across a border and Borderstamp gives you a stamp. Every country in the world is included, and optional packs add states, provinces, prefectures and counties. Everything stays on your device, with no servers and no tracking."
+summary: "Carry your phone across a border and Borderstamp gives you a stamp. Every country in the world is included, and optional packs add states, provinces, prefectures and counties. Everything happens on your device, with no servers and no tracking. Your stamps sync only through your own private iCloud."
 platforms: [iPhone, iPad]
 requires: iOS 26 or iPadOS 26
 status: testflight-soon
