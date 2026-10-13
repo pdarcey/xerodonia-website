@@ -228,6 +228,12 @@ Lighthouse's quieter "opportunities" found the real waste: every screenshot said
 
 **DNS, carefully.** Google Search Console wanted a TXT record on the apex domain, the same name as the SPF record that keeps mail working. Before Paul touched it, we took a snapshot of every mail and web record. Afterwards we compared it against Fastmail's own name server. My local resolver still had the old answers cached, which would have "proved" nothing had changed. One new TXT record, everything else identical.
 
+### 2026-10-09 and 2026-10-13: "Everything stays on your device", except when it doesn't
+
+**A sentence that outlived the feature it described.** Borderstamp's page said "Everything stays on your device". That was true until stamps started syncing through iCloud (Borderstamp #237). It's the user's own private iCloud, which Xerodonia can't see, so the privacy story is still a good one, but the sentence was wrong. The page now says stamps sync through your own iCloud. The policy and the support page explain the edge cases people actually ask about: what happens when you aren't signed in, when iCloud is full, and when you sign out. Privacy policies can also set their own contact address now (`privacyPolicy.contactEmail`), so Borderstamp's policy gives the same privacy@borderstamp.com address the app does. **Absolute claims ("everything", "never") need rechecking every time a feature ships.**
+
+**One logo, six files.** Clarity, our issue tracker, shows a logo for each project, and it reads `logo.svg` and `logo.png` from the repo root. The SVG was already there, a byte-for-byte copy of `src/images/xerodonia-mark.svg`. The 1024 px PNG took one line of `sharp`, which eleventy-img had already installed. The risk is drift: the mark now exists as the master SVG, a favicon, a touch icon, the link-preview cards and these two files. The Readme lists them all and says which is the master, so changing the mark is a short checklist and not a treasure hunt. **When you can't generate every copy from one source, at least write down which copy is the source.**
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.

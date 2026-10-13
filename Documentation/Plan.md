@@ -1,6 +1,6 @@
 # xerodonia.com — Rebuild Plan
 
-*Drafted 2026-10-05. Status (end of session, 2026-10-07): **Stages 1–5d done and live.** Every app that's ready has screenshots on its platforms (Scoreboard deferred), and `scripts/capture-screenshots.sh` re-captures them. Next: Stage 6 (see "Next session" below).*
+*Drafted 2026-10-05. Status (end of session, 2026-10-13): **Stages 1–6 done and live.** Every app that's ready has screenshots on its platforms (Scoreboard deferred), and CI checks every build before it deploys. Next: Stage 7 (see "Next session" below).*
 
 ## Goals
 
@@ -439,13 +439,14 @@ Baseline before starting: all 26 pages have `lang="en-AU"`, a canonical URL, a m
 7. **Repo name:** `pdarcey/xerodonia-website` (public), so the repo is never confused with the website itself.
 8. **Stage 5 decisions:** screenshots via a DEBUG-only "screenshot mode" in Blueprint and Clarity; robots.txt allows all AI crawlers; agent engagement includes a live MCP server on Cloudflare Workers (free tier); JSON-LD `<script type="application/ld+json">` is allowed, but executable JS is not.
 
-## Next session (written 2026-10-08)
+## Next session (written 2026-10-08, updated 2026-10-13)
 
 1. **App Store Connect:** every app's record exists and its `appStoreId` is in its YAML (Clarity's is reserved for a possible iOS companion app). No build is uploaded yet. Use `/apps/<slug>/`, `/privacy/` and `/support/` for the Marketing, Privacy Policy and Support URLs. **When an app is approved, set its `status` to `app-store` and push**; the button, Smart App Banner, JSON-LD and `llms.txt` link appear only then.
 2. **Stage 7:** release automation, including obfuscate's signed and notarised DMG (#470). Plan it first. Release-note PRs now get the full Stage 6 checks automatically.
 3. **Borderstamp's next work** (in that repo): StoreKit in-app purchases are now a **v1.0 launch feature**, and the site already promises them ("Free, with optional packs"). Also #488 (the map's dark-mode colours), after which: retake the dark map shots and the dark iPad widget shot, and add darkSrc to `borderstamp.yaml`.
 4. **Stage 8:** update docs, tidy Clarity.
-5. **Whenever Paul chooses:** Search Console and Bing take a few days to show data; check them for crawl errors once they have some. Clarity #467 (sample-data polish, then retake Clarity's dashboard shots); Upcoming Birthdays #479, #480, #475 and a `.gitignore`; Borderstamp #483 (the project file re-adds a self-reference on open; the experiment to try is written up in the issue).
+5. **Small tidy-ups:** close the test issue #493 ("Clarity check", imported from GitHub issue #1) once Paul agrees; Paul to check the Clarity logo files (#546).
+6. **Whenever Paul chooses:** Search Console and Bing take a few days to show data; check them for crawl errors once they have some. Clarity #467 (sample-data polish, then retake Clarity's dashboard shots); Upcoming Birthdays #479, #480, #475 and a `.gitignore`; Borderstamp #483 (the project file re-adds a self-reference on open; the experiment to try is written up in the issue).
 
 **Taking screenshots:** `scripts/capture-screenshots.sh <app> <udid>` does the in-app shots (presets: borderstamp, blueprint); its header explains the manual Home Screen widget shots. Ask Paul before booting a Simulator, run tests *before* publishing widget data (a test run turns Blueprint's widget flag off), and expect the Home Screen to jump to the app's icon page whenever the app quits. Mac shots: launch the Debug build with `-ScreenshotMode` (plus `-AppleInterfaceStyle Dark`, or `-NSRequiresAquaSystemAppearance YES` for light) and `screencapture -x -l <window id>`. Checking the page: headless Chrome needs `--virtual-time-budget=20000`.
 

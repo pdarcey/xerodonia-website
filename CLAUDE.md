@@ -67,6 +67,7 @@ scripts/check-lighthouse.mjs  Applies the Lighthouse targets to .lighthouseci/ r
   styles/site.css           Part 1: structure and accessibility. Part 2: Liquid Glass theme.
   images/apps/<slug>.png    1024 px source icons (Eleventy makes the web sizes)
 .github/workflows/deploy.yml   build → check → deploy on push to main; build and check on PRs; weekly external-link and MCP check
+logo.svg, logo.png          Not part of the site: Clarity uses them to represent this project. Keep them matching the site's mark (see Readme.md)
 lychee.toml                 Link-checker exclusions, shared by npm scripts and CI
 lighthouserc.json           The pages Lighthouse checks
 ```

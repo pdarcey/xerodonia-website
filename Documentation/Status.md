@@ -1,9 +1,9 @@
 # xerodonia.com — Status
 
-*Snapshot at the end of the 2026-10-07 session, with Stage 6 and the App Store IDs added on 2026-10-08. See `Plan.md` for the roadmap and "Next session".*
+*Snapshot at the end of the 2026-10-13 session. See `Plan.md` for the roadmap and "Next session".*
 
 ## Live at https://xerodonia.com
-Everything is pushed and live.
+Everything on the site is pushed and live. The 2026-10-13 commit (the Clarity logo files and the docs) is local only; it changes nothing visitors see.
 
 - GitHub Pages, deployed by GitHub Actions on every push to `main` (repo `pdarcey/xerodonia-website`, public). HTTPS is enforced; `www` redirects to the apex.
 - DNS stays at Fastmail (A/AAAA records to GitHub; `www` CNAME). Email records are untouched.
@@ -13,12 +13,13 @@ Everything is pushed and live.
 |---|---|
 | Home, About, Contact, website privacy | ✅ |
 | App pages (6) | ✅ Blueprint, Borderstamp, Upcoming Birthdays, Scoreboard, Clarity, obfuscate. Borderstamp: iPhone and iPad only, "Free, with optional packs", and a "What you get" section (2026-10-07) |
-| App privacy and support pages | ✅ Blueprint, Borderstamp, Upcoming Birthdays (the App Store Connect URLs) |
+| App privacy and support pages | ✅ Blueprint, Borderstamp, Upcoming Birthdays (the App Store Connect URLs). Borderstamp's now explain iCloud sync: stamps sync through the user's own iCloud, and stay on the device when signed out (2026-10-09). A policy can set its own `privacyPolicy.contactEmail`; Borderstamp uses privacy@borderstamp.com |
 | Consulting (overview, 3 audiences, services, FAQ) | ✅ |
 | Blog and Atom feed | ✅ 1 post |
 | AI-agent layer | ✅ JSON-LD, `llms.txt`, `llms-full.txt`, `/consulting/services.json`, AI-aware `robots.txt` |
 | Consulting MCP server | ✅ `https://xerodonia-mcp.autumn-glitter-b50d.workers.dev/mcp` (repo `pdarcey/xerodonia-mcp`); enquiries become GitHub issues and an email to hello@ |
 | Link previews, favicons | ✅ |
+| Clarity logo files | ✅ `logo.svg` and `logo.png` (1024 px) in the repo root represent this project in Clarity (2026-10-13). They aren't part of the site; `Readme.md` says how to keep them matching the site's mark. Awaiting Paul's check (#546) |
 | SEO and compliance (Stage 6) | ✅ **Done 2026-10-08.** W3C-valid, Lighthouse 100 across the board, no broken links (`Documentation/Audit-2026-10.md`). Every push runs build → check → deploy; PRs check without deploying; a weekly job checks external links and the MCP server and opens a GitHub issue (which syncs to Clarity). Search Console and Bing verified. |
 | App Store IDs | ✅ In each app's YAML (2026-10-07). Store links appear only when `status` is `app-store`; no build is uploaded yet |
 | Screenshots | ✅ **Stage 5d done (2026-10-07).** Blueprint: Mac, iPhone and iPad, plus iPad and iPhone widgets. Upcoming Birthdays: all three platforms. Borderstamp: iPhone and iPad (stamps, maps, iPad widgets; dark maps and widgets wait for Borderstamp #488). Clarity: Mac. Scoreboard deferred. `scripts/capture-screenshots.sh` captures each app's shots. |
@@ -49,7 +50,7 @@ Everything is pushed and live.
 
 ## Open Clarity issues
 - **Awaiting Paul's check:** xerodonia.com #468 (Stage 5d); Blueprint #465 (screenshot mode, now with widgets) and #492 (widget order); Clarity #466.
-- **xerodonia.com #470:** Stage 7.
+- **xerodonia.com #470:** Stage 7. **#546:** Clarity logo files, awaiting Paul's check. **#493:** "Clarity check", a test issue imported from GitHub issue #1; close it when Paul agrees.
 - **Borderstamp:** #488 (map dark-mode colours; blocks the dark map and widget shots), #483 (project self-reference, parked), #482 (native Mac port, after v1.0), #460 and #461 (privacy manifest, merchandise note).
 - **Clarity #467** (sample-data polish) and **#491** (MCP `issue_update` can detach an issue from its project; seen on Borderstamp #489 and #490, which Paul reattached).
 - **Upcoming Birthdays** #473 (awaiting verification), #475, #479, #480, #462.
