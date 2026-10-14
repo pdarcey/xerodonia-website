@@ -234,6 +234,14 @@ Lighthouse's quieter "opportunities" found the real waste: every screenshot said
 
 **One logo, six files.** Clarity, our issue tracker, shows a logo for each project, and it reads `logo.svg` and `logo.png` from the repo root. The SVG was already there, a byte-for-byte copy of `src/images/xerodonia-mark.svg`. The 1024 px PNG took one line of `sharp`, which eleventy-img had already installed. The risk is drift: the mark now exists as the master SVG, a favicon, a touch icon, the link-preview cards and these two files. The Readme lists them all and says which is the master, so changing the mark is a short checklist and not a treasure hunt. **When you can't generate every copy from one source, at least write down which copy is the source.**
 
+### 2026-10-15: Balloons out, cake in
+
+Upcoming Birthdays swapped its placeholder balloons for a real icon: a birthday cake on blue, with a heart for the middle candle's flame. The site had the balloons in three places, not one. The 1024 px icon (exported from the app's `AppIcon.icon` with Icon Composer's `ictool`, so the site shows the Liquid Glass version, not the flat artwork) feeds the home page, the apps list and the app page. `npm run images` rebuilt the link-preview card from it. And the iPad screenshot had the old icon in the Dock. The app also moved to iOS 27 / iPadOS 27 / macOS 27, so `requires` changed with it. The accent stays orange: it still suits the amber flame, and blue would blur into Xerodonia's own colour.
+
+**War story: the screenshot that was looking for you.** The retaken iPad shot had a grey location arrow, with a pill around the clock, that the 6 Oct one didn't. No app on screen uses location. The simulator's `locationd` log named the culprit: Reminders, which checks location for location-based reminders. Closing Reminders and waiting a moment cleared it. Its widget keeps working without the app. **Before you capture a Home Screen, zoom in on the status bar. `simctl status_bar override` sets the time, battery and signal, but not the location indicator.**
+
+Also: booting the simulator headless from the shell pinned the CPU on an 8 GB Mac until it was killed. Starting it in Device Hub and then driving the running device with `simctl` worked smoothly. Closing an app with `simctl terminate` leaves the Home Screen on the page where its icon lives, so someone has to swipe back to the widgets page by hand.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.

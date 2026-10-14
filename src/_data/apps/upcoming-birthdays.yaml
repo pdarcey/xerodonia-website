@@ -10,7 +10,7 @@ tagline: Birthdays for just the people you care about, in widgets and gentle rem
 headline: Never miss the birthdays that matter.
 summary: "Your calendar shows every contact's birthday. Upcoming Birthdays shows just the people you choose, with widgets for the next few birthdays and a reminder on the day."
 platforms: [iPhone, iPad, Mac]
-requires: iOS 26, iPadOS 26 or macOS 26
+requires: iOS 27, iPadOS 27 or macOS 27
 status: testflight-soon
 appStoreId: 6819952458
 testFlightUrl:
@@ -25,7 +25,7 @@ screenshots:             # fictional people from the app's screenshot mode (Imag
     darkSrc: images/apps/upcoming-birthdays/iphone-widgets-dark.png
     caption: Widgets for the next few days and the next few birthdays
     alt: "An iPhone Home Screen with two Upcoming Birthdays widgets: Birthdays in the Next 3 Days, showing Mia Nguyen today (34) and Liam O'Brien on 8 October (41), and a large Upcoming Birthdays widget listing the next seven birthdays"
-  # iPad Pro 13-inch (M5) Simulator, 2026-10-06, among system widgets (no third-party content)
+  # iPad Pro 13-inch (M5) Simulator, retaken 2026-10-15 for the new app icon (in the Dock), among system widgets (no third-party content)
   - device: tablet
     src: images/apps/upcoming-birthdays/ipad-widgets.png
     darkSrc: images/apps/upcoming-birthdays/ipad-widgets-dark.png

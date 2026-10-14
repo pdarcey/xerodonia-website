@@ -22,7 +22,7 @@ Everything on the site is pushed and live. The 2026-10-13 commit (the Clarity lo
 | Clarity logo files | ✅ `logo.svg` and `logo.png` (1024 px) in the repo root represent this project in Clarity (2026-10-13). They aren't part of the site; `Readme.md` says how to keep them matching the site's mark. Awaiting Paul's check (#546) |
 | SEO and compliance (Stage 6) | ✅ **Done 2026-10-08.** W3C-valid, Lighthouse 100 across the board, no broken links (`Documentation/Audit-2026-10.md`). Every push runs build → check → deploy; PRs check without deploying; a weekly job checks external links and the MCP server and opens a GitHub issue (which syncs to Clarity). Search Console and Bing verified. |
 | App Store IDs | ✅ In each app's YAML (2026-10-07). Store links appear only when `status` is `app-store`; no build is uploaded yet |
-| Screenshots | ✅ **Stage 5d done (2026-10-07).** Blueprint: Mac, iPhone and iPad, plus iPad and iPhone widgets. Upcoming Birthdays: all three platforms. Borderstamp: iPhone and iPad (stamps, maps, iPad widgets; dark maps and widgets wait for Borderstamp #488). Clarity: Mac. Scoreboard deferred. `scripts/capture-screenshots.sh` captures each app's shots. |
+| Screenshots | ✅ **Stage 5d done (2026-10-07).** Blueprint: Mac, iPhone and iPad, plus iPad and iPhone widgets. Upcoming Birthdays: all three platforms; new app icon (cake) on 2026-10-15, with the icon, link-preview card and iPad screenshots updated and `requires` raised to iOS/iPadOS/macOS 27. Borderstamp: iPhone and iPad (stamps, maps, iPad widgets; dark maps and widgets wait for Borderstamp #488). Clarity: Mac. Scoreboard deferred. `scripts/capture-screenshots.sh` captures each app's shots. |
 
 ## Related repos
 | Repo | Change | Pushed? |
