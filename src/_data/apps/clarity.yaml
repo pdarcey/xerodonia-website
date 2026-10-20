@@ -8,7 +8,7 @@ icon: images/apps/clarity.png
 category: Developer tools
 tagline: The issue tracker we built for ourselves, with a Mac app, a CLI and an MCP server for AI agents.
 headline: Project and issue tracking for indie Mac developers.
-summary: "Clarity tracks projects, issues and releases in a native Mac app. It also works from the command line, and as an MCP server so AI coding agents can read and update issues as they work."
+summary: "Clarity tracks projects, issues and releases in a native Mac app. It comes with a command-line tool, and an MCP server so your AI coding agents can read and update issues as they work."
 platforms: [Mac, CLI, MCP]
 requires: macOS 26
 status: in-house
@@ -22,38 +22,38 @@ screenshots:             # sample data from Clarity's screenshot mode (Clarity #
     src: images/apps/clarity/dashboard.png
     darkSrc: images/apps/clarity/dashboard-dark.png
     caption: Every project at a glance
-    alt: "Clarity's projects dashboard: a commit-activity timeline with release markers above cards for six Xerodonia projects, each with its icon, build and outstanding issues"
+    alt: "Clarity’s projects dashboard: a commit-activity timeline with release markers above cards for multiple Xerodonia projects, each with its icon, build and outstanding issues"
   - device: mac
     src: images/apps/clarity/kanban.png
     darkSrc: images/apps/clarity/kanban-dark.png
     caption: A Kanban board across every project
-    alt: "Clarity's Kanban board showing Backlog, Current and Completed columns of issues from several projects"
+    alt: "Clarity’s Kanban board showing Backlog, Current and Completed columns of issues from several projects"
   - device: mac
     src: images/apps/clarity/issues.png
     darkSrc: images/apps/clarity/issues-dark.png
     caption: Issues, filtered by kind and status
-    alt: "Clarity's issues list for Blueprint, with kind and status filters, and an urgent issue open alongside its description and activity"
+    alt: "Clarity’s issues list example, with kind and status filters, and an urgent issue open alongside its description and activity"
   - device: mac
     src: images/apps/clarity/project-dashboard.png
     darkSrc: images/apps/clarity/project-dashboard-dark.png
     caption: One project's tests, timeline and milestones
-    alt: "Clarity's dashboard for the Blueprint project: test results, a commit timeline with milestones, open issues, current tasks and a milestone list"
+    alt: "Clarity’s dashboard for an example project: test results, a commit timeline with milestones, open issues, current tasks and a milestone list"
 
-featuresHeading: One tracker, three ways in
+featuresHeading: Access it your way
 featuresIntro: A native Mac app for people, plus a command-line tool and an MCP server for scripts and AI agents. All three share one database.
 features:
   - title: Dashboard
-    text: Every project on one screen, with version, test and timeline summaries, and a drill-down dashboard for each project.
+    text: Every project—whether websites, web, mobile or desktop apps—on one screen with versions, test status and a visual timeline, and a drill-down dashboard for more details on each project.
   - title: Kanban board
-    text: Backlog, Current and Completed columns, with drag to reorder and multi-select.
+    text: Backlog, Current and Completed columns. Visualise your workflow, easily adapt to changing conditions—just drag to reorder or move between columns.
   - title: Issues with context
     text: Filter by status, kind and urgency, and drag images, PDFs, Markdown and other files straight onto an issue.
   - title: Imports from your repos
-    text: Drop a repo folder in to create a project, with its app icon. Link a GitHub repo and its open issues are imported automatically.
+    text: Drop a repo folder in to create a project, with its app icon. Link a GitHub repo and its open issues are imported automatically. Clarity becomes your local “source of truth”.
   - title: A full command-line tool
-    text: "Projects, issues, reminders, milestones and attachments from the terminal, with JSON output for scripts and shell completions."
+    text: "Prefer working from the terminal? Projects, issues, reminders, milestones and attachments from the terminal, human-readable, or with JSON output for scripts and shell completions."
   - title: An MCP server for AI agents
-    text: "27 tools let agents like Claude Code read and update issues as they work, so the tracker stays current without anyone typing it up."
+    text: "A complete set of tools let agents like Claude Code read and update issues as they work, so the tracker stays current without anyone typing it up."
 
 sections:
   - heading: Why we built it
