@@ -1,6 +1,6 @@
 {
   "product": "upcoming-birthdays",
-  "generated": "2026-10-21T06:54:41.071Z",
+  "generated": "2026-10-21T11:52:10.365Z",
   "defaultLocale": "en-AU",
   "locales": {
     "en-AU": [
@@ -17,7 +17,7 @@
             "height": 1088,
             "label": "UPCOMING BIRTHDAYS",
             "headline": "Just the people you care about, not everyone you ever met",
-            "alt": ""
+            "alt": "\"Just the people you care about, not everyone you ever met\" with an iPhone screenshot showing a limited number of people's names, their birthdays, and, in some cases, their ages"
           },
           {
             "index": 2,
@@ -28,7 +28,7 @@
             "height": 1088,
             "label": "WIDGETS",
             "headline": "Quickly, who’s got\na birthday \ncoming up?",
-            "alt": ""
+            "alt": "\"Quickly, who’s got a birthday coming up?\" and a screenshot of an iPhone showing two widgets: one with the title \"Birthdays in the next 3 days\" and showing a person's name and their birthday as today, and another person whose birthday is two days from now, and the second with the title \"Upcoming Birthdays\" showing three people's names birthdays and ages (including one today)"
           },
           {
             "index": 3,
@@ -39,7 +39,7 @@
             "height": 1088,
             "label": "AT A GLANCE",
             "headline": "See who’s next,\nwithout opening\nthe app.",
-            "alt": ""
+            "alt": "\"See who's next without opening the app\" and a screenshot of an iPhone showing a large widget with the title \"Upcoming Birthdays\" showing seven people's names birthdays and ages (including one today)"
           },
           {
             "index": 4,
@@ -50,7 +50,7 @@
             "height": 1088,
             "label": "REMINDERS",
             "headline": "Don’t you hate it when you \nforget?",
-            "alt": ""
+            "alt": "\"Don’t you hate it when you \nforget?\" and a screenshot of an iPhone showing a Settings screen for setting notifications, allowing the user to toggle each of: \"on the day\", \"one day before\", and \"a few days before\". There is also a selector to set how many days before, and the time for the notification."
           },
           {
             "index": 5,
@@ -61,7 +61,7 @@
             "height": 1088,
             "label": "DETAILS",
             "headline": "It’s whose birthday today?\n\nHow old?",
-            "alt": ""
+            "alt": "\"It’s whose birthday today?\nHow old?\" and a screenshot of an iPhone with details of a woman, with her name, photo, birthday, how old she will be turning, and the year she was born"
           },
           {
             "index": 6,
@@ -72,7 +72,7 @@
             "height": 1088,
             "label": "PRIVATE",
             "headline": "Your contacts\nstay on\nyour iPhone.",
-            "alt": ""
+            "alt": "A simple slide saying, \"Your contacts stay on your iPhone.\""
           },
           {
             "index": 7,
