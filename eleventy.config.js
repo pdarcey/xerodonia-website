@@ -9,6 +9,7 @@ import Image from "@11ty/eleventy-img";
 import { structuredData, toJsonLd } from "./lib/structured-data.js";
 import { checkBuildOutput } from "./lib/build-check.js";
 import { appStoreUrl } from "./lib/apps.js";
+import { defaultLocale } from "./lib/locales.js";
 
 /** Responsive widths generated for raster images (icons render at 72–176 CSS px). */
 const IMAGE_WIDTHS = [128, 256, 384];
@@ -137,6 +138,27 @@ export default function (eleventyConfig) {
   // JSON-LD block is invalid JSON. Visitors must never receive JavaScript.
   eleventyConfig.on("eleventy.after", async ({ dir }) => checkBuildOutput(dir.output));
 
+  /**
+   * A product's marketing images for a locale (src/_data/screenshots/<slug>.json,
+   * written by the Marketing repo): its device groups, falling back to the
+   * product's default locale. Null when the product has none, so the page uses
+   * the YAML's screenshots.
+   */
+  eleventyConfig.addFilter("localeScreenshots", (data, locale) => {
+    if (!data?.locales) return null;
+    const groups = data.locales[locale] ?? data.locales[data.defaultLocale];
+    return groups?.length ? groups : null;
+  });
+
+  /** A file size for people, e.g. 58265957 → "56 MB" (binary units, as Finder's "Get Info" rounds). */
+  eleventyConfig.addFilter("fileSize", (bytes) => {
+    const units = ["bytes", "KB", "MB", "GB"];
+    let value = bytes;
+    let unit = 0;
+    while (value >= 1024 && unit < units.length - 1) { value /= 1024; unit += 1; }
+    return `${unit ? Math.round(value) : value} ${units[unit]}`;
+  });
+
   /** All apps and tools as an array, in display order. */
   eleventyConfig.addFilter("sortProducts", (apps) =>
     Object.values(apps).sort((a, b) => a.order - b.order)
@@ -155,7 +177,7 @@ export default function (eleventyConfig) {
 
   /** Long Australian date, e.g. "5 October 2026". YAML dates are UTC midnight, so format in UTC. */
   eleventyConfig.addFilter("longDate", (date) =>
-    new Date(date).toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
+    new Date(date).toLocaleDateString(defaultLocale, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
   );
 
   /** Full ISO 8601 timestamp, for the Atom feed. */

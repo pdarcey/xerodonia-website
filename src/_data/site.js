@@ -1,5 +1,7 @@
 // Site-wide settings, available in every template as `site`.
 
+import { defaultLocale, locales, ogLocale } from "../../lib/locales.js";
+
 export default {
   name: "Xerodonia",
   legalName: "Xerodonia Pty Ltd",
@@ -7,7 +9,13 @@ export default {
   url: "https://xerodonia.com",
   email: "hello@xerodonia.com",
   location: "Sydney, Australia",
-  locale: "en_AU",
+  // See lib/locales.js. `locale` is the Open Graph form (en_AU).
+  defaultLocale,
+  locales,
+  locale: ogLocale(defaultLocale),
+  // Where the press kits live: one GitHub release per product, tagged
+  // press-<slug>, uploaded by the Marketing repo's update-website.sh.
+  pressUrl: "https://github.com/pdarcey/xerodonia-website/releases/download",
   description:
     "Xerodonia makes small, private, carefully built apps for iPhone, iPad and Mac, and helps businesses put AI coding agents to work.",
   // TODO: confirm. Marked "needs confirmation" in the old consulting site.

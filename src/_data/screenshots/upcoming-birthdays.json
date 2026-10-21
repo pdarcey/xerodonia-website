@@ -1,0 +1,218 @@
+{
+  "product": "upcoming-birthdays",
+  "generated": "2026-10-21T06:54:41.071Z",
+  "defaultLocale": "en-AU",
+  "locales": {
+    "en-AU": [
+      {
+        "device": "iphone",
+        "label": "iPhone",
+        "shots": [
+          {
+            "index": 1,
+            "layout": "hero",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-01-hero.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-01-hero-dark.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "UPCOMING BIRTHDAYS",
+            "headline": "Just the people you care about, not everyone you ever met",
+            "alt": ""
+          },
+          {
+            "index": 2,
+            "layout": "device-bottom",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-02-device-bottom.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-02-device-bottom-dark.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "WIDGETS",
+            "headline": "Quickly, who’s got\na birthday \ncoming up?",
+            "alt": ""
+          },
+          {
+            "index": 3,
+            "layout": "device-top",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-03-device-top.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-03-device-top-dark.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "AT A GLANCE",
+            "headline": "See who’s next,\nwithout opening\nthe app.",
+            "alt": ""
+          },
+          {
+            "index": 4,
+            "layout": "device-bottom",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-04-device-bottom.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-04-device-bottom-dark.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "REMINDERS",
+            "headline": "Don’t you hate it when you \nforget?",
+            "alt": ""
+          },
+          {
+            "index": 5,
+            "layout": "hero",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-05-hero.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-05-hero-dark.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "DETAILS",
+            "headline": "It’s whose birthday today?\n\nHow old?",
+            "alt": ""
+          },
+          {
+            "index": 6,
+            "layout": "no-device",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-06-no-device.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-06-no-device-dark.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "PRIVATE",
+            "headline": "Your contacts\nstay on\nyour iPhone.",
+            "alt": ""
+          },
+          {
+            "index": 7,
+            "layout": "two-devices",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-07-two-devices.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-07-two-devices-dark.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "ANY TEXT SIZE",
+            "headline": "Big text?\nNo problem.",
+            "alt": ""
+          },
+          {
+            "index": 8,
+            "layout": "no-device",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-08-no-device.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/iphone-08-no-device-dark.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "AND MORE",
+            "headline": "Two widgets\nThree reminders\nA Mac app too\nVoiceOver ready",
+            "alt": ""
+          }
+        ]
+      },
+      {
+        "device": "ipad",
+        "label": "iPad",
+        "shots": [
+          {
+            "index": 1,
+            "layout": "hero",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/ipad-01-hero.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/ipad-01-hero-dark.jpg",
+            "width": 816,
+            "height": 1088,
+            "label": "WIDGETS",
+            "headline": "Quickly, who’s got\na birthday \ncoming up?",
+            "alt": ""
+          },
+          {
+            "index": 2,
+            "layout": "hero",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/ipad-02-hero.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/ipad-02-hero-dark.jpg",
+            "width": 816,
+            "height": 1088,
+            "label": "UPCOMING BIRTHDAYS",
+            "headline": "Only the people\nyou care about.",
+            "alt": ""
+          },
+          {
+            "index": 3,
+            "layout": "device-top",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/ipad-03-device-top.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/ipad-03-device-top-dark.jpg",
+            "width": 816,
+            "height": 1088,
+            "label": "REMINDERS",
+            "headline": "Don’t you hate it when you \nforget?",
+            "alt": ""
+          },
+          {
+            "index": 4,
+            "layout": "device-bottom",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/ipad-04-device-bottom.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/ipad-04-device-bottom-dark.jpg",
+            "width": 816,
+            "height": 1088,
+            "label": "DETAILS",
+            "headline": "Know who’s\nturning what.",
+            "alt": ""
+          },
+          {
+            "index": 5,
+            "layout": "no-device",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/ipad-05-no-device.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/ipad-05-no-device-dark.jpg",
+            "width": 816,
+            "height": 1088,
+            "label": "PRIVATE",
+            "headline": "Your contacts\nstay on\nyour iPad.",
+            "alt": ""
+          }
+        ]
+      },
+      {
+        "device": "mac",
+        "label": "Mac",
+        "shots": [
+          {
+            "index": 1,
+            "layout": "no-device",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/mac-01-no-device.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/mac-01-no-device-dark.jpg",
+            "width": 1472,
+            "height": 920,
+            "label": "UPCOMING BIRTHDAYS",
+            "headline": "Just the people you care about, not everyone you ever met",
+            "alt": ""
+          },
+          {
+            "index": 2,
+            "layout": "no-device",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/mac-02-no-device.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/mac-02-no-device-dark.jpg",
+            "width": 1472,
+            "height": 920,
+            "label": "DETAILS",
+            "headline": "It’s whose birthday today?\n\nHow old???",
+            "alt": ""
+          },
+          {
+            "index": 3,
+            "layout": "no-device",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/mac-03-no-device.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/mac-03-no-device-dark.jpg",
+            "width": 1472,
+            "height": 920,
+            "label": "PRIVATE",
+            "headline": "Nothing leaves\nyour Mac.",
+            "alt": ""
+          },
+          {
+            "index": 4,
+            "layout": "no-device",
+            "src": "images/apps/upcoming-birthdays/marketing/en-AU/mac-04-no-device.jpg",
+            "darkSrc": "images/apps/upcoming-birthdays/marketing/en-AU/mac-04-no-device-dark.jpg",
+            "width": 1472,
+            "height": 920,
+            "label": "AND MORE",
+            "headline": "Widgets\nReminders\niPhone and iPad",
+            "alt": ""
+          }
+        ]
+      }
+    ]
+  },
+  "press": {
+    "file": "upcoming-birthdays-press.zip",
+    "bytes": 58265957
+  }
+}

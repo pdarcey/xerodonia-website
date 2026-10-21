@@ -4,7 +4,7 @@ eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="utf-8"?>
 {%- set posts = collections.posts | reverse %}
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-AU">
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ site.defaultLocale }}">
   <title>{{ site.name }} blog</title>
   <subtitle>Notes from Xerodonia on building apps for Apple platforms and putting AI coding agents to work.</subtitle>
   <link href="{{ site.url }}/feed.xml" rel="self" type="application/atom+xml"/>

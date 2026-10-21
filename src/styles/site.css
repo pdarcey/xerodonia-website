@@ -339,6 +339,21 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.025em; }
    shot doesn't melt into the light page. */
 .shot--phone .shot-image { border-radius: 13% / 6%; outline: 1px solid var(--line); outline-offset: -1px; }
 .shot--tablet .shot-image { border-radius: 4% / 3%; outline: 1px solid var(--line); outline-offset: -1px; }
+/* Marketing images (from the Marketing repo) carry their own background, device frame
+   and headline: just soften the corners, and outline them so a light one doesn't melt
+   into the light page. Each device gets its own strip. */
+.shot--marketing .shot-image { border-radius: 1rem; outline: 1px solid var(--line); outline-offset: -1px; }
+.shot-device { font-size: 1rem; color: var(--muted); margin: 1.5rem 0 .75rem; }
+.screenshots h2 + .shot-device { margin-top: 0; }
+
+/* Press page: one row per product kit */
+.press-list { display: grid; gap: var(--gap); margin-top: 2rem; }
+.press-kit { display: flex; gap: 1.25rem; align-items: flex-start; }
+.press-kit h2 { font-size: 1.3rem; }
+.press-kit .link-row { margin-top: .75rem; }
+.press-kit > picture { flex: none; } /* the flex item is the <picture>, not the <img> */
+.press-icon { width: 72px; height: 72px; border-radius: 22%; }
+.press-size { font-weight: normal; opacity: .8; margin-left: .35em; }
 
 /* ==========================================================================
    Document pages: privacy policies, support, about

@@ -1,0 +1,37 @@
+---
+layout: layouts/base.njk
+title: Press
+description: Screenshots, marketing images and app icons for Xerodonia's apps, free to use in articles and reviews.
+permalink: /press/
+bodyClass: doc-page
+---
+{#- One kit per product with a press zip in src/_data/screenshots/<slug>.json (written by the
+    Marketing repo; each zip is in the GitHub release press-<slug>, under site.pressUrl). -#}
+<article class="section doc">
+  <div class="wrap doc-wrap">
+    <header class="doc-header">
+      <p class="eyebrow">Press</p>
+      <h1 class="page-title">Press kits</h1>
+      <p class="doc-lead">Each kit has the app's icon and every screenshot, on every device it runs on, in light and dark. Use them in articles and reviews about the app. For anything else, email <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+    </header>
+
+    <ul class="press-list">
+      {%- asyncEach app in apps | sortProducts %}{# async: uses the image shortcode #}
+      {%- set kit = screenshots[app.slug].press if screenshots[app.slug] else null %}
+      {%- if kit %}
+      <li class="press-kit">
+        {% image app.icon, "", "72px", "press-icon" %}
+        <div>
+          <h2>{{ app.name }}</h2>
+          <p>{{ app.tagline }}</p>
+          <p class="link-row">
+            <a class="button button--primary" href="{{ site.pressUrl }}/press-{{ app.slug }}/{{ kit.file }}" download>Download the press kit <span class="press-size">(ZIP, {{ kit.bytes | fileSize }})</span></a>
+            <a class="text-link" href="{{ app | productUrl }}">About {{ app.name }} <span aria-hidden="true">→</span></a>
+          </p>
+        </div>
+      </li>
+      {%- endif %}
+      {%- endeach %}
+    </ul>
+  </div>
+</article>

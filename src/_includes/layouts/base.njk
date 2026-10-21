@@ -5,7 +5,7 @@
 {#- Link-preview image: a page's ogImage, else its app's card, else the site default (made by `npm run images`). -#}
 {%- set pageImage = ogImage or ("/images/og/" + app.slug + ".jpg" if app else "/images/og/default.jpg") -%}
 <!doctype html>
-<html lang="en-AU">
+<html lang="{{ lang or site.defaultLocale }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">

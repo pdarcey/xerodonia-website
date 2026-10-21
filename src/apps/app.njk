@@ -41,7 +41,26 @@ eleventyComputed:
   </div>
 </section>
 
-{%- if app.screenshots %}
+{#- Marketing images (src/_data/screenshots/<slug>.json, from the Marketing repo) replace the
+    YAML's screenshots once a product has them: one strip per device, light and dark. -#}
+{%- set marketing = screenshots[app.slug] | localeScreenshots(lang or site.defaultLocale) %}
+{%- if marketing %}
+<section class="section screenshots" aria-labelledby="shots-title">
+  <div class="wrap">
+    <h2 id="shots-title">Screenshots</h2>
+    {%- asyncEach group in marketing %}{# async: the inner loop uses the image shortcode #}
+    <h3 class="shot-device" id="shots-{{ group.device }}">{{ group.label }}</h3>
+    <ul class="shot-strip" aria-labelledby="shots-{{ group.device }}">
+      {%- asyncEach shot in group.shots %}
+      <li class="shot shot--marketing">
+        {% themedImage shot.src, shot.darkSrc, shot.alt or shot.headline, "", "shot-image" %}
+      </li>
+      {%- endeach %}
+    </ul>
+    {%- endeach %}
+  </div>
+</section>
+{%- elif app.screenshots %}
 <section class="section screenshots" aria-labelledby="shots-title">
   <div class="wrap">
     <h2 id="shots-title">Screenshots</h2>
