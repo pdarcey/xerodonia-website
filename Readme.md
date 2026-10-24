@@ -1,8 +1,21 @@
+---
+name: Xerodonia Website
+description: The source for xerodonia.com, the home of Xerodonia's apps and tools for iPhone, iPad and Mac, plus AI consulting and a blog. It's a static Eleventy site with no JavaScript, trackers or cookies.
+version: "1.0.0"
+readmeUpdated: 2026-10-24
+tags:
+  - Website
+---
+
 # Xerodonia Website
+
+<img src="logo.png" alt="Xerodonia Website logo: a white X with a yellow dot at the end of one stroke, on a bright blue background" width="128" height="128" align="left" hspace="16">
 
 The source for [xerodonia.com](https://xerodonia.com), the home of Xerodonia's apps and tools for iPhone, iPad and Mac, plus AI consulting and a blog.
 
 The site is static, built with [Eleventy](https://www.11ty.dev). It sends visitors only HTML and CSS: no JavaScript, no trackers and no cookies.
+
+<br clear="left">
 
 ## Quick start
 
