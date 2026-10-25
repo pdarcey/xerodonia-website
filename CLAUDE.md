@@ -4,7 +4,7 @@
 xerodonia.com is the public home for Xerodonia Pty Ltd's apps and tools (iPhone, iPad, Mac and CLI), its AI consulting service and its blog. It also hosts the **Privacy Policy and Support URLs** that App Store Connect requires for every app.
 
 Hard rules:
-- **Visitors get no JavaScript, no trackers and no cookies.** Node runs only at build time.
+- **Visitors get no cookies and no JavaScript of our own.** The one exception is TelemetryDeck's anonymous visit counts (approved by Paul, 25 Oct 2026): `site.telemetryDeck` in `src/_data/site.js`, written into every page's `<head>` by `base.njk`. Node runs only at build time.
 - **The site must expect more apps later.** Adding an app means adding a data file and an icon, with no template changes.
 - Australian English in all copy.
 
@@ -95,7 +95,7 @@ Edit `src/_data/consulting.yaml`. Each audience page lists the service `id`s it 
 
 ### AI agents and structured data
 - **Every template should set `pageType`** (app, app-privacy, app-support, consulting, consulting-services, consulting-audience, consulting-faq, or post) so `lib/structured-data.js` adds the right schema.org nodes. Pages without one get Organization and WebSite only.
-- **JSON-LD is the only `<script>` allowed.** The build fails on anything else (decision 8).
+- **JSON-LD and the TelemetryDeck tag are the only `<script>`s allowed.** The build fails on anything else, and on any page without exactly one TelemetryDeck tag that matches `site.telemetryDeck` (decision 8). If the App ID or script URL changes, change it there, and update the privacy page if what the script sends changes.
 - **`services.json` is a contract.** The MCP server depends on it, so add fields freely, but bump `schemaVersion` before renaming or removing any.
 - **The consulting MCP server** lives in `pdarcey/xerodonia-mcp` (`Projects/Services/xerodonia-mcp`). It reads `/consulting/services.json` from the live site, and `site.mcpUrl` advertises it. Its enquiries become issues in the private `pdarcey/consulting-enquiries` repo, which Clarity imports.
 

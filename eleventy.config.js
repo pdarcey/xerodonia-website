@@ -1,7 +1,7 @@
 // Eleventy configuration for xerodonia.com.
 //
-// Node runs only at build time. Visitors receive plain HTML and CSS,
-// with no JavaScript.
+// Node runs only at build time. Visitors receive plain HTML and CSS, plus
+// one script: TelemetryDeck's anonymous visit counts (lib/build-check.js).
 
 import path from "node:path";
 import yaml from "js-yaml";
@@ -134,8 +134,9 @@ export default function (eleventyConfig) {
   /** schema.org JSON-LD for a page (see lib/structured-data.js). Output with | safe. */
   eleventyConfig.addFilter("jsonLd", (data) => toJsonLd(structuredData(data)));
 
-  // Fail the build if any executable <script> sneaks into the output, or any
-  // JSON-LD block is invalid JSON. Visitors must never receive JavaScript.
+  // Fail the build if any executable <script> other than TelemetryDeck sneaks
+  // into the output, a page lacks the TelemetryDeck tag, or any JSON-LD block
+  // is invalid JSON (lib/build-check.js).
   eleventyConfig.on("eleventy.after", async ({ dir }) => checkBuildOutput(dir.output));
 
   /**

@@ -1,6 +1,6 @@
 # xerodonia.com — Status
 
-*Snapshot at the end of the 2026-10-13 session. See `Plan.md` for the roadmap and "Next session".*
+*Snapshot updated 2026-10-25. See `Plan.md` for the roadmap and "Next session".*
 
 ## Live at https://xerodonia.com
 Everything on the site is pushed and live. The 2026-10-13 commit (the Clarity logo files and the docs) is local only; it changes nothing visitors see.
@@ -19,12 +19,13 @@ Everything on the site is pushed and live. The 2026-10-13 commit (the Clarity lo
 | AI-agent layer | ✅ JSON-LD, `llms.txt`, `llms-full.txt`, `/consulting/services.json`, AI-aware `robots.txt` |
 | Consulting MCP server | ✅ `https://xerodonia-mcp.autumn-glitter-b50d.workers.dev/mcp` (repo `pdarcey/xerodonia-mcp`); enquiries become GitHub issues and an email to hello@ |
 | Link previews, favicons | ✅ |
+| Visit counts | **2026-10-25 (not pushed):** TelemetryDeck (WebSDK 1.1.0: one pageview per page, no storage) on every page, the only script besides JSON-LD; the build check enforces it. Privacy page has a "Visit counts" section and the short version "Anonymous visit counts / No cookies / No tracking across sites". About, `llms.txt` and the Readme updated. |
 | Clarity logo files | ✅ `logo.svg` and `logo.png` (1024 px) in the repo root represent this project in Clarity (2026-10-13). They aren't part of the site; `Readme.md` says how to keep them matching the site's mark. Awaiting Paul's check (#546) |
 | SEO and compliance (Stage 6) | ✅ **Done 2026-10-08.** W3C-valid, Lighthouse 100 across the board, no broken links (`Documentation/Audit-2026-10.md`). Every push runs build → check → deploy; PRs check without deploying; a weekly job checks external links and the MCP server and opens a GitHub issue (which syncs to Clarity). Search Console and Bing verified. |
 | App Store IDs | ✅ In each app's YAML (2026-10-07). Store links appear only when `status` is `app-store`; no build is uploaded yet |
-| Screenshots | ✅ **Stage 5d done (2026-10-07).** Blueprint: Mac, iPhone and iPad, plus iPad and iPhone widgets. Upcoming Birthdays: all three platforms; new app icon (cake) on 2026-10-15, with the icon, link-preview card and iPad screenshots updated and `requires` raised to iOS/iPadOS/macOS 27. Borderstamp: iPhone and iPad (stamps, maps, iPad widgets; dark maps and widgets wait for Borderstamp #488). Clarity: Mac. Scoreboard deferred. **2026-10-21 (not pushed):** Upcoming Birthdays uses the Marketing repo's images (headlines drawn in, light and dark, one strip per device, `src/_data/screenshots/`); the others still use YAML screenshots. `scripts/capture-screenshots.sh` is gone: the Marketing repo's scripts replace it. |
-| Press page | **2026-10-21 (not pushed):** `/press/` lists each product's press kit, a zip in the GitHub release `press-<slug>` on this repo, uploaded by the Marketing repo. Footer link under Company. |
-| Locales | **2026-10-21 (not pushed):** `lib/locales.js` (en-AU only) feeds `lang`, Open Graph, the feed, dates, prices and JSON-LD. |
+| Screenshots | ✅ **Stage 5d done (2026-10-07).** Blueprint: Mac, iPhone and iPad, plus iPad and iPhone widgets. Upcoming Birthdays: all three platforms; new app icon (cake) on 2026-10-15, with the icon, link-preview card and iPad screenshots updated and `requires` raised to iOS/iPadOS/macOS 27. Borderstamp: iPhone and iPad (stamps, maps, iPad widgets; dark maps and widgets wait for Borderstamp #488). Clarity: Mac. Scoreboard deferred. **2026-10-21 (live):** Upcoming Birthdays uses the Marketing repo's images (headlines drawn in, light and dark, one strip per device, `src/_data/screenshots/`); the others still use YAML screenshots. `scripts/capture-screenshots.sh` is gone: the Marketing repo's scripts replace it. |
+| Press page | **2026-10-21 (live):** `/press/` lists each product's press kit, a zip in the GitHub release `press-<slug>` on this repo, uploaded by the Marketing repo. Footer link under Company. |
+| Locales | **2026-10-21 (live):** `lib/locales.js` (en-AU only) feeds `lang`, Open Graph, the feed, dates, prices and JSON-LD. |
 
 ## Related repos
 | Repo | Change | Pushed? |

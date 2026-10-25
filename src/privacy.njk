@@ -1,10 +1,10 @@
 ---
 layout: layouts/base.njk
 title: Privacy
-description: The xerodonia.com website uses no cookies, no analytics and no JavaScript. Here's what little information it does handle, plus links to each app's privacy policy.
+description: The xerodonia.com website uses no cookies and counts visits anonymously, without tracking you across sites. Here's what little information it does handle, plus links to each app's privacy policy.
 permalink: /privacy/
 bodyClass: doc-page
-updated: 2026-10-05
+updated: 2026-10-25
 ---
 <article class="section doc">
   <div class="wrap doc-wrap">
@@ -17,16 +17,24 @@ updated: 2026-10-05
     <section class="doc-summary" aria-labelledby="summary-title">
       <h2 id="summary-title">The short version</h2>
       <ul class="checklist">
+        <li>Anonymous visit counts</li>
         <li>No cookies</li>
-        <li>No analytics, tracking pixels or fingerprinting</li>
-        <li>No JavaScript</li>
-        <li>No third-party fonts, embeds or ads</li>
+        <li>No tracking across sites</li>
       </ul>
     </section>
 
     <div class="prose">
       <h2>Hosting</h2>
       <p>This website is hosted by GitHub Pages. Like any web server, GitHub may log technical details of each visit, such as your IP address, to keep the service secure and running. We don't receive or use those logs. See <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.</p>
+
+      <h2 id="analytics">Visit counts</h2>
+      <p>We count visits with <a href="https://telemetrydeck.com">TelemetryDeck</a>, so we know which pages people read. Each page loads one small script from TelemetryDeck, which sends a single signal when the page opens.</p>
+      <ul>
+        <li><strong>What it sends:</strong> the page's address, the site that linked you here and your browser's language. From the request itself, TelemetryDeck also works out your country and your device and browser type.</li>
+        <li><strong>No cookies, no fingerprinting:</strong> nothing is stored in your browser. Visits are counted with a one-way hash of your IP address and browser details, mixed with a value that changes every day, so the same visitor can't be recognised on another day or on another site.</li>
+        <li><strong>What we use it for:</strong> only to see how many people visit and which pages they read. We see totals, not people.</li>
+        <li><strong>Where it goes:</strong> TelemetryDeck stores the data in Europe. See <a href="https://telemetrydeck.com/privacy/">TelemetryDeck's privacy policy</a>.</li>
+      </ul>
 
       <h2>When you email us</h2>
       <p>If you email us, we use your address and message only to reply to you, and we keep them only as long as we need to. Our email is hosted by Fastmail.</p>

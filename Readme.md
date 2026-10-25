@@ -1,8 +1,8 @@
 ---
 name: Xerodonia Website
-description: The source for xerodonia.com, the home of Xerodonia's apps and tools for iPhone, iPad and Mac, plus AI consulting and a blog. It's a static Eleventy site with no JavaScript, trackers or cookies.
+description: The source for xerodonia.com, the home of Xerodonia's apps and tools for iPhone, iPad and Mac, plus AI consulting and a blog. It's a static Eleventy site with no cookies, whose only script is TelemetryDeck's anonymous visit counts.
 version: "1.0.0"
-readmeUpdated: 2026-10-24
+readmeUpdated: 2026-10-25
 tags:
   - Website
 ---
@@ -13,7 +13,7 @@ tags:
 
 The source for [xerodonia.com](https://xerodonia.com), the home of Xerodonia's apps and tools for iPhone, iPad and Mac, plus AI consulting and a blog.
 
-The site is static, built with [Eleventy](https://www.11ty.dev). It sends visitors only HTML and CSS: no JavaScript, no trackers and no cookies.
+The site is static, built with [Eleventy](https://www.11ty.dev). It sends visitors HTML and CSS, plus one script: [TelemetryDeck](https://telemetrydeck.com)'s anonymous visit counts. No cookies, and no tracking across sites.
 
 <br clear="left">
 

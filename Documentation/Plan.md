@@ -6,7 +6,7 @@
 
 - The marketing home for Xerodonia's apps, tools and consulting services, plus a blog.
 - It also provides the **Privacy Policy and Support URLs** that App Store Connect requires.
-- Visitors get only HTML and CSS: **no JavaScript, no trackers, no cookies.**
+- Visitors get only HTML and CSS: **no JavaScript, no trackers, no cookies.** *(2026-10-25: Paul approved one exception, TelemetryDeck's anonymous visit counts. Still no cookies, and no tracking across sites.)*
 - Modern and clean, quick to load, and good modern SEO.
 - Free hosting at `xerodonia.com`.
 - A simple update process, with release notes published automatically where possible.
@@ -437,11 +437,11 @@ Baseline before starting: all 26 pages have `lang="en-AU"`, a canonical URL, a m
 6. **URLs:** tools share the `/apps/<slug>/` scheme (e.g. `/apps/obfuscate/`) instead of having a separate `/tools/` section. That's one listing and one template, and `kind: tool` still styles them differently.
 
 7. **Repo name:** `pdarcey/xerodonia-website` (public), so the repo is never confused with the website itself.
-8. **Stage 5 decisions:** screenshots via a DEBUG-only "screenshot mode" in Blueprint and Clarity; robots.txt allows all AI crawlers; agent engagement includes a live MCP server on Cloudflare Workers (free tier); JSON-LD `<script type="application/ld+json">` is allowed, but executable JS is not.
+8. **Stage 5 decisions:** screenshots via a DEBUG-only "screenshot mode" in Blueprint and Clarity; robots.txt allows all AI crawlers; agent engagement includes a live MCP server on Cloudflare Workers (free tier); JSON-LD `<script type="application/ld+json">` is allowed, but executable JS is not. **Changed 2026-10-25:** the TelemetryDeck tag is allowed too, exactly once per page (`lib/build-check.js`); the privacy page has a "Visit counts" section.
 
 ## Next session (written 2026-10-08, updated 2026-10-21)
 
-0. **Marketing images (2026-10-21, committed as `84aba89`, not pushed):** the Marketing repo's stages 1–6 (Marketing #619–#624, completed) changed this repo (`lib/locales.js`, marketing strips on app pages, `/press/`, the footer link, Upcoming Birthdays' new images). Don't push it by hand: the press page would link to a release that doesn't exist yet. After Paul finishes the alt text: `scripts/edit.sh --export upcoming-birthdays`, then `scripts/update-website.sh --add upcoming-birthdays` (Marketing repo). It uploads the press kit to the GitHub release `press-upcoming-birthdays`, then commits and pushes, asking first. Blueprint and Borderstamp follow once they have slides.
+0. ~~**Marketing images**~~ **Done:** pushed by `update-website.sh` on 2026-10-21 (`8dc8ab8`), with the press kit in the `press-upcoming-birthdays` release. Kept for the record: **Marketing images (2026-10-21, committed as `84aba89`):** the Marketing repo's stages 1–6 (Marketing #619–#624, completed) changed this repo (`lib/locales.js`, marketing strips on app pages, `/press/`, the footer link, Upcoming Birthdays' new images). Don't push it by hand: the press page would link to a release that doesn't exist yet. After Paul finishes the alt text: `scripts/edit.sh --export upcoming-birthdays`, then `scripts/update-website.sh --add upcoming-birthdays` (Marketing repo). It uploads the press kit to the GitHub release `press-upcoming-birthdays`, then commits and pushes, asking first. Blueprint and Borderstamp follow once they have slides.
 1. **App Store Connect:** every app's record exists and its `appStoreId` is in its YAML (Clarity's is reserved for a possible iOS companion app). No build is uploaded yet. Use `/apps/<slug>/`, `/privacy/` and `/support/` for the Marketing, Privacy Policy and Support URLs. **When an app is approved, set its `status` to `app-store` and push**; the button, Smart App Banner, JSON-LD and `llms.txt` link appear only then.
 2. **Stage 7:** release automation, including obfuscate's signed and notarised DMG (#470). Plan it first. Release-note PRs now get the full Stage 6 checks automatically.
 3. **Borderstamp's next work** (in that repo): StoreKit in-app purchases are now a **v1.0 launch feature**, and the site already promises them ("Free, with optional packs"). Also #488 (the map's dark-mode colours), after which: retake the dark map shots and the dark iPad widget shot, and add darkSrc to `borderstamp.yaml`.

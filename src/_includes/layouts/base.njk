@@ -29,6 +29,8 @@
   <meta name="apple-itunes-app" content="app-id={{ app.appStoreId }}">
   {%- endif %}
 
+  {#- Anonymous visit counts: the one script the build check allows (lib/build-check.js). #}
+  <script async src="{{ site.telemetryDeck.src }}" data-app-id="{{ site.telemetryDeck.appId }}"></script>
   <script type="application/ld+json">{{ { pageType: pageType, page: page, title: title, description: description, app: app, site: site, consulting: consulting } | jsonLd | safe }}</script>
   <link rel="alternate" type="text/markdown" title="{{ site.name }} for AI agents (llms.txt)" href="/llms.txt">
   {%- if pageType and pageType.startsWith("consulting") %}

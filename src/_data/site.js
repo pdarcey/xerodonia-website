@@ -23,6 +23,12 @@ export default {
   // The consulting MCP server's endpoint, once it's deployed (Stage 5c).
   // While empty, services.json and llms.txt simply don't mention it.
   mcpUrl: "https://xerodonia-mcp.autumn-glitter-b50d.workers.dev/mcp",
+  // TelemetryDeck: anonymous visit counts, and the only script visitors get.
+  // lib/build-check.js allows exactly this tag, and requires it on every page.
+  telemetryDeck: {
+    appId: "2B6D0C9E-C459-4538-A3D8-1E30ADE7116D",
+    src: "https://cdn.telemetrydeck.com/websdk/telemetrydeck.min.js",
+  },
   currentYear: new Date().getFullYear(),
   buildTime: new Date(),
 };

@@ -8,7 +8,7 @@ Out the back there's a consulting office (AI coding-agent consulting, with price
 
 It also does a less glamorous job that matters a lot: Apple wants a **Privacy Policy URL and a Support URL for every app** on the App Store. Those pages live here, at `/apps/<slug>/privacy/` and `/apps/<slug>/support/`.
 
-The ground rule for visitors is strict: **no JavaScript, no trackers, no cookies.** You get HTML, one stylesheet and images, and that's it.
+The ground rule for visitors is strict: **no cookies, and no JavaScript of our own.** You get HTML, one stylesheet and images, plus a single 679-byte script that counts visits anonymously (TelemetryDeck, since October 2026).
 
 ## Architecture Deep Dive
 
@@ -251,12 +251,20 @@ The website showed the real interface, framed by its own CSS; the App Store woul
 
 **The page that wouldn't die.** Testing `--remove`, the throwaway product's YAML, images and data were all gone, yet its page was still in `_site`. Eleventy writes pages; it never deletes them. CI starts clean so it would never have shipped, but the local checks were testing a ghost. The script now runs `npm run clean` first. **A build that only adds can't prove anything about removal.**
 
+### 2026-10-25: Counting heads without taking names
+
+The "no JavaScript" rule got its first real exception: Paul wanted to know whether anyone reads the site. TelemetryDeck was the obvious pick, since Blueprint already uses it, and it counts without cookies: a hash of IP, browser and a salt that changes daily, so a visitor is a stranger again tomorrow.
+
+The exception went in the same way JSON-LD did: **narrow, and enforced**. The build check doesn't just "allow scripts from TelemetryDeck"; it allows one exact tag (async, that URL, our App ID, nothing inside), demands it on every page, and still fails on anything else. It was proved against a doctored copy of the site with a wrong ID, a stray `evil.js`, a missing tag and a doubled one. All four failed.
+
+**Read the script, not the brochure.** TelemetryDeck's guide talks about a `pageLeave` event and engagement metrics, and the first draft of the privacy page promised a signal "when you leave". Then we downloaded the script itself: 679 bytes, one `fetch` on page load (address, referrer, language), no storage of any kind, and no `pageLeave` at all. The docs describe a newer SDK than the CDN serves. The policy now says what the code does. Same lesson as the app privacy policies: **a privacy claim comes from the code.**
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.
 - **One source of truth, many outputs.** Pages, privacy policies, JSON-LD, `llms.txt` and the MCP server's price list all come from the same YAML. Duplicated facts drift; generated ones can't.
 - **Privacy copy is a contract.** Write it from the code (usage strings, manifests, network calls), never from memory. The policy, the privacy manifest and App Store Connect's privacy answers must all agree.
-- **Make the rule enforce itself.** "No JavaScript" is a build failure, not a guideline. A guard you've seen fail is worth ten you hope work.
+- **Make the rule enforce itself.** "No JavaScript" is a build failure, not a guideline. A guard you've seen fail is worth ten you hope work. When a rule gains an exception, make the exception as exact as the rule.
 - **Check that a stranger can open a link before you publish it.** Private repos, unreleased apps and placeholder URLs all look fine from the inside.
 - **Change only the records you mean to.** A domain move is a web change and a mail change. Do one at a time, and check the MX records before and after.
 - **Native first.** Mac screenshots take seconds; Simulators can cost half an hour. Use the cheapest tool that does the job.
