@@ -30,7 +30,7 @@ The rebuild plan, decisions and staging are in `Documentation/Plan.md`. The stor
   - `npm run check:html`: the W3C Nu validator (`vnu-jar`). Needs Java, which this Mac doesn't have, so it runs in CI only.
   - Lighthouse targets: Performance fails below 90 and warns below 95; Accessibility, Best Practices and SEO must be 100 (`scripts/check-lighthouse.mjs`). The pages are listed in `lighthouserc.json`.
 - Screenshots are made in the Marketing repo (`~/Developer/Repos/Projects/Marketing`): `scripts/capture.sh` captures every product's screenshot mode on the simulators and the Mac, in every device, locale and look. It replaced this repo's `scripts/capture-screenshots.sh` (21 Oct 2026, Clarity #620).
-- `npm run images`: regenerate `favicon.ico`, `apple-touch-icon.png` and the link-preview cards in `src/images/og/`. Run this on a Mac after adding an app or changing an app's name, tagline or icon, and commit the output. It isn't part of the build, because its text rendering depends on the Mac's fonts.
+- `npm run images`: regenerate `favicon.ico`, `apple-touch-icon.png` and the link-preview cards in `src/images/og/`. Run this on a Mac after adding an app or changing an app's name, tagline or icon, and commit the output. It isn't part of the build, because its text rendering depends on the Mac's fonts. The Marketing repo's `scripts/update-website.sh` runs it on every publish (its output is identical when nothing changed), so by hand it's only needed for changes published some other way.
 
 ## Architecture
 ```
