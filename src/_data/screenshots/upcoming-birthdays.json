@@ -1,6 +1,6 @@
 {
   "product": "upcoming-birthdays",
-  "generated": "2026-10-21T11:52:10.365Z",
+  "generated": "2026-10-25T06:55:09.707Z",
   "defaultLocale": "en-AU",
   "locales": {
     "en-AU": [
@@ -17,7 +17,7 @@
             "height": 1088,
             "label": "UPCOMING BIRTHDAYS",
             "headline": "Just the people you care about, not everyone you ever met",
-            "alt": "\"Just the people you care about, not everyone you ever met\" with an iPhone screenshot showing a limited number of people's names, their birthdays, and, in some cases, their ages"
+            "alt": "“Just the people you care about, not everyone you ever met” with an iPhone screenshot showing a limited number of people’s names, their birthdays, and, in some cases, their ages"
           },
           {
             "index": 2,
@@ -28,7 +28,7 @@
             "height": 1088,
             "label": "WIDGETS",
             "headline": "Quickly, who’s got\na birthday \ncoming up?",
-            "alt": "\"Quickly, who’s got a birthday coming up?\" and a screenshot of an iPhone showing two widgets: one with the title \"Birthdays in the next 3 days\" and showing a person's name and their birthday as today, and another person whose birthday is two days from now, and the second with the title \"Upcoming Birthdays\" showing three people's names birthdays and ages (including one today)"
+            "alt": "“Quickly, who’s got a birthday coming up?” and a screenshot of an iPhone showing two widgets: one with the title “Birthdays in the next 3 days” and showing a person’s name and their birthday as today, and another person whose birthday is two days from now, and the second with the title “Upcoming Birthdays” showing three people’s names birthdays and ages (including one today)"
           },
           {
             "index": 3,
@@ -39,7 +39,7 @@
             "height": 1088,
             "label": "AT A GLANCE",
             "headline": "See who’s next,\nwithout opening\nthe app.",
-            "alt": "\"See who's next without opening the app\" and a screenshot of an iPhone showing a large widget with the title \"Upcoming Birthdays\" showing seven people's names birthdays and ages (including one today)"
+            "alt": "“See who’s next without opening the app” and a screenshot of an iPhone showing a large widget with the title “Upcoming Birthdays” showing seven people’s names birthdays and ages (including one today)"
           },
           {
             "index": 4,
@@ -50,7 +50,7 @@
             "height": 1088,
             "label": "REMINDERS",
             "headline": "Don’t you hate it when you \nforget?",
-            "alt": "\"Don’t you hate it when you \nforget?\" and a screenshot of an iPhone showing a Settings screen for setting notifications, allowing the user to toggle each of: \"on the day\", \"one day before\", and \"a few days before\". There is also a selector to set how many days before, and the time for the notification."
+            "alt": "“Don’t you hate it when you forget?” and a screenshot of an iPhone showing a Settings screen for setting notifications, allowing the user to toggle each of: “on the day”, “one day before”, and “a few days before”. There is also a selector to set how many days before, and the time for the notification."
           },
           {
             "index": 5,
@@ -61,7 +61,7 @@
             "height": 1088,
             "label": "DETAILS",
             "headline": "It’s whose birthday today?\n\nHow old?",
-            "alt": "\"It’s whose birthday today?\nHow old?\" and a screenshot of an iPhone with details of a woman, with her name, photo, birthday, how old she will be turning, and the year she was born"
+            "alt": "“It’s whose birthday today? How old?” and a screenshot of an iPhone with details of a woman, with her name, photo, birthday, how old she will be turning, and the year she was born"
           },
           {
             "index": 6,
@@ -72,7 +72,7 @@
             "height": 1088,
             "label": "PRIVATE",
             "headline": "Your contacts\nstay on\nyour iPhone.",
-            "alt": "A simple slide saying, \"Your contacts stay on your iPhone.\""
+            "alt": "A simple slide saying, “Your contacts stay on your iPhone.”"
           },
           {
             "index": 7,
@@ -83,7 +83,7 @@
             "height": 1088,
             "label": "ANY TEXT SIZE",
             "headline": "Big text?\nNo problem.",
-            "alt": ""
+            "alt": "“Big text? No problem.” and two iPhone screenshots: the birthday list at the standard text size, and the same list at a much larger accessibility text size, still laid out clearly."
           },
           {
             "index": 8,
@@ -94,7 +94,7 @@
             "height": 1088,
             "label": "AND MORE",
             "headline": "Two widgets\nThree reminders\nA Mac app too\nVoiceOver ready",
-            "alt": ""
+            "alt": "A slide listing more features: two widgets, three reminders, a Mac app too, and VoiceOver ready."
           }
         ]
       },
@@ -111,7 +111,7 @@
             "height": 1088,
             "label": "WIDGETS",
             "headline": "Quickly, who’s got\na birthday \ncoming up?",
-            "alt": ""
+            "alt": "“Quickly, who’s got a birthday coming up?” and an iPad Home Screen with three Upcoming Birthdays widgets: a large one listing seven people’s birthdays and ages, a medium one showing the next three, and “Birthdays in the Next 3 Days” showing one birthday today and one in two days."
           },
           {
             "index": 2,
@@ -122,7 +122,7 @@
             "height": 1088,
             "label": "UPCOMING BIRTHDAYS",
             "headline": "Only the people\nyou care about.",
-            "alt": ""
+            "alt": "“Only the people you care about.” and the iPad app: a “Today’s Birthdays” banner above a list of eleven people, each with their birthday, how far away it is and, for some, the age they’re turning."
           },
           {
             "index": 3,
@@ -133,7 +133,7 @@
             "height": 1088,
             "label": "REMINDERS",
             "headline": "Don’t you hate it when you \nforget?",
-            "alt": ""
+            "alt": "“Don’t you hate it when you forget?” and the iPad app’s Settings, with switches for notifications on the day, one day before and a few days before, how many days before (3), and the time to send them (10:00 am)."
           },
           {
             "index": 4,
@@ -144,7 +144,7 @@
             "height": 1088,
             "label": "DETAILS",
             "headline": "Know who’s\nturning what.",
-            "alt": ""
+            "alt": "“Know who’s turning what.” and the iPad app showing one person’s details: her name, photo, birthday (today), the age she turns (34) and the year she was born."
           },
           {
             "index": 5,
@@ -155,7 +155,7 @@
             "height": 1088,
             "label": "PRIVATE",
             "headline": "Your contacts\nstay on\nyour iPad.",
-            "alt": ""
+            "alt": "A slide saying “Your contacts stay on your iPad.”"
           }
         ]
       },
@@ -172,7 +172,7 @@
             "height": 920,
             "label": "UPCOMING BIRTHDAYS",
             "headline": "Just the people you care about, not everyone you ever met",
-            "alt": ""
+            "alt": "“Just the people you care about, not everyone you ever met” and the Mac app’s window: a “Today’s Birthdays” banner above a list of eleven people, with their birthdays, how far away each is and, for some, their age."
           },
           {
             "index": 2,
@@ -182,8 +182,8 @@
             "width": 1472,
             "height": 920,
             "label": "DETAILS",
-            "headline": "It’s whose birthday today?\n\nHow old???",
-            "alt": ""
+            "headline": "It’s whose birthday today?\n\nHow old?",
+            "alt": "“It’s whose birthday today? How old?” and two Mac windows: the birthday list, with one person’s details in front of it, showing her photo, birthday (today), the age she turns (34) and the year she was born."
           },
           {
             "index": 3,
@@ -194,7 +194,7 @@
             "height": 920,
             "label": "PRIVATE",
             "headline": "Nothing leaves\nyour Mac.",
-            "alt": ""
+            "alt": "A slide saying “Nothing leaves your Mac.”"
           },
           {
             "index": 4,
@@ -204,8 +204,8 @@
             "width": 1472,
             "height": 920,
             "label": "AND MORE",
-            "headline": "Widgets\nReminders\niPhone and iPad",
-            "alt": ""
+            "headline": "Widgets\nReminders\niPhone and iPad\nVoiceOver ready",
+            "alt": "A slide listing more features: widgets, reminders, apps for iPhone and iPad, and VoiceOver ready."
           }
         ]
       }
