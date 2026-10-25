@@ -257,7 +257,7 @@ The "no JavaScript" rule got its first real exception: Paul wanted to know wheth
 
 The exception went in the same way JSON-LD did: **narrow, and enforced**. The build check doesn't just "allow scripts from TelemetryDeck"; it allows one exact tag (async, that URL, our App ID, nothing inside), demands it on every page, and still fails on anything else. It was proved against a doctored copy of the site with a wrong ID, a stray `evil.js`, a missing tag and a doubled one. All four failed.
 
-**Read the script, not the brochure.** TelemetryDeck's guide talks about a `pageLeave` event and engagement metrics, and the first draft of the privacy page promised a signal "when you leave". Then we downloaded the script itself: 679 bytes, one `fetch` on page load (address, referrer, language), no storage of any kind, and no `pageLeave` at all. The docs describe a newer SDK than the CDN serves. The policy now says what the code does. Same lesson as the app privacy policies: **a privacy claim comes from the code.**
+**Read the script, not the brochure.** TelemetryDeck's guide talks about a `pageLeave` event and engagement metrics, and the first draft of the privacy page promised a signal "when you leave". Then we downloaded the script itself: 679 bytes, one `fetch` on page load (address, referrer, language), no storage of any kind, and no `pageLeave` at all. The docs describe a newer SDK than the CDN serves. The policy now says what the code does. Same lesson as the app privacy policies: **a privacy claim comes from the code.** It went live the same afternoon with every CI check green, and Lighthouse didn't lose a single point to the new script.
 
 ## Engineer's Wisdom
 

@@ -1,13 +1,13 @@
 # xerodonia.com — Status
 
-*Snapshot updated 2026-10-25. See `Plan.md` for the roadmap and "Next session".*
+*Snapshot at the end of the 2026-10-25 session. See `Plan.md` for the roadmap and "Next session".*
 
 ## Live at https://xerodonia.com
-Everything on the site is pushed and live. The 2026-10-13 commit (the Clarity logo files and the docs) is local only; it changes nothing visitors see.
+Everything is pushed and live (last deploy: `1b34241`, 2026-10-25).
 
 - GitHub Pages, deployed by GitHub Actions on every push to `main` (repo `pdarcey/xerodonia-website`, public). HTTPS is enforced; `www` redirects to the apex.
 - DNS stays at Fastmail (A/AAAA records to GitHub; `www` CNAME). Email records are untouched.
-- 32 output files, built in about 0.3 s once images are cached. No JavaScript: the post-build guard fails the build on any executable script.
+- 33 output files, built in about 0.3 s once images are cached. No JavaScript of our own: the post-build guard fails the build on any executable script except the one TelemetryDeck tag, which every page must have.
 
 | Area | State |
 |---|---|
@@ -19,7 +19,7 @@ Everything on the site is pushed and live. The 2026-10-13 commit (the Clarity lo
 | AI-agent layer | ✅ JSON-LD, `llms.txt`, `llms-full.txt`, `/consulting/services.json`, AI-aware `robots.txt` |
 | Consulting MCP server | ✅ `https://xerodonia-mcp.autumn-glitter-b50d.workers.dev/mcp` (repo `pdarcey/xerodonia-mcp`); enquiries become GitHub issues and an email to hello@ |
 | Link previews, favicons | ✅ |
-| Visit counts | **2026-10-25 (not pushed):** TelemetryDeck (WebSDK 1.1.0: one pageview per page, no storage) on every page, the only script besides JSON-LD; the build check enforces it. Privacy page has a "Visit counts" section and the short version "Anonymous visit counts / No cookies / No tracking across sites". About, `llms.txt` and the Readme updated. |
+| Visit counts | ✅ **Live 2026-10-25 (#641, verified by Paul and closed):** TelemetryDeck (WebSDK 1.1.0: one pageview per page, no storage) on every page, the only script besides JSON-LD; the build check enforces it. Privacy page has a "Visit counts" section and the short version "Anonymous visit counts / No cookies / No tracking across sites". About, `llms.txt` and the Readme updated. |
 | Clarity logo files | ✅ `logo.svg` and `logo.png` (1024 px) in the repo root represent this project in Clarity (2026-10-13). They aren't part of the site; `Readme.md` says how to keep them matching the site's mark. Awaiting Paul's check (#546) |
 | SEO and compliance (Stage 6) | ✅ **Done 2026-10-08.** W3C-valid, Lighthouse 100 across the board, no broken links (`Documentation/Audit-2026-10.md`). Every push runs build → check → deploy; PRs check without deploying; a weekly job checks external links and the MCP server and opens a GitHub issue (which syncs to Clarity). Search Console and Bing verified. |
 | App Store IDs | ✅ In each app's YAML (2026-10-07). Store links appear only when `status` is `app-store`; no build is uploaded yet |

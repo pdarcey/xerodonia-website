@@ -1,6 +1,6 @@
 # xerodonia.com — Rebuild Plan
 
-*Drafted 2026-10-05. Status (end of session, 2026-10-13): **Stages 1–6 done and live.** Every app that's ready has screenshots on its platforms (Scoreboard deferred), and CI checks every build before it deploys. Next: Stage 7 (see "Next session" below).*
+*Drafted 2026-10-05. Status (end of session, 2026-10-25): **Stages 1–6 done and live**, plus marketing images and `/press/` (2026-10-21) and TelemetryDeck visit counts (2026-10-25, #641). Every app that's ready has screenshots on its platforms (Scoreboard deferred), and CI checks every build before it deploys. Next: Stage 7 (see "Next session" below).*
 
 ## Goals
 
@@ -439,7 +439,7 @@ Baseline before starting: all 26 pages have `lang="en-AU"`, a canonical URL, a m
 7. **Repo name:** `pdarcey/xerodonia-website` (public), so the repo is never confused with the website itself.
 8. **Stage 5 decisions:** screenshots via a DEBUG-only "screenshot mode" in Blueprint and Clarity; robots.txt allows all AI crawlers; agent engagement includes a live MCP server on Cloudflare Workers (free tier); JSON-LD `<script type="application/ld+json">` is allowed, but executable JS is not. **Changed 2026-10-25:** the TelemetryDeck tag is allowed too, exactly once per page (`lib/build-check.js`); the privacy page has a "Visit counts" section.
 
-## Next session (written 2026-10-08, updated 2026-10-21)
+## Next session (written 2026-10-08, updated 2026-10-25)
 
 0. ~~**Marketing images**~~ **Done:** pushed by `update-website.sh` on 2026-10-21 (`8dc8ab8`), with the press kit in the `press-upcoming-birthdays` release. Kept for the record: **Marketing images (2026-10-21, committed as `84aba89`):** the Marketing repo's stages 1–6 (Marketing #619–#624, completed) changed this repo (`lib/locales.js`, marketing strips on app pages, `/press/`, the footer link, Upcoming Birthdays' new images). Don't push it by hand: the press page would link to a release that doesn't exist yet. After Paul finishes the alt text: `scripts/edit.sh --export upcoming-birthdays`, then `scripts/update-website.sh --add upcoming-birthdays` (Marketing repo). It uploads the press kit to the GitHub release `press-upcoming-birthdays`, then commits and pushes, asking first. Blueprint and Borderstamp follow once they have slides.
 1. **App Store Connect:** every app's record exists and its `appStoreId` is in its YAML (Clarity's is reserved for a possible iOS companion app). No build is uploaded yet. Use `/apps/<slug>/`, `/privacy/` and `/support/` for the Marketing, Privacy Policy and Support URLs. **When an app is approved, set its `status` to `app-store` and push**; the button, Smart App Banner, JSON-LD and `llms.txt` link appear only then.
@@ -447,7 +447,9 @@ Baseline before starting: all 26 pages have `lang="en-AU"`, a canonical URL, a m
 3. **Borderstamp's next work** (in that repo): StoreKit in-app purchases are now a **v1.0 launch feature**, and the site already promises them ("Free, with optional packs"). Also #488 (the map's dark-mode colours), after which: retake the dark map shots and the dark iPad widget shot, and add darkSrc to `borderstamp.yaml`.
 4. **Stage 8:** update docs, tidy Clarity.
 5. **Small tidy-ups:** close the test issue #493 ("Clarity check", imported from GitHub issue #1) once Paul agrees; Paul to check the Clarity logo files (#546).
-6. **Whenever Paul chooses:** Search Console and Bing take a few days to show data; check them for crawl errors once they have some. Clarity #467 (sample-data polish, then retake Clarity's dashboard shots); Upcoming Birthdays #479, #480, #475 and a `.gitignore`; Borderstamp #483 (the project file re-adds a self-reference on open; the experiment to try is written up in the issue).
+6. **Link-preview card (#558):** "Upcoming Birthdays" runs under the icon. Limit the title's width in `scripts/make-images.mjs`, run `npm run images`, and check every card.
+7. **TelemetryDeck (live 2026-10-25, #641 closed):** the CDN script isn't pinned. If it changes (now WebSDK 1.1.0: one pageview, no storage), update the privacy page's "Visit counts" section.
+8. **Whenever Paul chooses:** Search Console and Bing take a few days to show data; check them for crawl errors once they have some. Clarity #467 (sample-data polish, then retake Clarity's dashboard shots); Upcoming Birthdays #479, #480, #475 and a `.gitignore`; Borderstamp #483 (the project file re-adds a self-reference on open; the experiment to try is written up in the issue).
 
 **Taking screenshots:** the Marketing repo (`~/Developer/Repos/Projects/Marketing`) does it in three steps: `scripts/capture.sh` (every device, locale and look, Mac included; its header explains the manual Home Screen widget shots), `scripts/edit.sh` (wording and layouts) and `scripts/update-website.sh` (bring them here, build, check, push). Ask Paul before booting a Simulator, run tests *before* publishing widget data (a test run turns Blueprint's widget flag off), and expect the Home Screen to jump to the app's icon page whenever the app quits. Mac shots: launch the Debug build with `-ScreenshotMode` (plus `-AppleInterfaceStyle Dark`, or `-NSRequiresAquaSystemAppearance YES` for light) and `screencapture -x -l <window id>`. Checking the page: headless Chrome needs `--virtual-time-budget=20000`.
 
