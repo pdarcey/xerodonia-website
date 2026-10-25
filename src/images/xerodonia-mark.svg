@@ -1,5 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Xerodonia">
-  <rect width="64" height="64" rx="15" fill="#2f6cf6"/>
-  <path d="M20 19 44 45M44 19 20 45" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
-  <circle cx="47" cy="47" r="5" fill="#f8b93d"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Xerodonia">
+  <!-- Xerodonia mark, Depth version. Three layers for Icon Composer: the background is
+       full-bleed (Icon Composer applies its own mask), and the X and dot are filled shapes.
+       The round socket around the dot is part of the X's own outline. -->
+  <defs>
+    <linearGradient id="depth" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2f6cf6"/>
+      <stop offset="1" stop-color="#0b40af"/>
+    </linearGradient>
+  </defs>
+  <g id="background">
+    <rect width="1024" height="1024" fill="url(#depth)"/>
+  </g>
+  <g id="x">
+    <path fill="#ffffff" d="M512.00 417.87 L731.17 198.69 A66.56 66.56 0 0 1 825.31 292.83 L606.13 512.00 L765.60 671.47 A107.52 107.52 0 0 0 671.47 765.60 L512.00 606.13 L292.83 825.31 A66.56 66.56 0 0 1 198.69 731.17 L417.87 512.00 L198.69 292.83 A66.56 66.56 0 0 1 292.83 198.69 L512.00 417.87 Z"/>
+  </g>
+  <g id="dot">
+    <circle cx="778.24" cy="778.24" r="66.56" fill="#f8b93d"/>
+  </g>
 </svg>
