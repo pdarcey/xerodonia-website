@@ -66,10 +66,11 @@ privacy:
     - The places you've been, and when
     - Your photos and their locations
   offDevice:
-    - Nothing. Your stamps sync only through your own private iCloud, if you use it.
+    - Your stamps, only through your own private iCloud, if you use it
+    - Feedback, only when you choose to send it
 
 privacyPolicy:
-  updated: 2026-10-09
+  updated: 2026-11-02
   contactEmail: privacy@borderstamp.com   # matches the app's Settings › Privacy Policy; defaults to site.email
   storedIn: on your device and, if you use it, in your private iCloud   # optional; defaults to "on your device"
   permissions:
@@ -79,7 +80,11 @@ privacyPolicy:
       use: To scan the location data in your existing photos and award stamps for places you visited before you installed Borderstamp. Your photos are read on your device and are never uploaded or shared.
     - name: Notifications (optional)
       use: To tell you when you've earned a new stamp.
-  sharing: []            # v1.0 sends nothing off the device. Update this, the app page and App Store Connect when the merchandise store ships.
+  sharing:               # everything that leaves the device; keep in step with the app's PrivacyView and PrivacyInfo.xcprivacy
+    - recipient: Xerodonia, via our private issue tracker (hosted on GitHub)
+      data: "Only when you send feedback from Settings: the title and description you write, plus the app version, system version and device model. Never your location or your stamps."
+      purpose: To read and act on your feedback. Only we can see it.
+      policy: https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement
   sections:
     - heading: How Borderstamp handles your location
       text: Borderstamp compares each location reading with map data stored inside the app, to work out which country, state, province or county you're in. That happens entirely on your device. Borderstamp keeps the places you've earned stamps for and when you earned them. It doesn't keep a trail of where you've been, and your location is never sent to us or to anyone else.

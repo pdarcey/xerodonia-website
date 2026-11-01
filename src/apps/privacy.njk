@@ -90,7 +90,7 @@ const eleventyComputed = {
       </ul>
 
       <h2>Your choices and your data</h2>
-      <p>Everything {{ app.name }} stores is kept {{ policy.storedIn or "on your device" }}. Deleting the app deletes it.{% if policy.sharing.length %} Anonymous usage signals can't be linked to you, so there's nothing about you for us to find or delete. If you've sent us feedback or an email and would like it deleted, ask us and we will.{% endif %}</p>
+      <p>Everything {{ app.name }} stores is kept {{ policy.storedIn or "on your device" }}. Deleting the app deletes it.{% if policy.analytics %} Anonymous usage signals can't be linked to you, so there's nothing about you for us to find or delete.{% endif %}{% if policy.sharing.length %} If you've sent us feedback or an email and would like it deleted, ask us and we will.{% endif %}</p>
 
       <h2>Children</h2>
       <p>{{ app.name }} isn't directed at children under 13. It doesn't collect personal information from anyone, including children.{% if policy.sharing.length %} The only exception is feedback: if someone sends it, we see only what they choose to write.{% endif %}</p>
