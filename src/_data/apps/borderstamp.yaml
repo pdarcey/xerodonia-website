@@ -75,9 +75,9 @@ privacyPolicy:
   storedIn: on your device and, if you use it, in your private iCloud   # optional; defaults to "on your device"
   permissions:
     - name: Location (optional, "Always" or "While Using")
-      use: To notice when you cross a border and award a stamp. With "Always", this happens automatically in the background; with "While Using", it happens when you open the app.
+      use: To notice when you cross a border and issue a stamp. With "Always", this happens automatically in the background; with "While Using", it happens when you open the app.
     - name: Photos (optional)
-      use: To scan the location data in your existing photos and award stamps for places you visited before you installed Borderstamp. Your photos are read on your device and are never uploaded or shared.
+      use: To scan the location data in your existing photos and issue stamps for places you visited before you installed Borderstamp. Your photos are read on your device and are never uploaded or shared.
     - name: Notifications (optional)
       use: To tell you when you've earned a new stamp.
   sharing:               # everything that leaves the device; keep in step with the app's PrivacyView and PrivacyInfo.xcprivacy
@@ -100,7 +100,7 @@ support:
     - q: Why would I give Borderstamp "Always" location access?
       a: With "Always", stamps arrive automatically as you travel, even when the app is closed. If you'd rather not, choose "While Using" and open Borderstamp when you arrive somewhere new.
     - q: Can I get stamps for trips I took before installing Borderstamp?
-      a: Yes. Let Borderstamp scan your photos, and it will award stamps for places your photos were taken. Only the photos' location data is used, and nothing leaves your device.
+      a: Yes. Let Borderstamp scan your photos, and it will issue stamps for places your photos were taken. Only the photos' location data is used, and nothing leaves your device.
     - q: Do my stamps sync between my devices?
       a: Yes, if you're signed in to iCloud on each device. Sync uses your private iCloud database, which only you can access. If you're not signed in, or your iCloud storage is full, your stamps are kept on your device, and Settings › iCloud Sync in Borderstamp shows what's happening.
     - q: What happens if I sign out of iCloud, or turn it off for Borderstamp?
