@@ -1,4 +1,4 @@
-# Borderstamp. Privacy and support are complete (Stage 3); screenshots added 2026-10-07 (Stage 5d).
+# Borderstamp. Privacy and support are complete (Stage 3); marketing screenshots from 2026-11-07.
 name: Borderstamp
 slug: borderstamp
 order: 2
@@ -6,9 +6,9 @@ kind: app
 accent: "#e9a91c"
 icon: images/apps/borderstamp.png
 category: Travel
-tagline: A digital passport for the real world. Collect a stamp every time you cross a border.
-headline: Passport stamps for the places you actually go.
-summary: "Carry your phone across a border and Borderstamp gives you a stamp. Every country in the world is included, and optional stamp sets add states, provinces, prefectures and counties. Everything happens on your device, with no servers and no tracking. Your stamps sync only through your own private iCloud."
+tagline: Cross a border, get a stamp!
+headline: Cross a border, get a stamp!
+summary: "Cross a border with Borderstamp and you’ll get a stamp. Every country in the world. Optionally, states, provinces, prefectures, counties and even places that no longer exist. Everything happens on your device, totally private, as it should be."
 platforms: [iPhone, iPad]
 requires: iOS 26 or iPadOS 26
 status: testflight-soon
@@ -18,48 +18,30 @@ price: Free, with optional stamp sets
 appCategory: Travel
 languages: [English]
 
-screenshots:             # a sample passport from the app's screenshot mode (fake data), 2026-10-07
-  # iPad Pro 13-inch (M5) Simulator, full-screen mode, among Apple apps only (no third-party content).
-  # Light only until the map widgets get dark-mode colours (Borderstamp #488).
-  - device: tablet
-    src: images/apps/borderstamp/ipad-widgets.png
-    caption: Your latest stamp, your most-visited place and your maps, right on your Home Screen
-    alt: "An iPad Home Screen with five Borderstamp widgets: the latest stamp (Osaka, Japanese Prefectures, 3 July 2026), Most Visited (Australia), two stats widgets showing 31 stamps, 8 countries and 27 regions, a world map with 8 of 235 countries visited, and an Australian States map with 5 of 8 visited"
-  # iPhone 18 Pro Max Simulator (status bar 9:41, full battery)
-  - device: phone
-    src: images/apps/borderstamp/iphone-stamps.png
-    darkSrc: images/apps/borderstamp/iphone-stamps-dark.png
-    caption: Every border you cross becomes a stamp, newest first
-    alt: "Borderstamp on an iPhone: 31 Stamps, newest first. Australia and a round New South Wales stamp, then Japanese prefecture stamps for Osaka and Hiroshima, Japan and Tokyo, and China and Beijing, each with the date it was earned"
-  # iPad Pro 13-inch (M5) Simulator
-  - device: tablet
-    src: images/apps/borderstamp/ipad-stamps.png
-    darkSrc: images/apps/borderstamp/ipad-stamps-dark.png
-    caption: Every country is included; optional stamp sets add states, prefectures and counties, each with its own design
-    alt: "Borderstamp on an iPad: a grid of stamps four across, including Australia, New South Wales, Osaka, Hiroshima, Tokyo, Beijing, a shamrock stamp for Galway, Italy, Switzerland, a Schengen Area entry stamp, the European Union, France, Scotland and England"
-  # Dark versions of the maps wait for new dark-mode map colours (Borderstamp #488)
-  - device: phone
-    src: images/apps/borderstamp/iphone-map.png
-    caption: Watch your map fill in
-    alt: "The Borderstamp world map on an iPhone with the visited countries in amber: Australia, China, Japan, the United Kingdom, Ireland, France, Switzerland and Italy. Visited: 8 of 235 countries"
-  - device: tablet
-    src: images/apps/borderstamp/ipad-map-china.png
-    caption: Optional stamp sets zoom in further, like China's provinces
-    alt: "The Borderstamp map on an iPad zoomed in on China, with Beijing, Shanghai, Shaanxi and Sichuan in amber. Chinese Provinces: visited 4 of 34, most visited Beijing"
+# Screenshots: the marketing images in src/_data/screenshots/borderstamp.json,
+# made in the Marketing repo (capture, edit, update-website.sh --add).
+# Light only until the map widgets get dark-mode colours (Borderstamp #488).
 
 featuresHeading: What you get
-features:                # facts checked against the app's code, 2026-10-07
+features:                # Paul's wording, 2026-11-07; counts checked against the spatial database (235 countries and territories; 859 regions in the optional sets, 1,094 in all)
   - title: Every country, free
-    text: Borderstamp comes with a stamp for every country in the world. Optional stamp sets take you further, with Australian states, US states, Canadian provinces, Japanese prefectures, Chinese provinces, Irish counties and many more, each with its own stamp design.
-  - title: Places that don't exist any more
-    text: "Some stamp sets collect places you won't find on today's maps. Walk the Kurfürstendamm for a West Berlin stamp, then cross to Alexanderplatz for one from the German Democratic Republic. Visit Moscow, Belgrade or Prague for stamps from the USSR, Yugoslavia and Czechoslovakia. Others cross borders altogether: the European Union and the Schengen Area. And the UK's historical counties bring back Westmorland, Cumberland, Middlesex and Rutland. Your friends' passports can't do that."
+    text:
+      - "Out of the box, Borderstamp issues stamps for 235 countries and territories. That’s every country in the world!"
+      - "If the whole world’s not enough for you, we’ve got optional stamp sets for Australian states, US states, Canadian provinces, Japanese prefectures, Chinese provinces, Irish counties and many more, each with its own stamp design. That takes it to over 1,000 individual regions, with more to come."
+  - title: Places that don’t exist any more
+    text:
+      - "We issue stamps for places you won’t even find on today’s maps."
+      - "Walk the Kurfürstendamm for a West Berlin stamp, then cross to Alexanderplatz for one from the German Democratic Republic. Visit Moscow, Belgrade or Prague for stamps from the USSR, Yugoslavia and Czechoslovakia."
+      - "Others cross borders altogether: the European Union and the Schengen Area. And the UK’s historical counties bring back Westmorland, Cumberland, Middlesex and Rutland. Your friends’ passports can’t do that."
   - title: Your past travels count too
-    text: Let Borderstamp look through your photo library, and it will stamp your passport for trips you took years ago. It reads only when and where each photo was taken, never the pictures themselves, so whatever is in your photos stays between you and your camera roll. It all happens on your device, and nothing is uploaded.
-  - title: Add a stamp set, and your history fills in
-    text: Borderstamp quietly notes every region you visit, even ones in stamp sets you don't own yet. Add a stamp set later, and those stamps appear straight away, dated to when you were really there. No need to go back (though you might want to).
+    text:
+      - "If you want, you can let Borderstamp scan your photo library, and it will stamp your passport for trips you took years ago."
+      - "It reads only when and where each photo was taken, never the pictures themselves, so whatever is in your photos stays between you and your camera roll. It all happens on your device, and nothing is uploaded."
+  - title: No regrets
+    text: "Borderstamp quietly notes every region you visit, even ones in stamp sets you don’t own yet. Add a stamp set later, and those stamps appear straight away, dated to when you were really there. No need to go back (though you might want to)."
 
 privacy:
-  quote: Your location is turned into place names on your phone, and goes no further.
+  quote: Border crossings are calculated entirely on your phone, and go no further.
   summary: Borderstamp watches for border crossings using map data built into the app. It works out which country, state or county you're in on the device, and never sends your location anywhere.
   onDevice:
     - Your location, at all times

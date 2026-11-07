@@ -1,0 +1,145 @@
+{
+  "product": "borderstamp",
+  "generated": "2026-11-07T10:09:25.885Z",
+  "defaultLocale": "en-AU",
+  "locales": {
+    "en-AU": [
+      {
+        "device": "iphone",
+        "label": "iPhone",
+        "shots": [
+          {
+            "index": 1,
+            "layout": "hero",
+            "src": "images/apps/borderstamp/marketing/en-AU/iphone-01-hero.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "BORDERSTAMP",
+            "headline": "We never say, “Papers, please!”\n\nCross a border and automatically get a new stamp",
+            "alt": "“We never say, ‘Papers, please!’ Cross a border and automatically get a new stamp” and an iPhone showing 35 country stamps, newest first, each with its flag and the date it was earned: Australia, Estonia, Czechia, Germany, Italy, Switzerland, France and Ireland"
+          },
+          {
+            "index": 2,
+            "layout": "device-top",
+            "src": "images/apps/borderstamp/marketing/en-AU/iphone-02-device-top.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "SOMETHING FOR EVERYONE",
+            "headline": "Never travelled internationally? \n\nNo problem!",
+            "alt": "“Never travelled internationally? No problem!” and an iPhone showing 8 U.S. state stamps, each on a Stars and Stripes design: California, Hawaii, New York, Louisiana, Texas, Nevada, Alaska and Washington"
+          },
+          {
+            "index": 3,
+            "layout": "device-bottom",
+            "src": "images/apps/borderstamp/marketing/en-AU/iphone-03-device-bottom.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "CUSTOM STAMP SETS",
+            "headline": "Countries, states, territories, historical places\n\nGet custom stamps no-one else has",
+            "alt": "“Countries, states, territories, historical places. Get custom stamps no-one else has” and an iPhone showing Borderstamp’s Store. Cold War Countries is featured with a West Berlin stamp from Checkpoint Charlie: “You’ve already crossed nine borders in Cold War Europe”, $1.99. Below it, stamp sets for U.S. States, Japanese Prefectures and Australian States"
+          },
+          {
+            "index": 4,
+            "layout": "device-top",
+            "src": "images/apps/borderstamp/marketing/en-AU/iphone-04-device-top.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "ALREADY BEEN THERE?",
+            "headline": "Add your own history\n\nEasily, quickly, on‑device",
+            "alt": "“Add your own history. Easily, quickly, on-device” and an iPhone showing stamps from 2002 and 2003: the Netherlands, Kerry in Ireland, Ireland, the United Kingdom, Thailand, Okinawa, Hokkaido and Japan"
+          },
+          {
+            "index": 5,
+            "layout": "two-devices",
+            "src": "images/apps/borderstamp/marketing/en-AU/iphone-05-two-devices.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "MAPS & STATS",
+            "headline": "Where have you been?\n\nIt’s not a contest, but it kinda is",
+            "alt": "“Where have you been? It’s not a contest, but it kinda is” and two iPhones. One shows a Home Screen with two Borderstamp widgets: a world map with 30 of 235 countries visited, and 68 stamps from 30 countries and 56 regions. The other shows the Map tab with U.S. states, 8 of 56 visited, including Alaska, California and Texas"
+          },
+          {
+            "index": 6,
+            "layout": "no-device",
+            "src": "images/apps/borderstamp/marketing/en-AU/iphone-06-no-device.jpg",
+            "width": 501,
+            "height": 1088,
+            "label": "WHAT GOES ON TOUR, STAYS ON TOUR",
+            "headline": "Everything is private\n\nNo-one is tracking you\n\nWe never see where you’ve been, and neither does anyone else",
+            "alt": "A simple slide saying, “What goes on tour, stays on tour. Everything is private. No-one is tracking you. We never see where you’ve been, and neither does anyone else.”"
+          }
+        ]
+      },
+      {
+        "device": "ipad",
+        "label": "iPad",
+        "shots": [
+          {
+            "index": 1,
+            "layout": "hero",
+            "src": "images/apps/borderstamp/marketing/en-AU/ipad-01-hero.jpg",
+            "width": 816,
+            "height": 1088,
+            "label": "BORDERSTAMP",
+            "headline": "We never say, “Papers, please!”\n\nCross a border and automatically get a new stamp",
+            "alt": "“We never say, ‘Papers, please!’ Cross a border and automatically get a new stamp” and an iPad showing 35 country stamps four across, newest first, each with its flag and the date it was earned, from Australia, Estonia, Czechia and Germany in 2026 back to Thailand, Japan, South Korea and New Zealand in the early 2000s"
+          },
+          {
+            "index": 2,
+            "layout": "hero",
+            "src": "images/apps/borderstamp/marketing/en-AU/ipad-02-hero.jpg",
+            "width": 816,
+            "height": 1088,
+            "label": "SOMETHING FOR EVERYONE",
+            "headline": "Never travelled internationally? \n\nNo problem!",
+            "alt": "“Never travelled internationally? No problem!” and an iPad showing 8 U.S. state stamps, each on a Stars and Stripes design: California, Hawaii, New York, Louisiana, Texas, Nevada, Alaska and Washington"
+          },
+          {
+            "index": 3,
+            "layout": "device-bottom",
+            "src": "images/apps/borderstamp/marketing/en-AU/ipad-03-device-bottom.jpg",
+            "width": 816,
+            "height": 1088,
+            "label": "CUSTOM STAMP SETS",
+            "headline": "Countries, states, territories, historical places\n\nGet custom stamps no-one else has",
+            "alt": "“Countries, states, territories, historical places. Get custom stamps no-one else has” and an iPad showing Borderstamp’s Store: Cold War Countries featured at $1.99, a row of stamp sets each saying how many borders you’ve already crossed in it, and four bundles from $4.99 to $14.99"
+          },
+          {
+            "index": 4,
+            "layout": "device-top",
+            "src": "images/apps/borderstamp/marketing/en-AU/ipad-04-device-top.jpg",
+            "width": 816,
+            "height": 1088,
+            "label": "ALREADY BEEN THERE?",
+            "headline": "Add your own history\n\nEasily, quickly, on‑device",
+            "alt": "“Add your own history. Easily, quickly, on-device” and an iPad showing stamps from 2000 to 2003, four across: the Netherlands, Kerry in Ireland, Ireland and the United Kingdom, then Thailand, Okinawa, Hokkaido, Japan, South Korea, South Africa, Egypt, Turkey, Greece, Morocco, Portugal, Spain and more"
+          },
+          {
+            "index": 5,
+            "layout": "two-devices",
+            "src": "images/apps/borderstamp/marketing/en-AU/ipad-05-two-devices.jpg",
+            "width": 816,
+            "height": 1088,
+            "label": "MAPS & STATS",
+            "headline": "Where have you been?\n\nIt’s not a contest, but it kinda is",
+            "alt": "“Where have you been? It’s not a contest, but it kinda is” and two iPads. One shows a Home Screen with four Borderstamp widgets: a world map with 30 of 235 countries visited, a U.S. states map with 8 of 56 visited, and two stats widgets showing 68 stamps from 30 countries and 56 regions. The other shows the Map tab with U.S. states, including Alaska, California and Texas"
+          },
+          {
+            "index": 6,
+            "layout": "no-device",
+            "src": "images/apps/borderstamp/marketing/en-AU/ipad-06-no-device.jpg",
+            "width": 816,
+            "height": 1088,
+            "label": "WHAT GOES ON TOUR, STAYS ON TOUR",
+            "headline": "Everything is private\n\nNo-one is tracking you\n\nWe never see where you’ve been, and neither does anyone else",
+            "alt": "A simple slide saying, “What goes on tour, stays on tour. Everything is private. No-one is tracking you. We never see where you’ve been, and neither does anyone else.”"
+          }
+        ]
+      }
+    ]
+  },
+  "press": {
+    "file": "borderstamp-press.zip",
+    "bytes": 14725278
+  }
+}

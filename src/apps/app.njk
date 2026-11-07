@@ -91,7 +91,9 @@ eleventyComputed:
     </header>
     <ul class="feature-grid">
       {%- for feature in app.features %}
-      <li class="feature"><h3>{{ feature.title }}</h3><p>{{ feature.text }}</p></li>
+      <li class="feature"><h3>{{ feature.title }}</h3>
+        {#- feature.text: a string, or a list of paragraphs #}
+        {%- for paragraph in ([feature.text] if feature.text is string else (feature.text or [])) %}<p>{{ paragraph }}</p>{% endfor %}</li>
       {%- endfor %}
     </ul>
   </div>
