@@ -1,7 +1,7 @@
 # Clarity. Built in-house and not for sale; shown as an example of how we work.
 name: Clarity
 slug: clarity
-order: 5
+order: 7
 kind: app
 accent: "#d9a520"
 icon: images/apps/clarity.png
@@ -36,7 +36,7 @@ screenshots:             # sample data from Clarity's screenshot mode (Clarity #
   - device: mac
     src: images/apps/clarity/project-dashboard.png
     darkSrc: images/apps/clarity/project-dashboard-dark.png
-    caption: One project's tests, timeline and milestones
+    caption: One project’s tests, timeline and milestones
     alt: "Clarity’s dashboard for an example project: test results, a commit timeline with milestones, open issues, current tasks and a milestone list"
 
 featuresHeading: Access it your way
@@ -59,4 +59,4 @@ sections:
   - heading: Why we built it
     text:
       - "We build our apps with AI coding agents. We wanted an issue tracker the agents could use as easily as we do: one that lives on the Mac, works offline, and has no per-seat SaaS pricing."
-      - Clarity is the result. Every project on this site is tracked in it, including this website. It isn't for sale, but it shows the kind of tooling we build, for ourselves and for our consulting clients.
+      - Clarity is the result. Every project on this site is tracked in it, including this website. It isn’t for sale, but it shows the kind of tooling we build, for ourselves and for our consulting clients.

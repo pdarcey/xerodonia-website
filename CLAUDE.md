@@ -79,7 +79,7 @@ lighthouserc.json           The pages Lighthouse checks
    - **Required:** `name`, `slug`, `order`, `kind`, `accent`, `icon`, `category`, `tagline`, `headline`, `summary`, `platforms`, `requires`, `status`.
    - **Optional sections**, which only render when present: `screenshots`, `features`, `sections` (free-form: `heading`, `text`, `list`, `code`, `after`), `privacy`, `cta`, `terminal`, `appStoreId`, `testFlightUrl`, `downloadUrl`, `githubUrl`.
    - **Only link public URLs.** For example, leave `githubUrl` empty while a repo is private, or visitors get a 404.
-   - **`privacyPolicy`** generates `/apps/<slug>/privacy/`, the App Store Connect "Privacy Policy URL". It also needs the `privacy` block, because the policy's "short version" reuses it.
+   - **`privacyPolicy`** generates `/apps/<slug>/privacy/`, the App Store Connect "Privacy Policy URL". It also needs the `privacy` block, because the policy's "short version" reuses it. An app that asks for no permissions sets `permissions: []`, and one that sends nothing omits `sharing`; the page then says "Nothing." for each (Secret Santa does both).
    - **`support`** (an FAQ list) generates `/apps/<slug>/support/`, the App Store Connect "Support URL".
    - Every app on the App Store **must** have both. Their facts must match the app's `NS…UsageDescription` strings, its `PrivacyInfo.xcprivacy`, and its App Privacy answers in App Store Connect. Check the app's code; don't guess.
 3. Set `status` to a key from `src/_data/statuses.js`. That decides the badge and the buttons.

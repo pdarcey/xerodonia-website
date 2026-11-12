@@ -52,12 +52,16 @@ const eleventyComputed = {
 
     <div class="prose">
       <h2>What {{ app.name }} can access</h2>
+      {%- if policy.permissions.length %}
       <p>{{ app.name }} only asks for access when it needs it, and works without any permission you decline. You can change these at any time in the Settings app under Privacy &amp; Security{% if "Mac" in app.platforms %} (on a Mac, System Settings › Privacy &amp; Security){% endif %}.</p>
       <dl class="permission-list">
         {%- for permission in policy.permissions %}
         <div><dt>{{ permission.name }}</dt><dd>{{ permission.use }}</dd></div>
         {%- endfor %}
       </dl>
+      {%- else %}
+      <p><strong>Nothing.</strong> {{ app.name }} doesn’t ask for any permissions: not your contacts, location, photos or anything else.</p>
+      {%- endif %}
 
       <h2>What leaves your device</h2>
       {%- if policy.sharing.length %}
@@ -73,7 +77,7 @@ const eleventyComputed = {
         {%- endfor %}
       </ul>
       {%- else %}
-      <p><strong>Nothing.</strong> {{ app.name }} doesn't collect, transmit or sell any information. Xerodonia never receives any data about you or about how you use the app.</p>
+      <p><strong>Nothing.</strong> {{ app.name }} doesn’t collect, transmit or sell any information. Xerodonia never receives any data about you or about how you use the app.</p>
       {%- endif %}
 
       {%- for section in policy.sections %}
@@ -84,19 +88,19 @@ const eleventyComputed = {
       <h2>What we never do</h2>
       <ul>
         <li>Show ads, or share information with advertisers or data brokers.</li>
-        <li>Track you across other companies' apps or websites.</li>
+        <li>Track you across other companies’ apps or websites.</li>
         <li>Sell your information.</li>
         <li>Ask you to create an account.</li>
       </ul>
 
       <h2>Your choices and your data</h2>
-      <p>Everything {{ app.name }} stores is kept {{ policy.storedIn or "on your device" }}. Deleting the app deletes it.{% if policy.analytics %} Anonymous usage signals can't be linked to you, so there's nothing about you for us to find or delete.{% endif %}{% if policy.sharing.length %} If you've sent us feedback or an email and would like it deleted, ask us and we will.{% endif %}</p>
+      <p>Everything {{ app.name }} stores is kept {{ policy.storedIn or "on your device" }}. Deleting the app deletes it.{% if policy.analytics %} Anonymous usage signals can’t be linked to you, so there’s nothing about you for us to find or delete.{% endif %}{% if policy.sharing.length %} If you’ve sent us feedback or an email and would like it deleted, ask us and we will.{% endif %}</p>
 
       <h2>Children</h2>
-      <p>{{ app.name }} isn't directed at children under 13. It doesn't collect personal information from anyone, including children.{% if policy.sharing.length %} The only exception is feedback: if someone sends it, we see only what they choose to write.{% endif %}</p>
+      <p>{{ app.name }} isn’t directed at children under 13. It doesn’t collect personal information from anyone, including children.{% if policy.sharing.length %} The only exception is feedback: if someone sends it, we see only what they choose to write.{% endif %}</p>
 
       <h2>Changes to this policy</h2>
-      <p>If {{ app.name }} changes how it handles information, we'll update this page and the date at the top before the new version is released, and mention the change in the release notes.</p>
+      <p>If {{ app.name }} changes how it handles information, we’ll update this page and the date at the top before the new version is released, and mention the change in the release notes.</p>
 
       <h2>Contact us</h2>
       <p>Questions or requests about privacy go to <a href="mailto:{{ privacyEmail }}?subject={{ (app.name + ' privacy') | urlencode }}">{{ privacyEmail }}</a>. {{ site.legalName }} (ABN {{ site.abn }}), {{ site.location }}. We follow the Australian Privacy Principles.</p>
