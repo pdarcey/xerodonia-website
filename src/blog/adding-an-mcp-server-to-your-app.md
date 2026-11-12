@@ -114,4 +114,4 @@ Look at your own apps, and find the things you keep doing by hand on an agent’
 
 Your app’s windows or views were designed for people, and it’s good at that. But **agents aren’t human**, so don’t make them use your app like one.
 
-*Our stories use Claude Code but only because that's what we actually use; the advice should apply to any agent that speaks MCP.*
+*Our stories use Claude Code but only because that’s what we actually use; the advice should apply to any agent that speaks MCP.*

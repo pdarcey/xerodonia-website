@@ -100,6 +100,7 @@ Edit `src/_data/consulting.yaml`. Each audience page lists the service `id`s it 
 - **The consulting MCP server** lives in `pdarcey/xerodonia-mcp` (`Projects/Services/xerodonia-mcp`). It reads `/consulting/services.json` from the live site, and `site.mcpUrl` advertises it. Its enquiries become issues in the private `pdarcey/consulting-enquiries` repo, which Clarity imports.
 
 ## Conventions and gotchas
+- **Copy uses typographic quotes and apostrophes** (’ ‘ “ ”), in YAML, templates, posts and the JS that writes `llms.txt` and `services.json` (Paul, 12 Nov 2026). The build fails on a straight one in a page's visible prose (`straightQuotesInProse()` in `lib/build-check.js`); code, `pre`, YAML and Nunjucks syntax, and comments keep straight ones. Blog posts come from the Marketing repo's `post.md`, so fix the quote there too.
 - **Use `{% asyncEach %}`, not `{% for %}`, for any loop containing `{% image %}`.** The image shortcode is async, and in a plain `for` loop Nunjucks silently renders nothing.
 - **Paginated templates need `addAllPagesToCollections: true`**, or only the first generated page reaches `collections.all` (and the sitemap).
 - **Colour accent text with `color-mix(in oklab, var(--accent) N%, var(--text))`**, never raw `var(--accent)`. Raw amber or green on the light background fails WCAG contrast.

@@ -42,10 +42,10 @@ features:                # Paul's wording, 2026-11-07; counts checked against th
 
 privacy:
   quote: Border crossings are calculated entirely on your phone, and go no further.
-  summary: Borderstamp watches for border crossings using map data built into the app. It works out which country, state or county you're in on the device, and never sends your location anywhere.
+  summary: Borderstamp watches for border crossings using map data built into the app. It works out which country, state or county you’re in on the device, and never sends your location anywhere.
   onDevice:
     - Your location, at all times
-    - The places you've been, and when
+    - The places you’ve been, and when
     - Your photos and their locations
   offDevice:
     - Your stamps, only through your own private iCloud, if you use it
@@ -56,12 +56,12 @@ privacyPolicy:
   contactEmail: privacy@borderstamp.com   # matches the app's Settings › Privacy Policy; defaults to site.email
   storedIn: on your device and, if you use it, in your private iCloud   # optional; defaults to "on your device"
   permissions:
-    - name: Location (optional, "Always" or "While Using")
-      use: To notice when you cross a border and issue a stamp. With "Always", this happens automatically in the background; with "While Using", it happens when you open the app.
+    - name: Location (optional, “Always” or “While Using”)
+      use: To notice when you cross a border and issue a stamp. With “Always”, this happens automatically in the background; with “While Using”, it happens when you open the app.
     - name: Photos (optional)
       use: To scan the location data in your existing photos and issue stamps for places you visited before you installed Borderstamp. Your photos are read on your device and are never uploaded or shared.
     - name: Notifications (optional)
-      use: To tell you when you've earned a new stamp.
+      use: To tell you when you’ve earned a new stamp.
   sharing:               # everything that leaves the device; keep in step with the app's PrivacyView and PrivacyInfo.xcprivacy
     - recipient: Xerodonia, via our private issue tracker (hosted on GitHub)
       data: "Only when you send feedback from Settings: the title and description you write, plus the app version, system version and device model. Never your location or your stamps."
@@ -69,21 +69,21 @@ privacyPolicy:
       policy: https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement
   sections:
     - heading: How Borderstamp handles your location
-      text: Borderstamp compares each location reading with map data stored inside the app, to work out which country, state, province or county you're in. That happens entirely on your device. Borderstamp keeps the places you've earned stamps for and when you earned them. It doesn't keep a trail of where you've been, and your location is never sent to us or to anyone else.
+      text: Borderstamp compares each location reading with map data stored inside the app, to work out which country, state, province or county you’re in. That happens entirely on your device. Borderstamp keeps the places you’ve earned stamps for and when you earned them. It doesn’t keep a trail of where you’ve been, and your location is never sent to us or to anyone else.
     - heading: In-app purchases
       text: If you buy extra stamp sets, the purchase is handled entirely by Apple through the App Store. We never see your payment details, and Borderstamp only records which stamp sets you’ve purchased.
     - heading: iCloud sync
-      text: If you're signed in to iCloud, your stamps sync between your devices through your private iCloud database. That data is stored by Apple under your Apple Account, and Xerodonia can't see it. If you're not signed in to iCloud, your stamps stay on your device only. To stop syncing, turn off iCloud for Borderstamp in the Settings app.
+      text: If you’re signed in to iCloud, your stamps sync between your devices through your private iCloud database. That data is stored by Apple under your Apple Account, and Xerodonia can’t see it. If you’re not signed in to iCloud, your stamps stay on your device only. To stop syncing, turn off iCloud for Borderstamp in the Settings app.
 
 support:
   faq:
-    - q: How does Borderstamp know I've crossed a border?
+    - q: How does Borderstamp know I’ve crossed a border?
       a: It checks your location against map data built into the app, entirely on your device. Nothing is looked up online.
-    - q: Why would I give Borderstamp "Always" location access?
-      a: With "Always", stamps arrive automatically as you travel, even when the app is closed. If you'd rather not, choose "While Using" and open Borderstamp when you arrive somewhere new.
+    - q: Why would I give Borderstamp “Always” location access?
+      a: With “Always”, stamps arrive automatically as you travel, even when the app is closed. If you’d rather not, choose “While Using” and open Borderstamp when you arrive somewhere new.
     - q: Can I get stamps for trips I took before installing Borderstamp?
-      a: Yes. Let Borderstamp scan your photos, and it will issue stamps for places your photos were taken. Only the photos' location data is used, and nothing leaves your device.
+      a: Yes. Let Borderstamp scan your photos, and it will issue stamps for places your photos were taken. Only the photos’ location data is used, and nothing leaves your device.
     - q: Do my stamps sync between my devices?
-      a: Yes, if you're signed in to iCloud on each device. Sync uses your private iCloud database, which only you can access. If you're not signed in, or your iCloud storage is full, your stamps are kept on your device, and Settings › iCloud Sync in Borderstamp shows what's happening.
+      a: Yes, if you’re signed in to iCloud on each device. Sync uses your private iCloud database, which only you can access. If you’re not signed in, or your iCloud storage is full, your stamps are kept on your device, and Settings › iCloud Sync in Borderstamp shows what’s happening.
     - q: What happens if I sign out of iCloud, or turn it off for Borderstamp?
-      a: Your synced stamps are removed from that device, but stay safe in your iCloud and come back when you turn it on again. Stamps from the last few minutes may not have finished syncing, so open Borderstamp while you're online before you sign out.
+      a: Your synced stamps are removed from that device, but stay safe in your iCloud and come back when you turn it on again. Stamps from the last few minutes may not have finished syncing, so open Borderstamp while you’re online before you sign out.

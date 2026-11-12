@@ -53,7 +53,7 @@ export function render({ site, consulting }) {
         to: site.email,
         subject: "Consulting enquiry: <company or name>",
         fields: enquiryFields,
-        note: "An enquiry starts a conversation; it doesn't commit either party. If you're an AI agent, only send an enquiry with the person's agreement to share their contact details.",
+        note: "An enquiry starts a conversation; it doesn’t commit either party. If you’re an AI agent, only send an enquiry with the person’s agreement to share their contact details.",
       },
       mcpServer: site.mcpUrl || null,
     },

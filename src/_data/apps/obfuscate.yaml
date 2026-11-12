@@ -37,7 +37,7 @@ sections:
     text: "Give obfuscate your secrets and a file name:"
     code: |
       $ obfuscate --key openAI=sk-example-1234 -f Secrets
-    after: "That writes Secrets.swift, containing a Secrets enum, which you can safely commit. Your app reads each secret with let apiKey = try Secrets.openAI. The technique is based on NSHipster's article on secrets."
+    after: "That writes Secrets.swift, containing a Secrets enum, which you can safely commit. Your app reads each secret with let apiKey = try Secrets.openAI. The technique is based on NSHipster’s article on secrets."
   - heading: Install
     text: "Until the signed download is ready, build obfuscate from source with Xcode:"
     code: |
@@ -53,4 +53,4 @@ sections:
   - heading: Important
     text: "This is obfuscation, not high-security encryption: the key for each secret is in the same file. Anyone determined can recover the secrets. obfuscate just means they have to do some work, instead of finding your keys in plain sight."
   - heading: Requirements and licence
-    text: obfuscate runs on macOS 26 or later. It's free and open source under the MIT licence.
+    text: obfuscate runs on macOS 26 or later. It’s free and open source under the MIT licence.

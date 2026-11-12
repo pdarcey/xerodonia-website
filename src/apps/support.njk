@@ -37,7 +37,7 @@ const eleventyComputed = {
 
     <section class="doc-summary contact-panel" aria-labelledby="contact-title">
       <h2 id="contact-title">Contact us</h2>
-      <p>Email us and a real person will read your message and reply as soon as we can. It helps if you tell us your device, its system version and the app version (shown in {{ app.name }}'s Settings).</p>
+      <p>Email us and a real person will read your message and reply as soon as we can. It helps if you tell us your device, its system version and the app version (shown in {{ app.name }}’s Settings).</p>
       <div class="actions">
         <a class="button button--primary" href="mailto:{{ site.email }}?subject={{ (app.name + ' support') | urlencode }}">Email {{ site.email }}</a>
       </div>
