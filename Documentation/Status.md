@@ -1,21 +1,23 @@
 # xerodonia.com — Status
 
-*Snapshot at the end of the 2026-10-25 session. See `Plan.md` for the roadmap and "Next session".*
+*Snapshot at the end of the 2026-11-12 session (the 2026-10-25 snapshot, with 12 Nov's changes). See `Plan.md` for the roadmap and "Next session". This file moves to the standard Status format in the 20 Nov standards stage.*
+
+**12 Nov 2026:** Secret Santa's page, privacy policy and support page are live (status "TestFlight soon"); Clarity now sits last in the app lists; all copy uses typographic quotes, and the build fails on a straight one. **Next:** when Beta App Review approves Borderstamp 1.0.0 (127), set its `status: testflight` and `testFlightUrl: https://testflight.apple.com/join/g8CbCf8P`; later, Secret Santa's own public link. Paul pushes.
 
 ## Live at https://xerodonia.com
-Everything is pushed and live (last deploy: `1b34241`, 2026-10-25).
+Everything is pushed and live (last deploy: `f04db2c`, 2026-11-12).
 
 - GitHub Pages, deployed by GitHub Actions on every push to `main` (repo `pdarcey/xerodonia-website`, public). HTTPS is enforced; `www` redirects to the apex.
 - DNS stays at Fastmail (A/AAAA records to GitHub; `www` CNAME). Email records are untouched.
-- 33 output files, built in about 0.3 s once images are cached. No JavaScript of our own: the post-build guard fails the build on any executable script except the one TelemetryDeck tag, which every page must have.
+- No JavaScript of our own: the post-build guard fails the build on any executable script except the one TelemetryDeck tag, which every page must have. Since 2026-11-12 it also fails on a straight quote or apostrophe in any page's visible prose (`straightQuotesInProse()`).
 
 | Area | State |
 |---|---|
 | Home, About, Contact, website privacy | ✅ |
-| App pages (6) | ✅ Blueprint, Borderstamp, Upcoming Birthdays, Scoreboard, Clarity, obfuscate. Borderstamp: iPhone and iPad only, "Free, with optional packs", and a "What you get" section (2026-10-07) |
-| App privacy and support pages | ✅ Blueprint, Borderstamp, Upcoming Birthdays (the App Store Connect URLs). Borderstamp's now explain iCloud sync: stamps sync through the user's own iCloud, and stay on the device when signed out (2026-10-09). A policy can set its own `privacyPolicy.contactEmail`; Borderstamp uses privacy@borderstamp.com |
+| App pages (7) | ✅ In order: Blueprint, Borderstamp, Upcoming Birthdays, Scoreboard, Secret Santa (2026-11-12), obfuscate, Clarity (moved last on 2026-11-12, so the public apps sit together). Borderstamp: iPhone and iPad only, "Free, with optional packs", and a "What you get" section (2026-10-07) |
+| App privacy and support pages | ✅ Blueprint, Borderstamp, Upcoming Birthdays, Secret Santa (the App Store Connect URLs). An app with `permissions: []` gets "Nothing." (Secret Santa). Borderstamp's now explain iCloud sync: stamps sync through the user's own iCloud, and stay on the device when signed out (2026-10-09). A policy can set its own `privacyPolicy.contactEmail`; Borderstamp uses privacy@borderstamp.com |
 | Consulting (overview, 3 audiences, services, FAQ) | ✅ |
-| Blog and Atom feed | ✅ 1 post |
+| Blog and Atom feed | ✅ 2 posts (the MCP server post, 2026-11-11) |
 | AI-agent layer | ✅ JSON-LD, `llms.txt`, `llms-full.txt`, `/consulting/services.json`, AI-aware `robots.txt` |
 | Consulting MCP server | ✅ `https://xerodonia-mcp.autumn-glitter-b50d.workers.dev/mcp` (repo `pdarcey/xerodonia-mcp`); enquiries become GitHub issues and an email to hello@ |
 | Link previews, favicons | ✅ |

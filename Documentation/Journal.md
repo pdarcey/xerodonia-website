@@ -259,6 +259,26 @@ The exception went in the same way JSON-LD did: **narrow, and enforced**. The bu
 
 **Read the script, not the brochure.** TelemetryDeck's guide talks about a `pageLeave` event and engagement metrics, and the first draft of the privacy page promised a signal "when you leave". Then we downloaded the script itself: 679 bytes, one `fetch` on page load (address, referrer, language), no storage of any kind, and no `pageLeave` at all. The docs describe a newer SDK than the CDN serves. The policy now says what the code does. Same lesson as the app privacy policies: **a privacy claim comes from the code.** It went live the same afternoon with every CI check green, and Lighthouse didn't lose a single point to the new script.
 
+### 2026-11-12: Curly quotes, and a guard that keeps them curly
+
+Secret Santa needed its page, privacy policy and support page live before Beta App Review, so it got
+them in a day: one YAML file, an icon exported from Icon Composer, and facts checked against the app's
+code (no network, no permissions, `UserDefaults` only). The privacy template had never met an app that
+asks for nothing, so `permissions: []` now says "**Nothing.**" instead of an empty list.
+
+Then Paul spotted straight quotes all over the site. Rather than fix them and hope, the guard came
+first: `straightQuotesInProse()` in `lib/build-check.js` reads every built page's visible text, `alt`,
+`title`, `aria-label` and description meta tags (skipping code, `pre`, scripts and SVG) and fails the
+build on `'`, `"` or the entities Nunjucks turns them into. Its first run found about 195. A converter
+script fixed 145 lines in 21 files, and its bugs were instructive: shared placeholders put tokens back
+in the wrong order, and YAML flow mappings like `{ price: "…" }` had their *syntax* quotes curled. The
+rest were by hand: front-matter descriptions, and JS strings that write `llms.txt` and `services.json`.
+The Marketing repo's `post.md` got the same fix, or the next re-publish would have brought one back.
+
+Also: Clarity moved to the end of the app lists, so the apps people can actually get sit together.
+
+**Lesson: write the check before the fix. The check tells you when you're done, and keeps you done.**
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.
