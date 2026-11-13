@@ -279,6 +279,19 @@ Also: Clarity moved to the end of the app lists, so the apps people can actually
 
 **Lesson: write the check before the fix. The check tells you when you're done, and keeps you done.**
 
+### 2026-11-13: Borderstamp takes the big chair
+
+Borderstamp passed Beta App Review, and the data-file design paid off again: no template was
+touched. `status: testflight` plus its `testFlightUrl` turned its “Email me when it's ready”
+button into “Join the TestFlight beta”. Moving `featured: true` from Blueprint to Borderstamp gave
+it the large card, and new `order:` values put the apps in Paul's order: Borderstamp, Secret
+Santa, Blueprint, Upcoming Birthdays, Scoreboard, obfuscate, Clarity. One thing to remember:
+`featured` isn't tied to `order`. The large card takes whichever slot its `order` gives it, so the
+two are set separately.
+
+It's committed but deliberately not pushed. Secret Santa is still in Beta App Review, and Paul
+would rather the site change once, with both apps' links, than twice in a day.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.

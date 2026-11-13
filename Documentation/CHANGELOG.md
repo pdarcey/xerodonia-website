@@ -6,6 +6,7 @@ All notable changes to this project, newest first. Generated from the git histor
 
 ### Features
 
+- Put Borderstamp on TestFlight, make it the featured app, and reorder the apps ([`f922e3a`](https://github.com/pdarcey/xerodonia-website/commit/f922e3ab29013ff257d9ffb019f8960e9de9e806))
 - Add Secret Santa's page, privacy policy and support page ([`27a8c22`](https://github.com/pdarcey/xerodonia-website/commit/27a8c22a41873d1085afae06eb1c1e3c067b2553))
 - Publish "Agents Aren't Human", the MCP server post ([`d7c5716`](https://github.com/pdarcey/xerodonia-website/commit/d7c5716600a53fe4ac9ade229d50cbe8c247d2df))
 - Borderstamp's privacy policy covers feedback; usage-signals sentence only for apps with analytics ([`b54a36d`](https://github.com/pdarcey/xerodonia-website/commit/b54a36dbf38ae86b7a6e44cdffedfd8d84a5b001))
@@ -13,6 +14,7 @@ All notable changes to this project, newest first. Generated from the git histor
 
 ### Documentation
 
+- End of session: Status, Journal and a new changelog for 12 Nov 2026 ([`7b87519`](https://github.com/pdarcey/xerodonia-website/commit/7b875197d82c0f7933e075fd1e67041fa2b710a2))
 - Call Borderstamp's packs stamp sets ([`1f13bf5`](https://github.com/pdarcey/xerodonia-website/commit/1f13bf5783ff167773772e7d390e887d28d5c47e))
 - Say Borderstamp issues stamps, to match the app ([`17ca411`](https://github.com/pdarcey/xerodonia-website/commit/17ca4110779be300fc1b5f425cfa675cb002a70b))
 - npm run images now runs on every Marketing publish ([`d7d04c6`](https://github.com/pdarcey/xerodonia-website/commit/d7d04c669d2119a3fc5e64139c734f9e0e12ae58))
