@@ -3,8 +3,7 @@
 
 name: Blueprint
 slug: blueprint
-order: 1                 # position in app lists (lowest first)
-featured: true           # shown as the large card on the home page
+order: 3                 # position in app lists (lowest first)
 kind: app                # app | tool
 accent: "#2f6cf6"        # tints cards, ticks and highlights; take it from the icon
 icon: images/apps/blueprint.png

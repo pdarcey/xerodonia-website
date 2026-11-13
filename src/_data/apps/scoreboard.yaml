@@ -1,7 +1,7 @@
 # Scoreboard. In development; privacy and support pages get added before its App Store submission.
 name: Scoreboard
 slug: scoreboard
-order: 4
+order: 5
 kind: app
 accent: "#3c8d2f"
 icon: images/apps/scoreboard.png

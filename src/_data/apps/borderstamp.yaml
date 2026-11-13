@@ -1,7 +1,8 @@
 # Borderstamp. Privacy and support are complete (Stage 3); marketing screenshots from 2026-11-07.
 name: Borderstamp
 slug: borderstamp
-order: 2
+order: 1
+featured: true           # shown as the large card on the home page
 kind: app
 accent: "#e9a91c"
 icon: images/apps/borderstamp.png
@@ -11,9 +12,9 @@ headline: Cross a border, get a stamp!
 summary: "Cross a border with Borderstamp and you’ll get a stamp. Every country in the world. Optionally, states, provinces, prefectures, counties and even places that no longer exist. Everything happens on your device, totally private, as it should be."
 platforms: [iPhone, iPad]
 requires: iOS 26 or iPadOS 26
-status: testflight-soon
+status: testflight
 appStoreId: 6819947495
-testFlightUrl:
+testFlightUrl: https://testflight.apple.com/join/g8CbCf8P
 price: Free, with optional stamp sets
 appCategory: Travel
 languages: [English]
