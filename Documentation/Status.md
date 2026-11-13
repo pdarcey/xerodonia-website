@@ -2,12 +2,12 @@
 
 *Snapshot at the end of the 2026-11-13 session (the 2026-10-25 snapshot, with 12 and 13 Nov's changes). See `Plan.md` for the roadmap and "Next session". This file moves to the standard Status format in the 20 Nov standards stage.*
 
-**13 Nov 2026 (committed, not pushed):** Borderstamp passed Beta App Review, so it's `status: testflight` with its public link (`https://testflight.apple.com/join/g8CbCf8P`; its page shows “Join the TestFlight beta”), and it's now the featured (large) card. The order is Borderstamp, Secret Santa, Blueprint, Upcoming Birthdays, Scoreboard, obfuscate, Clarity (Paul). `npm run check` passed with 100s. **Not pushed on purpose:** when Secret Santa's Beta App Review passes, set its `status: testflight` and `testFlightUrl`, check, commit, and Paul pushes both together.
+**13 Nov 2026 (pushed and live):** Borderstamp passed Beta App Review, so it's `status: testflight` with its public link (`https://testflight.apple.com/join/g8CbCf8P`; its page shows “Join the TestFlight beta”), and it's now the featured (large) card. The order is Borderstamp, Secret Santa, Blueprint, Upcoming Birthdays, Scoreboard, obfuscate, Clarity (Paul). `npm run check` passed with 100s. Paul chose to push it without waiting for Secret Santa: deploy run 43381174756 passed, and the live home page and Borderstamp page were checked. **Next:** when Secret Santa's Beta App Review passes, set its `status: testflight` and `testFlightUrl` (`https://testflight.apple.com/join/XJ4dpqDJ`), `npm run check`, commit, push. Low priority: #880 (the workflow's actions still target Node.js 20).
 
 **12 Nov 2026:** Secret Santa's page, privacy policy and support page are live (status "TestFlight soon"); Clarity now sits last in the app lists; all copy uses typographic quotes, and the build fails on a straight one. **Next:** when Beta App Review approves Borderstamp 1.0.0 (127), set its `status: testflight` and `testFlightUrl: https://testflight.apple.com/join/g8CbCf8P`; later, Secret Santa's own public link. Paul pushes.
 
 ## Live at https://xerodonia.com
-Live as of `f04db2c` (2026-11-12). Not yet pushed: `7b87519` (12 Nov docs) and the 13 Nov Borderstamp and app-order commit.
+Live as of `aca1edb` (2026-11-13).
 
 - GitHub Pages, deployed by GitHub Actions on every push to `main` (repo `pdarcey/xerodonia-website`, public). HTTPS is enforced; `www` redirects to the apex.
 - DNS stays at Fastmail (A/AAAA records to GitHub; `www` CNAME). Email records are untouched.
@@ -16,7 +16,7 @@ Live as of `f04db2c` (2026-11-12). Not yet pushed: `7b87519` (12 Nov docs) and t
 | Area | State |
 |---|---|
 | Home, About, Contact, website privacy | ✅ |
-| App pages (7) | ✅ In order (2026-11-13, not pushed): Borderstamp (featured, on TestFlight), Secret Santa, Blueprint, Upcoming Birthdays, Scoreboard, obfuscate, Clarity (last, so the public apps sit together). `order:` sets the order and `featured: true` the large card; only one app should have it. Borderstamp: iPhone and iPad only, "Free, with optional packs", and a "What you get" section (2026-10-07) |
+| App pages (7) | ✅ In order (2026-11-13, live): Borderstamp (featured, on TestFlight), Secret Santa, Blueprint, Upcoming Birthdays, Scoreboard, obfuscate, Clarity (last, so the public apps sit together). `order:` sets the order and `featured: true` the large card; only one app should have it. Borderstamp: iPhone and iPad only, "Free, with optional packs", and a "What you get" section (2026-10-07) |
 | App privacy and support pages | ✅ Blueprint, Borderstamp, Upcoming Birthdays, Secret Santa (the App Store Connect URLs). An app with `permissions: []` gets "Nothing." (Secret Santa). Borderstamp's now explain iCloud sync: stamps sync through the user's own iCloud, and stay on the device when signed out (2026-10-09). A policy can set its own `privacyPolicy.contactEmail`; Borderstamp uses privacy@borderstamp.com |
 | Consulting (overview, 3 audiences, services, FAQ) | ✅ |
 | Blog and Atom feed | ✅ 2 posts (the MCP server post, 2026-11-11) |

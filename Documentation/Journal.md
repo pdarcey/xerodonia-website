@@ -289,8 +289,11 @@ Santa, Blueprint, Upcoming Birthdays, Scoreboard, obfuscate, Clarity. One thing 
 `featured` isn't tied to `order`. The large card takes whichever slot its `order` gives it, so the
 two are set separately.
 
-It's committed but deliberately not pushed. Secret Santa is still in Beta App Review, and Paul
-would rather the site change once, with both apps' links, than twice in a day.
+It was committed but deliberately not pushed: Secret Santa was still in Beta App Review, and the
+idea was to change the site once, with both apps' links. By the evening Secret Santa was still
+waiting, and a live TestFlight link is worth more than a tidy single deploy, so Paul had it pushed
+on its own. The deploy passed (about 8 minutes, most of it Lighthouse), and the live pages were
+checked. The run's only grumble: three GitHub actions still target Node.js 20 (#880).
 
 ## Engineer's Wisdom
 

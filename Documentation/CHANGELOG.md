@@ -14,6 +14,7 @@ All notable changes to this project, newest first. Generated from the git histor
 
 ### Documentation
 
+- End of session 13 Nov 2026: Borderstamp on TestFlight, waiting for Secret Santa ([`aca1edb`](https://github.com/pdarcey/xerodonia-website/commit/aca1edb11cef78776fee3324332e7b15d58d5eb8))
 - End of session: Status, Journal and a new changelog for 12 Nov 2026 ([`7b87519`](https://github.com/pdarcey/xerodonia-website/commit/7b875197d82c0f7933e075fd1e67041fa2b710a2))
 - Call Borderstamp's packs stamp sets ([`1f13bf5`](https://github.com/pdarcey/xerodonia-website/commit/1f13bf5783ff167773772e7d390e887d28d5c47e))
 - Say Borderstamp issues stamps, to match the app ([`17ca411`](https://github.com/pdarcey/xerodonia-website/commit/17ca4110779be300fc1b5f425cfa675cb002a70b))
