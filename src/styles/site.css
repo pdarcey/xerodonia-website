@@ -505,6 +505,16 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.025em; }
 }
 .post-body blockquote p { margin-bottom: .6rem; }
 .post-body blockquote > :last-child { margin-bottom: 0; }
+/* A table in a post (Markdown table): scrolls sideways on phones rather than squashing */
+.post-body table {
+  display: block; overflow-x: auto; width: 100%; margin: 1.5rem 0;
+  border-collapse: collapse; font-size: .92rem;
+}
+.post-body th, .post-body td { padding: .6rem .8rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.post-body thead th { font-size: .8rem; font-weight: 600; color: var(--muted); }
+.post-body tbody tr:last-child > * { border-bottom: 0; }
+/* A diagram or figure in a post ({% themedImage %} with class "post-image") */
+.post-body .post-image { width: 100%; margin: 1.5rem 0; }
 @media (min-width: 48rem) {
   .post-body aside { float: right; width: 17rem; margin: .35rem 0 1rem 1.75rem; }
 }
