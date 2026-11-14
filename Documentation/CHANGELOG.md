@@ -14,6 +14,7 @@ All notable changes to this project, newest first. Generated from the git histor
 
 ### Documentation
 
+- End of session 13 Nov 2026: Borderstamp live on TestFlight ([`a557a7f`](https://github.com/pdarcey/xerodonia-website/commit/a557a7f7c50780b804ee165d0db3f152f06c7102))
 - End of session 13 Nov 2026: Borderstamp on TestFlight, waiting for Secret Santa ([`aca1edb`](https://github.com/pdarcey/xerodonia-website/commit/aca1edb11cef78776fee3324332e7b15d58d5eb8))
 - End of session: Status, Journal and a new changelog for 12 Nov 2026 ([`7b87519`](https://github.com/pdarcey/xerodonia-website/commit/7b875197d82c0f7933e075fd1e67041fa2b710a2))
 - Call Borderstamp's packs stamp sets ([`1f13bf5`](https://github.com/pdarcey/xerodonia-website/commit/1f13bf5783ff167773772e7d390e887d28d5c47e))
@@ -29,6 +30,7 @@ All notable changes to this project, newest first. Generated from the git histor
 
 ### Other Changes
 
+- Marketing images: rebuild ([`df8177a`](https://github.com/pdarcey/xerodonia-website/commit/df8177aba01a02cdbd569991d44995f6d2b0fe17))
 - Marketing images: rebuild ([`1c361c0`](https://github.com/pdarcey/xerodonia-website/commit/1c361c05e5b7223a0f1cb7f55b1275f6895cad7b))
 - Marketing images: add or update upcoming-birthdays ([`dbfdd7a`](https://github.com/pdarcey/xerodonia-website/commit/dbfdd7a637a171594fc8f897fad5b9eb26105dbb))
 - Add README front matter and wrap text around the logo ([`4e9a1e4`](https://github.com/pdarcey/xerodonia-website/commit/4e9a1e48025d9deea5a99c3781fc65ba9c7334d4))

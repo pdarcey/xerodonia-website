@@ -295,6 +295,19 @@ waiting, and a live TestFlight link is worth more than a tidy single deploy, so 
 on its own. The deploy passed (about 8 minutes, most of it Lighthouse), and the live pages were
 checked. The run's only grumble: three GitHub actions still target Node.js 20 (#880).
 
+### 2026-11-14: A post gets a picture, and a table
+
+The third post, “Your Mileage May Vary”, was the first with a diagram and tables in it. The
+diagram needed a dark version, and the site already had the answer: `{% themedImage %}`, built for
+app screenshots, works inside a Markdown post too, because Eleventy runs posts through Nunjucks
+first. So the post gets one `<picture>` with the dark sources behind `prefers-color-scheme`, and
+still no JavaScript. Tables and the image needed a few lines of CSS (`.post-body table`,
+`.post-image`): a table scrolls sideways on a phone rather than squashing its columns.
+
+The slip was a familiar one: Lighthouse checks only the pages listed in `lighthouserc.json`, and
+the post wasn't on it, so it went live unscored. Added afterwards, it scored 100 on all four. That's
+the second post in a week to miss it, so Marketing #882 is to make the check catch it.
+
 ## Engineer's Wisdom
 
 - **Choose the boring option on purpose.** A static site has no server to patch and no database to back up, and it can't be hacked through the front end. Boring is a feature.
