@@ -124,8 +124,8 @@ async function main() {
 
   await card({
     file: "default.jpg",
-    eyebrow: "Independent Apple developer · Sydney",
-    title: "Thoughtful apps for iPhone, iPad and Mac",
+    eyebrow: "Single-person studio · Sydney",
+    title: "Private apps, built with AI coding agents",
     subtitle: "Small, private, carefully built apps, and practical AI consulting.",
   });
 

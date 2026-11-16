@@ -102,40 +102,6 @@ whyUs:
 
 # One page per audience, at /consulting/<slug>/
 audiences:
-  - slug: business-owners
-    navLabel: Business owners
-    card:
-      label: I’m a business owner
-      text: "Sceptical about AI hype? We’ll show you what’s actually working for businesses like yours, with no jargon and no wasted budget."
-    eyebrow: For business owners
-    title: Practical AI. Real results. No hype.
-    lead: "AI is already reshaping how businesses operate. The problem? Most small and mid-sized businesses don’t have the time, expertise or internal team to work out what’s real, what’s useful and what’s a distraction."
-    cta: Book a free AI Opportunity Audit
-    concernsHeading: You’ve heard the AI promises. You’re not buying it.
-    concernsIntro: These are the concerns we hear from business owners. They’re completely valid, and we have straight answers for all of them.
-    concerns:
-      - "I’ve been told AI will transform my business, but I don’t know where to start."
-      - "I tried an AI tool and it didn’t work. I don’t want to waste more money."
-      - "My team isn’t technical. I can’t afford to distract them with experiments."
-      - "I don’t know what’s hype and what’s actually useful for a business like mine."
-    helpHeading: We find where AI can actually help, then we build it.
-    help:
-      - title: We start with your business, not AI
-        text: We analyse your operations first, then identify 2–3 specific areas where an AI agent can save time, reduce costs or increase revenue, with honest estimates of the impact.
-      - title: We build it properly, once
-        text: A working, best-practice AI agent that fits your existing workflows. Not a prototype or a demo, but something your team can use from day one.
-      - title: We train your team
-        text: Every engagement includes training and documentation pitched at your team’s technical level.
-    outcomesHeading: Clear outcomes. Fixed price. No surprises.
-    outcomes:
-      - An honest assessment of where AI can help your business right now
-      - A working AI agent in your existing workflows
-      - Training materials your team will actually use
-      - Clear documentation, so nothing is a black box
-      - A fixed price with no hidden extras
-      - Ongoing support, if you want it
-    services: [initial-setup, follow-up]
-
   - slug: scaling-teams
     navLabel: Scaling teams
     card:
@@ -177,7 +143,7 @@ audiences:
       label: I lead a tech company
       text: Ready to roll agents out across your organisation? We design and deploy production-ready AI systems with measurable returns.
     eyebrow: For tech-forward companies
-    title: Designing the autonomous business.
+    title: Coding agents across every team, set up once and properly.
     lead: "AI agents are more than automation tools; they’re digital teammates. We design and deploy agents that fit your stack, work with your team, and keep improving how you build software."
     cta: Build your AI agent strategy
     concernsHeading: The gap between AI potential and production reality is real.
@@ -258,3 +224,40 @@ faq:
       - q: Are your prices in Australian dollars? Do they include GST?
         a:
           - All prices are in Australian dollars (AUD) and exclude GST. GST is added to invoices for Australian clients where applicable.
+
+# Hidden until there's an offer for non-developers (Paul, 16 Nov 2026, Marketing #910).
+# Nothing reads this list; /consulting/business-owners/ redirects to /consulting/.
+hiddenAudiences:
+  - slug: business-owners
+    navLabel: Business owners
+    card:
+      label: I’m a business owner
+      text: "Sceptical about AI hype? We’ll show you what’s actually working for businesses like yours, with no jargon and no wasted budget."
+    eyebrow: For business owners
+    title: Practical AI. Real results. No hype.
+    lead: "AI is already reshaping how businesses operate. The problem? Most small and mid-sized businesses don’t have the time, expertise or internal team to work out what’s real, what’s useful and what’s a distraction."
+    cta: Book a free AI Opportunity Audit
+    concernsHeading: You’ve heard the AI promises. You’re not buying it.
+    concernsIntro: These are the concerns we hear from business owners. They’re completely valid, and we have straight answers for all of them.
+    concerns:
+      - "I’ve been told AI will transform my business, but I don’t know where to start."
+      - "I tried an AI tool and it didn’t work. I don’t want to waste more money."
+      - "My team isn’t technical. I can’t afford to distract them with experiments."
+      - "I don’t know what’s hype and what’s actually useful for a business like mine."
+    helpHeading: We find where AI can actually help, then we build it.
+    help:
+      - title: We start with your business, not AI
+        text: We analyse your operations first, then identify 2–3 specific areas where an AI agent can save time, reduce costs or increase revenue, with honest estimates of the impact.
+      - title: We build it properly, once
+        text: A working, best-practice AI agent that fits your existing workflows. Not a prototype or a demo, but something your team can use from day one.
+      - title: We train your team
+        text: Every engagement includes training and documentation pitched at your team’s technical level.
+    outcomesHeading: Clear outcomes. Fixed price. No surprises.
+    outcomes:
+      - An honest assessment of where AI can help your business right now
+      - A working AI agent in your existing workflows
+      - Training materials your team will actually use
+      - Clear documentation, so nothing is a black box
+      - A fixed price with no hidden extras
+      - Ongoing support, if you want it
+    services: [initial-setup, follow-up]

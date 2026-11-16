@@ -1,6 +1,6 @@
 {#- The outer shell of every page.
     Front matter it reads: title, description, accent, bodyClass, app (on app pages). -#}
-{%- set pageTitle = title + " · " + site.name if title and title != site.name else site.name + ": thoughtful apps for iPhone, iPad and Mac" -%}
+{%- set pageTitle = title + " · " + site.name if title and title != site.name else site.name + ": private apps, built with AI coding agents" -%}
 {%- set pageDescription = description or site.description -%}
 {#- Link-preview image: a page's ogImage, else its app's card, else the site default (made by `npm run images`). -#}
 {%- set pageImage = ogImage or ("/images/og/" + app.slug + ".jpg" if app else "/images/og/default.jpg") -%}
