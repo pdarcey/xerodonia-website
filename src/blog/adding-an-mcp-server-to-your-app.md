@@ -112,6 +112,8 @@ Don’t add one just because you can, though. If nobody will ask an agent to use
 
 Look at your own apps, and find the things you keep doing by hand on an agent’s behalf: copying an error across, pasting in a record, looking up a status. That’s your first tool. If you’d like a second opinion on where agents could help your business, [book a free AI Opportunity Audit](/consulting/). It’s 15 minutes, with no obligation and no jargon.
 
+For eight more lessons like that last one, see [Scars, and How to Avoid Them](/blog/small-changes-that-make-ai-agents-better/).
+
 Your app’s windows or views were designed for people, and it’s good at that. But **agents aren’t human**, so don’t make them use your app like one.
 
 *Our stories use Claude Code but only because that’s what we actually use; the advice should apply to any agent that speaks MCP.*
