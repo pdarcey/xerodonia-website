@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: AI consulting
-description: Xerodonia helps small and medium businesses put AI coding agents (Claude Code, Codex, Copilot, Gemini) to work. Fixed-price engagements, Sydney-based, worldwide remote.
+description: Xerodonia helps your teams put AI coding agents (Claude Code, Codex, Copilot, Gemini) to work. Fixed-price engagements, Sydney-based, worldwide remote.
 permalink: /consulting/
 pageType: consulting
 ---
@@ -10,8 +10,8 @@ pageType: consulting
 <section class="hero hero--left">
   <div class="wrap">
     <p class="eyebrow">AI consulting · {{ site.location }}</p>
-    <h1 class="hero-title">AI agents that work like employees, <em>without the payroll.</em></h1>
-    <p class="hero-lead">Small and medium businesses know they need AI, but most don’t know where to start, what’s realistic, or how to avoid wasting money. We cut through the hype and deliver measurable outcomes inside your existing workflows.</p>
+    <h1 class="hero-title">AI coding agents, set up <em>the way we use them every day.</em></h1>
+    <p class="hero-lead">We build our own apps with AI coding agents, and we publish how, including what it costs and what went wrong. We’ll set your developers up the same way, so they can skip the mistakes we’ve already made.</p>
     <div class="actions">
       <a class="button button--primary" href="{{ site.calendlyUrl }}">Book a free {{ consulting.audit.name }}</a>
       <a class="button button--secondary" href="/consulting/services/">Services and pricing</a>
@@ -56,8 +56,8 @@ pageType: consulting
   <div class="wrap split">
     <div>
       <p class="eyebrow">Why Xerodonia</p>
-      <h2 id="why-title">Outcomes, not experiments.</h2>
-      <p>We’re practitioners, not theorists. Every engagement is focused on real, measurable results in your business.</p>
+      <h2 id="why-title">Tried on our own work first.</h2>
+      <p>Everything we recommend, we’ve used on our own apps first, and written up in public. You can read the posts before you talk to us.</p>
     </div>
     <ul class="checklist">
       {%- for item in consulting.whyUs %}
@@ -82,5 +82,6 @@ pageType: consulting
   </div>
 </section>
 
-{% set ctaTitle = "Ready to see what AI can do for your business?" %}
+{% set ctaTitle = "Ready to see what agents could do for your team?" %}
+{% set ctaText = "Book a free 15-minute call, and we’ll look at where they’d help your developers most." %}
 {% include "partials/audit-cta.njk" %}
