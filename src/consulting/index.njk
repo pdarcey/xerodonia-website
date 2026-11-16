@@ -26,7 +26,8 @@ pageType: consulting
       <h2 id="fit-title">Where do you fit?</h2>
       <p>Not every business is at the same point with AI. Choose the path that sounds like you.</p>
     </header>
-    <ul class="card-grid">
+    {#- Two audiences fill the row (card-grid--two); three or more wrap as usual. #}
+    <ul class="card-grid{% if consulting.audiences.length == 2 %} card-grid--two{% endif %}">
       {%- for audience in consulting.audiences %}
       <li class="info-card">
         <h3><a class="stretched-link" href="/consulting/{{ audience.slug }}/">{{ audience.card.label }}</a></h3>
