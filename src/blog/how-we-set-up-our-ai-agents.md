@@ -21,11 +21,16 @@ We use Claude Code, and every session starts by loading one git repo: our Knowle
 
 Our rule of thumb is to keep each instruction file short and to point to further instructions rather than pasting them in. It’s the old Unix idea of small pieces that each do one job, applied to text.
 
-Claude Code gives you two ways to do that. A `CLAUDE.md` can import a single file with `@path` (such as `@docs/architecture.md`). And a `.claude/rules/` folder can hold rules that apply only to some files: a rule whose front matter says `paths: ["src/lib/**"]` is loaded only when the agent works there. Imports keep files manageable, but everything imported still loads at the start of every session; path-scoped rules load only when they’re needed.
+Claude Code gives you two ways to do that:
+
+1. A `CLAUDE.md` can **import** a single file with `@path` (such as `@docs/architecture.md`), and
+2. A `.claude/rules/` folder can hold **rules** that apply only to some files: a rule whose front matter says `paths: ["src/lib/**"]` is loaded only when the agent works there.
+
+Imports keep files manageable, but everything imported still loads at the start of every session; path-scoped rules load only when they’re needed. That difference is why our own standards are now rules rather than imports.
 
 Every session reads three layers of instructions, from the general to the specific. Each layer says only what the one above can’t.
 
-1. **Global instructions** (`~/.claude/CLAUDE.md`). They’re short: who the agent is (a senior Swift developer), how we work (plan first, pause after each stage, ask before committing), and where the Knowledge Base is. Then they import 25 standards with lines like `@~/.claude/documents/swiftui.md`: one each for Swift, SwiftUI, SwiftData, git, tests, linting, Readmes, websites, App Store Connect and more.
+1. **Global instructions** (`~/.claude/CLAUDE.md`). They’re short: who the agent is (a senior developer), how we work (plan first, pause after each stage, ask before committing), and where the Knowledge Base is. Alongside them sit 26 standards, one each for Swift, SwiftUI, SwiftData, git, tests, linting, Readmes, websites, App Store Connect and more. They’re rules, not imports: 11 that apply to everything (git, tests, documentation, planning) load in every session, while the Swift standard, say, loads only once the agent opens a Swift file. The last two, for setting up a new project, are read only when we start one.
 2. **The Knowledge Base**, which the global file tells the agent to use: read the project’s card at the start of a session, search the notes before solving a problem, and put any lesson that would help another project there. When the agent is working *on* the Knowledge Base itself, the repo’s own `CLAUDE.md` adds its rules (one fact per note, required front matter, run the checks before committing).
 3. **The project’s own `CLAUDE.md`**, in the repo’s root. It holds what’s true of that one project: its architecture, conventions, gotchas and history. It points into the Knowledge Base with `kb:` paths (such as `kb:knowledge/swiftdata/cloudkit-on-a-sandboxed-mac-needs-network-client.md`) rather than copying the lesson.
 
@@ -38,7 +43,7 @@ The layers work because each one knows its place:
 
 ## The Knowledge Base
 
-The Knowledge Base is a private git repo of plain Markdown: about 470 notes, written for us and for agents alike. We started it at the end of October 2026, and it has 128 commits so far. It changes most days.
+The Knowledge Base is a private git repo of plain Markdown: about 500 notes, written for us and for agents alike. We started it at the end of October 2026, and it has 175 commits so far. It changes most days.
 
 One test decides what goes in: **would it have saved time in a different repo?** If yes, it’s a note. If it only matters to one project, it stays in that project’s own docs.
 
@@ -60,30 +65,30 @@ The folders fall into six groups, by what they’re for.
 These four aren’t notes; they’re live configuration. Each one is linked into `~/.claude/`, so Claude Code reads them straight from the repo.
 
 - **`global/`** holds the global `CLAUDE.md` described above.
-- **`agents/`** holds our 12 custom sub-agents, each with a name and a speciality: Akira refactors without changing behaviour, Dara knows Core Data and SwiftData, Noor tests Metal rendering, Zuri writes DocC documentation, and so on. A note in `library/` lists who does what, and the names still free for new ones.
+- **`agents/`** holds our 10 custom sub-agents, each with a name and a speciality: Akira refactors without changing behaviour, Dara knows Core Data and SwiftData, Indigo runs and debugs iOS apps, Zuri writes DocC documentation, and so on. Two more were written for one app, so they now live in that project rather than in every session. A note in `library/` lists who does what.
 - **`commands/`** holds our seven slash commands: `/start-of-session`, `/end-of-session`, `/kb` (search the Knowledge Base), `/kb-update` (check a project against the current standards), `/initialise-new-project`, `/design-logo` and `/mac-app-review`.
 - **`skills/`** holds the skills we wrote (more on skills below).
 
 ### Standards, knowledge, library and templates: how to do things
 
-- **`standards/`**: the 25 rules every project follows, imported by the global instructions. They cover Swift, SwiftUI, SwiftData, Metal, git, tests, linting, documentation, Readmes, websites and App Store Connect.
-- **`knowledge/`**: about 370 how-tos and gotchas in 22 areas. Marketing is the largest (68), then Xcode (32), macOS (27), SwiftUI (24) and debugging (23). A typical title: “HealthKit compiles on the Mac, but there’s no Health data there”.
+- **`standards/`**: the 26 standards every project follows, 24 of them linked into Claude Code’s `rules/` folder. They cover Swift, SwiftUI, SwiftData, Metal, git, tests, linting, documentation, Readmes, websites and App Store Connect, and each one says whether it loads in every session, only for matching files, or only when a task asks for it.
+- **`knowledge/`**: about 400 how-tos and gotchas in 22 areas. Marketing is the largest (70), then Xcode (36), macOS (28), Swift (27) and SwiftUI (25). A typical title: “HealthKit compiles on the Mac, but there’s no Health data there”.
 - **`library/`**: reference material from elsewhere. There’s a Markdown copy of *97 Things Every Programmer Should Know*, profiles of 13 marketers (Steve Jobs, Rory Sutherland, David Ogilvy, Bill Bernbach and others) and the sub-agent roster.
 - **`templates/`**: starting points for a note, a decision, a project card and a project definition, plus the build script every Xcode project copies to stamp its version number from git.
 
 ### Projects and Xerodonia: what we have
 
-- **`projects/`**: a card for each main project (where it lives, how it relates to the others, key decisions, cautions and the notes that apply to it), plus a catalogue. A script builds the catalogue from every repo on the Mac, reading each Readme’s front matter and its git history, so it lists about 50 repos with their versions and never goes stale.
+- **`projects/`**: a card for each main project (where it lives, how it relates to the others, key decisions, cautions and the notes that apply to it), plus a catalogue. A script builds the catalogue from every repo on the Mac, reading each Readme’s front matter and its git history, so it lists more than 50 repos with their versions and never goes stale.
 - **`xerodonia/`**: the company. Its brand colours and logo, domains, DNS and email, devices, identifiers, online services and the names of accounts. Never the secrets: a note names a credential and says where it’s kept.
 
 ### Decisions and ideas: why things are the way they are
 
-- **`decisions/`**: 13 dated decisions that affect more than one project, each with its context and consequences. Two examples: version numbers come from plain git tags, and some repos stay local-only. When an agent wonders “why do we do it this way?”, the answer is here, so the question doesn’t come back every few weeks.
+- **`decisions/`**: 14 dated decisions that affect more than one project, each with its context and consequences. Two examples: version numbers come from plain git tags, and some repos stay local-only. When an agent wonders “why do we do it this way?”, the answer is here, so the question doesn’t come back every few weeks.
 - **`ideas/`**: ideas for new apps, and assessments like a marketing review of an app.
 
 ### Working together: how we like to work
 
-**`working-together/`** has 12 notes about us as collaborators. We plan first, and want the work paused after each stage. We check the work before it’s committed. We do the installing, uploading and deploying ourselves. Animation is part of the product, so don’t remove one without asking. And there’s how we like to be talked to, and the wording we want in anything a user will read. An agent that reads these makes fewer of the mistakes we’d otherwise correct by hand.
+**`working-together/`** has 13 notes about us as collaborators. We plan first, and want the work paused after each stage. We check the work before it’s committed. We do the installing, uploading and deploying ourselves. Animation is part of the product, so don’t remove one without asking. And there’s how we like to be talked to, and the wording we want in anything a user will read. An agent that reads these makes fewer of the mistakes we’d otherwise correct by hand.
 
 ### Automation: the Sunday batch
 
@@ -118,7 +123,7 @@ The third-party skills also check our code against outside opinions. Our standar
 
 ## Beyond code
 
-The biggest single area of the Knowledge Base isn’t Swift or Xcode. It’s marketing, with 68 notes.
+The biggest single area of the Knowledge Base isn’t Swift or Xcode. It’s marketing, with 70 notes.
 
 Xerodonia is one developer, so the same setup has to cover selling the apps as well as building them. The non-code side has four parts:
 
@@ -150,11 +155,11 @@ The split matters more than any one document. Status says where we are, the Plan
 
 Claude Code reads its configuration from `~/.claude/`, which isn’t under version control. Ours is now mostly symlinks into the Knowledge Base, so every instruction an agent follows has a history.
 
-{% themedImage "images/blog/how-we-set-up-our-ai-agents/claude-folder-symlinks.png", "images/blog/how-we-set-up-our-ai-agents/claude-folder-symlinks-dark.png", "Six folders and files in ~/.claude/ are symlinks to matching folders in the Knowledge Base git repo: CLAUDE.md to global/CLAUDE.md, documents/ to standards/, commands/ to commands/, agents/ to agents/, two of the 48 skills to skills/, and agent-jobs/ to automation/agent-jobs/. Below, what stays unversioned on purpose: settings.json, the batch’s output, and 46 third-party skills, listed in skills/third-party.md rather than copied.", "", "post-image" %}
+{% themedImage "images/blog/how-we-set-up-our-ai-agents/claude-folder-symlinks.png", "images/blog/how-we-set-up-our-ai-agents/claude-folder-symlinks-dark.png", "Seven folders and files in ~/.claude/ are symlinks into the Knowledge Base git repo: CLAUDE.md to global/CLAUDE.md, documents/ to standards/, each rule in rules/ to its standard, commands/ to commands/, agents/ to the 10 agents, two of the 48 skills to skills/, and agent-jobs/ to automation/agent-jobs/. Below, what stays unversioned on purpose: settings.json, the batch’s output, and 46 third-party skills, listed in skills/third-party.md rather than copied.", "", "post-image" %}
 
 Each entry on the left is a symlink, so editing the file in the repo changes what every new session loads.
 
-It started with the standards. They had no history, and over time they’d drifted into contradicting each other. At the end of October we moved them into the Knowledge Base and made `~/.claude/documents` a symlink to them, after a test showed that `CLAUDE.md` imports follow a symlinked folder. The global `CLAUDE.md` and the commands followed in November, then the agents and our skills.
+It started with the standards. They had no history, and over time they’d drifted into contradicting each other. At the end of October we moved them into the Knowledge Base and made `~/.claude/documents` a symlink to them, after a test showed that `CLAUDE.md` imports follow a symlinked folder. The global `CLAUDE.md` and the commands followed in November, then the agents and our skills. In November the standards changed again: all but the two for new projects are now linked into `~/.claude/rules/`, so the ones that apply only to Swift, Metal or websites stay out of a session until it needs them. The `documents` link stays, so an agent can still read any standard by name.
 
 Some things stay out on purpose:
 
@@ -175,7 +180,7 @@ Costs aren’t only money. Ours come in five kinds:
 
 - **Time:** about a day to set it up. The first commit was on 30 October, and the Knowledge Base reached version 1.0 the next day. That day went quickly because the material already existed: it gathered up the lessons we’d been writing into project `CLAUDE.md` files since we started using Claude.
 - **Money:** we pay for a year of Claude’s US$20-a-month plan: AUD$341 for the year, about AUD$28 a month. At pay-as-you-go rates, one recent month of our use would have cost US$856 (about AUD$1,220), and the Knowledge Base was built in that month. That’s one developer’s heavy month, not a team’s budget: a team should budget from its own usage.
-- **Context:** the global rules and the standards come to about 57 KB, roughly 14,000 tokens by our estimate, loaded into every session before any work starts.
+- **Context:** the global rules and the standards that apply to everything come to about 33 KB, roughly 8,300 tokens by our estimate, loaded into every session before any work starts. Each language or platform standard adds a few KB more, but only once the agent opens a matching file. Until our November update, all of them loaded every time: about 57 KB.
 - **Ongoing effort:** the Sunday batch saves nothing if nobody reads its patches, and the morning after its first run went on checking seven of them, one at a time. Notes need re-checking too; the script flags any that nobody has verified in 180 days.
 - **Opportunity:** the day spent building it was a day not spent on the apps.
 
@@ -204,3 +209,5 @@ Start small: next time you catch yourself explaining something to an agent for t
 Your setup will look different from ours. Your mileage may vary. But **write it down once, and keep it in git** works for everyone.
 
 *This post was drafted with Claude Code, from our own notes and a fact sheet, and then edited by us. Our stories use Claude Code because it’s what we actually use; the ideas should apply to any agent that reads instruction files.*
+
+*Updated 19 Nov 2026: our standards now load as path-scoped rules instead of imports, which cut what every session loads at the start from about 57 KB to 33 KB, and two app-specific agents moved into their project. The counts are as of that day.*
