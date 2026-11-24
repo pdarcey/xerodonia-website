@@ -5,6 +5,7 @@
 
 import path from "node:path";
 import yaml from "js-yaml";
+import markdownItFootnote from "markdown-it-footnote";
 import Image from "@11ty/eleventy-img";
 import { structuredData, toJsonLd } from "./lib/structured-data.js";
 import { checkBuildOutput } from "./lib/build-check.js";
@@ -118,6 +119,11 @@ async function themedImageShortcode(src, darkSrc, alt, sizes, className = "", wi
 export default function (eleventyConfig) {
   // App data lives in src/_data/apps/<slug>.yaml
   eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
+
+  // Footnotes in Markdown: [^1] in the text, and "[^1]: …" on its own line.
+  // The notes render as a numbered list at the end of the post, numbered in the
+  // order they're first referred to, whatever their labels.
+  eleventyConfig.amendLibrary("md", (md) => md.use(markdownItFootnote));
 
   // Static files copied as-is
   eleventyConfig.addPassthroughCopy("src/styles");

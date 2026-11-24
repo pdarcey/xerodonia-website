@@ -498,6 +498,15 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.025em; }
 .post-body aside p { margin-bottom: .6rem; }
 .post-body aside ul { gap: .6rem; margin-bottom: 0; }
 .post-body h2 { clear: both; }
+/* Footnotes ([^1] in the Markdown, via markdown-it-footnote). The reference is one
+   fixed size (rem, so a heading's is no bigger than a paragraph's), smaller than the
+   text, and line-height 0 stops it pushing its line apart. The notes are a compact list. */
+.post-body .footnote-ref { font-size: .7rem; font-weight: 400; line-height: 0; vertical-align: super; }
+.post-body .footnote-ref a { text-decoration: none; }
+.post-body .footnotes-sep { margin: 2rem 0 1rem; }
+.post-body .footnotes { font-size: .9rem; }
+.post-body .footnotes-list { gap: .15rem; }
+.post-body .footnote-item p { margin: 0; }
 /* A quotation in a post: indented behind a brand-blue bar, so it doesn't read as our own words */
 .post-body blockquote {
   margin: 1.5rem 0; padding: .2rem 0 .2rem 1.25rem;
