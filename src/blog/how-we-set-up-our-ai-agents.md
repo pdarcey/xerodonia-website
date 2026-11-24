@@ -43,7 +43,7 @@ The layers work because each one knows its place:
 
 ## The Knowledge Base
 
-The Knowledge Base is a private git repo of plain Markdown: about 500 notes, written for us and for agents alike. We started it at the end of October 2026, and it has 175 commits so far. It changes most days.
+The Knowledge Base is a private git repo of plain Markdown: about 500 notes, written for us and for agents alike. We started it at the end of October 2026, and it has 175 commits so far. It changes most days. ([Here’s why we built it](/blog/give-your-ai-agents-a-shared-knowledge-base/).)
 
 One test decides what goes in: **would it have saved time in a different repo?** If yes, it’s a note. If it only matters to one project, it stays in that project’s own docs.
 

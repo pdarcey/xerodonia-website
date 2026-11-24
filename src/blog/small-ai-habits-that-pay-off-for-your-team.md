@@ -25,7 +25,7 @@ Checking after each stage stops a small mistake from becoming the foundation for
 
 **Write corrections down.** Agents don’t remember last week. If you correct one, have it write the correction into the instructions it reads every time. Otherwise you’re paying, in time, for the same lesson again and again.
 
-**Share what you learn.** Each project’s agent usually learns alone. We found the same lesson saved separately in four of our projects: four times we’d paid for it. Now lessons go into one shared knowledge base that every agent reads. ([Here’s how ours works](/blog/how-we-set-up-our-ai-agents/).)
+**Share what you learn.** Each project’s agent usually learns alone. We found the same lesson saved separately in four of our projects: four times we’d paid for it. Now lessons go into one shared knowledge base that every agent reads. ([Here’s why we built ours](/blog/stop-paying-your-ai-to-relearn-the-same-lessons/), and [how it works](/blog/how-we-set-up-our-ai-agents/).)
 
 **Connect your tools.** If people spend their day copying text between an AI and other systems, they’re acting as its hands. Many business tools can now connect to an agent directly, through a standard called MCP. ([Why we added one to our own app](/blog/adding-an-mcp-server-to-your-app/).)
 

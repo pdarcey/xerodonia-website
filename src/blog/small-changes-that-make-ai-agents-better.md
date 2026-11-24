@@ -47,7 +47,7 @@ The catch is that these files grow. Anthropic suggests keeping each one under 20
 
 An agent’s memory usually stops at the edge of the project. We found that one hard-won lesson (“never hand-edit the Xcode project file”) had been learnt, and saved, in four different projects. Each time, we’d paid for the lesson again.
 
-Now lessons go into one shared knowledge base, which every agent reads, in every project. Learn it once, and every project knows it. ([Here’s how ours is set up](/blog/how-we-set-up-our-ai-agents/).)
+Now lessons go into one shared knowledge base, which every agent reads, in every project. Learn it once, and every project knows it. ([Here’s why we built ours](/blog/give-your-ai-agents-a-shared-knowledge-base/), and [how it’s set up](/blog/how-we-set-up-our-ai-agents/).)
 
 ### 5. Give it tools, not copy and paste
 
